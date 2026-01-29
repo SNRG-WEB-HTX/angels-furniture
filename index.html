@@ -1393,6 +1393,67 @@ header { position: sticky; top:0; }
   font-size: 14px;
   line-height: 1.5;
 }
+
+
+/* ===== CINEMATIC HERO (NO CARDS) ===== */
+.hero-media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,.35), rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 75%),
+    linear-gradient(180deg, rgba(0,0,0,0.0) 20%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
+
+/* Title + UI on image */
+.hero h1{
+  color:#fff !important;
+  text-shadow: 0 10px 40px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.5) !important;
+}
+.hero .divider{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent) !important;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,.35));
+}
+.hero-ctas .btn.primary{
+  background:#fff !important;
+  color:#1A1A1A !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35) !important;
+}
+.hero-ctas .btn.ghost{
+  border-color: rgba(255,255,255,.75) !important;
+  color:#fff !important;
+  background: rgba(0,0,0,.15) !important;
+  backdrop-filter: blur(6px);
+}
+.hero .pill{
+  background: rgba(0,0,0,.35) !important;
+  color:#fff !important;
+  border-color: rgba(255,255,255,.45) !important;
+  backdrop-filter: blur(6px);
+}
+
+/* Centering and spacing */
+.hero-inner{
+  align-items: center !important;
+}
+.hero-inner > *{
+  max-width: 900px;
+}
+
+/* Mobile tuning */
+@media (max-width: 640px){
+  .hero h1{
+    text-shadow: 0 8px 28px rgba(0,0,0,.65), 0 2px 10px rgba(0,0,0,.6) !important;
+  }
+}
+
+/* Keep signature look for brand title */
+.hero h1{
+  font-family: "Segoe Script", "Brush Script MT", "Lucida Handwriting", "Apple Chancery", cursive !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+}
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
@@ -1576,18 +1637,15 @@ header { position: sticky; top:0; }
 <div class="container">
 <div class="hero-surface">
 <div aria-hidden="true" class="hero-media"></div>
-<div class="hero-inner">
-<div class="logo-intro">
-</div>
-<div class="hero-glass-card hero-card-title"><h1 class="fade-rise" data-i18n="t042">Angel’s Furniture
-Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div></div><div class="hero-glass-card hero-card-actions"><div class="hero-ctas fade-rise delay-2">
+<div class="hero-inner"><h1 class="fade-rise" data-i18n="t042">Angel’s Furniture
+Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div><div class="hero-ctas fade-rise delay-2">
 <a class="btn primary" data-i18n="t044" data-nav="" href="#/collection/living">Shop Collections</a>
 <a class="btn ghost" data-i18n="t045" data-nav="" href="#/showroom">Visit Houston Showroom</a>
 </div><div class="hero-subrow fade-rise delay-3">
 <span class="pill" data-i18n="t046">Ready today in Houston • Limited stock</span>
 <span class="pill" data-i18n="t048">Pickup available</span>
 <span class="pill" data-i18n="t049">Assembly available</span>
-</div></div></div>
+</div></div>
 </div>
 <!-- Shop by room -->
 <div class="section fade-rise" style="padding-top:26px;">
