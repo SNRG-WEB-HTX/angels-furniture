@@ -1454,6 +1454,314 @@ header { position: sticky; top:0; }
   font-weight: 400 !important;
   letter-spacing: -0.01em !important;
 }
+
+
+/* ===== SHOP BY ROOM — IMAGE CARDS ===== */
+.shop-room-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 18px;
+}
+@media (max-width: 900px){
+  .shop-room-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 480px){
+  .shop-room-grid{ grid-template-columns: 1fr; }
+}
+
+.shop-room-img-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 12px 30px rgba(0,0,0,.14);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+}
+.shop-room-img-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 46px rgba(0,0,0,.20);
+}
+.shop-room-img-card img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  aspect-ratio: 4/3;
+}
+.shop-room-img-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.0) 35%, rgba(0,0,0,.45) 100%);
+}
+.shop-room-img-card .title{
+  position:absolute;
+  left:16px; right:16px; bottom:14px;
+  z-index:2;
+  color:#fff;
+  font-weight:700;
+  letter-spacing:-.01em;
+  text-shadow: 0 8px 24px rgba(0,0,0,.6);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.shop-room-img-card .title span{
+  font-size: 18px;
+}
+
+
+/* ===== REVIEW CAROUSEL ===== */
+.reviews-wrap{
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.reviews-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px;
+}
+.reviews-contact{
+  font-size: 14px; color: rgba(0,0,0,.75);
+}
+.review-carousel{
+  position: relative;
+  overflow: hidden;
+}
+.review-track{
+  display:flex;
+  gap:16px;
+  transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+}
+.review-card{
+  min-width: 320px;
+  background: rgba(255,255,255,.92);
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 26px rgba(0,0,0,.12);
+  padding: 16px 18px;
+}
+.review-card .name{
+  font-weight:700;
+}
+.review-card .city{
+  font-size:12px; opacity:.7;
+}
+.review-card .stars{
+  letter-spacing:2px;
+}
+.review-nav{
+  display:flex; gap:8px;
+}
+.review-nav button{
+  border-radius: 999px;
+  border:1px solid rgba(0,0,0,.2);
+  background:#fff;
+  padding:8px 12px;
+  cursor:pointer;
+}
+
+
+/* =========================
+   HOTFIX: Header logo on mobile
+   (prevents flex collapse + filename mismatch resilience)
+   ========================= */
+.brand{ min-width: 0 !important; flex: 1 1 auto !important; }
+.logo-wrap{ display:flex !important; align-items:center !important; }
+.header-logo-img{
+  display:block !important;
+  height:72px !important;
+  width:auto !important;
+  max-width:min(72vw, 460px) !important;
+}
+@media (max-width: 640px){
+  header{ min-height: 88px !important; }
+  .header-row{ padding:10px 0 !important; gap:10px !important; }
+  .header-logo-img{ height:56px !important; max-width:72vw !important; }
+}
+@media (max-width: 380px){
+  .header-logo-img{ height:48px !important; max-width:70vw !important; }
+}
+
+/* IMPORTANT: do NOT zero out brand text globally — only hide the old title safely if present */
+.brand-title{ display:none !important; }
+
+
+/* =========================
+   Shop by Room — premium image cards
+   ========================= */
+.room-card{
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+  border:1px solid rgba(26,26,26,.10);
+  box-shadow: 0 14px 34px rgba(26,26,26,.14);
+  transform: translateZ(0);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+  min-height: 220px;
+}
+.room-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(26,26,26,.18);
+}
+.room-media{
+  position:absolute; inset:0;
+}
+.room-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter: saturate(108%) contrast(102%);
+  transform: scale(1.02);
+}
+.room-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 420px at 50% 10%, rgba(255,255,255,.10), rgba(0,0,0,0) 55%),
+    linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
+.room-overlay{
+  position:absolute;
+  left:14px; right:14px; bottom:14px;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(10px) saturate(140%);
+}
+.room-title{
+  color:#fff;
+  font-weight:800;
+  letter-spacing:-.02em;
+  text-shadow: 0 10px 30px rgba(0,0,0,.55);
+  font-size: 16px;
+}
+.room-cta{
+  color:#fff;
+  font-weight:700;
+  font-size: 13px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);
+  background: rgba(0,0,0,.18);
+  backdrop-filter: blur(8px);
+  white-space:nowrap;
+}
+@media (max-width: 720px){
+  .room-card{ min-height: 200px; }
+}
+
+
+/* =========================
+   Reviews carousel — premium (no boring white cards)
+   ========================= */
+.review-pro{
+  border-radius:22px;
+  min-width: 72%;
+  padding: 1px;
+  background:
+    radial-gradient(700px 240px at 10% 0%, rgba(201,162,74,.35), rgba(201,162,74,0) 60%),
+    linear-gradient(135deg, rgba(26,26,26,.18), rgba(26,26,26,.05));
+  box-shadow: 0 14px 34px rgba(26,26,26,.14);
+}
+@media (min-width:720px){ .review-pro{ min-width: 42%; } }
+@media (min-width:1024px){ .review-pro{ min-width: 30%; } }
+
+.review-pro-inner{
+  border-radius:21px;
+  background: rgba(255,255,255,.86);
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(255,255,255,.55);
+  padding: 16px 16px 18px;
+}
+.review-pro-top{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  justify-content:space-between;
+}
+.review-avatar{
+  width:44px; height:44px;
+  border-radius:16px;
+  display:grid; place-items:center;
+  font-weight:900;
+  letter-spacing:.02em;
+  color: rgba(26,26,26,.92);
+  background: rgba(201,162,74,.18);
+  border: 1px solid rgba(201,162,74,.35);
+  flex:0 0 auto;
+}
+.review-name{
+  font-weight:800;
+  letter-spacing:-.02em;
+  font-size: 14px;
+}
+.review-loc{
+  font-size:12px;
+  color: rgba(26,26,26,.62);
+  margin-top:2px;
+}
+.review-stars{
+  letter-spacing:2px;
+  color: rgba(201,162,74,.95);
+  text-shadow: 0 8px 24px rgba(201,162,74,.25);
+  font-size: 12px;
+  flex:0 0 auto;
+}
+.review-msg{
+  margin:12px 0 0;
+  color: rgba(26,26,26,.78);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+/* =========================
+   Showroom section — subtle premium surfaces
+   ========================= */
+.section h2 + .lede + p.subtle{ margin-top:10px; }
+.houston-info .card,
+.section .grid-3 .card{
+  background: rgba(255,255,255,.78);
+  backdrop-filter: blur(10px) saturate(140%);
+  border: 1px solid rgba(232,226,216,.95);
+}
+
+
+/* ===== TUNE: Shop by Room card text smaller (surgical) ===== */
+.room-title{
+  font-size: 14px !important;
+  letter-spacing: -0.01em !important;
+}
+.room-cta{
+  font-size: 12px !important;
+  padding: 6px 10px !important;
+}
+@media (max-width: 720px){
+  .room-title{ font-size: 13px !important; }
+  .room-cta{ font-size: 11px !important; padding: 6px 9px !important; }
+}
+
+
+/* ===== Shop by Room overlay: hug content only ===== */
+.room-overlay{
+  width: fit-content !important;
+  max-width: calc(100% - 28px) !important;
+  padding: 8px 10px !important;
+  gap: 8px !important;
+}
+.room-overlay{
+  left: 14px !important;
+  right: auto !important;   /* stop stretching full width */
+}
+@media (max-width: 720px){
+  .room-overlay{
+    padding: 7px 9px !important;
+    gap: 6px !important;
+  }
+}
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
@@ -1470,7 +1778,7 @@ header { position: sticky; top:0; }
 <header>
 <div class="container">
 <div aria-label="Primary" class="header-row" role="navigation">
-<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="favicon (1).png"/></span></a>
+<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" onerror="this.onerror=null;this.src='favicon (1).png';" src="favicon.png"/></span></a>
 <nav aria-label="Categories" class="primary">
 <a data-i18n="t005" data-mega="living" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-mega="bedroom" href="#/collection/bedroom">Bedroom</a>
@@ -1655,44 +1963,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 <p class="lede" data-i18n="t051">Start with the space, then refine by style. Built for fast decision-making on mobile.</p>
 </div>
 </div>
-<div class="grid grid-2 md-grid-3 lg-grid-4">
-<a class="card pad" data-i18n="t052" data-nav="" href="#/collection/living">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-<img alt="Living room" loading="lazy" src="https://images.unsplash.com/photo-1484101403633-562f891dc89a?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/>
-</div>
-<div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
-<strong data-i18n="t053" style="font-size:14px;">Living</strong>
-<span class="subtle" data-i18n="t054">Sofas, sectionals, tables</span>
-</div>
-</a>
-<a class="card pad" data-i18n="t055" data-nav="" href="#/collection/bedroom">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-<img alt="Bedroom" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/>
-</div>
-<div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
-<strong data-i18n="t056" style="font-size:14px;">Bedroom</strong>
-<span class="subtle" data-i18n="t057">Beds, dressers, nightstands</span>
-</div>
-</a>
-<a class="card pad" data-i18n="t058" data-nav="" href="#/collection/dining">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-<img alt="Dining" loading="lazy" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/>
-</div>
-<div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
-<strong data-i18n="t059" style="font-size:14px;">Dining</strong>
-<span class="subtle" data-i18n="t060">Tables, chairs, storage</span>
-</div>
-</a>
-<a class="card pad" data-i18n="t061" data-nav="" href="#/collection/office">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-<img alt="Office" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/>
-</div>
-<div style="margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:10px;">
-<strong data-i18n="t062" style="font-size:14px;">Office</strong>
-<span class="subtle" data-i18n="t063">Desks, chairs, lighting</span>
-</div>
-</a>
-</div>
+<div class="grid md-grid-3 grid-2 lg-grid-4"><a class="room-card" href="#/collection/living"><div class="room-media"><img alt="Living Room" loading="lazy" src="https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&amp;fit=crop&amp;w=1800&amp;q=70"/></div><div class="room-overlay"><div class="room-title">Living Room</div><div class="room-cta">View collection</div></div></a><a class="room-card" href="#/collection/bedroom"><div class="room-media"><img alt="Bedroom" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=70"/></div><div class="room-overlay"><div class="room-title">Bedroom</div><div class="room-cta">View collection</div></div></a><a class="room-card" href="#/collection/dining"><div class="room-media"><img alt="Dining Room" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=70"/></div><div class="room-overlay"><div class="room-title">Dining Room</div><div class="room-cta">View collection</div></div></a><a class="room-card" href="#/collection/office"><div class="room-media"><img alt="Office" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=70"/></div><div class="room-overlay"><div class="room-title">Office</div><div class="room-cta">View collection</div></div></a></div>
 </div>
 <!-- New arrivals carousel -->
 <div class="section fade-rise">
@@ -1715,89 +1986,9 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 <div class="products" id="readyToday"></div>
 </div>
 <!-- Why Angel's -->
-<div class="section fade-rise">
-<div class="section-head">
-<div>
-<h2 data-i18n="t068">Why Angel’s</h2>
-<p class="lede" data-i18n="t069">Premium experience, Houston warmth. No fluff.</p>
-</div>
-</div>
-<div class="grid grid-2 md-grid-3">
-<div class="card pad">
-<span class="pill" data-i18n="t070"><strong data-i18n="t071">Fast local Delivery</strong></span>
-<p class="subtle" data-i18n="t072" style="margin:12px 0 0;">Same-week options for many items. Clear Delivery windows and pickup availability.</p>
-</div>
-<div class="card pad">
-<span class="pill" data-i18n="t073"><strong data-i18n="t074">Curated quality</strong></span>
-<p class="subtle" data-i18n="t075" style="margin:12px 0 0;">Warm textures and clean lines. We choose fewer pieces so every piece works.</p>
-</div>
-<div class="card pad">
-<span class="pill" data-i18n="t076"><strong data-i18n="t077">Real showroom support</strong></span>
-<p class="subtle" data-i18n="t078" style="margin:12px 0 0;">See finishes in person. Ask questions. Schedule a quick visit.</p>
-</div>
-</div>
-</div>
 <!-- Showroom highlight -->
-<div class="section fade-rise">
-<div class="card pad soft-shadow">
-<div class="grid" style="grid-template-columns:1fr;gap:18px;align-items:center;">
-<div>
-<h2 data-i18n="t079" style="margin:0 0 8px;">Houston showroom</h2>
-<p class="lede" data-i18n="t080" style="margin:0 0 12px;">See pieces in person, check comfort and finishes, and plan pickup.</p>
-<div class="status">
-<span class="pill" data-i18n="t081">Hours: <strong data-i18n="t082">Mon–Sat 10–7</strong></span>
-<span class="pill" data-i18n="t083">Pickup: <strong data-i18n="t084">Available</strong></span>
-<span class="pill" data-i18n="t085">Parking: <strong data-i18n="t086">Easy lot</strong></span>
-</div>
-<div class="hero-ctas" style="margin-top:14px;">
-<a class="btn primary" data-i18n="t087" data-nav="" href="#/showroom">Get directions</a>
-<a class="btn ghost" data-i18n="t088" data-nav="" href="#/contact">Call / Text</a>
-</div>
-</div>
-<div class="p-media" style="border-radius:18px;overflow:hidden;border:1px solid rgba(26,26,26,.10);min-height:220px;">
-<img alt="Showroom highlight" loading="lazy" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&amp;fit=crop&amp;w=1600&amp;q=70"/>
-</div>
-</div>
-</div>
-</div>
 <!-- Social proof -->
-<div class="section fade-rise">
-<div class="section-head">
-<div>
-<h2 data-i18n="t089">Local favorites</h2>
-<p class="lede" data-i18n="t090">Clean testimonial cards (no fake star ratings).</p>
-</div>
-</div>
-<div class="grid grid-2 md-grid-3">
-<div class="card pad">
-<p data-i18n="t091" style="margin:0 0 10px;">“Fast Delivery, the finish looked even better in person. Easy pickup.”</p>
-<div class="subtle">— Houston customer</div>
-</div>
-<div class="card pad">
-<p data-i18n="t092" style="margin:0 0 10px;">“They helped us match a dining set to our floors. Zero pressure.”</p>
-<div class="subtle">— Heights</div>
-</div>
-<div class="card pad">
-<p data-i18n="t093" style="margin:0 0 10px;">“The sectional is perfect. Quick questions got answered immediately.”</p>
-<div class="subtle">— Midtown</div>
-</div>
-</div>
-</div>
 <!-- Instagram-style gallery -->
-<div class="section fade-rise">
-<div class="section-head">
-<div>
-<h2 data-i18n="t094">Inspiration gallery</h2>
-<p class="lede" data-i18n="t095">Lazy loaded image grid. Swap with your IG feed later.</p>
-</div>
-</div>
-<div class="grid grid-2 md-grid-3 lg-grid-4">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Furniture inspiration 1" loading="lazy" src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Furniture inspiration 2" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Furniture inspiration 3" loading="lazy" src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Furniture inspiration 4" loading="lazy" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-</div>
-</div>
 </div>
 </section>
 <!-- COLLECTION -->
@@ -2017,7 +2208,28 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 </div>
 </div>
 </section>
-</main>
+<div class="section fade-rise">
+<div class="card pad soft-shadow">
+<div class="grid" style="grid-template-columns:1fr;gap:18px;align-items:center;">
+<div>
+<h2 data-i18n="t079" style="margin:0 0 8px;">Houston showroom</h2>
+<p class="lede" data-i18n="t080" style="margin:0 0 12px;">See pieces in person, check comfort and finishes, and plan pickup.</p>
+<div class="status">
+<span class="pill" data-i18n="t081">Hours: <strong data-i18n="t082">Mon–Sat 10–7</strong></span>
+<span class="pill" data-i18n="t083">Pickup: <strong data-i18n="t084">Available</strong></span>
+<span class="pill" data-i18n="t085">Parking: <strong data-i18n="t086">Easy lot</strong></span>
+</div>
+<div class="hero-ctas" style="margin-top:14px;">
+<a class="btn primary" data-i18n="t087" data-nav="" href="#/showroom">Get directions</a>
+<a class="btn ghost" data-i18n="t088" data-nav="" href="#/contact">Call / Text</a>
+</div>
+</div>
+<div class="p-media" style="border-radius:18px;overflow:hidden;border:1px solid rgba(26,26,26,.10);min-height:220px;">
+<img alt="Showroom highlight" loading="lazy" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&amp;fit=crop&amp;w=1600&amp;q=70"/>
+</div>
+</div>
+</div>
+</div></main>
 <!-- Mobile sticky CTA (PDP) -->
 <div class="mobile-sticky-cta" id="mobileSticky">
 <div class="inner">
@@ -3253,5 +3465,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
   els.forEach(el => io.observe(el));
 });
+</script><script>
+(function(){
+  const track = document.querySelector('.review-track');
+  if(!track) return;
+  const cards = track.children;
+  let index = 0;
+  const step = () => cards[0].offsetWidth + 16;
+  const maxIndex = Math.max(0, cards.length - Math.floor((document.querySelector('.review-carousel').offsetWidth / step())));
+  const prev = document.querySelector('.review-nav button:nth-child(1)');
+  const next = document.querySelector('.review-nav button:nth-child(2)');
+  const update = () => { track.style.transform = 'translateX(' + (-index * step()) + 'px)'; };
+  prev.addEventListener('click', ()=>{ index = Math.max(0, index-1); update(); });
+  next.addEventListener('click', ()=>{ index = Math.min(maxIndex, index+1); update(); });
+  setInterval(()=>{ index = (index < maxIndex) ? index+1 : 0; update(); }, 4500);
+  window.addEventListener('resize', update);
+})();
 </script></body>
 </html>
