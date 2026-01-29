@@ -1305,6 +1305,94 @@ header { position: sticky; top:0; }
   font-weight: 400 !important;
   letter-spacing: -0.01em !important;
 }
+
+
+/* ===== HERO GLASS REFINEMENT: AIRIER + HUG CONTENT ===== */
+.hero-glass-card{
+  display: inline-block !important;      /* hug content */
+  max-width: 100% !important;
+  width: fit-content !important;
+  background: rgba(246,243,238,.26) !important;  /* even more transparent */
+  border: 1px solid rgba(232,226,216,.75);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-radius: 22px;
+  padding: clamp(14px, 2.5vw, 22px);
+  box-shadow: 0 10px 26px rgba(26,26,26,.10);
+}
+.hero-card-title{ margin-bottom: 12px; }
+.hero-card-actions{}
+
+/* Center the cards nicely */
+.hero-inner{
+  align-items: flex-start !important;
+}
+@media (max-width: 720px){
+  .hero-inner{ align-items: center !important; }
+}
+
+
+/* ===== PREMIUM SHOP-BY-ROOM CARDS ===== */
+.shop-room-card{
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgba(26,26,26,.10);
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(26,26,26,.10);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+}
+.shop-room-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26,26,26,.14);
+}
+.shop-room-card .p-media{
+  border-radius: 0 !important;
+  border: 0 !important;
+}
+.shop-room-overlay{
+  position:absolute;
+  inset:auto 12px 12px 12px;
+  background: rgba(255,255,255,.82);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(26,26,26,.10);
+  border-radius: 14px;
+  padding: 12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+.shop-room-overlay strong{
+  font-size: 15px;
+  letter-spacing: -.01em;
+}
+.shop-room-overlay .subtle{
+  font-size: 12px;
+}
+
+
+/* ===== PREMIUM WHY ANGEL'S CARDS ===== */
+.why-card{
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  border: 1px solid rgba(26,26,26,.10);
+  padding: 18px;
+  box-shadow: 0 10px 28px rgba(26,26,26,.10);
+  transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+}
+.why-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26,26,26,.14);
+}
+.why-card .pill{
+  background: rgba(201,162,74,.14) !important;
+  border-color: rgba(201,162,74,.35) !important;
+}
+.why-card p{
+  font-size: 14px;
+  line-height: 1.5;
+}
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
@@ -1490,7 +1578,6 @@ header { position: sticky; top:0; }
 <div aria-hidden="true" class="hero-media"></div>
 <div class="hero-inner">
 <div class="logo-intro">
-
 </div>
 <div class="hero-glass-card hero-card-title"><h1 class="fade-rise" data-i18n="t042">Angel’s Furniture
 Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div></div><div class="hero-glass-card hero-card-actions"><div class="hero-ctas fade-rise delay-2">
