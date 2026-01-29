@@ -2,11 +2,10 @@
 
 <html lang="en">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="apple-touch-icon" href="favicon.png">
-<meta property="og:image" content="favicon.png">
-<meta property="twitter:image" content="favicon.png">
-
+<link href="favicon.png" rel="icon" type="image/png"/>
+<link href="favicon.png" rel="apple-touch-icon"/>
+<meta content="favicon.png" property="og:image"/>
+<meta content="favicon.png" property="twitter:image"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#F6F3EE" name="theme-color"/>
@@ -1158,13 +1157,62 @@ header{ min-height: 110px !important; }
   .header-logo-img{ height:64px !important; }
 }
 
+
+
+/* ===== Hero readable glass card ===== */
+.hero-glass-card{
+  background: rgba(246,243,238,.78);
+  border: 1px solid rgba(232,226,216,.95);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-radius: 22px;
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: 0 12px 30px rgba(26,26,26,.10);
+  max-width: 820px;
+}
+.hero-glass-card .hero-lead{
+  color: rgba(26,26,26,.92) !important;
+  font-weight: 700;
+}
+.hero-glass-card .pill{
+  background: rgba(255,255,255,.92) !important;
+  border-color: rgba(26,26,26,.14) !important;
+}
+
+
+/* ===== HARD LOCK HEADER LOGO (kill text permanently) ===== */
+.brand { display:flex !important; align-items:center !important; }
+.brand * { font-size:0 !important; }
+.brand .logo-wrap, .brand img { font-size:initial !important; }
+.brand-title { display:none !important; }
+
+
+/* ===== Dramatic elegant fade-rise system ===== */
+.fade-rise{
+  opacity:0;
+  transform: translateY(22px);
+  filter: blur(2px);
+  transition: opacity 900ms cubic-bezier(.2,.8,.2,1), transform 900ms cubic-bezier(.2,.8,.2,1), filter 900ms cubic-bezier(.2,.8,.2,1);
+}
+.fade-rise.in{
+  opacity:1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+.fade-rise.delay-1{ transition-delay: 120ms; }
+.fade-rise.delay-2{ transition-delay: 240ms; }
+.fade-rise.delay-3{ transition-delay: 360ms; }
+.fade-rise.delay-4{ transition-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce){
+  .fade-rise, .fade-rise.in{ opacity:1; transform:none; filter:none; transition:none; }
+}
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
 <meta content="angel_logo.png" property="og:image"/>
-<meta content="summary_large_image" name="twitter:card"/>
-<meta content="angel_logo.png" name="twitter:image"/>
-</head>
+<meta content="summary_large_image" name="twitter:card">
+<meta content="angel_logo.png" name="twitter:image">
+</meta></meta></head>
 <body>
 <!-- Overlay for drawers/modals -->
 <div aria-hidden="true" class="overlay" id="overlay"></div>
@@ -1174,13 +1222,7 @@ header{ min-height: 110px !important; }
 <header>
 <div class="container">
 <div aria-label="Primary" class="header-row" role="navigation">
-<a class="brand" data-i18n="t001" data-nav="" href="#/home">
-<span aria-hidden="true" class="logo-wrap"></span>
-<span class="brand-title" data-i18n="t002">
-<strong data-i18n="t003">Angel’s Furniture</strong>
-<span data-i18n="t004">Houston showroom • Pickup &amp; Delivery</span>
-</span>
-</a>
+<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" src="favicon (1).png"/></span></a>
 <nav aria-label="Categories" class="primary">
 <a data-i18n="t005" data-mega="living" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-mega="bedroom" href="#/collection/bedroom">Bedroom</a>
@@ -1349,25 +1391,25 @@ header{ min-height: 110px !important; }
 <div aria-hidden="true" class="hero-media"></div>
 <div class="hero-inner">
 <div class="logo-intro">
-<div>
-<h1 data-i18n="t042">Angel’s Furniture<br/>Houston Showroom</h1>
+<div class="hero-glass-card"><div>
+<h1 class="fade-rise" data-i18n="t042">Furniture you can take home today</h1>
 <div class="divider" style="margin:12px 0 12px;max-width:520px;"></div>
-<p class="hero-lead" data-i18n="t043">Curated pieces, warm finishes, and clean modern lines. Shop collections, or grab “ready today” inventory for pickup or fast local Delivery.</p>
-<div class="hero-ctas">
+<p class="hero-lead fade-rise delay-1" data-i18n="t043">Comfortable, well-made furniture with a clean, modern look. Browse our collections or grab in‑stock pieces you can pick up or get delivered fast in Houston.</p>
+<div class="hero-ctas fade-rise delay-2">
 <a class="btn primary" data-i18n="t044" data-nav="" href="#/collection/living">Shop Collections</a>
 <a class="btn ghost" data-i18n="t045" data-nav="" href="#/showroom">Visit Houston Showroom</a>
 </div>
-<div class="hero-subrow">
-<span class="pill" data-i18n="t046"><strong data-i18n="t047">Ready today in Houston</strong> • limited drops</span>
+<div class="hero-subrow fade-rise delay-3">
+<span class="pill" data-i18n="t046">Ready today in Houston • Limited stock</span>
 <span class="pill" data-i18n="t048">Pickup available</span>
-<span class="pill" data-i18n="t049">Assembly options</span>
+<span class="pill" data-i18n="t049">Assembly available</span>
 </div>
-</div>
+</div></div>
 </div>
 </div>
 </div>
 <!-- Shop by room -->
-<div class="section" style="padding-top:26px;">
+<div class="section fade-rise" style="padding-top:26px;">
 <div class="section-head">
 <div>
 <h2 data-i18n="t050">Shop by room</h2>
@@ -1414,7 +1456,7 @@ header{ min-height: 110px !important; }
 </div>
 </div>
 <!-- New arrivals carousel -->
-<div class="section">
+<div class="section fade-rise">
 <div class="section-head">
 <div>
 <h2 data-i18n="t064">New arrivals</h2>
@@ -1424,7 +1466,7 @@ header{ min-height: 110px !important; }
 <div class="carousel" id="newArrivals"></div>
 </div>
 <!-- Ready today in Houston -->
-<div class="section">
+<div class="section fade-rise">
 <div class="section-head">
 <div>
 <h2 data-i18n="t066">Ready today in Houston</h2>
@@ -1434,7 +1476,7 @@ header{ min-height: 110px !important; }
 <div class="products" id="readyToday"></div>
 </div>
 <!-- Why Angel's -->
-<div class="section">
+<div class="section fade-rise">
 <div class="section-head">
 <div>
 <h2 data-i18n="t068">Why Angel’s</h2>
@@ -1457,7 +1499,7 @@ header{ min-height: 110px !important; }
 </div>
 </div>
 <!-- Showroom highlight -->
-<div class="section">
+<div class="section fade-rise">
 <div class="card pad soft-shadow">
 <div class="grid" style="grid-template-columns:1fr;gap:18px;align-items:center;">
 <div>
@@ -1480,7 +1522,7 @@ header{ min-height: 110px !important; }
 </div>
 </div>
 <!-- Social proof -->
-<div class="section">
+<div class="section fade-rise">
 <div class="section-head">
 <div>
 <h2 data-i18n="t089">Local favorites</h2>
@@ -1503,7 +1545,7 @@ header{ min-height: 110px !important; }
 </div>
 </div>
 <!-- Instagram-style gallery -->
-<div class="section">
+<div class="section fade-rise">
 <div class="section-head">
 <div>
 <h2 data-i18n="t094">Inspiration gallery</h2>
@@ -1520,7 +1562,7 @@ header{ min-height: 110px !important; }
 </div>
 </section>
 <!-- COLLECTION -->
-<section class="section" data-page="collection">
+<section class="section fade-rise" data-page="collection">
 <div class="container">
 <div class="sticky-filterbar">
 <button class="btn ghost" data-i18n="t096" id="openFiltersMobile">
@@ -1625,7 +1667,7 @@ header{ min-height: 110px !important; }
 </div>
 </section>
 <!-- ABOUT -->
-<section class="section" data-page="about">
+<section class="section fade-rise" data-page="about">
 <div class="container">
 <div class="section-head">
 <div>
@@ -1658,7 +1700,7 @@ header{ min-height: 110px !important; }
 </div>
 </section>
 <!-- SHOWROOM -->
-<section class="section" data-page="showroom">
+<section class="section fade-rise" data-page="showroom">
 <div class="container">
 <div class="section-head">
 <div>
@@ -1700,7 +1742,7 @@ header{ min-height: 110px !important; }
 </div>
 </section>
 <!-- CONTACT -->
-<section class="section" data-page="contact">
+<section class="section fade-rise" data-page="contact">
 <div class="container">
 <div class="section-head">
 <div>
@@ -2959,5 +3001,18 @@ header{ min-height: 110px !important; }
   if (btnEN) btnEN.addEventListener('click', () => apply('en'));
   if (btnES) btnES.addEventListener('click', () => apply('es'));
 })();
+</script><script>
+document.addEventListener("DOMContentLoaded", () => {
+  const els = document.querySelectorAll('.fade-rise');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => io.observe(el));
+});
 </script></body>
 </html>
