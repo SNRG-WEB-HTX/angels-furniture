@@ -4852,6 +4852,115 @@ document.addEventListener("DOMContentLoaded", () => {
   prev.addEventListener('click', ()=>{ index = Math.max(0, index-1); update(); });
   next.addEventListener('click', ()=>{ index = Math.min(maxIndex, index+1); update(); });
 })();
+
+
+    /* ========================================
+       MOBILE IMAGE FIX - Fallback Loading
+       ======================================== */
+    
+    function setupMobileImageFallbacks() {
+      // Only apply on mobile/tablet
+      if (window.innerWidth <= 1024) {
+        console.log('🔧 Applying mobile image fallbacks...');
+        
+        // Map furniture-XX.png to actual FM*.png files
+        const imageMap = {
+          'furniture-01.png': 'FM7597GY.png',
+          'furniture-02.png': 'FM7670.png',
+          'furniture-03.png': 'FM77701BR.png',
+          'furniture-04.png': 'FM7425BK-G.png',
+          'furniture-05.png': 'FM7415BK.png',
+          'furniture-06.png': 'FM72006IV.png',
+          'furniture-07.png': 'FM7200WH.png',
+          'furniture-08.png': 'FM74021DW-F.png',
+          'furniture-09.png': 'FM72005GR.png',
+          'furniture-10.png': 'FM74003BK.png',
+          'furniture-11.png': 'FM72014DW.png'
+        };
+        
+        // Apply fallbacks to all images
+        document.querySelectorAll('img').forEach(img => {
+          const src = img.getAttribute('src') || '';
+          const basename = src.split('/').pop();
+          
+          if (imageMap[basename]) {
+            console.log(`Trying fallback: ${basename} → ${imageMap[basename]}`);
+            
+            // Try the original first, if it fails, use the mapped version
+            img.onerror = function() {
+              if (!this.dataset.fallbackTried) {
+                this.dataset.fallbackTried = 'true';
+                const fallback = imageMap[basename];
+                console.log(`Loading fallback: ${fallback}`);
+                this.src = fallback;
+              }
+            };
+            
+            // For mobile, preemptively use the mapped version if furniture-XX doesn't load fast
+            const testImg = new Image();
+            testImg.onload = function() {
+              // Original loaded fine, do nothing
+            };
+            testImg.onerror = function() {
+              // Original failed, switch immediately
+              if (img.src.includes(basename)) {
+                img.src = imageMap[basename];
+              }
+            };
+            testImg.src = src;
+          }
+        });
+        
+        // Also fix logo
+        const logoImg = document.querySelector('.header-logo-img');
+        if (logoImg && logoImg.src.includes('angels-logo-main-transparent.png')) {
+          logoImg.onerror = function() {
+            console.log('Logo failed to load, trying alternatives...');
+            // Try different paths
+            const alternatives = [
+              'angels-logo.png',
+              './angels-logo-main-transparent.png',
+              'images/angels-logo-main-transparent.png',
+              'assets/angels-logo-main-transparent.png'
+            ];
+            
+            let attemptIndex = 0;
+            const tryNext = () => {
+              if (attemptIndex < alternatives.length) {
+                console.log(`Trying: ${alternatives[attemptIndex]}`);
+                logoImg.src = alternatives[attemptIndex];
+                attemptIndex++;
+              }
+            };
+            
+            logoImg.onerror = tryNext;
+            tryNext();
+          };
+        }
+      }
+    }
+    
+    // Run on page load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupMobileImageFallbacks);
+    } else {
+      setupMobileImageFallbacks();
+    }
+    
+    // Re-run when new content is added (for dynamic loading)
+    const originalInnerHTML = HTMLElement.prototype.__proto__.innerHTML;
+    Object.defineProperty(Element.prototype, 'innerHTML', {
+      set: function(value) {
+        originalInnerHTML.call(this, value);
+        if (window.innerWidth <= 1024) {
+          setTimeout(setupMobileImageFallbacks, 100);
+        }
+      },
+      get: function() {
+        return originalInnerHTML.call(this);
+      }
+    });
+    
 </script>
 
 <!-- PROFESSIONAL FOOTER - NO CONFLICTS -->
@@ -4891,7 +5000,7 @@ document.addEventListener("DOMContentLoaded", () => {
             10:00 AM - 7:00 PM<br>
             <br>
             Phone: (Add Your Number)<br>
-            Email: info@angelsfurniture.com
+            Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f060109002f0e01080a031c091a1d01061b1a1d0a410c0002">[email&#160;protected]</a>
           </p>
         </div>
       </div>
@@ -4914,14 +5023,4 @@ document.addEventListener("DOMContentLoaded", () => {
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                 <polyline points="15 3 21 3 21 9"></polyline>
                 <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+              
