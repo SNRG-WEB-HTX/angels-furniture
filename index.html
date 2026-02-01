@@ -2446,6 +2446,153 @@ body, .btn, input, textarea, select{
 }
 </style>
 
+
+<style>
+/* ================= MOBILE & DESKTOP FIX PACK ================= */
+
+/* DESKTOP + LAPTOP: subsection titles to charcoal ONLY */
+@media (min-width: 981px){
+  .section p.lede,
+  .section .subtle{
+    color: rgba(26,26,26,.72) !important;
+  }
+}
+
+/* MOBILE HERO: glass-card-only model */
+@media (max-width: 980px){
+
+  .hero-media{
+    display:none !important;
+  }
+
+  .hero-surface{
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .hero{
+    padding-top: 12px !important;
+  }
+
+  .hero-inner{
+    min-height: auto !important;
+    padding: 24px 16px 20px !important;
+  }
+
+  .hero-glass{
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    background: rgba(255,255,255,.55) !important;
+    border: 1px solid rgba(26,26,26,.10) !important;
+    backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  }
+
+  .hero h1{
+    color: #1d1d1f !important;
+    text-shadow: none !important;
+    font-size: clamp(30px, 7vw, 38px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero p,
+  .hero .lede{
+    color: rgba(29,29,31,.75) !important;
+  }
+}
+
+/* MOBILE HEADER LOGO: guaranteed visibility */
+@media (max-width: 980px){
+
+  header{
+    min-height: 84px !important;
+  }
+
+  .header-row{
+    align-items: center !important;
+  }
+
+  .brand{
+    display:flex !important;
+    align-items:center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .logo-wrap{
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  .header-logo-img{
+    height: 72px !important;
+    width: auto !important;
+    max-width: 190px !important;
+    display:block !important;
+  }
+}
+
+/* GLOBAL MOBILE POLISH */
+@media (max-width: 980px){
+
+  section{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  .container,
+  .wrap{
+    max-width:600px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  h2{
+    font-size: clamp(22px, 6vw, 28px) !important;
+  }
+
+  p{
+    line-height:1.55 !important;
+  }
+
+  .btn{
+    min-height:48px !important;
+  }
+}
+</style>
+
+
+<style>
+/* ===== HERO CARD: ABSOLUTE PERFECT CENTERING (ALL DEVICES) ===== */
+
+/* Hero container becomes centering context */
+.hero-inner{
+  display:grid !important;
+  place-items:center !important;
+}
+
+/* Glass card true center */
+.hero-glass{
+  margin:0 !important;
+}
+
+/* Desktop safety: do NOT affect layout, only centering */
+@media (min-width: 981px){
+  .hero-inner{
+    min-height: inherit !important;
+  }
+}
+
+/* Mobile fine-tune */
+@media (max-width: 980px){
+  .hero-inner{
+    padding: 24px 16px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- Overlay for drawers/modals -->
