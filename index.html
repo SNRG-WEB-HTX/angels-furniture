@@ -1457,24 +1457,75 @@ header { position: sticky; top:0; }
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent) !important;
   filter: drop-shadow(0 0 10px rgba(255,255,255,.35));
 }
-.hero-ctas .btn.primary{
-  background:#fff !important;
-  color:#1A1A1A !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35) !important;
-}
-.hero-ctas .btn.ghost{
-  border-color: rgba(255,255,255,.75) !important;
-  color:#fff !important;
-  background: rgba(0,0,0,.15) !important;
-  backdrop-filter: blur(6px);
-}
-.hero .pill{
-  background: rgba(0,0,0,.35) !important;
-  color:#fff !important;
-  border-color: rgba(255,255,255,.45) !important;
-  backdrop-filter: blur(6px);
+
+/* WORLD-CLASS HERO BUTTONS - Elegant & Readable */
+.hero-ctas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  margin-top:16px;
+  justify-content:center;
 }
 
+.hero-ctas .btn{
+  font-weight:600;
+  font-size:15px;
+  letter-spacing:0.2px;
+  padding:14px 28px;
+  min-width:140px;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hero-ctas .btn.primary{
+  background: linear-gradient(135deg, #1A1A1A 0%, #2D2D2D 100%) !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 
+    0 4px 16px rgba(26,26,26,0.25),
+    0 8px 32px rgba(26,26,26,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.1) !important;
+}
+
+.hero-ctas .btn.primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(26,26,26,0.3),
+    0 12px 40px rgba(26,26,26,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.15) !important;
+  background: linear-gradient(135deg, #2D2D2D 0%, #1A1A1A 100%) !important;
+}
+
+.hero-ctas .btn.ghost{
+  background: rgba(255,255,255,0.95) !important;
+  color: #1A1A1A !important;
+  border: 1px solid rgba(26,26,26,0.12) !important;
+  backdrop-filter: blur(10px) saturate(180%);
+  box-shadow: 
+    0 2px 8px rgba(0,0,0,0.08),
+    0 4px 16px rgba(0,0,0,0.04) !important;
+}
+
+.hero-ctas .btn.ghost:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,1) !important;
+  border-color: rgba(26,26,26,0.18) !important;
+  box-shadow: 
+    0 4px 12px rgba(0,0,0,0.12),
+    0 8px 24px rgba(0,0,0,0.08) !important;
+}
+
+/* Pill badges - refined */
+.hero .pill{
+  background: rgba(255,255,255,0.18) !important;
+  color: #1A1A1A !important;
+  border: 1px solid rgba(26,26,26,0.15) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  padding: 6px 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
 /* Centering and spacing */
 .hero-inner{
   align-items: center !important;
@@ -2750,7 +2801,7 @@ body, .btn, input, textarea, select{
 /* Mobile fine-tune */
 @media (max-width: 980px){
   .hero-inner{
-    padding: 40px 16px 24px !important;
+    padding: 24px 16px !important;
   }
 }
 </style>
