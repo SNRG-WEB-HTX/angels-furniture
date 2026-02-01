@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0062)file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/home -->
+<!-- saved from url=(0077)file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/home -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="file:///C:/Users/snrgw/Downloads/angels-logo.png" rel="icon" type="image/png">
 <link href="file:///C:/Users/snrgw/Downloads/angels-logo.png" rel="apple-touch-icon">
@@ -361,7 +361,7 @@
 
     /* Hero */
     .hero{
-      padding:28px 0 18px;
+      padding: 18px 0 12px;
     }
     .hero-surface{
       border-radius:28px;
@@ -376,26 +376,66 @@
     .hero-media{
       position:absolute;
       inset:0;
-      background-image:
-        linear-gradient(180deg, rgba(246,243,238,.0) 10%, rgba(246,243,238,.70) 78%, rgba(246,243,238,.92)),
-        url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2200&q=70");
-      background-size:cover;
-      background-position:center;
-      filter:saturate(105%);
+      overflow:hidden;
+      border-radius:24px;
+      background:#f5f5f7;
     }
+    .hero-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg,
+        rgba(246,243,238,0) 10%,
+        rgba(246,243,238,.70) 78%,
+        rgba(246,243,238,.92));
+      pointer-events:none;
+      z-index:3;
+    }
+    .hero-slide{
+      position:absolute;
+      inset:-2%;
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      opacity:0;
+      transform: scale(1.06);
+      transition: opacity 1200ms ease;
+      z-index:1;
+      will-change: transform;
+      filter: saturate(102%) contrast(102%);
+    }
+    .hero-slide.is-active{ opacity:1; z-index:2; }
+    @keyframes kb-1{0%{transform:scale(1.04) translate3d(-1.5%,-1%,0)}100%{transform:scale(1.10) translate3d(1.0%,1.0%,0)}}
+    @keyframes kb-2{0%{transform:scale(1.05) translate3d(1.2%,-1.0%,0)}100%{transform:scale(1.10) translate3d(-1.2%,1.2%,0)}}
+    @keyframes kb-3{0%{transform:scale(1.06) translate3d(0%,1.6%,0)}100%{transform:scale(1.10) translate3d(0%,-1.2%,0)}}
+    .hero-slide.is-anim-1{ animation: kb-1 9000ms ease-in-out both; }
+    .hero-slide.is-anim-2{ animation: kb-2 9000ms ease-in-out both; }
+    .hero-slide.is-anim-3{ animation: kb-3 9000ms ease-in-out both; }
+
+    /* Subtle parallax (no JS): "fixed" background on larger screens */
+    @media (min-width: 980px){
+      .hero-slide{ background-attachment: fixed; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hero-slide{ animation:none !important; transition:none !important; }
+    }
+
     .hero-inner{
       position:relative;
-      padding: clamp(28px, 6vw, 56px);
+      padding: clamp(18px, 4.5vw, 42px);
       display:grid;
       gap:18px;
       align-items:center;
-      min-height: clamp(420px, 52vw, 560px);
+      min-height: clamp(280px, 40vw, 420px);
+          justify-items:center;
+      text-align:center;
     }
     .hero h1{
       margin:0;
-      font-size:var(--step-3);
-      letter-spacing:-.04em;
-      line-height:1.02;
+      font-size:var(--step-2);
+      font-weight:700;
+      letter-spacing:-.02em;
+      line-height:1.06;
     }
     .hero p{
       margin:0;
@@ -886,6 +926,9 @@
       gap:18px;
       grid-template-columns:1fr;
     }
+.footer-visit{ text-align:center; }
+.footer-visit p{ margin-left:auto; margin-right:auto; }
+
     @media (min-width:880px){
       .footer-grid{
         grid-template-columns: 1.2fr .8fr .8fr;
@@ -1153,7 +1196,7 @@ header{ min-height: 110px !important; }
 .brand{ min-width:auto !important; gap:16px !important; background:transparent !important; }
 .logo-wrap{ width:auto !important; height:auto !important; background:transparent !important; padding:0 !important; }
 .header-logo-img{ 
-  height:120px !important; 
+  height:96px !important; 
   width:auto !important; 
   max-width:250px !important; 
   background:transparent !important;
@@ -1187,13 +1230,9 @@ header{ min-height: 110px !important; }
 }
 
 
-/* ===== HARD LOCK HEADER LOGO (kill text permanently) ===== */
-.brand { display:flex !important; align-items:center !important; }
-.brand * { font-size:0 !important; }
-.brand .logo-wrap, .brand img { font-size:initial !important; }
-.brand-title { display:none !important; }
-
-
+/* ===== HEADER LOGO (hide text label, keep image) ===== */
+.brand{ display:flex !important; align-items:center !important; }
+.brand-title{ display:none !important; }
 /* ===== Dramatic elegant fade-rise system ===== */
 .fade-rise{
   opacity:0;
@@ -1229,7 +1268,7 @@ header .logo-wrap{
 }
 
 /* Default size */
-.header-logo-img{ height:120px !important; width:auto; max-width:250px; }
+.header-logo-img{ height:96px !important; width:auto; max-width:250px; }
 
 /* Mobile tuning */
 @media (max-width: 640px){
@@ -1265,7 +1304,7 @@ header { position: sticky; top:0; }
 }
 .brand, .brand * { visibility: visible !important; opacity: 1 !important; }
 .logo-wrap{ display:flex !important; align-items:center !important; }
-.header-logo-img{ height:120px !important; width:auto; max-width:250px; }
+.header-logo-img{ height:96px !important; width:auto; max-width:250px; }
 @media (max-width: 640px){
   header{ min-height: 88px !important; }
   .header-row{ gap:8px !important; }
@@ -1291,14 +1330,24 @@ header { position: sticky; top:0; }
 }
 
 
-/* ===== SIGNATURE TITLE STYLE ===== */
+/* ===== SIGNATURE TITLE STYLE (ELEGANT / EDITORIAL) ===== */
 .hero h1{
-  font-family: "Segoe Script", "Brush Script MT", "Lucida Handwriting", "Apple Chancery", cursive !important;
-  font-weight: 400 !important;
-  letter-spacing: -0.01em !important;
+  font-family: "Canela","Noe Display","Playfair Display","Libre Baskerville",Georgia,serif !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.05 !important;
+  font-size: clamp(40px, 5vw, 58px) !important;
 }
 
-
+.hero .lede,
+.hero p{
+  max-width: 58ch;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(26,26,26,.72);
+}
 /* ===== HERO GLASS REFINEMENT: AIRIER + HUG CONTENT ===== */
 .hero-glass-card{
   display: inline-block !important;      /* hug content */
@@ -1314,15 +1363,11 @@ header { position: sticky; top:0; }
 .hero-card-title{ margin-bottom: 12px; }
 .hero-card-actions{}
 
-/* Center the cards nicely */
+/* ===== HERO CENTERING ===== */
 .hero-inner{
-  align-items: flex-start !important;
+  align-items: center !important;
+  text-align: center !important;
 }
-@media (max-width: 720px){
-  .hero-inner{ align-items: center !important; }
-}
-
-
 /* ===== PREMIUM SHOP-BY-ROOM CARDS ===== */
 .shop-room-card{
   position: relative;
@@ -1556,7 +1601,7 @@ header { position: sticky; top:0; }
    ========================= */
 .brand{ min-width: 0 !important; flex: 1 1 auto !important; }
 .logo-wrap{ display:flex !important; align-items:center !important; }
-.header-logo-img{ height:120px !important; width:auto; max-width:250px; }
+.header-logo-img{ height:96px !important; width:auto; max-width:250px; }
 @media (max-width: 640px){
   header{ min-height: 88px !important; }
   .header-row{ padding:10px 0 !important; gap:10px !important; }
@@ -1809,7 +1854,7 @@ header { position: sticky; top:0; }
     box-shadow: 0 4px 12px rgba(201,162,74,0.25);
   }
   50% { 
-    transform: scale(1.05); 
+    transform: scale(1.02); 
     box-shadow: 0 6px 20px rgba(201,162,74,0.4);
   }
 }
@@ -1845,14 +1890,14 @@ header { position: sticky; top:0; }
 .footer-inner {
   position: relative;
   z-index: 2;
-  padding: 60px 0 20px;
+  padding: 44px 0 16px;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 40px;
-  margin-bottom: 50px;
+  gap: 28px;
+  margin-bottom: 28px;
   position: relative;
 }
 
@@ -1899,8 +1944,8 @@ header { position: sticky; top:0; }
 
 .footer-bottom {
   border-top: 1px solid rgba(201, 162, 74, 0.2);
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   text-align: center;
 }
 
@@ -1908,7 +1953,7 @@ header { position: sticky; top:0; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
 }
 
 .footer-copyright {
@@ -1950,7 +1995,7 @@ header { position: sticky; top:0; }
 
 .footer-built-by-link:hover {
   color: #ffffff;
-  transform: scale(1.05);
+  transform: scale(1.02);
   text-shadow: 0 4px 16px rgba(201, 162, 74, 0.6);
 }
 
@@ -2025,12 +2070,621 @@ header { position: sticky; top:0; }
   -webkit-tap-highlight-color: transparent;
 }
 
+
+/* ============================
+   SHOWROOM + FOOTER TIGHTENING (Responsive / Centered)
+   ============================ */
+.showroom-layout{
+  justify-items: center;
+  align-items: start;
+}
+.showroom-layout > div{
+  width: 100%;
+  max-width: 520px;
+}
+@media (max-width: 900px){
+  .showroom-layout{
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .showroom-layout > div{
+    max-width: 640px;
+  }
+}
+
+/* Tighten footer logo spacing without breaking layout */
+.site-footer .footer-inner .container > div[style*="justify-content:center"]{
+  padding: 18px 0 8px !important;
+}
+.site-footer .footer-inner .container > div[style*="justify-content:center"] img{
+  height: 96px !important;
+}
+@media (max-width: 480px){
+  .site-footer .footer-inner .container > div[style*="justify-content:center"] img{
+    height: 84px !important;
+  }
+}
+
+
+
+/* =========================
+   Apple-catalog hero + Shop-by-Room hover fix
+   ========================= */
+
+/* HERO: Apple-style (clean, calm, premium) */
+.hero{
+  background: #f5f5f7 !important;
+}
+.hero-surface{
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.hero-media{
+  border-radius: 28px !important;
+  overflow: hidden !important;
+  background-image:
+    radial-gradient(1200px 600px at 50% 30%, rgba(255,255,255,.75), rgba(245,245,247,.92) 55%, rgba(245,245,247,1)),
+    url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2200&q=70") !important;
+  filter: saturate(102%) contrast(102%) !important;
+}
+.hero-media::after{ display:none !important; }
+
+.hero-inner{
+  padding: 72px 10px 26px !important;
+  text-align: center !important;
+  align-items: center !important;
+}
+.hero h1{
+  color:#1d1d1f !important;
+  text-shadow: none !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.04 !important;
+}
+.hero .divider{
+  background: linear-gradient(90deg, transparent, rgba(29,29,31,.25), transparent) !important;
+  filter: none !important;
+}
+.hero-ctas{
+  justify-content:center !important;
+}
+.hero-ctas .btn.primary{
+  background:#1d1d1f !important;
+  color:#fff !important;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18) !important;
+}
+.hero-ctas .btn.ghost{
+  border-color: rgba(29,29,31,.22) !important;
+  color:#1d1d1f !important;
+  background: rgba(255,255,255,.65) !important;
+  backdrop-filter: blur(10px) saturate(160%);
+}
+.hero-subrow{
+  justify-content:center !important;
+}
+.hero .pill{
+  background: rgba(255,255,255,.70) !important;
+  border-color: rgba(29,29,31,.12) !important;
+  color:#1d1d1f !important;
+  text-shadow:none !important;
+}
+
+/* SHOP BY ROOM: prevent “white flash” on hover/tap by ensuring swap image exists
+   + lock image (no zoom) */
+.hero .section .p-card{
+  -webkit-tap-highlight-color: transparent;
+}
+@media (hover:hover) and (pointer:fine){
+  .hero .section .p-card:hover .p-media img{ transform:none !important; }
+}
+
+/* Also, do not dim/blank the primary image (swap now duplicates, but keep safe) */
+@media (hover:hover) and (pointer:fine){
+  .hero .section .p-card:hover .p-media img.primary{ opacity:1 !important; }
+  .hero .section .p-card:hover .p-media img.swap{ opacity:0 !important; }
+}
+
+
+/* ============================
+   VISIBILITY / CLASSY CONTRAST (Showroom + CTAs)
+   ============================ */
+
+/* Global type smoothing */
+:root{
+  --ink: #1d1d1f;
+  --muted-ink: rgba(29,29,31,.74);
+  --soft-surface: rgba(255,255,255,.72);
+  --hard-surface: #ffffff;
+  --stroke: rgba(29,29,31,.14);
+  --shadow: 0 10px 28px rgba(0,0,0,.10);
+}
+
+/* Elegant editorial heading, readable body */
+.hero h1{
+  font-family: "Playfair Display", Georgia, serif !important;
+  font-weight: 500 !important;
+}
+body, .btn, input, textarea, select{
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Make subtle text actually readable */
+.subtle, .lede{
+  color: var(--muted-ink) !important;
+}
+
+/* Buttons: higher contrast + classy depth */
+.btn{
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.btn.primary{
+  background: var(--ink) !important;
+  color:#fff !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+.btn.ghost{
+  background: rgba(255,255,255,.80) !important;
+  border: 1px solid var(--stroke) !important;
+  color: var(--ink) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+}
+.btn.primary:hover, .btn.ghost:hover{
+  transform: translateY(-1px);
+}
+
+/* Visit our showroom: root cause fix — conflicting layout rules.
+   Force a stable two-column layout with proper centering and stretching */
+.showroom-layout{
+  display:grid !important;
+  grid-template-columns: minmax(320px, 520px) minmax(320px, 560px) !important;
+  gap: 26px !important;
+  align-items: start !important;
+  justify-content: center !important;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+@media (max-width: 980px){
+  .showroom-layout{
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* Left column cards: give contrast */
+.showroom-layout > div:first-child > div[style*="background:#f5f5f7"]{
+  background: rgba(255,255,255,.84) !important;
+  border: 1px solid var(--stroke) !important;
+  box-shadow: 0 10px 26px rgba(0,0,0,.06);
+}
+
+/* Map: root cause fix — iframe height set to 100% with no fixed parent height.
+   We force an explicit height and let iframe fill it. */
+.showroom-map{
+  height: 480px !important;
+  min-height: 480px !important;
+  background: rgba(255,255,255,.84);
+}
+.showroom-map iframe{
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Hero video posters: reduce over-zoom (already adjusted), keep crisp */
+.video-tile__poster.is-active,
+.video-media img.active{
+  transform: scale(1.04) !important;
+}
+
+
+/* =========================
+   PATCH (2026-01-31)
+   - Easy Financing banner: white bg + black text
+   - Hero: glass card for title/CTAs, cinematic readability
+   - Hero slides: reduce zoom-in
+   ========================= */
+
+/* Easy Financing banner (override) */
+.financing-banner{
+  background:#ffffff !important;
+  border-bottom:1px solid rgba(26,26,26,.10) !important;
+  animation:none !important;
+}
+.financing-banner::before{ display:none !important; }
+.financing-text{
+  color:#1A1A1A !important;
+  text-shadow:none !important;
+  letter-spacing: .28em !important;
+  animation:none !important;
+}
+
+/* Hero content glass card */
+.hero-inner{ position:relative; z-index:4; }
+.hero-glass{
+  display:block;
+  width: fit-content;
+  margin: 0 auto;
+  max-width:min(920px, 100%);
+  padding: clamp(14px, 2.6vw, 24px);
+  border-radius: 22px;
+  background: rgba(255,255,255,.16);
+  border: 1px solid rgba(255,255,255,.28);
+  backdrop-filter: blur(12px) saturate(140%);
+  box-shadow: 0 18px 46px rgba(0,0,0,.28);
+}
+
+/* Ensure cinematic hero stays cinematic (override the later "Apple-catalog hero") */
+.hero{ background: transparent !important; }
+.hero-surface{
+  border-radius:28px;
+  overflow:hidden;
+  border:1px solid rgba(232,226,216,.9);
+  box-shadow:var(--shadow);
+  position:relative;
+  background: transparent !important;
+}
+.hero-media{
+  background:#0b0b0c !important; /* fallback while images load */
+  border-radius:24px;
+}
+.hero-media::after{
+  display:block !important;
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,.30), rgba(0,0,0,.55) 55%, rgba(0,0,0,.68) 80%),
+    linear-gradient(180deg, rgba(0,0,0,0.0) 20%, rgba(0,0,0,.30) 60%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+  z-index:3;
+}
+
+/* Title + UI on cinematic hero */
+.hero h1{
+  color:#fff !important;
+  text-shadow: 0 10px 40px rgba(0,0,0,.60), 0 2px 12px rgba(0,0,0,.55) !important;
+}
+.hero .lede, .hero p{ color: rgba(255,255,255,.86) !important; }
+.hero .pill{
+  background: rgba(0,0,0,.28) !important;
+  color:#fff !important;
+  border-color: rgba(255,255,255,.30) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Buttons readable on top of image */
+.hero-ctas .btn.primary{
+  background:#fff !important;
+  color:#1A1A1A !important;
+  box-shadow: 0 14px 34px rgba(0,0,0,.35) !important;
+}
+.hero-ctas .btn.ghost{
+  border-color: rgba(255,255,255,.60) !important;
+  color:#fff !important;
+  background: rgba(0,0,0,.18) !important;
+  backdrop-filter: blur(8px);
+}
+
+/* Hero slides: less zoomed-in */
+.hero-slide{
+  inset:-1% !important;
+  transform: scale(1.02) !important;
+  background-position: center center !important;
+}
+@keyframes kb-1{0%{transform:scale(1.02) translate3d(-0.6%,-0.4%,0)}100%{transform:scale(1.05) translate3d(0.6%,0.6%,0)}}
+@keyframes kb-2{0%{transform:scale(1.02) translate3d(0.6%,-0.4%,0)}100%{transform:scale(1.05) translate3d(-0.6%,0.6%,0)}}
+@keyframes kb-3{0%{transform:scale(1.02) translate3d(0%,0.7%,0)}100%{transform:scale(1.05) translate3d(0%,-0.6%,0)}}
+
+@media (min-width: 980px){
+  /* fixed attachment can feel "croppier" — keep normal for wider compositions */
+  .hero-slide{ background-attachment: scroll !important; }
+}
+
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload">
 <meta content="angel_logo.png" property="og:image">
 <meta content="summary_large_image" name="twitter:card">
 <meta content="angel_logo.png" name="twitter:image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Angel’s Furniture _ Houston, TX_files/css2" rel="stylesheet">
+
+<style>
+/* ===== FOOTER: TIGHT, CENTERED, EVEN ===== */
+.site-footer{
+  margin-top:48px !important;
+}
+.footer-inner{
+  padding:24px 0 12px !important;
+}
+.footer-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:20px !important;
+  text-align:center !important;
+}
+.footer-col{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+}
+.footer-col h4{
+  margin-bottom:8px !important;
+}
+.footer-col ul li,
+.footer-col p{
+  margin:0 0 6px !important;
+  line-height:1.35 !important;
+}
+.footer-col ul li a{
+  padding:2px 0 !important;
+  font-size:14px !important;
+}
+.footer-bottom{
+  padding:12px 0 !important;
+}
+@media(max-width:900px){
+  .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+    text-align:left !important;
+  }
+  .footer-col{
+    align-items:flex-start !important;
+  }
+  /* Two-column link lists on mobile */
+  .footer-col ul{
+    width:100% !important;
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    column-gap:18px !important;
+    row-gap:10px !important;
+  }
+  .footer-col ul li{ margin:0 !important; }
+  /* Put Visit Us first */
+  .footer-grid .footer-visit{ order:-1 !important; }
+}
+</style>
+
+
+<style>
+/* ================= MOBILE & DESKTOP FIX PACK ================= */
+
+/* DESKTOP + LAPTOP: subsection titles to charcoal ONLY */
+@media (min-width: 981px){
+  .section p.lede,
+  .section .subtle{
+    color: rgba(26,26,26,.72) !important;
+  }
+}
+
+/* MOBILE HERO: glass-card-only model */
+@media (max-width: 980px){
+
+  .hero-media{
+    display:block !important;
+    opacity:1 !important;
+  }
+
+  .hero-surface{
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .hero{
+    padding-top: 12px !important;
+  }
+
+  .hero-inner{
+    min-height: auto !important;
+    padding: 24px 16px 20px !important;
+  }
+
+  .hero-glass{
+    width: 100% !important;
+    max-width: 560px !important;
+    margin: 0 auto !important;
+    background: rgba(255,255,255,.55) !important;
+    border: 1px solid rgba(26,26,26,.10) !important;
+    backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  }
+
+  .hero h1{
+    color: #1d1d1f !important;
+    text-shadow: none !important;
+    font-size: clamp(30px, 7vw, 38px) !important;
+    line-height: 1.08 !important;
+  }
+
+  .hero p,
+  .hero .lede{
+    color: rgba(29,29,31,.75) !important;
+  }
+}
+
+/* MOBILE HEADER LOGO: guaranteed visibility */
+@media (max-width: 980px){
+
+  header{
+    min-height: 84px !important;
+  }
+
+  .header-row{
+    align-items: center !important;
+  }
+
+  .brand{
+    display:flex !important;
+    align-items:center !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .logo-wrap{
+    display:flex !important;
+    align-items:center !important;
+  }
+
+  .header-logo-img{
+    height: 72px !important;
+    width: auto !important;
+    max-width: 190px !important;
+    display:block !important;
+  }
+}
+
+/* GLOBAL MOBILE POLISH */
+@media (max-width: 980px){
+
+  section{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  .container,
+  .wrap{
+    max-width:600px !important;
+    margin-left:auto !important;
+    margin-right:auto !important;
+  }
+
+  h2{
+    font-size: clamp(22px, 6vw, 28px) !important;
+  }
+
+  p{
+    line-height:1.55 !important;
+  }
+
+  .btn{
+    min-height:48px !important;
+  }
+}
+</style>
+
+
+<style>
+/* ===== HERO CARD: ABSOLUTE PERFECT CENTERING (ALL DEVICES) ===== */
+
+/* Hero container becomes centering context */
+.hero-inner{
+  display:grid !important;
+  place-items:center !important;
+}
+
+/* Glass card true center */
+.hero-glass{
+  margin:0 !important;
+}
+
+/* Desktop safety: do NOT affect layout, only centering */
+@media (min-width: 981px){
+  .hero-inner{
+    min-height: inherit !important;
+  }
+}
+
+/* Mobile fine-tune */
+@media (max-width: 980px){
+  .hero-inner{
+    padding: 24px 16px !important;
+  }
+}
+</style>
+
+
+<style>
+/* ================= ROOT CAUSE FIXES ================= */
+
+/* ROOT CAUSE #1: Images hidden on mobile due to container overflow / display rules */
+@media (max-width: 980px){
+
+  img{
+    max-width:100% !important;
+    height:auto !important;
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  .image,
+  .media,
+  .media-wrap,
+  .collection-image,
+  .card-media{
+    display:block !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    overflow:visible !important;
+  }
+}
+
+/* ROOT CAUSE #2: Logo hidden by flex shrink / height clamp */
+@media (max-width: 980px){
+
+  .brand{
+    flex:0 0 auto !important;
+  }
+
+  .logo-wrap,
+  .header-logo,
+  .header-logo-img{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  .header-logo-img{
+    height:64px !important;
+    max-height:none !important;
+  }
+}
+
+/* ================= MOBILE FOOTER: VISIT SHOWROOM ELITE ================= */
+@media (max-width: 980px){
+
+  .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:20px !important;
+  }
+
+  .footer-col{
+    align-items:center !important;
+    text-align:center !important;
+  }
+
+  .footer-col h4{
+    margin-bottom:6px !important;
+    font-size:15px !important;
+  }
+
+  .footer-col p,
+  .footer-col li{
+    font-size:14px !important;
+    line-height:1.45 !important;
+    margin-bottom:4px !important;
+  }
+
+  .footer-col.visit-us{
+    padding:12px 0 !important;
+    border-top:1px solid rgba(0,0,0,.08);
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- Overlay for drawers/modals -->
@@ -2041,14 +2695,14 @@ header { position: sticky; top:0; }
 <header>
 <div class="container">
 <div aria-label="Primary" class="header-row" role="navigation">
-<a class="brand" data-nav="" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="./Angel’s Furniture _ Houston, TX_files/angels-logo-main-transparent.png"></span></a>
+<a class="brand" data-nav="" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="./Angel’s Furniture _ Houston, TX_files/angels-logo-main-transparent.png"></span></a>
 <nav aria-label="Categories" class="primary">
-<a data-i18n="t005" data-mega="living" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/living">Living</a>
-<a data-i18n="t006" data-mega="bedroom" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/bedroom">Bedroom</a>
-<a data-i18n="t007" data-mega="dining" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/dining">Dining</a>
-<a data-i18n="t008" data-mega="office" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/office">Office</a>
-<a data-i18n="t009" data-mega="decor" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/decor">Decor</a>
-<a data-i18n="t010" data-mega="sale" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/sale">Sale</a>
+<a data-i18n="t005" data-mega="living" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/living">Living</a>
+<a data-i18n="t006" data-mega="bedroom" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/bedroom">Bedroom</a>
+<a data-i18n="t007" data-mega="dining" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/dining">Dining</a>
+<a data-i18n="t008" data-mega="office" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office">Office</a>
+<a data-i18n="t009" data-mega="decor" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/decor">Decor</a>
+<a data-i18n="t010" data-mega="sale" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/sale">Sale</a>
 </nav>
 <div class="header-actions">
 <button aria-label="Search" class="icon-btn" id="openSearch">
@@ -2069,8 +2723,18 @@ header { position: sticky; top:0; }
 <div aria-hidden="true" class="mega" id="mega">
 <div class="container">
 <div class="mega-inner">
-<div class="mega-cols" id="megaCols"></div>
-<div class="feat-tiles" id="megaFeats"></div>
+<div class="mega-cols" id="megaCols"><div><h4>Shop</h4><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office" data-nav="">Desks</a><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?q=chair" data-nav="">Chairs</a><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?q=light" data-nav="">Lighting</a></div><div><h4>Style</h4><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?q=slim" data-nav="">Slim setups</a><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?q=black" data-nav="">Black + wood</a></div><div><h4>Shortcuts</h4><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?Delivery=ready" data-nav="">Ready today</a><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?sort=new" data-nav="">New arrivals</a></div></div>
+<div class="feat-tiles" id="megaFeats">
+        <a class="feat" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office" data-nav="">
+          <img loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1524758631624-e2822e304c36(1)" alt="Desks">
+          <span class="label">Desks</span>
+        </a>
+      
+        <a class="feat" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office?q=essentials" data-nav="">
+          <img loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1502005229762-cf1b2da7c5d6" alt="Setup essentials">
+          <span class="label">Setup essentials</span>
+        </a>
+      </div>
 </div>
 </div>
 </div>
@@ -2202,18 +2866,39 @@ header { position: sticky; top:0; }
 </div>
 <main>
 <!-- HOME -->
-<section class="hero active" data-page="home">
+<!-- CMS COMPONENT: HERO (editable copy stays in i18n keys) -->
+<section class="hero active" data-page="home" data-cms="hero">
 <div class="container">
 <div class="hero-surface">
-<div aria-hidden="true" class="hero-media"></div>
-<div class="hero-inner"><h1 class="fade-rise in" data-i18n="t042">Angel’s Furniture<br>Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div><div class="hero-ctas fade-rise delay-2 in">
+<script type="application/json" id="cms-hero-config">
+{
+  "headlineKey": "t042",
+  "ledeKey": "t043",
+  "primaryCtaKey": "t164",
+  "secondaryCtaKey": "t044",
+  "pills": ["t048","t049"],
+  "slides": [
+    "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2400&q=80",
+    "https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&fit=crop&w=2400&q=80",
+    "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=2400&q=80",
+    "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=2400&q=80"
+  ]
+}
+</script>
+
+<div aria-hidden="true" class="hero-media">
+  <div class="hero-slide" style="--bg:url(&#39;https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2400&amp;q=80&#39;);"></div>
+  <div class="hero-slide is-active is-anim-2" style="--bg:url(&#39;https://images.unsplash.com/photo-1540574163026-643ea20ade25?auto=format&amp;fit=crop&amp;w=2400&amp;q=80&#39;);"></div>
+  <div class="hero-slide" style="--bg:url(&#39;https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=2400&amp;q=80&#39;);"></div>
+  <div class="hero-slide" style="--bg:url(&#39;https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=2400&amp;q=80&#39;);"></div>
+</div>
+<div class="hero-inner"><div class="hero-glass"><h1 class="fade-rise in" data-i18n="t042">Angel’s Furniture<br>Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div><div class="hero-ctas fade-rise delay-2 in">
 <a class="btn primary" href="tel:+13468671155" data-i18n="t164">Call Now</a>
-<a class="btn ghost" data-nav="" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/living" data-i18n="t044">Shop Collections</a>
+<a class="btn ghost" data-nav="" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/living" data-i18n="t044">Shop Collections</a>
 </div><div class="hero-subrow fade-rise delay-3 in">
-<span class="pill" data-i18n="t046">Great Deals • Easy Financing Available</span>
 <span class="pill" data-i18n="t048">Pickup available</span>
 <span class="pill" data-i18n="t049">Same-Week Delivery</span>
-</div></div>
+</div></div></div>
 </div>
 <!-- Shop by room -->
 <div class="section fade-rise in" style="padding-top:26px;">
@@ -2224,36 +2909,40 @@ header { position: sticky; top:0; }
 </div>
 </div>
 <div class="grid md-grid-3 grid-2 lg-grid-4">
-  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/living" style="text-decoration:none;display:block;">
+  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/living" style="text-decoration:none;display:block;">
     <div class="p-media">
       <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1540574163026-643ea20ade25" alt="Living Room">
+      <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1540574163026-643ea20ade25" alt="Living Room">
     </div>
     <div class="p-body">
       <h3 class="p-title" data-i18n="t053">Living</h3>
       <div class="subtle" data-i18n="t054">Sofas, sectionals, tables</div>
     </div>
   </a>
-  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/bedroom" style="text-decoration:none;display:block;">
+  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/bedroom" style="text-decoration:none;display:block;">
     <div class="p-media">
       <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1505693416388-ac5ce068fe85" alt="Bedroom">
+      <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1505693416388-ac5ce068fe85" alt="Bedroom">
     </div>
     <div class="p-body">
       <h3 class="p-title" data-i18n="t056">Bedroom</h3>
       <div class="subtle" data-i18n="t057">Beds, dressers, nightstands</div>
     </div>
   </a>
-  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/dining" style="text-decoration:none;display:block;">
+  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/dining" style="text-decoration:none;display:block;">
     <div class="p-media">
       <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1519710164239-da123dc03ef4" alt="Dining Room">
+      <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1519710164239-da123dc03ef4" alt="Dining Room">
     </div>
     <div class="p-body">
       <h3 class="p-title" data-i18n="t059">Dining</h3>
       <div class="subtle" data-i18n="t060">Tables, chairs, storage</div>
     </div>
   </a>
-  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/office" style="text-decoration:none;display:block;">
+  <a class="card p-card" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/office" style="text-decoration:none;display:block;">
     <div class="p-media">
       <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1524758631624-e2822e304c36" alt="Office">
+      <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/photo-1524758631624-e2822e304c36" alt="Office">
     </div>
     <div class="p-body">
       <h3 class="p-title" data-i18n="t062">Office</h3>
@@ -2280,7 +2969,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/HH-74497" data-nav="" aria-label="Miami White Sofa &amp; Loveseat LED Set">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/HH-74497" data-nav="" aria-label="Miami White Sofa &amp; Loveseat LED Set">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/miami-white-1.jpg" alt="Miami White Sofa &amp; Loveseat LED Set">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/miami-white-1.jpg" alt="Miami White Sofa &amp; Loveseat LED Set alternate view">
@@ -2304,7 +2993,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-MI633" data-nav="" aria-label="Picasso II 6-Piece Caramel Power Sectional">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-MI633" data-nav="" aria-label="Picasso II 6-Piece Caramel Power Sectional">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/MI-633PICASSOII_CARMEL_1.jpg" alt="Picasso II 6-Piece Caramel Power Sectional">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/MI-633PICASSOII_CARMEL_1.jpg" alt="Picasso II 6-Piece Caramel Power Sectional alternate view">
@@ -2328,7 +3017,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S1400" data-nav="" aria-label="Stepso Green Sofa &amp; Loveseat">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S1400" data-nav="" aria-label="Stepso Green Sofa &amp; Loveseat">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S1400_STEPSO_GREEN_SLC_c3b45403-14ae-4c83-838d-35d7d422129e.jpg" alt="Stepso Green Sofa &amp; Loveseat">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S1400_STEPSO_GREEN_SLC_c3b45403-14ae-4c83-838d-35d7d422129e.jpg" alt="Stepso Green Sofa &amp; Loveseat alternate view">
@@ -2352,7 +3041,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S343" data-nav="" aria-label="Thea Grey Sectional">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S343" data-nav="" aria-label="Thea Grey Sectional">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/Replace_the_background_with_a_mo-0.png" alt="Thea Grey Sectional">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/Replace_the_background_with_a_mo-0.png" alt="Thea Grey Sectional alternate view">
@@ -2376,7 +3065,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-323494" data-nav="" aria-label="Lora Collection 3-Piece Set">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-323494" data-nav="" aria-label="Lora Collection 3-Piece Set">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/LORA_3PCS.jpg" alt="Lora Collection 3-Piece Set">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/LORA_3PCS.jpg" alt="Lora Collection 3-Piece Set alternate view">
@@ -2400,7 +3089,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S3300" data-nav="" aria-label="Minerva Black Velvet 3-Piece Set">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S3300" data-nav="" aria-label="Minerva Black Velvet 3-Piece Set">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S3300_MINERVA_BLACK_SLC.jpg" alt="Minerva Black Velvet 3-Piece Set">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S3300_MINERVA_BLACK_SLC.jpg" alt="Minerva Black Velvet 3-Piece Set alternate view">
@@ -2424,7 +3113,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S319" data-nav="" aria-label="Austin Light Grey Sectional">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S319" data-nav="" aria-label="Austin Light Grey Sectional">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/download_31b9f81f-db2b-43be-8f72-f5d787464843.jpg" alt="Austin Light Grey Sectional">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/download_31b9f81f-db2b-43be-8f72-f5d787464843.jpg" alt="Austin Light Grey Sectional alternate view">
@@ -2448,7 +3137,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/HH-27704" data-nav="" aria-label="Ashley 277-04 Sofa &amp; Loveseat">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/HH-27704" data-nav="" aria-label="Ashley 277-04 Sofa &amp; Loveseat">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/s388224282203948371_p3471_i6_w1184.png" alt="Ashley 277-04 Sofa &amp; Loveseat">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/s388224282203948371_p3471_i6_w1184.png" alt="Ashley 277-04 Sofa &amp; Loveseat alternate view">
@@ -2472,7 +3161,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S329" data-nav="" aria-label="Snuggle Station Grey Tech Sectional">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S329" data-nav="" aria-label="Snuggle Station Grey Tech Sectional">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/Untitled_design_3_831a8d02-8980-461e-86b8-a96336af43e9.png" alt="Snuggle Station Grey Tech Sectional">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/Untitled_design_3_831a8d02-8980-461e-86b8-a96336af43e9.png" alt="Snuggle Station Grey Tech Sectional alternate view">
@@ -2496,7 +3185,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/NE-S351" data-nav="" aria-label="Zaira Grey Sleeper Sofa &amp; Loveseat">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/NE-S351" data-nav="" aria-label="Zaira Grey Sleeper Sofa &amp; Loveseat">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S351ZAIRAGREYSL1.jpg" alt="Zaira Grey Sleeper Sofa &amp; Loveseat">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/S351ZAIRAGREYSL1.jpg" alt="Zaira Grey Sleeper Sofa &amp; Loveseat alternate view">
@@ -2520,7 +3209,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-4902S" data-nav="" aria-label="Arabella Accent Chair Light Grey Velvet">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-4902S" data-nav="" aria-label="Arabella Accent Chair Light Grey Velvet">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet alternate view">
@@ -2544,7 +3233,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-B6580" data-nav="" aria-label="Jaymes Platform Storage Bedroom Set">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-B6580" data-nav="" aria-label="Jaymes Platform Storage Bedroom Set">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set alternate view">
@@ -2559,30 +3248,6 @@ header { position: sticky; top:0; }
           </div>
         </a>
       </article>
-      <article class="card p-card" data-id="CM-B9255">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-B9255">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-B9255">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-B9255" data-nav="" aria-label="Millie Upholstered Bed Group">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B9255.jpg" alt="Millie Upholstered Bed Group">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B9255.jpg" alt="Millie Upholstered Bed Group alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Millie Upholstered Bed Group</h3>
-            <div class="p-meta">
-              <span class="pill">3–7 days</span>
-              <span class="price">$1,599</span>
-            </div>
-            <div class="subtle">In stock • Wood</div>
-          </div>
-        </a>
-      </article>
       <article class="card p-card" data-id="CM-5212GY">
         <div class="p-actions">
           <button class="mini" aria-label="Wishlist" data-wish="CM-5212GY">
@@ -2592,7 +3257,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-5212GY" data-nav="" aria-label="Voltare Fireplace TV Lift Bed">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-5212GY" data-nav="" aria-label="Voltare Fireplace TV Lift Bed">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/5212GY.jpg" alt="Voltare Fireplace TV Lift Bed">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/5212GY.jpg" alt="Voltare Fireplace TV Lift Bed alternate view">
@@ -2616,137 +3281,7 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-B8250" data-nav="" aria-label="Sienna Canopy Bedroom Group">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Sienna Canopy Bedroom Group</h3>
-            <div class="p-meta">
-              <span class="pill">Ready today</span>
-              <span class="price">$1,799</span>
-            </div>
-            <div class="subtle">In stock • Wood</div>
-          </div>
-        </a>
-      </article></div>
-</div>
-<!-- Ready today in Houston -->
-<div class="section fade-rise">
-<div class="section-head">
-<div>
-<h2 data-i18n="t066">Ready Today In Houston</h2>
-<p class="lede" data-i18n="t067">In-stock furniture ready for same-week delivery or pickup. Great deals with flexible payment plans.</p>
-</div>
-</div>
-<div class="products" id="readyToday">
-      <article class="card p-card" data-id="CM-6293F">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-6293F">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-6293F">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-6293F" data-nav="" aria-label="Floor Lamp">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6293F.jpg" alt="Floor Lamp">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6293F.jpg" alt="Floor Lamp alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Floor Lamp</h3>
-            <div class="p-meta">
-              <span class="pill">Ready today</span>
-              <span class="price">$249</span>
-            </div>
-            <div class="subtle">In stock • Metal &amp; Glass</div>
-          </div>
-        </a>
-      </article>
-      <article class="card p-card" data-id="CM-4902S">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-4902S">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-4902S">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-4902S" data-nav="" aria-label="Arabella Accent Chair Light Grey Velvet">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Arabella Accent Chair Light Grey Velvet</h3>
-            <div class="p-meta">
-              <span class="pill">Ready today</span>
-              <span class="price">$449</span>
-            </div>
-            <div class="subtle">In stock • Velvet</div>
-          </div>
-        </a>
-      </article>
-      <article class="card p-card" data-id="CM-6290T">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-6290T">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-6290T">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-6290T" data-nav="" aria-label="Table Lamp">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6290T-SV-2.jpg" alt="Table Lamp">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6290T-SV-2.jpg" alt="Table Lamp alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Table Lamp</h3>
-            <div class="p-meta">
-              <span class="pill">Ready today</span>
-              <span class="price">$159</span>
-            </div>
-            <div class="subtle">In stock • Metal &amp; Fabric</div>
-          </div>
-        </a>
-      </article>
-      <article class="card p-card" data-id="CM-B6580">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-B6580">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-B6580">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-B6580" data-nav="" aria-label="Jaymes Platform Storage Bedroom Set">
-          <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set alternate view">
-          </div>
-          <div class="p-body">
-            <h3 class="p-title">Jaymes Platform Storage Bedroom Set</h3>
-            <div class="p-meta">
-              <span class="pill">Ready today</span>
-              <span class="price">$1,899</span>
-            </div>
-            <div class="subtle">In stock • Upholstered Fabric</div>
-          </div>
-        </a>
-      </article>
-      <article class="card p-card" data-id="CM-B8250">
-        <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="CM-B8250">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="CM-B8250">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
-          </button>
-        </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/CM-B8250" data-nav="" aria-label="Sienna Canopy Bedroom Group">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-B8250" data-nav="" aria-label="Sienna Canopy Bedroom Group">
           <div class="p-media">
             <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group">
             <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group alternate view">
@@ -2770,10 +3305,164 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/FOA-FM72014DW" data-nav="" aria-label="Lantrisant Contemporary Bed">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/FOA-FM72014DW" data-nav="" aria-label="Lantrisant Contemporary Bed">
           <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-11.png" alt="Lantrisant Contemporary Bed">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-11.png" alt="Lantrisant Contemporary Bed alternate view">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-10.png" alt="Lantrisant Contemporary Bed">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-10.png" alt="Lantrisant Contemporary Bed alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Lantrisant Contemporary Bed</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$1,439</span>
+            </div>
+            <div class="subtle">In stock • Wood &amp; Leatherette</div>
+          </div>
+        </a>
+      </article></div>
+</div>
+<!-- Ready today in Houston -->
+<div class="section fade-rise">
+<div class="section-head">
+<div>
+<h2 data-i18n="t066">Ready Today In Houston</h2>
+<p class="lede" data-i18n="t067">In-stock furniture ready for same-week delivery or pickup. Great deals with flexible payment plans.</p>
+</div>
+</div>
+<div class="products" id="readyToday">
+      <article class="card p-card" data-id="CM-6293F">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="CM-6293F">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="CM-6293F">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-6293F" data-nav="" aria-label="Floor Lamp">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6293F.jpg" alt="Floor Lamp">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6293F.jpg" alt="Floor Lamp alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Floor Lamp</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$249</span>
+            </div>
+            <div class="subtle">In stock • Metal &amp; Glass</div>
+          </div>
+        </a>
+      </article>
+      <article class="card p-card" data-id="CM-4902S">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="CM-4902S">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="CM-4902S">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-4902S" data-nav="" aria-label="Arabella Accent Chair Light Grey Velvet">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/4902S-LG.jpg" alt="Arabella Accent Chair Light Grey Velvet alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Arabella Accent Chair Light Grey Velvet</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$449</span>
+            </div>
+            <div class="subtle">In stock • Velvet</div>
+          </div>
+        </a>
+      </article>
+      <article class="card p-card" data-id="CM-6290T">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="CM-6290T">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="CM-6290T">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-6290T" data-nav="" aria-label="Table Lamp">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6290T-SV-2.jpg" alt="Table Lamp">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/6290T-SV-2.jpg" alt="Table Lamp alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Table Lamp</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$159</span>
+            </div>
+            <div class="subtle">In stock • Metal &amp; Fabric</div>
+          </div>
+        </a>
+      </article>
+      <article class="card p-card" data-id="CM-B6580">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="CM-B6580">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="CM-B6580">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-B6580" data-nav="" aria-label="Jaymes Platform Storage Bedroom Set">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B6580.jpg" alt="Jaymes Platform Storage Bedroom Set alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Jaymes Platform Storage Bedroom Set</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$1,899</span>
+            </div>
+            <div class="subtle">In stock • Upholstered Fabric</div>
+          </div>
+        </a>
+      </article>
+      <article class="card p-card" data-id="CM-B8250">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="CM-B8250">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="CM-B8250">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/CM-B8250" data-nav="" aria-label="Sienna Canopy Bedroom Group">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/B8250.jpg" alt="Sienna Canopy Bedroom Group alternate view">
+          </div>
+          <div class="p-body">
+            <h3 class="p-title">Sienna Canopy Bedroom Group</h3>
+            <div class="p-meta">
+              <span class="pill">Ready today</span>
+              <span class="price">$1,799</span>
+            </div>
+            <div class="subtle">In stock • Wood</div>
+          </div>
+        </a>
+      </article>
+      <article class="card p-card" data-id="FOA-FM72014DW">
+        <div class="p-actions">
+          <button class="mini" aria-label="Wishlist" data-wish="FOA-FM72014DW">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+          </button>
+          <button class="mini" aria-label="Quick view" data-quick="FOA-FM72014DW">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+          </button>
+        </div>
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/FOA-FM72014DW" data-nav="" aria-label="Lantrisant Contemporary Bed">
+          <div class="p-media">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-10.png" alt="Lantrisant Contemporary Bed">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-10.png" alt="Lantrisant Contemporary Bed alternate view">
           </div>
           <div class="p-body">
             <h3 class="p-title">Lantrisant Contemporary Bed</h3>
@@ -2794,10 +3483,10 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/FOA-FM7200WH" data-nav="" aria-label="Horten White Wash Bed">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/FOA-FM7200WH" data-nav="" aria-label="Horten White Wash Bed">
           <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-06.png" alt="Horten White Wash Bed">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-06.png" alt="Horten White Wash Bed alternate view">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-07.png" alt="Horten White Wash Bed">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-07.png" alt="Horten White Wash Bed alternate view">
           </div>
           <div class="p-body">
             <h3 class="p-title">Horten White Wash Bed</h3>
@@ -2818,10 +3507,10 @@ header { position: sticky; top:0; }
             <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
-        <a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/product/FOA-FM72005GR" data-nav="" aria-label="Finamore Olive Green Bed">
+        <a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/product/FOA-FM72005GR" data-nav="" aria-label="Finamore Olive Green Bed">
           <div class="p-media">
-            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-02.png" alt="Finamore Olive Green Bed">
-            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-02.png" alt="Finamore Olive Green Bed alternate view">
+            <img class="primary" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-09.png" alt="Finamore Olive Green Bed">
+            <img class="swap" loading="lazy" src="./Angel’s Furniture _ Houston, TX_files/furniture-09.png" alt="Finamore Olive Green Bed alternate view">
           </div>
           <div class="p-body">
             <h3 class="p-title">Finamore Olive Green Bed</h3>
@@ -2896,7 +3585,7 @@ header { position: sticky; top:0; }
           <label for="d-material">Material / fabric</label>
           <select id="d-material" class="select">
             <option value="any" selected="">Any</option>
-            <option value="Boucle &amp; Velvet">Boucle &amp; Velvet</option><option value="Fabric">Fabric</option><option value="Fabric &amp; Wood">Fabric &amp; Wood</option><option value="Glass &amp; Metal">Glass &amp; Metal</option><option value="Hybrid">Hybrid</option><option value="Italian Design">Italian Design</option><option value="Italian Leather">Italian Leather</option><option value="Leather">Leather</option><option value="Melamine">Melamine</option><option value="Memory Foam">Memory Foam</option><option value="Metal &amp; Fabric">Metal &amp; Fabric</option><option value="Metal &amp; Glass">Metal &amp; Glass</option><option value="Metal &amp; Wood">Metal &amp; Wood</option><option value="Upholstered">Upholstered</option><option value="Upholstered Fabric">Upholstered Fabric</option><option value="Velvet">Velvet</option><option value="Wood">Wood</option><option value="Wood &amp; Fabric">Wood &amp; Fabric</option><option value="Wood &amp; Leatherette">Wood &amp; Leatherette</option><option value="Wood &amp; Marble">Wood &amp; Marble</option><option value="Wood &amp; Stone">Wood &amp; Stone</option>
+            <option value="Boucle &amp; Velvet">Boucle &amp; Velvet</option><option value="Fabric">Fabric</option><option value="Fabric &amp; Wood">Fabric &amp; Wood</option><option value="Italian Design">Italian Design</option><option value="Italian Leather">Italian Leather</option><option value="Leather">Leather</option><option value="Melamine">Melamine</option><option value="Metal &amp; Fabric">Metal &amp; Fabric</option><option value="Metal &amp; Glass">Metal &amp; Glass</option><option value="Metal &amp; Wood">Metal &amp; Wood</option><option value="Upholstered">Upholstered</option><option value="Upholstered Fabric">Upholstered Fabric</option><option value="Velvet">Velvet</option><option value="Wood">Wood</option><option value="Wood &amp; Fabric">Wood &amp; Fabric</option><option value="Wood &amp; Leatherette">Wood &amp; Leatherette</option><option value="Wood &amp; Marble">Wood &amp; Marble</option><option value="Wood &amp; Stone">Wood &amp; Stone</option>
           </select>
         </div>
       </div>
@@ -2925,7 +3614,7 @@ header { position: sticky; top:0; }
 <section class="pdp" data-page="product">
 <div class="container">
 <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
-<a class="pill" data-i18n="t102" data-nav="" href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection/living" id="pdpBack">← Back to collection</a>
+<a class="pill" data-i18n="t102" data-nav="" href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection/living" id="pdpBack">← Back to collection</a>
 <span class="pill" data-i18n="t103" id="pdpBreadcrumb">Product</span>
 </div>
 <div class="pdp-grid">
@@ -3124,17 +3813,17 @@ header { position: sticky; top:0; }
 <div class="section fade-rise">
 <div class="container">
 <!-- Compact Two-Column Layout - NOW CENTERED AND RESPONSIVE -->
-<div style="display:grid;grid-template-columns:1fr 1.2fr;gap:20px;max-width:1100px;margin:0 auto;">
+<div class="showroom-layout">
   
 <!-- LEFT: Info Column -->
-<div style="display:flex;flex-direction:column;justify-content:center;gap:16px;">
+<div style="display:flex;flex-direction:column;justify-content:center;gap:16px;align-items:center;max-width:520px;margin:0 auto;">
 <div style="text-align:center;">
 <h2 data-i18n="t165" style="margin:0 0 6px;font-size:32px;font-weight:600;letter-spacing:-0.02em;color:#1d1d1f;line-height:1.1;">Visit Our Showroom</h2>
 <p data-i18n="t166" style="margin:0 0 12px;font-size:15px;line-height:1.4;color:#86868b;">Touch the fabrics, test the comfort, and plan your delivery.</p>
 </div>
 
 <!-- Address Block -->
-<div style="background:#f5f5f7;border-radius:12px;padding:16px;display:flex;align-items:start;gap:12px;">
+<div style="width:100%;background:#f5f5f7;border-radius:12px;padding:16px;display:flex;align-items:start;gap:12px;">
 <svg width="20" height="20" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
 <div style="flex:1;">
 <div data-i18n="t169" style="font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:4px;letter-spacing:0.01em;">FAIRBANKS BUSINESS PARK</div>
@@ -3143,7 +3832,7 @@ header { position: sticky; top:0; }
 </div>
 
 <!-- Hours Compact -->
-<div style="background:#f5f5f7;border-radius:12px;padding:16px;">
+<div style="width:100%;background:#f5f5f7;border-radius:12px;padding:16px;">
 <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
 <svg width="18" height="18" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
 <span data-i18n="t171" style="font-size:13px;font-weight:600;color:#1d1d1f;letter-spacing:0.01em;">HOURS</span>
@@ -3159,7 +3848,7 @@ header { position: sticky; top:0; }
 </div>
 
 <!-- Phone -->
-<a href="tel:+13468671155" style="background:#f5f5f7;border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background=&#39;#e8e8ed&#39;" onmouseout="this.style.background=&#39;#f5f5f7&#39;">
+<a href="tel:+13468671155" style="width:100%;background:#f5f5f7;border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;text-decoration:none;transition:background 0.2s;" onmouseover="this.style.background=&#39;#e8e8ed&#39;" onmouseout="this.style.background=&#39;#f5f5f7&#39;">
 <svg width="20" height="20" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
 <div style="flex:1;">
 <div data-i18n="t170" style="font-size:13px;font-weight:600;color:#1d1d1f;margin-bottom:2px;letter-spacing:0.01em;">CALL OR TEXT</div>
@@ -3168,15 +3857,15 @@ header { position: sticky; top:0; }
 </a>
 
 <!-- CTA Buttons -->
-<div style="display:flex;gap:10px;margin-top:4px;">
+<div style="width:100%;display:flex;gap:10px;margin-top:4px;justify-content:center;">
 <a href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040" target="_blank" rel="noopener" data-i18n="t167" style="flex:1;background:#0071e3;color:#fff;border:none;padding:12px 18px;border-radius:980px;font-size:15px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s;min-height:44px;text-align:center;" onmouseover="this.style.background=&#39;#0077ED&#39;" onmouseout="this.style.background=&#39;#0071e3&#39;">Get Directions</a>
 <button id="scheduleBtn" data-i18n="t168" style="flex:1;background:#f5f5f7;color:#1d1d1f;border:none;padding:12px 18px;border-radius:980px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s;min-height:44px;cursor:pointer;text-align:center;" onmouseover="this.style.background=&#39;#e8e8ed&#39;" onmouseout="this.style.background=&#39;#f5f5f7&#39;">Schedule Visit</button>
 </div>
 </div>
 
 <!-- RIGHT: Map -->
-<div style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08);height:100%;min-height:480px;">
-<iframe src="./Angel’s Furniture _ Houston, TX_files/embed.html" width="100%" height="100%" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+<div class="showroom-map" style="border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08);width:100%;height:480px;min-height:480px;">
+<iframe src="./Angel’s Furniture _ Houston, TX_files/embed.html" width="100%" style="border:0;display:block;;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
 </iframe>
 </div>
 
@@ -3185,12 +3874,31 @@ header { position: sticky; top:0; }
 
 <!-- Mobile Responsive Stack -->
 <style>
-@media (max-width: 768px) {
-  div[style*="grid-template-columns:1fr 1.2fr"] {
-    grid-template-columns: 1fr !important;
+/* Showroom: perfectly centered + aligned */
+.showroom-layout{
+  display:flex;
+  gap:20px;
+  max-width:1100px;
+  margin:0 auto;
+  justify-content:center;
+  align-items:center;
+}
+.showroom-layout > div{
+  flex:1 1 420px;
+  min-width:320px;
+}
+@media (max-width: 900px){
+  .showroom-layout{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
   }
-  div[style*="min-height:480px"] {
-    min-height: 320px !important;
+  .showroom-layout > div{
+    width:100%;
+  }
+  /* keep map nicely sized on mobile/tablet */
+  .showroom-layout iframe{
+    min-height:320px;
   }
 }
 </style>
@@ -3262,7 +3970,7 @@ header { position: sticky; top:0; }
         title:'Miami White Sofa & Loveseat LED Set',
         category:'living',
         price: 1799,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3278,7 +3986,7 @@ header { position: sticky; top:0; }
         title:'Picasso II 6-Piece Caramel Power Sectional',
         category:'living',
         price: 4999,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3326,7 +4034,7 @@ header { position: sticky; top:0; }
         title:'Lora Collection 3-Piece Set',
         category:'living',
         price: 2299,
-        featured:true,
+        featured:false,
         best:false,
         isNew:true,
         inStock:true,
@@ -3374,7 +4082,7 @@ header { position: sticky; top:0; }
         title:'Austin Light Grey Sectional',
         category:'living',
         price: 2199,
-        featured:true,
+        featured:false,
         best:false,
         isNew:true,
         inStock:true,
@@ -3438,7 +4146,7 @@ header { position: sticky; top:0; }
         title:'Snuggle Station Grey Tech Sectional',
         category:'living',
         price: 2799,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3470,7 +4178,7 @@ header { position: sticky; top:0; }
         title:'Zaira Grey Sleeper Sofa & Loveseat',
         category:'living',
         price: 1299,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3599,7 +4307,7 @@ header { position: sticky; top:0; }
         title:'Jaymes Platform Storage Bedroom Set',
         category:'bedroom',
         price: 1899,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3624,7 +4332,7 @@ header { position: sticky; top:0; }
         title:'Millie Upholstered Bed Group',
         category:'bedroom',
         price: 1599,
-        featured:true,
+        featured:false,
         best:true,
         isNew:false,
         inStock:true,
@@ -3649,7 +4357,7 @@ header { position: sticky; top:0; }
         title:'Voltare Fireplace TV Lift Bed',
         category:'bedroom',
         price: 3999,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:true,
@@ -3674,7 +4382,7 @@ header { position: sticky; top:0; }
         title:'Sienna Canopy Bedroom Group',
         category:'bedroom',
         price: 1799,
-        featured:true,
+        featured:false,
         best:false,
         isNew:true,
         inStock:true,
@@ -3699,7 +4407,7 @@ header { position: sticky; top:0; }
         title:'Cressida Bedroom Group White',
         category:'bedroom',
         price: 2199,
-        featured:true,
+        featured:false,
         best:false,
         isNew:false,
         inStock:true,
@@ -3749,7 +4457,7 @@ header { position: sticky; top:0; }
         title:'Lantrisant Contemporary Bed',
         category:'bedroom',
         price: 1439,
-        featured:false,
+        featured:true,
         best:false,
         isNew:true,
         inStock:true,
@@ -3757,7 +4465,7 @@ header { position: sticky; top:0; }
         material:'Wood & Leatherette',
         dims:'FM72014DW',
         images:[
-          'furniture-11.png'
+          'furniture-10.png'
         ],
         variants:[
           { id:'FOA-FM72014DW-DW', name:'Dark Walnut', swatch:'#5C4033' }
@@ -3774,7 +4482,7 @@ header { position: sticky; top:0; }
         title:'Vellara Transitional Bed',
         category:'bedroom',
         price: 1109,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3782,7 +4490,7 @@ header { position: sticky; top:0; }
         material:'Wood & Stone',
         dims:'FM74021DW-F',
         images:[
-          'furniture-07.png'
+          'furniture-11.png'
         ],
         variants:[
           { id:'FOA-FM74021DW-DW', name:'Dark Walnut', swatch:'#5C4033' }
@@ -3799,7 +4507,7 @@ header { position: sticky; top:0; }
         title:'Horten White Wash Bed',
         category:'bedroom',
         price: 539,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3807,7 +4515,7 @@ header { position: sticky; top:0; }
         material:'Melamine',
         dims:'FM7200WH',
         images:[
-          'furniture-06.png'
+          'furniture-07.png'
         ],
         variants:[
           { id:'FOA-FM7200WH-WW', name:'White Wash', swatch:'#F5F5F5' }
@@ -3824,7 +4532,7 @@ header { position: sticky; top:0; }
         title:'Palmdale Ivory Bed',
         category:'bedroom',
         price: 1079,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3832,7 +4540,7 @@ header { position: sticky; top:0; }
         material:'Fabric',
         dims:'FM72006IV',
         images:[
-          'furniture-10.png'
+          'furniture-06.png'
         ],
         variants:[
           { id:'FOA-FM72006IV-IV', name:'Ivory', swatch:'#FFFFF0' }
@@ -3844,37 +4552,12 @@ header { position: sticky; top:0; }
           warranty:'1-year warranty'
         }
       },
-      {
-        id:'FOA-FM74021DW',
-        title:'Vellara Transitional Bed',
-        category:'bedroom',
-        price: 1109,
-        featured:false,
-        best:false,
-        isNew:false,
-        inStock:true,
-        Delivery:'fast',
-        material:'Wood & Stone',
-        dims:'FM74021DW-F',
-        images:[
-          'furniture-08.png'
-        ],
-        variants:[
-          { id:'FOA-FM74021DW-DW', name:'Dark Walnut', swatch:'#5C4033' }
-        ],
-        details:{
-          dimensions:'Queen/King with storage',
-          materials:'Wire-brushed wood with quartz stone top. Warm LED lighting, USB charging, felt-lined drawers, and gold hardware accents.',
-          shipping:'Houston Delivery: 5–7 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
+            {
         id:'FOA-FM74003BK',
         title:'Danvers Fireplace Bed',
         category:'bedroom',
         price: 1079,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3882,7 +4565,7 @@ header { position: sticky; top:0; }
         material:'Metal & Wood',
         dims:'FM74003BK',
         images:[
-          'furniture-09.png'
+          'furniture-08.png'
         ],
         variants:[
           { id:'FOA-FM74003BK-BLK', name:'Black', swatch:'#000000' }
@@ -3899,7 +4582,7 @@ header { position: sticky; top:0; }
         title:'Finamore Olive Green Bed',
         category:'bedroom',
         price: 1019,
-        featured:false,
+        featured:true,
         best:false,
         isNew:true,
         inStock:true,
@@ -3907,7 +4590,7 @@ header { position: sticky; top:0; }
         material:'Boucle & Velvet',
         dims:'FM72005GR',
         images:[
-          'furniture-02.png'
+          'furniture-09.png'
         ],
         variants:[
           { id:'FOA-FM72005GR-OLV', name:'Olive Green', swatch:'#556B2F' }
@@ -3924,7 +4607,7 @@ header { position: sticky; top:0; }
         title:'Fromberg Traditional Bed',
         category:'bedroom',
         price: 1589,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3932,7 +4615,7 @@ header { position: sticky; top:0; }
         material:'Wood & Marble',
         dims:'FM7670',
         images:[
-          'furniture-01.png'
+          'furniture-02.png'
         ],
         variants:[
           { id:'FOA-FM7670-CHR', name:'Brown Cherry', swatch:'#8B4513' }
@@ -3949,7 +4632,7 @@ header { position: sticky; top:0; }
         title:'Gristalt Stone Gray Bed',
         category:'bedroom',
         price: 809,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3957,7 +4640,7 @@ header { position: sticky; top:0; }
         material:'Fabric & Wood',
         dims:'FM7597GY',
         images:[
-          'furniture-05.png'
+          'furniture-01.png'
         ],
         variants:[
           { id:'FOA-FM7597GY-GRY', name:'Stone Gray', swatch:'#708090' }
@@ -3974,7 +4657,7 @@ header { position: sticky; top:0; }
         title:'Ashbourne Black Bed',
         category:'bedroom',
         price: 899,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -3982,7 +4665,7 @@ header { position: sticky; top:0; }
         material:'Wood',
         dims:'FM7415BK',
         images:[
-          'furniture-04.png'
+          'furniture-05.png'
         ],
         variants:[
           { id:'FOA-FM7415BK-BLK', name:'Black', swatch:'#000000' }
@@ -3999,7 +4682,7 @@ header { position: sticky; top:0; }
         title:'Goldsberg Black & Gold Bed',
         category:'bedroom',
         price: 1499,
-        featured:false,
+        featured:true,
         best:false,
         isNew:true,
         inStock:true,
@@ -4007,7 +4690,7 @@ header { position: sticky; top:0; }
         material:'Wood',
         dims:'FM7425BK-G',
         images:[
-          'furniture-03.png'
+          'furniture-04.png'
         ],
         variants:[
           { id:'FOA-FM7425BK-BLK', name:'Black/Gold', swatch:'#000000' }
@@ -4024,7 +4707,7 @@ header { position: sticky; top:0; }
         title:'Sheringham Weathered Gray Bed',
         category:'bedroom',
         price: 869,
-        featured:false,
+        featured:true,
         best:false,
         isNew:false,
         inStock:true,
@@ -4032,7 +4715,7 @@ header { position: sticky; top:0; }
         material:'Wood',
         dims:'FM7701BR',
         images:[
-          'https://www.crownmark.com/wc/Pictures/B8250.jpg'
+          'furniture-03.png'
         ],
         variants:[
           { id:'FOA-FM7701BR-GRY', name:'Weathered Gray', swatch:'#808080' }
@@ -4074,7 +4757,7 @@ header { position: sticky; top:0; }
         title:'7-Piece Dining Room Set',
         category:'dining',
         price: 1799,
-        featured:true,
+        featured:false,
         best:true,
         isNew:false,
         inStock:true,
@@ -4101,7 +4784,7 @@ header { position: sticky; top:0; }
         title:'Italian Dining Collection',
         category:'dining',
         price: 3599,
-        featured:true,
+        featured:false,
         best:true,
         isNew:true,
         inStock:false,
@@ -4150,67 +4833,13 @@ header { position: sticky; top:0; }
         }
       },
       
-      // ========== MATTRESSES ==========
-      {
-        id:'NE-MAT-401',
-        title:'Zeva 10" Gel Memory Foam Mattress',
-        category:'bedroom',
-        price: 649,
-        featured:true,
-        best:true,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Memory Foam',
-        dims:'Queen: 60" × 80"',
-        images:[
-          'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1800&q=80'
-        ],
-        variants:[
-          { id:'NE-MAT-401-Q', name:'Queen', swatch:'#FFFFFF' },
-          { id:'NE-MAT-401-K', name:'King', swatch:'#FFFFFF' },
-          { id:'NE-MAT-401-F', name:'Full', swatch:'#FFFFFF' }
-        ],
-        details:{
-          dimensions:'10" gel memory foam. Multiple sizes',
-          materials:'Gel-infused memory foam. Breathable',
-          shipping:'Ready today. Free delivery',
-          warranty:'5-year warranty'
-        }
-      },
-      {
-        id:'NE-MAT-402',
-        title:'LuxeCloud 13" Gel Hybrid Mattress',
-        category:'bedroom',
-        price: 1099,
-        featured:true,
-        best:true,
-        isNew:true,
-        inStock:true,
-        Delivery:'fast',
-        material:'Hybrid',
-        dims:'Queen: 60" × 80"',
-        images:[
-          'https://images.unsplash.com/photo-1505693314120-0d443867891c?auto=format&fit=crop&w=1800&q=80'
-        ],
-        variants:[
-          { id:'NE-MAT-402-Q', name:'Queen', swatch:'#FFFFFF' },
-          { id:'NE-MAT-402-K', name:'King', swatch:'#FFFFFF' }
-        ],
-        details:{
-          dimensions:'13" hybrid. Gel foam + pocketed coils',
-          materials:'Premium gel memory foam + coils',
-          shipping:'Houston Delivery: 2–3 days',
-          warranty:'10-year warranty'
-        }
-      },
       // ========== TV STANDS & ENTERTAINMENT ==========
       {
         id:'NE-TV-501',
         title:'Modern TV Stand with Fireplace',
         category:'living',
         price: 949,
-        featured:true,
+        featured:false,
         best:false,
         isNew:true,
         inStock:true,
@@ -4231,89 +4860,8 @@ header { position: sticky; top:0; }
           warranty:'1-year warranty'
         }
       },
-      {
-        id:'HH-TV-502',
-        title:'Entertainment Center',
-        category:'living',
-        price: 799,
-        featured:false,
-        best:false,
-        isNew:false,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood',
-        dims:'60"W × 16"D × 24"H',
-        images:[
-          'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1800&q=80'
-        ],
-        variants:[
-          { id:'HH-TV-502-BLK', name:'Black', swatch:'#000000' },
-          { id:'HH-TV-502-WAL', name:'Walnut', swatch:'#5C4033' }
-        ],
-        details:{
-          dimensions:'Fits up to 65" TV',
-          materials:'Wood construction',
-          shipping:'Ready for pickup. Delivery next day',
-          warranty:'1-year warranty'
-        }
-      },
-      
-      // ========== ACCENT FURNITURE ==========
-      {
-        id:'HH-ACC-601',
-        title:'Accent Chair with Ottoman',
-        category:'living',
-        price: 749,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Fabric',
-        dims:'32"W × 35"D × 38"H',
-        images:[
-          'https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=1800&q=80',
-          'https://images.unsplash.com/photo-1567016520496-0cb37d8467a7?auto=format&fit=crop&w=1800&q=80'
-        ],
-        variants:[
-          { id:'HH-ACC-601-GRY', name:'Grey', swatch:'#808080' },
-          { id:'HH-ACC-601-BLU', name:'Blue', swatch:'#4682B4' },
-          { id:'HH-ACC-601-BEG', name:'Beige', swatch:'#F5F5DC' }
-        ],
-        details:{
-          dimensions:'Chair with matching ottoman',
-          materials:'Upholstered fabric. Solid wood legs',
-          shipping:'Ready today. Delivery 1–2 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'NE-COFF-701',
-        title:'Glass Top Coffee Table',
-        category:'living',
-        price: 499,
-        featured:false,
-        best:false,
-        isNew:false,
-        inStock:true,
-        Delivery:'ready',
-        material:'Glass & Metal',
-        dims:'48"L × 28"W × 18"H',
-        images:[
-          'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1800&q=80'
-        ],
-        variants:[
-          { id:'NE-COFF-701-BLK', name:'Black Metal', swatch:'#000000' },
-          { id:'NE-COFF-701-SLV', name:'Silver Metal', swatch:'#C0C0C0' }
-        ],
-        details:{
-          dimensions:'Modern design. Tempered glass top',
-          materials:'Tempered glass + metal frame',
-          shipping:'Ready today. Delivery next day',
-          warranty:'90-day warranty'
-        }
-      },
-      {
+            // ========== ACCENT FURNITURE ==========
+                  {
         id:'HH-BAR-801',
         title:'Counter Height Barstool Set (2)',
         category:'dining',
@@ -5406,45 +5954,42 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4>Angel's Furniture</h4>
-          <p>Premium furniture for your Houston home. Curated collections, exceptional quality, and personalized service. Visit our showroom to experience the difference.</p>
-        </div>
-        <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/home">Home</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection">Shop</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/showroom">Showroom</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/about">About</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/contact">Contact</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/home">Home</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection">Shop</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/showroom">Showroom</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/about">About</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/contact">Contact</a></li>
           </ul>
         </div>
-        <div class="footer-col">
-          <h4>Categories</h4>
-          <ul>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection?room=living">Living</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection?room=bedroom">Bedroom</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection?room=dining">Dining</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection?room=office">Office</a></li>
-            <li><a href="file:///C:/Users/snrgw/Downloads/index-updated-logo.html#/collection?room=decor">Decor</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
+        <div class="footer-col footer-visit">
           <h4>Visit Us</h4>
           <p>
             Houston, TX<br>
-            Monday - Saturday<br>
-            10:00 AM - 7:00 PM<br>
-            <br>
-            Phone: (Add Your Number)<br>
-            Email: info@angelsfurniture.com
+Mon-Thu 10:00 AM - 6:00 PM<br>
+Fri-Sat 10:00 AM - 7:00 PM<br>
+<br>
+Phone: (346) 867-1155<br>
+Email: info@angelsfurniture.com
           </p>
         </div>
+      <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection?room=living">Living</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection?room=bedroom">Bedroom</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection?room=dining">Dining</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection?room=office">Office</a></li>
+            <li><a href="file:///C:/Users/snrgw/Downloads/index%20-%202026-02-01T101012.191.html#/collection?room=decor">Decor</a></li>
+          </ul>
+        </div>
+        
       </div>
       
       <!-- Footer Logo - CENTERED -->
-      <div style="display:flex; justify-content:center; align-items:center; padding:40px 0 20px; width:100%; max-width:100%;">
-        <img src="./Angel’s Furniture _ Houston, TX_files/angels-logo-main-transparent.png" alt="Angel&#39;s Furniture Logo" style="height:120px; width:auto; max-width:300px; display:block; margin:0 auto;">
+      <div style="display:flex; justify-content:center; align-items:center; padding:20px 0 10px; width:100%; max-width:100%;">
+        <img src="./Angel’s Furniture _ Houston, TX_files/angels-logo-main-transparent.png" alt="Angel&#39;s Furniture Logo" style="height:96px; width:auto; max-width:300px; display:block; margin:0 auto;">
       </div>
       
       <div class="footer-bottom">
@@ -5468,6 +6013,43 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
 </footer>
+
+<script>
+/* Cinematic hero motion (Ken Burns + crossfade) */
+(() => {
+  const prefersReduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function initHeroMotion(){
+    const hero = document.querySelector('section.hero[data-page="home"]');
+    if(!hero) return;
+
+    const slides = Array.from(hero.querySelectorAll('.hero-media .hero-slide'));
+    if(slides.length < 2) return;
+
+    let i = 0;
+    const set = (idx) => {
+      slides.forEach(s => s.classList.remove('is-active','is-anim-1','is-anim-2','is-anim-3'));
+      const s = slides[idx];
+      s.classList.add('is-active');
+      if(!prefersReduced()){
+        s.classList.add('is-anim-' + ((idx % 3) + 1));
+      }
+    };
+
+    // Restart-safe
+    if(window.__heroMotionTimer) clearInterval(window.__heroMotionTimer);
+    set(i);
+    window.__heroMotionTimer = setInterval(() => {
+      i = (i + 1) % slides.length;
+      set(i);
+    }, 5200);
+  }
+
+  // Run on load and on hash navigation back to home (SPA-safe)
+  window.addEventListener('hashchange', initHeroMotion);
+  window.addEventListener('DOMContentLoaded', initHeroMotion);
+})();
+</script>
 
 
 
