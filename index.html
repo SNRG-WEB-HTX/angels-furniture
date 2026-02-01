@@ -2593,6 +2593,87 @@ body, .btn, input, textarea, select{
 }
 </style>
 
+
+<style>
+/* ================= ROOT CAUSE FIXES ================= */
+
+/* ROOT CAUSE #1: Images hidden on mobile due to container overflow / display rules */
+@media (max-width: 980px){
+
+  img{
+    max-width:100% !important;
+    height:auto !important;
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  .image,
+  .media,
+  .media-wrap,
+  .collection-image,
+  .card-media{
+    display:block !important;
+    opacity:1 !important;
+    visibility:visible !important;
+    overflow:visible !important;
+  }
+}
+
+/* ROOT CAUSE #2: Logo hidden by flex shrink / height clamp */
+@media (max-width: 980px){
+
+  .brand{
+    flex:0 0 auto !important;
+  }
+
+  .logo-wrap,
+  .header-logo,
+  .header-logo-img{
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  .header-logo-img{
+    height:64px !important;
+    max-height:none !important;
+  }
+}
+
+/* ================= MOBILE FOOTER: VISIT SHOWROOM ELITE ================= */
+@media (max-width: 980px){
+
+  .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:20px !important;
+  }
+
+  .footer-col{
+    align-items:center !important;
+    text-align:center !important;
+  }
+
+  .footer-col h4{
+    margin-bottom:6px !important;
+    font-size:15px !important;
+  }
+
+  .footer-col p,
+  .footer-col li{
+    font-size:14px !important;
+    line-height:1.45 !important;
+    margin-bottom:4px !important;
+  }
+
+  .footer-col.visit-us{
+    padding:12px 0 !important;
+    border-top:1px solid rgba(0,0,0,.08);
+    border-bottom:1px solid rgba(0,0,0,.08);
+  }
+}
+</style>
+
 </head>
 <body>
 <!-- Overlay for drawers/modals -->
