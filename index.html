@@ -5339,241 +5339,258 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
+
 <style>
-/* Footer A - Enhanced with Prominent SNRG WEB Branding */
+/* SLICK AS SHIT Pastel Bronze Footer */
 .footerA{
-  background:#0f0f12;
-  color:#d7d7db;
-  padding:48px 0 28px;
+  background:linear-gradient(135deg, #d4c4b0 0%, #c9b89d 50%, #bda688 100%);
+  border-top:1px solid rgba(139,76,92,.15);
+  padding:20px 0 18px;
+  color:#2a2520;
+  position:relative;
+  overflow:hidden;
+}
+.footerA::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  background:radial-gradient(circle at 30% 50%, rgba(201,162,74,.08) 0%, transparent 50%),
+             radial-gradient(circle at 70% 50%, rgba(139,76,92,.06) 0%, transparent 50%);
+  pointer-events:none;
 }
 .footerA .wrap{
-  max-width:1100px;
+  max-width:1200px;
   margin:0 auto;
-  padding:0 20px;
+  padding:0 24px;
+  position:relative;
+  z-index:1;
 }
-.footerA .top{
-  display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;
-  gap:24px;
-  margin-bottom:24px;
-}
-.footerA .brand{
+
+/* Visit Us Section - SLICK */
+.footerA .visit-row{
   display:flex;
-  flex-direction:column;
-  gap:12px;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(0,0,0,.15);
+  margin-bottom:14px;
 }
-.footerA .brand .name{
-  font-size:20px;
-  font-weight:800;
-  letter-spacing:.02em;
-  color:#fff;
-}
-.footerA .brand .sub{
-  color:rgba(215,215,219,.8);
-  line-height:1.5;
-  font-size:15px;
-}
-.footerA .col h4{
-  margin:0 0 12px;
-  color:#fff;
+.footerA .visit-info{
+  text-align:left;
   font-size:13px;
-  letter-spacing:.10em;
-  text-transform:uppercase;
-  font-weight:700;
+  line-height:1.6;
+  color:#3d3530;
+  font-weight:600;
 }
-.footerA a{
-  color:rgba(215,215,219,.85);
+.footerA .visit-info strong{
+  display:block;
+  font-size:16px;
+  font-weight:800;
+  margin-bottom:4px;
+  color:#1a1410;
+  letter-spacing:0.01em;
+}
+.footerA .visit-info a{
+  color:#1a1410;
   text-decoration:none;
+  font-weight:800;
   transition:color 0.2s ease;
 }
-.footerA a:hover{
-  color:#fff;
+.footerA .visit-info a:hover{
+  color:#000;
 }
-.footerA .links{
-  display:grid;
-  gap:10px;
-  font-size:14px;
-}
-.footerA .visit{
-  grid-column:1/-1;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.10);
-  border-radius:16px;
-  padding:16px;
+.footerA .visit-buttons{
   display:flex;
-  gap:16px;
-  align-items:center;
-  justify-content:space-between;
-  margin-top:8px;
+  gap:12px;
 }
-.footerA .visit .addr{
-  color:rgba(215,215,219,.9);
-  font-size:14px;
-  line-height:1.5;
-}
-.footerA .visit .pill{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
-.footerA .pill a{
+.footerA .btn-visit{
   display:inline-flex;
   align-items:center;
   justify-content:center;
   height:40px;
-  padding:0 16px;
+  padding:0 22px;
   border-radius:999px;
-  border:1px solid rgba(255,255,255,.16);
-  background:rgba(255,255,255,.06);
   font-weight:700;
-  font-size:14px;
-  transition:all 0.2s ease;
+  font-size:13px;
+  text-decoration:none;
+  transition:all 0.25s cubic-bezier(0.2,0.8,0.2,1);
+  white-space:nowrap;
+  letter-spacing:0.01em;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
 }
-.footerA .pill a:hover{
-  background:rgba(255,255,255,.12);
-  border-color:rgba(255,255,255,.24);
+.footerA .btn-visit:active{
+  transform:translateY(1px);
 }
-.footerA .pill a.primary{
-  background:#C9A24A;
-  border-color:#C9A24A;
+.footerA .btn-visit.primary{
+  background:#7a3f4f;
+  color:#fff;
+  border:1px solid rgba(122,63,79,.4);
+  font-weight:800;
+}
+.footerA .btn-visit.primary:hover{
+  background:#8d4a5d;
+  box-shadow:0 4px 14px rgba(122,63,79,.4);
+  transform:translateY(-1px);
   color:#fff;
 }
-.footerA .pill a.primary:hover{
-  background:#d4ad55;
-  border-color:#d4ad55;
+.footerA .btn-visit.secondary{
+  background:rgba(255,255,255,.90);
+  backdrop-filter:blur(10px);
+  color:#1a1410;
+  border:1px solid rgba(26,20,16,.25);
+  font-weight:700;
 }
-.footerA .bottom{
+.footerA .btn-visit.secondary:hover{
+  background:#fff;
+  box-shadow:0 4px 14px rgba(0,0,0,.15);
+  transform:translateY(-1px);
+  border-color:rgba(26,20,16,.35);
+}
+
+/* Bottom Row - PERFECTLY ALIGNED */
+.footerA .footer-bottom{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:16px;
-  flex-wrap:wrap;
-  margin-top:24px;
-  padding-top:20px;
-  border-top:1px solid rgba(255,255,255,.10);
-  font-size:13px;
-  color:rgba(215,215,219,.75);
+  font-size:12px;
+  color:#3a3a3a;
+  font-weight:600;
 }
-.footerA .bottom-left{
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex-wrap:wrap;
+.footerA .footer-copyright{
+  flex:1;
+  text-align:left;
+  letter-spacing:0.01em;
+  color:#3a3a3a;
+}
+.footerA .footer-center{
+  flex:0 0 auto;
+  text-align:center;
 }
 .footerA .snrg-credit{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:10px 18px;
-  background:rgba(201,162,74,.12);
-  border:1px solid rgba(201,162,74,.3);
+  gap:7px;
+  padding:8px 18px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(201,162,74,.35);
   border-radius:999px;
-  transition:all 0.2s ease;
+  transition:all 0.25s cubic-bezier(0.2,0.8,0.2,1);
   text-decoration:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.08);
 }
 .footerA .snrg-credit:hover{
-  background:rgba(201,162,74,.18);
-  border-color:rgba(201,162,74,.45);
-  transform:translateY(-1px);
-  box-shadow: 0 4px 12px rgba(201,162,74,.25);
+  background:#fff;
+  border-color:rgba(201,162,74,.55);
+  box-shadow:0 4px 12px rgba(201,162,74,.3);
+  transform:translateY(-2px);
 }
 .footerA .built-by-label{
-  font-size:12px;
-  color:rgba(215,215,219,.6);
-  margin-right:4px;
+  font-size:11px;
+  color:#000;
+  font-weight:600;
 }
 .footerA .snrg-text{
-  font-size:17px;
-  font-weight:800;
-  letter-spacing:0.08em;
-  color:#C9A24A;
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:-0.05em;
+  color:#000;
   text-transform:uppercase;
+  text-shadow:none;
 }
 .footerA .snrg-icon{
-  width:16px;
-  height:16px;
-  color:#C9A24A;
+  width:13px;
+  height:13px;
+  color:#000;
+  filter:none;
+}
+.footerA .footer-links{
+  flex:1;
+  display:flex;
+  justify-content:flex-end;
+  gap:18px;
+}
+.footerA .footer-links a{
+  color:#3a3a3a;
+  text-decoration:none;
+  transition:all 0.2s ease;
+  font-weight:700;
+  letter-spacing:0.01em;
+}
+.footerA .footer-links a:hover{
+  color:#1a1a1a;
+  transform:translateY(-1px);
 }
 
-/* Mobile perfection */
+/* Mobile - Still SLICK */
 @media (max-width: 760px){
-  .footerA .top{
-    grid-template-columns:1fr 1fr;
+  .footerA{
+    padding:18px 0 16px;
   }
-  .footerA .brand{
-    grid-column:1/-1;
-  }
-  .footerA .visit{
+  .footerA .visit-row{
     flex-direction:column;
-    align-items:flex-start;
+    gap:16px;
+    padding:14px 0;
+    text-align:center;
   }
-  .footerA .visit .pill{
-    justify-content:flex-start;
+  .footerA .visit-info{
+    text-align:center;
+  }
+  .footerA .visit-buttons{
+    width:100%;
+    flex-direction:column;
+  }
+  .footerA .btn-visit{
     width:100%;
   }
-  .footerA .pill a{
-    flex:1;
-  }
-  .footerA .bottom{
+  .footerA .footer-bottom{
     flex-direction:column;
-    align-items:flex-start;
     gap:12px;
+    text-align:center;
   }
-  .footerA .bottom-left{
-    flex-direction:column;
-    align-items:flex-start;
+  .footerA .footer-copyright,
+  .footerA .footer-center,
+  .footerA .footer-links{
+    flex:none;
     width:100%;
+    text-align:center;
+    justify-content:center;
+  }
+  .footerA .footer-links{
+    order:-1;
   }
 }
 </style>
 
 <footer class="footerA" aria-label="Footer">
   <div class="wrap">
-    <div class="top">
-      <div class="brand">
-        <div class="name">Angel's Furniture</div>
-        <div class="sub">Premium pieces, fast delivery, and real showroom support. Shop online or visit us in Houston.</div>
+    
+    <!-- Visit Us Row - SLICK -->
+    <div class="visit-row">
+      <div class="visit-info">
+        <strong>Visit Us</strong>
+        14300 Northwest Fwy, Bldg B-26, Houston, TX 77040<br>
+        <a href="tel:+13468671155">(346) 867-1155</a>
       </div>
-
-      <div class="col">
-        <h4>Shop</h4>
-        <div class="links">
-          <a href="#/collection?room=living">Living Room</a>
-          <a href="#/collection?room=bedroom">Bedroom</a>
-          <a href="#/collection?room=dining">Dining</a>
-          <a href="#/collection?room=office">Office</a>
-        </div>
-      </div>
-
-      <div class="col">
-        <h4>Support</h4>
-        <div class="links">
-          <a href="#/showroom">Showroom</a>
-          <a href="#/about">About</a>
-          <a href="#/contact">Contact</a>
-        </div>
-      </div>
-
-      <div class="visit">
-        <div class="addr">
-          <strong style="color:#fff;font-size:15px;">Visit Us</strong><br>
-          14300 Northwest Fwy, Bldg B-26, Houston, TX 77040<br>
-          <a href="tel:+13468671155">(346) 867-1155</a>
-        </div>
-        <div class="pill">
-          <a class="primary" target="_blank" rel="noopener noreferrer"
-             href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040">Get Directions</a>
-          <a href="#/contact">Message Us</a>
-        </div>
+      <div class="visit-buttons">
+        <a class="btn-visit primary" target="_blank" rel="noopener noreferrer"
+           href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040">Get Directions</a>
+        <a class="btn-visit secondary" href="#/contact">Message Us</a>
       </div>
     </div>
 
-    <div class="bottom">
-      <div class="bottom-left">
-        <div>© <span id="yearA"></span> Angel's Furniture. All rights reserved.</div>
+    <!-- Bottom Row: Copyright | SNRG WEB | Privacy/Terms -->
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        © <span id="yearA"></span> Angel's Furniture. All rights reserved.
+      </div>
+      <div class="footer-center">
         <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="snrg-credit">
-          <span class="built-by-label">Built by</span>
+          <span class="built-by-label">Built by:</span>
           <span class="snrg-text">SNRG WEB</span>
           <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -5582,12 +5599,21 @@ document.addEventListener("DOMContentLoaded", () => {
           </svg>
         </a>
       </div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div class="footer-links">
         <a href="#/about">Privacy</a>
         <a href="#/about">Terms</a>
       </div>
     </div>
+
   </div>
+</footer>
+
+<script>
+(function(){
+  var y=document.getElementById('yearA'); 
+  if(y) y.textContent=new Date().getFullYear();
+})();
+</script>
 </footer>
 
 <script>
