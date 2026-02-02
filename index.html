@@ -272,6 +272,8 @@
       stroke-linejoin:round;
     }
     .badge{
+      display:grid !important;
+      visibility:visible !important;
       position:absolute;
       transform:translate(10px,-10px);
       min-width:18px;
@@ -284,7 +286,9 @@
       display:grid;
       place-items:center;
       border:2px solid rgba(246,243,238,.72);
-    }
+    
+    display: grid !important;
+    opacity: 1 !important;}
 
     @media (min-width: 980px){
       nav.primary{ display:flex; }
@@ -3013,7 +3017,7 @@ window.scrollTo(0, 0);
 <button aria-label="Account (demo)" class="icon-btn" id="openAccount">
 <svg class="icon" viewbox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="8" r="4"></circle></svg>
 </button>
-<button aria-label="Add to cart" class="icon-btn" data-i18n="t011" id="openWishlist">
+<button aria-label="Add to cart" class="icon-btn" data-i18n="t011" id="openWishlist" style="display:none;">
 <svg class="icon" viewbox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
 <span aria-label="Wishlist count" class="badge" data-i18n="t012" id="wishCount" style="position:absolute;right:4px;top:4px;display:none;">0</span>
 </button>
@@ -3382,12 +3386,6 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 <div class="gallery">
 <div aria-label="Open image viewer" class="gallery-main" id="galleryMain" role="button" tabindex="0"></div>
 <div class="thumbs" id="thumbs"></div>
-<div class="card pad">
-<strong data-i18n="t104" style="font-size:14px;">View in room</strong>
-<p class="subtle" data-i18n="t105" style="margin:8px 0 0;">Static mockups (no heavy 3D). Swap with your brand imagery later.</p>
-<div class="grid grid-2" style="margin-top:12px;">
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Mockup 1" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px;overflow:hidden;border:1px solid rgba(26,26,26,.10);"><img alt="Mockup 2" loading="lazy" src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
 </div>
 </div>
 </div>
@@ -4896,6 +4894,366 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
           warranty:'1-year warranty'
         }
       }
+      ,
+      // ========== OFFICE CATEGORY ==========
+      {
+        id:'OF-CHAIR-H556',
+        title:'Office Chair H556',
+        category:'office',
+        price: 399,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood & Leatherette',
+        dims:'H556-01A',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h556-01a.png'],
+        variants:[],
+        details:{
+          dimensions:'Adjustable height office chair',
+          materials:'Solid wood frame with tufted leatherette cushions. Adjustable height mechanism with casters for easy mobility.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-CHAIR-H742',
+        title:'Antique White Office Chair',
+        category:'office',
+        price: 449,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood & Polyester',
+        dims:'H742-01A',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h742-01a.png'],
+        variants:[
+          { id:'OF-CHAIR-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
+        ],
+        details:{
+          dimensions:'25.38"W x 25"D x 37.13"H',
+          materials:'Solid wood frame with antiqued white finish and grain texture. Foam cushioned seat and backrest with polyester upholstery. Adjustable height with casters.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DAYBED-5324OT',
+        title:'Philipa Daybed with Trundle',
+        category:'office',
+        price: 1299,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Upholstered Tweed',
+        dims:'5324OT-SET',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/philipa-daybed-5340t-set.png'],
+        variants:[
+          { id:'OF-DAYBED-5324OT-OAT', name:'Oatmeal Tweed', swatch:'#E8DCC8' }
+        ],
+        details:{
+          dimensions:'Daybed with pull-out trundle',
+          materials:'Stylish multifunctional daybed in oatmeal tweed upholstery. Features innovative pull-out trundle for guest sleeping. Clean lines and neutral tone. Perfect for home office or guest room.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-B9330',
+        title:'Valor Writing Desk',
+        category:'office',
+        price: 599,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'B9330-DESK',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-valor-writing-desk-b9330.png'],
+        variants:[],
+        details:{
+          dimensions:'Standard writing desk',
+          materials:'Rustic charm with distressed white finish and chevron-patterned drawer front. Spacious surface for work or creativity. Sturdy construction complements farmhouse and contemporary interiors.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-B6832',
+        title:'Rangley Writing Desk - Driftwood',
+        category:'office',
+        price: 549,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'B6832-DESK',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-driftwood-b6832.png'],
+        variants:[
+          { id:'OF-DESK-B6832-DRF', name:'Driftwood', swatch:'#B8A88A' }
+        ],
+        details:{
+          dimensions:'Modern writing desk',
+          materials:'Two-tone finish with light woodgrain base and crisp contrasting surface. Spacious drawers for storage. Sturdy construction with minimalist aesthetic.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-B6830',
+        title:'Rangley Writing Desk - Grey/Brown',
+        category:'office',
+        price: 549,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'B6830-DESK',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-grey-b6830.png'],
+        variants:[
+          { id:'OF-DESK-B6830-GRY', name:'Grey/Brown', swatch:'#8B7D6B' }
+        ],
+        details:{
+          dimensions:'Contemporary writing desk',
+          materials:'Rich textured finish with spacious surface. Dual drawers with elegant metal handles. Modern design for home or office.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-4950',
+        title:'Rylee Faux Marble Desk',
+        category:'office',
+        price: 699,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Faux Marble & Wood',
+        dims:'4950',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rylee-faux-marble-desk-4950.png'],
+        variants:[],
+        details:{
+          dimensions:'Premium writing desk with marble top',
+          materials:'Elegant faux marble top surface with black wood base and drawers. Contemporary styling with ample storage.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-CHAIR-CMFC612',
+        title:'Argon Gaming Office Chair',
+        category:'office',
+        price: 329,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Leatherette & Metal',
+        dims:'CM-FC612',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/argon-office-chair-cm-fc612.png'],
+        variants:[
+          { id:'OF-CHAIR-CMFC612-BLK', name:'Black/Red/Silver', swatch:'#000000' }
+        ],
+        details:{
+          dimensions:'Contemporary gaming chair',
+          materials:'Black leatherette with silver and red accents. Pneumatic height adjustable seat, padded armrests, sturdy wheel base. Perfect for gaming or office.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DECOR-A2000765',
+        title:'Lauretman Alligator Sculpture',
+        category:'office',
+        price: 249,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Polyresin',
+        dims:'A2000765',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-lauretman-a2000765.png'],
+        variants:[
+          { id:'OF-DECOR-A2000765-GLD', name:'Antiqued Goldtone', swatch:'#D4AF37' }
+        ],
+        details:{
+          dimensions:'22.5"L x 10.5"D x 6.5"H',
+          materials:'Polyresin alligator sculpture in antiqued goldtone finish. Remarkable attention to detail in contemporary fashion. Glam appeal for office or living room.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-BOOKCASE-A4000589',
+        title:'Ashley Bookcase',
+        category:'office',
+        price: 599,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'A4000589',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-a4000589.png'],
+        variants:[
+          { id:'OF-BOOKCASE-A4000589-BRN', name:'Brown/Gold', swatch:'#8B4513' }
+        ],
+        details:{
+          dimensions:'48"W x 12.5"D x 72"H',
+          materials:'Brown with gold finish bookcase. Multiple shelves for storage and display.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-BOOKCASE-H742',
+        title:'Antique White Bookcase',
+        category:'office',
+        price: 799,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood & Oak Veneer',
+        dims:'H742-70',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h742-70.png'],
+        variants:[
+          { id:'OF-BOOKCASE-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
+        ],
+        details:{
+          dimensions:'45"W x 17"D x 74.63"H',
+          materials:'Hardwood solids, oak veneer and MDF with antiqued white finish. Wood grain texture, round metal knobs with aged pewter tone. 4 fixed shelves and smooth-gliding drawer.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-BOOKCASE-H743',
+        title:'Traditional Bookcase H743',
+        category:'office',
+        price: 749,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'H743-70',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h743-70.png'],
+        variants:[],
+        details:{
+          dimensions:'Traditional bookcase with shelves',
+          materials:'Quality wood construction with traditional styling. Multiple fixed shelves for books and display items.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-H742',
+        title:'Antique White Executive Desk',
+        category:'office',
+        price: 899,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood & Oak Veneer',
+        dims:'H742-34',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h742-34.png'],
+        variants:[
+          { id:'OF-DESK-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
+        ],
+        details:{
+          dimensions:'60"W x 28"D x 31"H',
+          materials:'Hardwood solids, oak veneer and MDF with antiqued white finish. Wood grain texture, round metal knobs in dark bronze. Smooth-gliding accessories drawer, wide keyboard drawer. 110V power with USB-A and USB-C charging ports included.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-H3929',
+        title:'Tan Executive L-Desk',
+        category:'office',
+        price: 1299,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'H3929',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h3929.png'],
+        variants:[
+          { id:'OF-DESK-H3929-TAN', name:'Tan', swatch:'#D2B48C' }
+        ],
+        details:{
+          dimensions:'60"W x 64"D x 29"H',
+          materials:'Large L-shaped executive desk in tan finish. Spacious workspace with ample storage and surface area.',
+          shipping:'Houston Delivery: 7–10 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-RACK-B4852WH',
+        title:'Luxo Display Rack - White',
+        category:'office',
+        price: 449,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood & Mirror',
+        dims:'B4852WH-RACK',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/luxo-rack-white-b4852wh.png'],
+        variants:[
+          { id:'OF-RACK-B4852WH-WHT', name:'White', swatch:'#FFFFFF' }
+        ],
+        details:{
+          dimensions:'Contemporary display shelving',
+          materials:'Sleek modern shelving unit in crisp white finish. Clean minimalist lines with mirrored back. Each spacious shelf showcases decor, plants, or books. Perfect for living rooms, home offices, or reading nooks.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'OF-DESK-B4900',
+        title:'Nyomi Writing Desk',
+        category:'office',
+        price: 479,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'B4900-DESK',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nyomi-desk-writing-desk-b4900.png'],
+        variants:[],
+        details:{
+          dimensions:'Compact modern desk',
+          materials:'Clean silhouette with softly rounded edges. Light neutral wood finish with minimalist appeal. Dual drawers with sleek black pulls. Streamlined profile ideal for smaller offices or contemporary homes.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      }
           ];
 
     const megaData = {
@@ -4977,6 +5335,19 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       t.classList.add('show');
       clearTimeout(toast._t);
       toast._t = setTimeout(()=> t.classList.remove('show'), 1800);
+    }
+    
+    function updateCartBadge() {
+      const badge = document.getElementById('cartBadge');
+      const cartBtn = document.getElementById('openCart');
+      if (badge && state.cart) {
+        const count = state.cart.length;
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'grid' : 'grid'; // Always show
+        if (cartBtn) {
+          cartBtn.setAttribute('aria-label', `Cart (${count} items)`);
+        }
+      }
     }
 
     function parseRoute(){
