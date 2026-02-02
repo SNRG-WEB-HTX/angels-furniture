@@ -2954,6 +2954,14 @@ html, body{ scroll-behavior:auto; }
 
 </head>
 <body>
+<script>
+// FORCE PAGE TO START AT TOP ON EVERY LOAD/RELOAD
+// Runs immediately before anything else
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+</script>
 <!-- Overlay for drawers/modals -->
 <div aria-hidden="true" class="overlay" id="overlay"></div>
 <!-- Toast -->
@@ -5641,7 +5649,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Fri-Sat 10:00 AM - 7:00 PM<br>
             <br>
             Phone: <a href="tel:+13468671155">(346) 867-1155</a><br>
-            Email: <a href="mailto:info@angelsfurniture.com">info@angelsfurniture.com</a>
+            Email: <a href="/cdn-cgi/l/email-protection#b5dcdbd3daf5d4dbd2d0d9c6d3c0c7dbdcc1c0c7d09bd6dad8"><span class="__cf_email__" data-cfemail="d1b8bfb7be91b0bfb6b4bda2b7a4a3bfb8a5a4a3b4ffb2bebc">[email&#160;protected]</span></a>
           </p>
         </div>
         
@@ -5688,7 +5696,32 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* Cinematic hero motion (Ken Burns + crossfade) */
-(() => {
-  const prefersReduced = () => window.matchMedia('(pre
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-deco
+<!-- Scroll to Top on Load - Backup Script -->
+<script>
+// Additional scroll reset on page load (backup)
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, 0);
+});
+
+// Also reset on page show (handles back/forward navigation)
+window.addEventListener('pageshow', function(event) {
+  if (event.persisted) {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+});
+
+// Reset on hashchange (for single-page navigation)
+window.addEventListener('hashchange', function() {
+  window.scrollTo(0, 0);
+});
+</script>
+
+</body>
+</html>
