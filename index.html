@@ -199,100 +199,130 @@
       backdrop-filter:saturate(160%) blur(14px);
       border-bottom:1px solid rgba(232,226,216,.85);
     }
+    /* Header row - Apple-clean alignment */
     .header-row{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:12px 0;
+      gap:20px;
+      padding:14px 0;
+      position:relative;
     }
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      min-width:180px;
+      flex-shrink:0;
     }
     
-    
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      line-height:1.1;
-    }
-    .brand-title strong{
-      font-size:14px;
-      letter-spacing:-.02em;
-    }
-    .brand-title span{
-      font-size:12px;
-      color:rgba(26,26,26,.62);
-    }
-
+    /* Navigation - DESKTOP ONLY (1100px+) */
     nav.primary{
       display:none;
       flex:1;
       justify-content:center;
-      gap:18px;
+      align-items:center;
+      gap:20px;
       font-size:14px;
       letter-spacing:-.01em;
     }
     nav.primary a{
-      padding:10px 10px;
+      padding:10px 16px;
       border-radius:12px;
       color:rgba(26,26,26,.82);
-      transition:background var(--t160) var(--ease), color var(--t160) var(--ease);
+      transition:background var(--t160) var(--ease), color var(--t160) var(--ease), transform var(--t160) var(--ease);
+      cursor:pointer;
+      white-space:nowrap;
+      font-weight:500;
     }
-    nav/* removed hover-based mega menu rule */
+    nav.primary a:hover{
+      background:rgba(201,162,74,.12);
+      color:var(--ink);
+    }
+    nav.primary a:active{
+      background:rgba(201,162,74,.18);
+      transform:scale(0.97);
+    }
+    
+    /* Header action buttons */
     .header-actions{
       display:flex;
       align-items:center;
-      gap:8px;
-      min-width:180px;
+      gap:10px;
+      flex-shrink:0;
       justify-content:flex-end;
     }
 
     .icon-btn{
-      width:40px;height:40px;
-      border-radius:12px;
-      border:1px solid rgba(26,26,26,.10);
-      background:rgba(255,255,255,.65);
-      backdrop-filter:saturate(140%) blur(10px);
+      width:48px;
+      height:48px;
+      min-width:48px;
+      min-height:48px;
+      border-radius:14px;
+      border:1px solid rgba(26,26,26,.08);
+      background:rgba(255,255,255,.75);
+      backdrop-filter:saturate(140%) blur(12px);
       display:grid;
       place-items:center;
       cursor:pointer;
-      transition:transform var(--t160) var(--ease), background var(--t160) var(--ease), border-color var(--t160) var(--ease);
+      transition:all var(--t160) var(--ease);
+      position:relative;
+      z-index:10;
+      -webkit-tap-highlight-color:rgba(201,162,74,.15);
+      touch-action:manipulation;
     }
-    .icon-btn:hover{ background:rgba(255,255,255,.85); border-color:rgba(26,26,26,.14); }
-    .icon{
-      width:18px;height:18px;
-      stroke:rgba(26,26,26,.82);
-      stroke-width:1.8;
-      fill:none;
-      stroke-linecap:round;
-      stroke-linejoin:round;
+    .icon-btn:hover{ 
+      background:rgba(255,255,255,.9); 
+      border-color:rgba(26,26,26,.12);
+      transform:translateY(-1px);
     }
-    .badge{
-      display:grid !important;
-      visibility:visible !important;
-      position:absolute;
-      transform:translate(10px,-10px);
-      min-width:18px;
-      height:18px;
-      padding:0 5px;
-      border-radius:999px;
-      background:var(--ink);
-      color:#fff;
-      font-size:11px;
-      display:grid;
-      place-items:center;
-      border:2px solid rgba(246,243,238,.72);
+    .icon-btn:active{
+      transform:scale(0.96);
+      background:rgba(255,255,255,1);
+    }
     
-    display: grid !important;
-    opacity: 1 !important;}
-
-    @media (min-width: 980px){
-      nav.primary{ display:flex; }
-      .mobile-menu-only{ display:none !important; }
+    /* DESKTOP ONLY - Show navigation */
+    @media (min-width: 1100px){
+      nav.primary{ 
+        display:flex;
+      }
+      .mobile-menu-only{ 
+        display:none !important; 
+      }
+    }
+    
+    /* TABLET/MOBILE - Hide navigation, optimize buttons */
+    @media (max-width: 1099px){
+      nav.primary{
+        display:none !important;
+      }
+      .header-actions{
+        gap:8px;
+      }
+      .icon-btn{
+        width:44px;
+        height:44px;
+        min-width:44px;
+        min-height:44px;
+      }
+    }
+    
+    /* MOBILE - Compact */
+    @media (max-width: 640px){
+      .header-row{
+        gap:12px;
+        padding:12px 0;
+      }
+      .header-actions{
+        gap:6px;
+      }
+      .icon-btn{
+        width:42px;
+        height:42px;
+        min-width:42px;
+        min-height:42px;
+        border-radius:12px;
+      }
+    }
     }
 
     /* Mega menu */
@@ -1205,16 +1235,16 @@ header{ min-height: 110px !important; }
 .brand{ min-width:auto !important; gap:16px !important; background:transparent !important; }
 .logo-wrap{ width:auto !important; height:auto !important; background:transparent !important; padding:0 !important; }
 .header-logo-img{ 
-  height:108px !important; 
+  height:128px !important; 
   width:auto !important; 
-  max-width:280px !important; 
+  max-width:330px !important; 
   background:transparent !important;
   background-color:transparent !important;
   box-shadow:none !important;
   border:none !important;
 }
 @media (max-width: 640px){
-  .header-logo-img{ height:90px !important; width:auto; max-width:220px; }
+  .header-logo-img{ height:106px !important; width:auto; max-width:260px; }
 }
 
 
@@ -1305,7 +1335,7 @@ header .logo-wrap{
 }
 
 /* Default size - BIGGER */
-.header-logo-img{ height:108px !important; width:auto; max-width:280px; }
+.header-logo-img{ height:128px !important; width:auto; max-width:280px; }
 
 /* Mobile tuning */
 @media (max-width: 640px){
@@ -1315,12 +1345,12 @@ header .logo-wrap{
   .header-row{
     padding: 12px 0 !important;
   }
-  .header-logo-img{ height:90px !important; width:auto; max-width:220px; }
+  .header-logo-img{ height:106px !important; width:auto; max-width:260px; }
 }
 
 /* Ultra small phones */
 @media (max-width: 380px){
-  .header-logo-img{ height:78px !important; width:auto; max-width:190px; }
+  .header-logo-img{ height:92px !important; width:auto; max-width:225px; }
 }
 
 /* ===== EXTRA AIRY HERO GLASS ===== */
@@ -1341,14 +1371,14 @@ header { position: sticky; top:0; }
 }
 .brand, .brand * { visibility: visible !important; opacity: 1 !important; }
 .logo-wrap{ display:flex !important; align-items:center !important; }
-.header-logo-img{ height:96px !important; width:auto; max-width:250px; }
+.header-logo-img{ height:114px !important; width:auto; max-width:295px; }
 @media (max-width: 640px){
   header{ min-height: 88px !important; }
   .header-row{ gap:8px !important; }
-  .header-logo-img{ height:80px !important; width:auto; max-width:200px; }
+  .header-logo-img{ height:94px !important; width:auto; max-width:235px; }
 }
 @media (max-width: 380px){
-  .header-logo-img{ height:70px !important; width:auto; max-width:180px; }
+  .header-logo-img{ height:83px !important; width:auto; max-width:215px; }
 }
 
 
@@ -1638,14 +1668,14 @@ header { position: sticky; top:0; }
    ========================= */
 .brand{ min-width: 0 !important; flex: 1 1 auto !important; }
 .logo-wrap{ display:flex !important; align-items:center !important; }
-.header-logo-img{ height:96px !important; width:auto; max-width:250px; }
+.header-logo-img{ height:114px !important; width:auto; max-width:295px; }
 @media (max-width: 640px){
   header{ min-height: 88px !important; }
   .header-row{ padding:10px 0 !important; gap:10px !important; }
-  .header-logo-img{ height:80px !important; width:auto; max-width:200px; }
+  .header-logo-img{ height:94px !important; width:auto; max-width:235px; }
 }
 @media (max-width: 380px){
-  .header-logo-img{ height:70px !important; width:auto; max-width:180px; }
+  .header-logo-img{ height:83px !important; width:auto; max-width:215px; }
 }
 
 /* IMPORTANT: do NOT zero out brand text globally — only hide the old title safely if present */
@@ -1983,7 +2013,7 @@ header { position: sticky; top:0; }
 }
 
 .footer-logo-section img {
-  height: 88px;
+  height: 104px;
   width: auto;
   max-width: 280px;
   opacity: 0.85;
@@ -2098,7 +2128,7 @@ header { position: sticky; top:0; }
   }
   
   .footer-logo-section img {
-    height: 96px;
+    height: 112px;
   }
   
   .footer-bottom-content {
@@ -2675,7 +2705,7 @@ header{
   box-shadow:0 10px 26px rgba(0,0,0,.06);
 }
 .icon-btn:hover{ background:rgba(255,255,255,.92); }
-.icon{ stroke:rgba(26,26,26,.86); }
+.icon{ width:20px; height:20px; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; color:rgba(26,26,26,.75); } .icon-btn:hover .icon{ color:rgba(26,26,26,.9); }
 
 .lang-toggle-mini{
   border:1px solid rgba(26,26,26,.10);
@@ -3009,38 +3039,32 @@ window.scrollTo(0, 0);
   </div>
 
 <div aria-label="Primary" class="header-row" role="navigation">
-<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src='https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png'/></span></a>
+<a class="brand" data-nav href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src='https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png'/></span></a>
 <nav aria-label="Categories" class="primary">
-<a data-i18n="t005" data-mega="living" href="#/collection/living">Living</a>
-<a data-i18n="t006" data-mega="bedroom" href="#/collection/bedroom">Bedroom</a>
-<a data-i18n="t007" data-mega="dining" href="#/collection/dining">Dining</a>
-<a data-i18n="t008" data-mega="office" href="#/collection/office">Office</a>
-<a data-i18n="t009" data-mega="decor" href="#/collection/decor">Decor</a>
-<a data-i18n="t010" data-mega="sale" href="#/collection/sale">Sale</a>
+<a data-i18n="t005" data-nav href="#/collection/living">Living</a>
+<a data-i18n="t006" data-nav href="#/collection/bedroom">Bedroom</a>
+<a data-i18n="t007" data-nav href="#/collection/dining">Dining</a>
+<a data-i18n="t008" data-nav href="#/collection/office">Office</a>
+<a data-i18n="t009" data-nav href="#/collection/decor">Decor</a>
+<a data-i18n="t010" data-nav href="#/collection/sale">Sale</a>
 </nav>
 <div class="header-actions">
 <button aria-label="Search" class="icon-btn" id="openSearch">
-<svg class="icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
-</button>
-<button aria-label="Financing applications" class="icon-btn" id="openFinanceIcon">
-  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M12 1v22"></path>
-    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
-  </svg>
+<svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
 </button>
 <button aria-label="Account (demo)" class="icon-btn" id="openAccount">
-<svg class="icon" viewbox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="8" r="4"></circle></svg>
+<svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 1 0-16 0"></path></svg>
 </button>
 <button aria-label="Cart"  class="icon-btn" data-i18n="t011" id="openWishlist">
-<svg class="icon" viewbox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
+<svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
 <span aria-label="Cart count" class="badge" data-i18n="t012" id="wishCount" style="position:absolute;right:4px;top:4px;display:none;">0</span>
 </button>
 <button aria-label="Cart" class="icon-btn" data-i18n="t013" id="openCart" style="display:none;">
-<svg class="icon" viewbox="0 0 24 24"><path d="M7 7h14l-1.5 8.5H8.2L7 7Z"></path><path d="M7 7l-1-3H3"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle></svg>
+<svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
 <span aria-label="Cart count" class="badge" data-i18n="t014" id="cartCount" style="position:absolute;right:4px;top:4px;display:none;">0</span>
 </button>
 <button aria-label="Menu" class="icon-btn mobile-menu-only" id="openMenu">
-<svg class="icon" viewbox="0 0 24 24"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg>
+<svg class="icon" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
 </button>
 <div class="lang-toggle-mini" id="langToggle"><button aria-pressed="true" id="btnEN" type="button">EN</button><button aria-pressed="false" id="btnES" type="button">ES</button></div></div>
 </div>
@@ -3315,7 +3339,7 @@ window.scrollTo(0, 0);
 <div class="hero-inner"><div class="hero-glass"><h1 class="fade-rise" data-i18n="t042">Angel’s Furniture
 Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div><div class="hero-ctas fade-rise delay-2">
 <a class="btn primary" href="tel:+13468671155" data-i18n="t164">Call Now</a>
-<a class="btn ghost" data-nav="" href="#/collection/living" data-i18n="t044">Shop Collections</a>
+<a class="btn ghost" data-nav href="#/collection/living" data-i18n="t044">Shop Collections</a>
 </div><div class="hero-subrow fade-rise delay-3">
 <span class="pill" data-i18n="t048">Pickup available</span>
 <span class="pill" data-i18n="t049">Same-week delivery</span>
@@ -3453,7 +3477,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 <section class="pdp" data-page="product">
 <div class="container">
 <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
-<a class="pill" data-i18n="t102" data-nav="" href="#/collection/living" id="pdpBack">← Back to collection</a>
+<a class="pill" data-i18n="t102" data-nav href="#/collection/living" id="pdpBack">← Back to collection</a>
 <span class="pill" data-i18n="t103" id="pdpBreadcrumb">Product</span>
 </div>
 <div class="pdp-grid">
@@ -4507,6 +4531,328 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       },
       // ========== DINING ROOM ==========
       {
+        id:'BR-LILLIAN-B7100',
+        title:'Lillian Bedroom Group',
+        category:'bedroom',
+        price: 3499,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood & LED',
+        dims:'SETB7100',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.png'],
+        variants:[
+          { id:'BR-LILLIAN-B7100-SLV', name:'Silver', swatch:'#C0C0C0' }
+        ],
+        details:{
+          dimensions:'Complete bedroom set with LED headboard',
+          materials:'This bedroom collection offers a touch of glamour and luxury to any home. The chic silver finish paired with elegant textured panels creates a sophisticated look. Features stunning tufted headboard with integrated LED lighting, dresser with mirror, tall chest, and nightstands.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-EMILY-B4255',
+        title:'Emily Storage White Bedroom',
+        category:'bedroom',
+        price: 2899,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'SETB4255',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.png'],
+        variants:[
+          { id:'BR-EMILY-B4255-WHT', name:'White', swatch:'#FFFFFF' }
+        ],
+        details:{
+          dimensions:'Bedroom set with storage solutions',
+          materials:'Optimize your bedroom with this innovative and stylish furniture collection. Features sophisticated headboard with built-in shelving and storage compartments. Integrated storage drawers on bed frame, streamlined design with curved drawer fronts. Finished in chic whitewash.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-ELLAMAE-B6840',
+        title:'Ella-Mae Bedroom Reclaimed Grey',
+        category:'bedroom',
+        price: 3199,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'SETB6840',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.png'],
+        variants:[
+          { id:'BR-ELLAMAE-B6840-GRY', name:'Reclaimed Grey', swatch:'#808080' }
+        ],
+        details:{
+          dimensions:'Rustic bedroom collection',
+          materials:'Immerse yourself in rustic charm with this exquisite bedroom collection. Warm weathered aesthetic with timeless design meets sophisticated craftsmanship. Robust frames, ample storage, and finely detailed hardware. Reclaimed grey finish.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-REMINGTON-B8162',
+        title:'Remington Bedroom Black/White',
+        category:'bedroom',
+        price: 2799,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'SETB8162',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.png'],
+        variants:[
+          { id:'BR-REMINGTON-B8162-BW', name:'Black/White', swatch:'#000000' }
+        ],
+        details:{
+          dimensions:'Modern two-tone bedroom suite',
+          materials:'Epitomizes modern aesthetic with bold contrasts and streamlined design. Avant-garde suite with fresh two-toned approach. Visually compelling headboard with geometric precision. Includes broad dresser with framed mirror, high chest, and nightstand.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-DAPHNE-5094LG',
+        title:'Daphne Bed Light Grey',
+        category:'bedroom',
+        price: 1299,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Fabric',
+        dims:'5094LG',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/daphne-bed-5094lg.png'],
+        variants:[
+          { id:'BR-DAPHNE-5094LG-LGRY', name:'Light Grey', swatch:'#D3D3D3' }
+        ],
+        details:{
+          dimensions:'Queen/King upholstered bed',
+          materials:'Experience comfort and elegance of our modern upholstered bed frame. Stylish tufted headboard and soft tweed fabric perfect for contemporary homes. Blend of comfort and sophistication.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-JAYLEN-B9280',
+        title:'Jaylen Black Bedroom Group',
+        category:'bedroom',
+        price: 2699,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'SETB9280',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.png'],
+        variants:[
+          { id:'BR-JAYLEN-B9280-BLK', name:'Black', swatch:'#000000' }
+        ],
+        details:{
+          dimensions:'Modern dark finish bedroom suite',
+          materials:'Straightforward modern design with rich dark finish seamlessly integrates into various decor styles. Bed features subtle tufting and integrated lighting. Includes dresser and chest with smooth metallic handles and nightstands for convenience.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-HINWITZ-FM7399ES',
+        title:'Hinwitz 5 Pc Queen Bedroom Set',
+        category:'bedroom',
+        price: 3689,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Solid Wood',
+        dims:'FM7399ES-Q-5PC',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.png'],
+        variants:[
+          { id:'BR-HINWITZ-FM7399ES-ESP', name:'Espresso', swatch:'#3B2F2F' }
+        ],
+        details:{
+          dimensions:'Queen Bed + Nightstand + Dresser + Mirror + Chest',
+          materials:'Transitional bedroom set in espresso finish. Solid wood construction with English dovetail front and French dovetail back. Felt-lined top drawers and beveled mirror. Premium craftsmanship throughout.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-LILLIAN-B7100',
+        title:'Lillian Bedroom Group',
+        category:'bedroom',
+        price: 3499,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood & LED',
+        dims:'SETB7100',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.png'],
+        variants:[
+          { id:'BR-LILLIAN-B7100-SLV', name:'Silver', swatch:'#C0C0C0' }
+        ],
+        details:{
+          dimensions:'Complete bedroom set with LED headboard',
+          materials:'This bedroom collection offers a touch of glamour and luxury to any home. The chic silver finish paired with elegant textured panels creates a sophisticated look. Features stunning tufted headboard with integrated LED lighting, dresser with mirror, tall chest, and nightstands.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-EMILY-B4255',
+        title:'Emily Storage White Bedroom',
+        category:'bedroom',
+        price: 2899,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'SETB4255',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.png'],
+        variants:[
+          { id:'BR-EMILY-B4255-WHT', name:'White', swatch:'#FFFFFF' }
+        ],
+        details:{
+          dimensions:'Bedroom set with storage solutions',
+          materials:'Optimize your bedroom with this innovative and stylish furniture collection. Features sophisticated headboard with built-in shelving and storage compartments. Integrated storage drawers on bed frame, streamlined design with curved drawer fronts. Finished in chic whitewash.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-ELLAMAE-B6840',
+        title:'Ella-Mae Bedroom Reclaimed Grey',
+        category:'bedroom',
+        price: 3199,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'SETB6840',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.png'],
+        variants:[
+          { id:'BR-ELLAMAE-B6840-GRY', name:'Reclaimed Grey', swatch:'#808080' }
+        ],
+        details:{
+          dimensions:'Rustic bedroom collection',
+          materials:'Immerse yourself in rustic charm with this exquisite bedroom collection. Warm weathered aesthetic with timeless design meets sophisticated craftsmanship. Robust frames, ample storage, and finely detailed hardware. Reclaimed grey finish.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-REMINGTON-B8162',
+        title:'Remington Bedroom Black/White',
+        category:'bedroom',
+        price: 2799,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Wood',
+        dims:'SETB8162',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.png'],
+        variants:[
+          { id:'BR-REMINGTON-B8162-BW', name:'Black/White', swatch:'#000000' }
+        ],
+        details:{
+          dimensions:'Modern two-tone bedroom suite',
+          materials:'Epitomizes modern aesthetic with bold contrasts and streamlined design. Avant-garde suite with fresh two-toned approach. Visually compelling headboard with geometric precision. Includes broad dresser with framed mirror, high chest, and nightstand.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-DAPHNE-5094LG',
+        title:'Daphne Bed Light Grey',
+        category:'bedroom',
+        price: 1299,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Fabric',
+        dims:'5094LG',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/daphne-bed-5094lg.png'],
+        variants:[
+          { id:'BR-DAPHNE-5094LG-LGRY', name:'Light Grey', swatch:'#D3D3D3' }
+        ],
+        details:{
+          dimensions:'Queen/King upholstered bed',
+          materials:'Experience comfort and elegance of our modern upholstered bed frame. Stylish tufted headboard and soft tweed fabric perfect for contemporary homes. Blend of comfort and sophistication.',
+          shipping:'Houston Delivery: 3–5 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-JAYLEN-B9280',
+        title:'Jaylen Black Bedroom Group',
+        category:'bedroom',
+        price: 2699,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Wood',
+        dims:'SETB9280',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.png'],
+        variants:[
+          { id:'BR-JAYLEN-B9280-BLK', name:'Black', swatch:'#000000' }
+        ],
+        details:{
+          dimensions:'Modern dark finish bedroom suite',
+          materials:'Straightforward modern design with rich dark finish seamlessly integrates into various decor styles. Bed features subtle tufting and integrated lighting. Includes dresser and chest with smooth metallic handles and nightstands for convenience.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-HINWITZ-FM7399ES',
+        title:'Hinwitz 5 Pc Queen Bedroom Set',
+        category:'bedroom',
+        price: 3689,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Solid Wood',
+        dims:'FM7399ES-Q-5PC',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.png'],
+        variants:[
+          { id:'BR-HINWITZ-FM7399ES-ESP', name:'Espresso', swatch:'#3B2F2F' }
+        ],
+        details:{
+          dimensions:'Queen Bed + Nightstand + Dresser + Mirror + Chest',
+          materials:'Transitional bedroom set in espresso finish. Solid wood construction with English dovetail front and French dovetail back. Felt-lined top drawers and beveled mirror. Premium craftsmanship throughout.',
+          shipping:'Houston Delivery: 5–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
         id:'DN-BLACKGLASS-D106',
         title:'Black Glass Dining Set with 4 Chairs',
         category:'dining',
@@ -5553,7 +5899,6 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
     $('#bnCart').addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
     $('#bnMenu').addEventListener('click', ()=> openDrawer('menuDrawer'));
     $("#openFinance").addEventListener("click", ()=> openDrawer("financeDrawer"));
-    $("#openFinanceIcon").addEventListener("click", ()=> openDrawer("financeDrawer"));
     $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.hash = b.dataset.go));
 
     /* ---------- Mega menu ---------- */
@@ -5645,8 +5990,22 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
     }
 
     function renderHome(){
-      // Get 15 mixed products for carousel (featured + isNew)
-      const featured = catalog.filter(p=>p.featured || p.isNew).slice(0,15);
+      // Get mixed products for carousel - balanced across categories
+      function getMixedProducts(filterFn, count) {
+        const categories = ['living', 'bedroom', 'dining', 'office'];
+        const perCategory = Math.ceil(count / categories.length);
+        let mixed = [];
+        
+        categories.forEach(cat => {
+          const items = catalog.filter(p => filterFn(p) && p.category === cat).slice(0, perCategory);
+          mixed = mixed.concat(items);
+        });
+        
+        // Shuffle for variety
+        return mixed.sort(() => Math.random() - 0.5).slice(0, count);
+      }
+      
+      const featured = getMixedProducts(p => p.featured || p.isNew, 16);
       $('#newArrivals').innerHTML = featured.map(p=>cardHTML(p)).join('');
 
       // Auto-play carousel - butter smooth infinite loop
@@ -5702,7 +6061,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
         setTimeout(startAutoPlay, 5000); // Resume after 5s
       });
 
-      const ready = catalog.filter(p=>p.Delivery==='ready' && p.inStock).slice(0,8);
+      const ready = getMixedProducts(p => p.Delivery==='ready' && p.inStock, 12);
       $('#readyToday').innerHTML = ready.map(p=>cardHTML(p)).join('');
     }
 
@@ -6665,7 +7024,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="snrg-credit">
           <span class="built-by-label">Built by:</span>
           <span class="snrg-text">SNRG WEB</span>
-          <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
             <polyline points="15 3 21 3 21 9"></polyline>
             <line x1="10" y1="14" x2="21" y2="3"></line>
