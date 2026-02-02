@@ -631,6 +631,10 @@
     }
     .mini:active{ transform:translateY(1px); }
     .mini:hover{ background:rgba(255,255,255,.90); }
+    .mini.added{ background:#1F8A5B !important; border-color:#1F8A5B !important; }
+    .mini.added svg{ fill:#fff; stroke:#fff; }
+    .mini svg{ fill:none; stroke:currentColor; transition:all var(--t220) var(--ease); }
+    .mini.added svg{ fill:#fff !important; }
 
     /* Collection Layout */
     .collection-layout{
@@ -3009,7 +3013,7 @@ window.scrollTo(0, 0);
 <button aria-label="Account (demo)" class="icon-btn" id="openAccount">
 <svg class="icon" viewbox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0"></path><circle cx="12" cy="8" r="4"></circle></svg>
 </button>
-<button aria-label="Wishlist" class="icon-btn" data-i18n="t011" id="openWishlist">
+<button aria-label="Add to cart" class="icon-btn" data-i18n="t011" id="openWishlist">
 <svg class="icon" viewbox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
 <span aria-label="Wishlist count" class="badge" data-i18n="t012" id="wishCount" style="position:absolute;right:4px;top:4px;display:none;">0</span>
 </button>
@@ -3569,468 +3573,6 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 </div>
 </div>
 </section>
-<!-- MODERN SHOWROOM LOCATION SECTION -->
-<div class="section fade-rise" style="background:#f5f5f7;padding:80px 0;">
-  <div class="container" style="max-width:1100px;margin:0 auto;">
-    
-    <!-- Section Header - Centered -->
-    <div style="text-align:center;margin-bottom:60px;">
-      <h2 style="font-size:clamp(32px,4vw,48px);font-weight:600;color:#1d1d1f;margin:0 0 12px;letter-spacing:-0.02em;line-height:1.1;">Visit Our Showroom</h2>
-      <p style="font-size:clamp(17px,2vw,21px);color:#6e6e73;margin:0;max-width:640px;margin-inline:auto;line-height:1.4;">Touch the fabrics, test the comfort, and plan your delivery.</p>
-    </div>
-    
-    <!-- Two Column Layout: Info + Map -->
-    <div class="showroom-layout-modern">
-      
-      <!-- LEFT: Contact Info -->
-      <div class="showroom-info">
-        
-        <!-- Address Card -->
-        <div class="info-card">
-          <div class="info-card-icon">
-            <svg width="20" height="20" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </div>
-          <div class="info-card-content">
-            <div class="info-label">FAIRBANKS BUSINESS PARK</div>
-            <div class="info-text">14300 Northwest Fwy<br>Bldg B-26<br>Houston, TX 77040</div>
-          </div>
-        </div>
-        
-        <!-- Hours Card -->
-        <div class="info-card">
-          <div class="info-card-icon">
-            <svg width="20" height="20" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M12 6v6l4 2"></path>
-            </svg>
-          </div>
-          <div class="info-card-content">
-            <div class="info-label">HOURS</div>
-            <div class="hours-grid">
-              <span>Mon</span><span>10am–6pm</span>
-              <span>Tue</span><span>Closed</span>
-              <span>Wed</span><span>10am–6pm</span>
-              <span>Thu</span><span>10am–6pm</span>
-              <span>Fri–Sat</span><span>10am–7pm</span>
-              <span>Sun</span><span>Closed</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Phone Card -->
-        <a href="tel:+13468671155" class="info-card info-card-link">
-          <div class="info-card-icon">
-            <svg width="20" height="20" fill="none" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-          </div>
-          <div class="info-card-content">
-            <div class="info-label">CALL OR TEXT</div>
-            <div class="info-phone">(346) 867-1155</div>
-          </div>
-        </a>
-        
-        <!-- CTA Buttons -->
-        <div class="showroom-ctas">
-          <a href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040" target="_blank" rel="noopener" class="btn-modern btn-primary">
-            Get Directions
-          </a>
-          <button id="scheduleBtn" class="btn-modern btn-secondary">
-            Schedule Visit
-          </button>
-        </div>
-        
-      </div>
-      
-      <!-- RIGHT: Map -->
-      <div class="showroom-map-modern">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3458.0!2d-95.5234!3d29.8904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c7c0e0000000%3A0x0!2s14300%20Northwest%20Fwy%2C%20Houston%2C%20TX%2077040!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
-          width="100%" 
-          height="100%" 
-          style="border:0;display:block;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-      
-    </div>
-  </div>
-</div>
-
-<!-- Showroom Section Styles -->
-<style>
-/* Modern Showroom Layout */
-.showroom-layout-modern {
-  display: grid;
-  grid-template-columns: 420px 1fr;
-  gap: 40px;
-  align-items: start;
-}
-
-.showroom-info {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* Info Cards - Apple Style */
-.info-card {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 20px;
-  display: flex;
-  gap: 16px;
-  align-items: start;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-.info-card-link {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.info-card-link:hover {
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
-}
-
-.info-card-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: #f5f5f7;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.info-card-content {
-  flex: 1;
-}
-
-.info-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: #1d1d1f;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 8px;
-}
-
-.info-text {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #1d1d1f;
-  font-weight: 400;
-}
-
-.info-phone {
-  font-size: 19px;
-  font-weight: 500;
-  color: #8B4C5C;
-  line-height: 1.3;
-}
-
-.hours-grid {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 16px;
-  font-size: 14px;
-  color: #1d1d1f;
-}
-
-.hours-grid span:nth-child(odd) {
-  font-weight: 500;
-}
-
-/* CTA Buttons - Modern Apple Style */
-.showroom-ctas {
-  display: flex;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.btn-modern {
-  flex: 1;
-  padding: 13px 20px;
-  border-radius: 980px;
-  font-size: 15px;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  min-height: 48px;
-}
-
-.btn-primary {
-  background: #8B4C5C;
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  background: #9D5A6A;
-  box-shadow: 0 4px 12px rgba(139,76,92,0.3);
-}
-
-.btn-secondary {
-  background: #ffffff;
-  color: #1d1d1f;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-
-.btn-secondary:hover {
-  background: #f5f5f7;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* Map Container */
-.showroom-map-modern {
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  height: 520px;
-  min-height: 520px;
-  background: #e8e8ed;
-}
-
-/* Responsive Design */
-@media (max-width: 900px) {
-  .showroom-layout-modern {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  
-  .showroom-info {
-    max-width: 520px;
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  .showroom-map-modern {
-    height: 400px;
-    min-height: 400px;
-  }
-}
-
-@media (max-width: 640px) {
-  /* ===================================
-     SHOWROOM SECTION - MOBILE PERFECT
-     =================================== */
-  
-  .showroom-layout-modern {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 24px !important;
-  }
-  
-  /* Compact Map - Small and Clean */
-  .showroom-map-modern {
-    height: 250px !important;
-    min-height: 250px !important;
-    border-radius: 16px !important;
-    order: 2 !important;
-    margin-top: 0 !important;
-  }
-  
-  /* Info Cards - Horizontal Layout on Mobile */
-  .showroom-info {
-    order: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 16px !important;
-  }
-  
-  .info-card {
-    padding: 16px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    flex-direction: row !important;
-    background: #ffffff !important;
-    border-radius: 12px !important;
-  }
-  
-  .info-card-icon {
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    flex-shrink: 0 !important;
-    margin-top: 0 !important;
-  }
-  
-  .info-card-content {
-    flex: 1 !important;
-    margin-left: 12px !important;
-  }
-  
-  .info-label {
-    font-size: 10px !important;
-    margin-bottom: 4px !important;
-    opacity: 0.7 !important;
-  }
-  
-  .info-text {
-    font-size: 14px !important;
-    line-height: 1.4 !important;
-  }
-  
-  .info-phone {
-    font-size: 18px !important;
-    font-weight: 600 !important;
-  }
-  
-  .hours-grid {
-    font-size: 13px !important;
-    gap: 4px 10px !important;
-  }
-  
-  /* CTA Buttons - Side by Side on Mobile */
-  .showroom-ctas {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 10px !important;
-    margin-top: 16px !important;
-  }
-  
-  .btn-modern {
-    font-size: 14px !important;
-    padding: 12px 16px !important;
-    white-space: nowrap !important;
-  }
-  
-  /* ===================================
-     FOOTER - MOBILE PERFECT HORIZONTAL
-     =================================== */
-  
-  .site-footer {
-    margin-top: 40px !important;
-  }
-  
-  .footer-inner {
-    padding: 32px 20px 20px !important;
-  }
-  
-  /* Footer Grid - 2 Column on Mobile */
-  .footer-grid {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 24px 20px !important;
-    margin-bottom: 24px !important;
-    padding-bottom: 20px !important;
-    text-align: left !important;
-  }
-  
-  .footer-col {
-    text-align: left !important;
-  }
-  
-  .footer-col h4 {
-    font-size: 12px !important;
-    margin-bottom: 10px !important;
-    font-weight: 600 !important;
-  }
-  
-  .footer-col ul {
-    list-style: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  
-  .footer-col ul li {
-    margin-bottom: 8px !important;
-  }
-  
-  .footer-col ul li a {
-    font-size: 14px !important;
-    line-height: 1.6 !important;
-    color: #6e6e73 !important;
-  }
-  
-  .footer-col p {
-    font-size: 14px !important;
-    line-height: 1.6 !important;
-    color: #6e6e73 !important;
-  }
-  
-  /* Footer Logo - Centered but Smaller */
-  .footer-logo-section {
-    padding: 20px 0 !important;
-    text-align: center !important;
-  }
-  
-  .footer-logo-section img {
-    height: 70px !important;
-    width: auto !important;
-    margin: 0 auto !important;
-  }
-  
-  /* Footer Bottom - Stacked but Compact */
-  .footer-bottom {
-    padding-top: 20px !important;
-  }
-  
-  .footer-bottom-content {
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    gap: 12px !important;
-  }
-  
-  .footer-copyright {
-    font-size: 13px !important;
-    color: #86868b !important;
-  }
-  
-  .footer-built-by {
-    font-size: 13px !important;
-  }
-  
-  .footer-built-by-label {
-    color: #86868b !important;
-  }
-  
-  .footer-built-by-link {
-    font-weight: 700 !important;
-    font-size: 14px !important;
-  }
-}
-
-/* Small Mobile Adjustments - Under 400px */
-@media (max-width: 400px) {
-  .showroom-map-modern {
-    height: 220px !important;
-    min-height: 220px !important;
-  }
-  
-  .info-card {
-    padding: 14px !important;
-  }
-  
-  .info-phone {
-    font-size: 16px !important;
-  }
-  
-  .showroom-ctas {
-    grid-template-columns: 1fr !important;
-  }
-  
-  .btn-modern {
-    width: 100% !important;
-  }
-}
-</style>
 
 </div></main>
 <!-- Mobile sticky CTA (PDP) -->
@@ -4054,7 +3596,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
 <svg class="icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
 <span data-i18n="t157">Search</span>
 </button>
-<button aria-label="Wishlist" class="bn-item" data-i18n="t158" id="bnWish">
+<button aria-label="Add to cart" class="bn-item" data-i18n="t158" id="bnWish">
 <svg class="icon" viewbox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"></path></svg>
 <span data-i18n="t159">Saved</span>
 </button>
@@ -4972,6 +4514,8 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
     $('#bnWish').addEventListener('click', ()=>{ renderWishlist(); openDrawer('wishlistDrawer'); });
     $('#bnCart').addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
     $('#bnMenu').addEventListener('click', ()=> openDrawer('menuDrawer'));
+    $("#openFinance").addEventListener("click", ()=> openDrawer("financeDrawer"));
+    $("#openFinanceIcon").addEventListener("click", ()=> openDrawer("financeDrawer"));
     $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.hash = b.dataset.go));
 
     /* ---------- Mega menu ---------- */
@@ -5017,11 +4561,8 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       return `
       <article class="card p-card" data-id="${p.id}">
         <div class="p-actions">
-          <button class="mini" aria-label="Wishlist" data-wish="${p.id}">
+          <button class="mini" aria-label="Add to cart" data-cart="${p.id}">
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"/></svg>
-          </button>
-          <button class="mini" aria-label="Quick view" data-quick="${p.id}">
-            <svg class="icon" viewBox="0 0 24 24"><path d="M1.5 12s4.5-7 10.5-7 10.5 7 10.5 7-4.5 7-10.5 7S1.5 12 1.5 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
           </button>
         </div>
         <a href="#/product/${p.id}" data-nav aria-label="${p.title}">
@@ -5198,10 +4739,12 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
     }
 
     function wireProductCardActions(root){
-      root.querySelectorAll('[data-wish]').forEach(btn=>{
+      root.querySelectorAll('[data-cart]').forEach(btn=>{
         btn.addEventListener('click', (e)=>{
+          btn.classList.add("added");
+          setTimeout(()=>btn.classList.remove("added"), 1500);
           e.preventDefault(); e.stopPropagation();
-          toggleWishlist(btn.dataset.wish);
+          addToCart(btn.dataset.wish);
         });
       });
       root.querySelectorAll('[data-quick]').forEach(btn=>{
@@ -5454,7 +4997,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       if(ups) ups.onclick = ()=> toast('Protection added (demo)');
     }
 
-    function toggleWishlist(productId){
+    function addToCart(productId){
       const idx = state.wishlist.indexOf(productId);
       if(idx >= 0){
         state.wishlist.splice(idx,1);
@@ -5795,102 +5338,265 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 
-<!-- MODERN APPLE-STYLE FOOTER -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="container">
-      
-      <!-- Footer Links Grid -->
-      <div class="footer-grid">
-        
-        <!-- Quick Links -->
-        <div class="footer-col">
-          <h4>Quick Links</h4>
-          <ul>
-            <li><a href="#/home">Home</a></li>
-            <li><a href="#/collection">Shop</a></li>
-            <li><a href="#/showroom">Showroom</a></li>
-            <li><a href="#/about">About</a></li>
-            <li><a href="#/contact">Contact</a></li>
-          </ul>
-        </div>
-        
-        <!-- Visit Us -->
-        <div class="footer-col">
-          <h4>Visit Us</h4>
-          <p>
-            Houston, TX<br>
-            Mon-Thu 10:00 AM - 6:00 PM<br>
-            Fri-Sat 10:00 AM - 7:00 PM<br>
-            <br>
-            Phone: <a href="tel:+13468671155">(346) 867-1155</a><br>
-            Email: <a href="/cdn-cgi/l/email-protection#b5dcdbd3daf5d4dbd2d0d9c6d3c0c7dbdcc1c0c7d09bd6dad8"><span class="__cf_email__" data-cfemail="d1b8bfb7be91b0bfb6b4bda2b7a4a3bfb8a5a4a3b4ffb2bebc">[email&#160;protected]</span></a>
-          </p>
-        </div>
-        
-        <!-- Categories -->
-        <div class="footer-col">
-          <h4>Categories</h4>
-          <ul>
-            <li><a href="#/collection?room=living">Living</a></li>
-            <li><a href="#/collection?room=bedroom">Bedroom</a></li>
-            <li><a href="#/collection?room=dining">Dining</a></li>
-            <li><a href="#/collection?room=office">Office</a></li>
-            <li><a href="#/collection?room=decor">Decor</a></li>
-          </ul>
-        </div>
-        
+
+<style>
+/* Footer A - Enhanced with Prominent SNRG WEB Branding */
+.footerA{
+  background:#0f0f12;
+  color:#d7d7db;
+  padding:48px 0 28px;
+}
+.footerA .wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 20px;
+}
+.footerA .top{
+  display:grid;
+  grid-template-columns:1.4fr 1fr 1fr;
+  gap:24px;
+  margin-bottom:24px;
+}
+.footerA .brand{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.footerA .brand .name{
+  font-size:20px;
+  font-weight:800;
+  letter-spacing:.02em;
+  color:#fff;
+}
+.footerA .brand .sub{
+  color:rgba(215,215,219,.8);
+  line-height:1.5;
+  font-size:15px;
+}
+.footerA .col h4{
+  margin:0 0 12px;
+  color:#fff;
+  font-size:13px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-weight:700;
+}
+.footerA a{
+  color:rgba(215,215,219,.85);
+  text-decoration:none;
+  transition:color 0.2s ease;
+}
+.footerA a:hover{
+  color:#fff;
+}
+.footerA .links{
+  display:grid;
+  gap:10px;
+  font-size:14px;
+}
+.footerA .visit{
+  grid-column:1/-1;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:16px;
+  padding:16px;
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:space-between;
+  margin-top:8px;
+}
+.footerA .visit .addr{
+  color:rgba(215,215,219,.9);
+  font-size:14px;
+  line-height:1.5;
+}
+.footerA .visit .pill{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.footerA .pill a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:40px;
+  padding:0 16px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.06);
+  font-weight:700;
+  font-size:14px;
+  transition:all 0.2s ease;
+}
+.footerA .pill a:hover{
+  background:rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.24);
+}
+.footerA .pill a.primary{
+  background:#C9A24A;
+  border-color:#C9A24A;
+  color:#fff;
+}
+.footerA .pill a.primary:hover{
+  background:#d4ad55;
+  border-color:#d4ad55;
+}
+.footerA .bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.10);
+  font-size:13px;
+  color:rgba(215,215,219,.75);
+}
+.footerA .bottom-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.footerA .snrg-credit{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  background:rgba(201,162,74,.12);
+  border:1px solid rgba(201,162,74,.3);
+  border-radius:999px;
+  transition:all 0.2s ease;
+  text-decoration:none;
+}
+.footerA .snrg-credit:hover{
+  background:rgba(201,162,74,.18);
+  border-color:rgba(201,162,74,.45);
+  transform:translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201,162,74,.25);
+}
+.footerA .built-by-label{
+  font-size:12px;
+  color:rgba(215,215,219,.6);
+  margin-right:4px;
+}
+.footerA .snrg-text{
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:0.08em;
+  color:#C9A24A;
+  text-transform:uppercase;
+}
+.footerA .snrg-icon{
+  width:16px;
+  height:16px;
+  color:#C9A24A;
+}
+
+/* Mobile perfection */
+@media (max-width: 760px){
+  .footerA .top{
+    grid-template-columns:1fr 1fr;
+  }
+  .footerA .brand{
+    grid-column:1/-1;
+  }
+  .footerA .visit{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .footerA .visit .pill{
+    justify-content:flex-start;
+    width:100%;
+  }
+  .footerA .pill a{
+    flex:1;
+  }
+  .footerA .bottom{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .footerA .bottom-left{
+    flex-direction:column;
+    align-items:flex-start;
+    width:100%;
+  }
+}
+</style>
+
+<footer class="footerA" aria-label="Footer">
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <div class="name">Angel's Furniture</div>
+        <div class="sub">Premium pieces, fast delivery, and real showroom support. Shop online or visit us in Houston.</div>
       </div>
-      
-      <!-- Footer Logo -->
-      <div class="footer-logo-section">
-        <img src='assets/images/angels-logo.png' alt="Angel's Furniture Logo" />
-      </div>
-      
-      <!-- Footer Bottom -->
-      <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <div class="footer-copyright">
-            © 2025 Angel's Furniture. All rights reserved.
-          </div>
-          <div class="footer-built-by">
-            <span class="footer-built-by-label">Built by</span>
-            <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="footer-built-by-link">
-              SNRG WEB
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                <polyline points="15 3 21 3 21 9"></polyline>
-                <line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-            </a>
-          </div>
+
+      <div class="col">
+        <h4>Shop</h4>
+        <div class="links">
+          <a href="#/collection?room=living">Living Room</a>
+          <a href="#/collection?room=bedroom">Bedroom</a>
+          <a href="#/collection?room=dining">Dining</a>
+          <a href="#/collection?room=office">Office</a>
         </div>
       </div>
-      
+
+      <div class="col">
+        <h4>Support</h4>
+        <div class="links">
+          <a href="#/showroom">Showroom</a>
+          <a href="#/about">About</a>
+          <a href="#/contact">Contact</a>
+        </div>
+      </div>
+
+      <div class="visit">
+        <div class="addr">
+          <strong style="color:#fff;font-size:15px;">Visit Us</strong><br>
+          14300 Northwest Fwy, Bldg B-26, Houston, TX 77040<br>
+          <a href="tel:+13468671155">(346) 867-1155</a>
+        </div>
+        <div class="pill">
+          <a class="primary" target="_blank" rel="noopener noreferrer"
+             href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040">Get Directions</a>
+          <a href="#/contact">Message Us</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="bottom-left">
+        <div>© <span id="yearA"></span> Angel's Furniture. All rights reserved.</div>
+        <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="snrg-credit">
+          <span class="built-by-label">Built by</span>
+          <span class="snrg-text">SNRG WEB</span>
+          <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#/about">Privacy</a>
+        <a href="#/about">Terms</a>
+      </div>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-deco
-<!-- Scroll to Top on Load - Backup Script -->
 <script>
-// Additional scroll reset on page load (backup)
-window.addEventListener('load', function() {
-  setTimeout(function() {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, 0);
-});
+(function(){
+  var y=document.getElementById('yearA'); 
+  if(y) y.textContent=new Date().getFullYear();
+})();
+</script>
 
-// Also reset on page show (handles back/forward navigation)
-window.addEventListener('pageshow', function(event) {
-  if (event.persisted) {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }
-});
 
 // Reset on hashchange (for single-page navigation)
 window.addEventListener('hashchange', function() {
