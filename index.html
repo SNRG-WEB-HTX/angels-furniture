@@ -145,16 +145,28 @@
     }
     .btn:active{ transform: translateY(1px); }
     .btn.primary{
-      background:var(--ink);
-      color:var(--surface);
-      box-shadow:0 8px 18px rgba(26,26,26,.18);
+      background:var(--surface);
+      color:var(--ink);
+      border:2px solid var(--halo);
+      box-shadow:0 8px 18px rgba(201,162,74,.25);
+    }
+    .btn.primary:hover{
+      background:var(--surface);
+      border-color:var(--halo);
+      box-shadow:0 10px 22px rgba(201,162,74,.35);
     }
     .btn/* removed hover-based mega menu rule */
     .btn.ghost{
-      background:transparent;
-      border-color:rgba(26,26,26,.16);
+      background:#FFFFFF;
+      color:var(--ink);
+      border:2px solid var(--halo);
+      box-shadow:0 4px 10px rgba(201,162,74,.15);
     }
-    .btn.ghost:hover{ background:rgba(26,26,26,.04); }
+    .btn.ghost:hover{ 
+      background:#FFFFFF;
+      border-color:var(--halo);
+      box-shadow:0 6px 14px rgba(201,162,74,.25);
+    }
     .btn.halo{
       background:rgba(201,162,74,.12);
       border-color:rgba(201,162,74,.35);
@@ -171,23 +183,33 @@
       gap:8px;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(26,26,26,.12);
-      background:rgba(255,255,255,.7);
+      border:2px solid var(--halo) !important;
+      background:#FFFFFF !important;
       backdrop-filter:saturate(140%) blur(10px);
       font-size:13px;
-      color:rgba(26,26,26,.78);
+      font-weight:600 !important;
+      color:var(--ink) !important;
+      box-shadow:0 4px 10px rgba(201,162,74,.2) !important;
     }
     .chip{
       padding:8px 12px;
       border-radius:999px;
-      border:1px solid rgba(26,26,26,.14);
-      background:transparent;
+      border:2px solid var(--halo);
+      background:#FFFFFF;
+      color:var(--ink);
+      font-weight:600;
       cursor:pointer;
-      transition:background var(--t160) var(--ease), border-color var(--t160) var(--ease);
+      box-shadow:0 4px 10px rgba(201,162,74,.15);
+      transition:background var(--t160) var(--ease), border-color var(--t160) var(--ease), box-shadow var(--t160) var(--ease);
     }
     .chip[aria-pressed="true"]{
-      background:rgba(26,26,26,.06);
-      border-color:rgba(26,26,26,.22);
+      background:#FFFFFF;
+      border-color:var(--halo);
+      box-shadow:0 6px 14px rgba(201,162,74,.3);
+    }
+    .chip:hover{
+      border-color:var(--halo);
+      box-shadow:0 6px 14px rgba(201,162,74,.25);
     }
 
     /* Header */
@@ -397,23 +419,18 @@
     /* Hero */
     .hero{
       padding: 28px 0 12px;
+      background: var(--bg);
     }
     .hero-surface{
       border-radius:28px;
       overflow:hidden;
-      border:1px solid rgba(232,226,216,.9);
-      background: radial-gradient(1200px 600px at 30% 10%, rgba(201,162,74,.10), transparent 55%),
-                  radial-gradient(900px 500px at 70% 40%, rgba(26,26,26,.06), transparent 60%),
-                  linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
-      box-shadow:var(--shadow);
+      border:0;
+      background: transparent;
+      box-shadow:none;
       position:relative;
     }
     .hero-media{
-      position:absolute;
-      inset:0;
-      overflow:hidden;
-      border-radius:24px;
-      background:#f5f5f7;
+      display: none !important;
     }
     .hero-media::after{
       content:"";
@@ -480,19 +497,37 @@
     }
     .hero-ctas{
       display:flex;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       gap:12px;
       margin-top:10px;
+      justify-content:center;
     }
     .hero-subrow{
       display:flex;
-      flex-wrap:wrap;
+      flex-wrap:nowrap;
       gap:10px;
       align-items:center;
+      justify-content:center;
       margin-top:10px;
     }
-    .hero .pill{
-      background:rgba(255,255,255,.78);
+    @media (max-width: 640px){
+      .hero-subrow{
+        gap:8px;
+      }
+      .hero-subrow .pill{
+        font-size:12px;
+        padding:5px 8px;
+        white-space:nowrap;
+      }
+    }
+    .hero-inner .pill,
+    .hero-surface .pill,
+    .hero-content .pill{
+      background: #FFFFFF !important;
+      color: var(--ink) !important;
+      border: 2px solid var(--halo) !important;
+      font-weight: 600 !important;
+      box-shadow: 0 4px 10px rgba(201,162,74,.2) !important;
     }
 
     /* Animated logo intro (no CLS) */
@@ -1251,7 +1286,7 @@ header{ min-height: 110px !important; }
 
 /* ===== Hero readable glass card ===== */
 .hero-glass-card{
-  background: rgba(246,243,238,.42);
+  background: rgba(255,255,255,.28);
   border: 3px solid rgba(201,162,74,.65);
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
@@ -1288,8 +1323,11 @@ header{ min-height: 110px !important; }
   font-weight: 700;
 }
 .hero-glass-card .pill{
-  background: rgba(255,255,255,.92) !important;
-  border-color: rgba(26,26,26,.14) !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--halo) !important;
+  color: var(--ink) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(201,162,74,.2) !important;
 }
 
 
@@ -1355,7 +1393,7 @@ header .logo-wrap{
 
 /* ===== EXTRA AIRY HERO GLASS ===== */
 .hero-glass-card{
-  background: rgba(246,243,238,.42) !important;
+  background: rgba(255,255,255,.28) !important;
 }
 
 
@@ -1387,8 +1425,8 @@ header { position: sticky; top:0; }
 .hero-card-actions{ display: inline-block; }
 
 .hero-glass-card{
-  background: rgba(246,243,238,.32) !important;
-  border: 1px solid rgba(232,226,216,.85);
+  background: rgba(255,255,255,.28) !important;
+  border: 1.5px solid rgba(201,162,74,.35);
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
   padding: clamp(16px, 3vw, 24px);
@@ -1420,8 +1458,8 @@ header { position: sticky; top:0; }
   display: inline-block !important;      /* hug content */
   max-width: 100% !important;
   width: fit-content !important;
-  background: rgba(246,243,238,.26) !important;  /* even more transparent */
-  border: 1px solid rgba(232,226,216,.75);
+  background: rgba(255,255,255,.28) !important;  /* white transparent */
+  border: 1.5px solid rgba(201,162,74,.35);
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
   padding: clamp(14px, 2.5vw, 22px);
@@ -1501,39 +1539,38 @@ header { position: sticky; top:0; }
 
 /* ===== CINEMATIC HERO (NO CARDS) ===== */
 .hero-media::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,.35), rgba(0,0,0,.55) 55%, rgba(0,0,0,.65) 75%),
-    linear-gradient(180deg, rgba(0,0,0,0.0) 20%, rgba(0,0,0,.35) 60%, rgba(0,0,0,.55) 100%);
-  pointer-events:none;
+  display:none !important;
 }
 
 /* Title + UI on image */
 .hero h1{
-  color:#fff !important;
-  text-shadow: 0 10px 40px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.5) !important;
+  color:#1d1d1f !important;
+  text-shadow: none !important;
 }
 .hero .divider{
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent) !important;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,.35));
+  background: linear-gradient(90deg, transparent, rgba(29,29,31,.25), transparent) !important;
+  filter: none !important;
 }
 .hero-ctas .btn.primary{
   background:#fff !important;
   color:#1A1A1A !important;
+  border: 2px solid var(--halo) !important;
   box-shadow: 0 10px 30px rgba(0,0,0,.35) !important;
 }
 .hero-ctas .btn.ghost{
-  border-color: rgba(255,255,255,.75) !important;
-  color:#fff !important;
-  background: rgba(0,0,0,.15) !important;
-  backdrop-filter: blur(6px);
+  border-color: rgba(29,29,31,.22) !important;
+  color:#1d1d1f !important;
+  background: rgba(255,255,255,.65) !important;
+  backdrop-filter: blur(10px) saturate(160%);
 }
-.hero .pill{
-  background: rgba(0,0,0,.35) !important;
-  color:#fff !important;
-  border-color: rgba(255,255,255,.45) !important;
+.hero-inner .pill,
+.hero-surface .pill,
+.hero-content .pill{
+  background: #FFFFFF !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--halo) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(201,162,74,.2) !important;
   backdrop-filter: blur(6px);
 }
 
@@ -2187,12 +2224,7 @@ header { position: sticky; top:0; }
   box-shadow: none !important;
 }
 .hero-media{
-  border-radius: 28px !important;
-  overflow: hidden !important;
-  background-image:
-    radial-gradient(1200px 600px at 50% 30%, rgba(255,255,255,.75), rgba(245,245,247,.92) 55%, rgba(245,245,247,1)),
-    url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=2200&q=70") !important;
-  filter: saturate(102%) contrast(102%) !important;
+  display: none !important;
 }
 .hero-media::after{ display:none !important; }
 
@@ -2216,9 +2248,10 @@ header { position: sticky; top:0; }
   justify-content:center !important;
 }
 .hero-ctas .btn.primary{
-  background:#1d1d1f !important;
-  color:#fff !important;
-  box-shadow: 0 10px 28px rgba(0,0,0,.18) !important;
+  background:#fff !important;
+  color:#1A1A1A !important;
+  border: 2px solid var(--halo) !important;
+  box-shadow: 0 10px 28px rgba(201,162,74,.25) !important;
 }
 .hero-ctas .btn.ghost{
   border-color: rgba(29,29,31,.22) !important;
@@ -2228,11 +2261,16 @@ header { position: sticky; top:0; }
 }
 .hero-subrow{
   justify-content:center !important;
+  flex-wrap:nowrap !important;
 }
-.hero .pill{
-  background: rgba(255,255,255,.70) !important;
-  border-color: rgba(29,29,31,.12) !important;
-  color:#1d1d1f !important;
+.hero-inner .pill,
+.hero-surface .pill,
+.hero-content .pill{
+  background: #FFFFFF !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--halo) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(201,162,74,.2) !important;
   text-shadow:none !important;
 }
 
@@ -2290,15 +2328,19 @@ body, .btn, input, textarea, select{
   letter-spacing: -0.01em;
 }
 .btn.primary{
-  background: var(--ink) !important;
-  color:#fff !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.18);
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--halo) !important;
+  box-shadow: 0 8px 18px rgba(201,162,74,.25) !important;
 }
 .btn.ghost{
-  background: rgba(255,255,255,.80) !important;
-  border: 1px solid var(--stroke) !important;
+  background: #FFFFFF !important;
+  border: 2px solid var(--halo) !important;
   color: var(--ink) !important;
-  box-shadow: 0 10px 24px rgba(0,0,0,.08);
+  box-shadow: 0 4px 10px rgba(201,162,74,.15);
+}
+.btn.ghost:hover{
+  box-shadow: 0 6px 14px rgba(201,162,74,.25);
 }
 .btn/* removed hover-based mega menu rule */
 
@@ -2377,7 +2419,7 @@ body, .btn, input, textarea, select{
   max-width:min(920px, 100%);
   padding: clamp(14px, 2.6vw, 24px);
   border-radius: 22px;
-  background: rgba(255,255,255,.16);
+  background: rgba(255,255,255,.28);
   border: 1.5px solid rgba(201,162,74,.45);
   backdrop-filter: blur(12px) saturate(140%);
   box-shadow: 0 18px 46px rgba(0,0,0,.28),
@@ -2405,41 +2447,36 @@ body, .btn, input, textarea, select{
 }
 
 /* Ensure cinematic hero stays cinematic (override the later "Apple-catalog hero") */
-.hero{ background: transparent !important; }
+.hero{ background: var(--bg) !important; }
 .hero-surface{
   border-radius:28px;
   overflow:hidden;
-  border:1px solid rgba(232,226,216,.9);
-  box-shadow:var(--shadow);
+  border:0;
+  box-shadow:none;
   position:relative;
   background: transparent !important;
 }
 .hero-media{
-  background:#0b0b0c !important; /* fallback while images load */
-  border-radius:24px;
+  display: none !important;
 }
 .hero-media::after{
-  display:block !important;
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(1200px 600px at 50% 60%, rgba(0,0,0,.30), rgba(0,0,0,.55) 55%, rgba(0,0,0,.68) 80%),
-    linear-gradient(180deg, rgba(0,0,0,0.0) 20%, rgba(0,0,0,.30) 60%, rgba(0,0,0,.55) 100%);
-  pointer-events:none;
-  z-index:3;
+  display:none !important;
 }
 
 /* Title + UI on cinematic hero */
 .hero h1{
-  color:#fff !important;
-  text-shadow: 0 10px 40px rgba(0,0,0,.60), 0 2px 12px rgba(0,0,0,.55) !important;
+  color:#1d1d1f !important;
+  text-shadow: none !important;
 }
-.hero .lede, .hero p{ color: rgba(255,255,255,.86) !important; }
-.hero .pill{
-  background: rgba(0,0,0,.28) !important;
-  color:#fff !important;
-  border-color: rgba(255,255,255,.30) !important;
+.hero .lede, .hero p{ color: rgba(29,29,31,.75) !important; }
+.hero-inner .pill,
+.hero-surface .pill,
+.hero-content .pill{
+  background: #FFFFFF !important;
+  color: var(--ink) !important;
+  border: 2px solid var(--halo) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 10px rgba(201,162,74,.2) !important;
   backdrop-filter: blur(8px);
 }
 
@@ -2447,13 +2484,14 @@ body, .btn, input, textarea, select{
 .hero-ctas .btn.primary{
   background:#fff !important;
   color:#1A1A1A !important;
+  border: 2px solid var(--halo) !important;
   box-shadow: 0 14px 34px rgba(0,0,0,.35) !important;
 }
 .hero-ctas .btn.ghost{
-  border-color: rgba(255,255,255,.60) !important;
-  color:#fff !important;
-  background: rgba(0,0,0,.18) !important;
-  backdrop-filter: blur(8px);
+  border-color: rgba(29,29,31,.22) !important;
+  color:#1d1d1f !important;
+  background: rgba(255,255,255,.65) !important;
+  backdrop-filter: blur(10px) saturate(160%);
 }
 
 /* Hero slides: less zoomed-in */
@@ -2517,8 +2555,8 @@ body, .btn, input, textarea, select{
     max-width: 560px !important;
     margin: -30px auto 0 !important;
     padding-bottom: 30px !important;
-    background: rgba(255,255,255,.55) !important;
-    border: 1px solid rgba(26,26,26,.10) !important;
+    background: rgba(255,255,255,.28) !important;
+    border: 1.5px solid rgba(201,162,74,.35) !important;
     backdrop-filter: blur(12px) saturate(140%);
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
   }
@@ -2636,7 +2674,7 @@ body, .btn, input, textarea, select{
 .header-utility{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-end;
   gap:14px;
   padding:10px 0 8px;
   border-bottom:1px solid rgba(26,26,26,.08);
@@ -2645,10 +2683,13 @@ body, .btn, input, textarea, select{
   letter-spacing:.01em;
 }
 .utility-text{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.utility-right{ display:flex; gap:10px; align-items:center; }
 .utility-link{ color:rgba(26,26,26,.92); text-decoration:none; font-weight:600; }
 .utility-link:hover{ text-decoration:underline; }
 .utility-dot{ margin:0 8px; opacity:.55; }
 .utility-finance-btn{
+  display:inline-flex;
+  align-items:center;
   appearance:none;
   border:1px solid rgba(26,26,26,.14);
   background:rgba(255,255,255,.78);
@@ -2658,6 +2699,7 @@ body, .btn, input, textarea, select{
   font-weight:700;
   font-size:12px;
   letter-spacing:.02em;
+  text-decoration:none;
   backdrop-filter:saturate(160%) blur(12px);
   -webkit-backdrop-filter:saturate(160%) blur(12px);
   box-shadow:0 8px 24px rgba(0,0,0,.06);
@@ -2776,9 +2818,10 @@ header{
 }
 .hero-ctas .btn.ghost:hover{ background:rgba(255,255,255,.96) !important; }
 .hero-ctas .btn.primary{
-  background:#111 !important;
-  color:#fff !important;
-  border:1px solid rgba(17,17,17,.9) !important;
+  background:#fff !important;
+  color:#1A1A1A !important;
+  border: 2px solid var(--halo) !important;
+  box-shadow: 0 10px 28px rgba(201,162,74,.25) !important;
 }
 .hero-ctas .btn/* removed hover-based mega menu rule */
 
@@ -2897,8 +2940,8 @@ nav.primary li:hover .mega{ display:none !important; }
     width: 100% !important;
     max-width: 560px !important;
     margin: 0 auto !important;
-    background: rgba(255,255,255,.55) !important;
-    border: 1px solid rgba(26,26,26,.10) !important;
+    background: rgba(255,255,255,.28) !important;
+    border: 1.5px solid rgba(201,162,74,.35) !important;
     backdrop-filter: blur(12px) saturate(140%);
     box-shadow: 0 12px 30px rgba(0,0,0,.12);
   }
@@ -3006,6 +3049,41 @@ nav.primary li:hover .mega{ display:none !important; }
     padding: 40px 16px 24px !important;
   }
 }
+
+/* Desktop-only hero improvements */
+@media (min-width: 981px){
+  /* Lift hero closer to header */
+  .hero{
+    padding-top: 4px !important;
+  }
+  
+  /* Bigger glass card with less top padding */
+  .hero-glass{
+    max-width: 920px !important;
+    padding: clamp(28px, 4vw, 48px) clamp(48px, 6vw, 88px) clamp(40px, 5vw, 68px) !important;
+    text-align: center !important;
+  }
+  
+  /* Split heading with proper sizing */
+  .hero h1{
+    font-size: clamp(48px, 5.5vw, 64px) !important;
+    line-height: 1.12 !important;
+    margin-bottom: 0 !important;
+    text-align: center !important;
+  }
+  
+  /* Center align pills */
+  .hero-subrow{
+    justify-content: center !important;
+    margin-top: 28px !important;
+  }
+  
+  /* Bigger pills on desktop */
+  .hero-subrow .pill{
+    font-size: 15px !important;
+    padding: 9px 18px !important;
+  }
+}
 </style>
 
 </head>
@@ -3027,14 +3105,10 @@ window.scrollTo(0, 0);
 <div class="container">
   <!-- Utility strip: ordering + delivery + financing (minimal) -->
   <div class="header-utility" aria-label="Ordering, delivery, and financing">
-    <div class="utility-left">
-      <span class="utility-text">
-        Order online, call, or <a class="utility-link" href="/cdn-cgi/l/email-protection#fd94939b92bd9c939a98918e9b888f939489888f98d39e9290">email</a>
-        <span class="utility-dot">•</span>
-        Next‑day delivery (most items)
-      </span>
-    </div>
     <div class="utility-right">
+      <a class="utility-finance-btn" href="tel:+13468671155" aria-label="Call now">
+        Call Now
+      </a>
       <button class="utility-finance-btn" id="openFinance" type="button" aria-label="Apply for financing">
         Apply for Financing
       </button>
@@ -3339,11 +3413,7 @@ window.scrollTo(0, 0);
   <div class="hero-slide" style="--bg:url('https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=2400&q=80');"></div>
   <div class="hero-slide" style="--bg:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=2400&q=80');"></div>
 </div>
-<div class="hero-inner"><div class="hero-glass"><h1 class="fade-rise" data-i18n="t042">Angel’s Furniture
-Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:520px;"></div><div class="hero-ctas fade-rise delay-2">
-<a class="btn primary" href="tel:+13468671155" data-i18n="t164">Call Now</a>
-<a class="btn ghost" data-nav href="#/collection/living" data-i18n="t044">Shop Collections</a>
-</div><div class="hero-subrow fade-rise delay-3">
+<div class="hero-inner"><div class="hero-glass"><h1 class="fade-rise" data-i18n="t042"><span style="font-size:1.15em;">Angel's Furniture</span><br>Houston Showroom</h1><div class="hero-subrow fade-rise delay-3" style="margin-top:20px;">
 <span class="pill" data-i18n="t048">Pickup available</span>
 <span class="pill" data-i18n="t049">Same-week delivery</span>
 </div></div></div>
@@ -4132,7 +4202,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'LR-FLOORLAMP-6293F',
         title:'Modern Floor Lamp',
-        category:'living',
+        category:'decor',
         price:129,
         featured:false,
         best:false,
@@ -4153,7 +4223,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'LR-TABLELAMP-6290T',
         title:'Table Lamp',
-        category:'living',
+        category:'decor',
         price:99,
         featured:false,
         best:false,
@@ -5477,7 +5547,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'OF-DECOR-A2000765',
         title:'Lauretman Alligator Sculpture',
-        category:'office',
+        category:'decor',
         price: 249,
         featured:false,
         best:false,
@@ -5500,7 +5570,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'OF-BOOKCASE-A4000589',
         title:'Ashley Bookcase',
-        category:'office',
+        category:'decor',
         price: 599,
         featured:false,
         best:false,
@@ -5523,7 +5593,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'OF-BOOKCASE-H742',
         title:'Antique White Bookcase',
-        category:'office',
+        category:'decor',
         price: 799,
         featured:true,
         best:true,
@@ -5546,7 +5616,7 @@ Houston Showroom</h1><div class="divider" style="margin:12px 0 12px;max-width:52
       {
         id:'OF-BOOKCASE-H743',
         title:'Traditional Bookcase H743',
-        category:'office',
+        category:'decor',
         price: 749,
         featured:false,
         best:false,
