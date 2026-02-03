@@ -650,17 +650,21 @@
       overflow:hidden;
       position:relative;
       transition:transform var(--t160) var(--ease), box-shadow var(--t160) var(--ease), border-color var(--t160) var(--ease);
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.08);
+      background:#fff;
     }
     .p-card:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--shadow2);
-      border-color:rgba(26,26,26,.12);
+      transform:translateY(-1px);
+      box-shadow:0 2px 8px rgba(0,0,0,.06);
+      border-color:rgba(0,0,0,.12);
     }
     .p-media{
       aspect-ratio: 1/1;
-      background:linear-gradient(180deg, rgba(26,26,26,.04), rgba(26,26,26,.02));
+      background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.01));
       position:relative;
       overflow:hidden;
+      border-radius:12px 12px 0 0;
     }
     .p-media img{
       width:100%;
@@ -679,46 +683,71 @@
       .p-card:hover .p-media img.swap{ opacity:1; }
     }
     .p-body{
-      padding:10px 12px 12px;
+      padding:12px 12px 14px;
       display:flex;
       flex-direction:column;
-      gap:6px;
+      gap:2px;
     }
     .p-title{
       margin:0;
       font-size:13px;
+      font-weight:500;
       letter-spacing:-.01em;
-      line-height:1.2;
-    }
-    @media (max-width: 640px){
-      .p-title{
-        font-size:12px;
-        line-height:1.3;
-      }
-      .p-body{
-        padding:8px 10px 10px;
-        gap:5px;
-      }
-      .p-meta{
-        font-size:11px;
-        gap:6px;
-      }
-      .subtle{
-        font-size:10px;
-      }
-    }
-    .p-meta{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      color:rgba(26,26,26,.74);
-      font-size:12px;
+      line-height:1.3;
+      color:#1d1d1f;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:100%;
+      height:17px;
     }
     .price{
       font-family:var(--mono);
       letter-spacing:-.02em;
       font-weight:600;
+      font-size:15px;
+      color:#1d1d1f;
+      line-height:1.3;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      height:20px;
+    }
+    .p-meta{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      color:rgba(0,0,0,.65);
+      font-size:11px;
+      line-height:1.3;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      height:14px;
+      font-weight:400;
+    }
+    .p-meta > *{
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    @media (max-width: 640px){
+      .p-title{
+        font-size:12px;
+        height:16px;
+      }
+      .price{
+        font-size:14px;
+        height:18px;
+      }
+      .p-body{
+        padding:10px 10px 12px;
+        gap:2px;
+      }
+      .p-meta{
+        font-size:10px;
+        height:13px;
+      }
     }
     .p-actions{
       position:absolute;
@@ -3845,67 +3874,51 @@ window.scrollTo(0, 0);
 <section class="section fade-rise" data-page="showroom">
 <div class="container">
 <!-- Section Header -->
-<div class="section-head">
+<div class="section-head" style="align-items:center;">
+<div style="text-align:center;max-width:100%;">
+<h2 data-i18n="t128" style="margin:0 auto;">Houston Showroom</h2>
+<p class="lede" data-i18n="t129" style="margin:0 auto;max-width:100%;">See it in person. Pickup available. Text us for quick questions.</p>
+</div>
+</div>
+<!-- Single unified showroom card -->
+<div style="max-width:680px;margin:0 auto 32px;">
+<div class="card pad soft-shadow">
+<!-- Visit -->
+<div style="margin-bottom:24px;">
+<strong data-i18n="t130" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">Visit</strong>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font-size:14px;color:rgba(0,0,0,.70);"><span data-i18n="t131">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span></div>
+<div style="font-size:14px;color:rgba(0,0,0,.70);">Hours: <strong data-i18n="t082" style="color:#1d1d1f;font-weight:500;">Mon–Sat 10–7</strong></div>
+
+<div style="font-size:14px;color:rgba(0,0,0,.70);">Pickup: <strong data-i18n="t084" style="color:#1d1d1f;font-weight:500;">Available</strong></div>
+</div>
+<div style="display:flex;gap:10px;margin-top:14px;">
+<button class="btn primary" data-i18n="t135" id="dirBtn" style="flex:1;">Get directions</button>
+<button class="btn ghost" data-i18n="t136" id="apptBtn" style="flex:1;">Schedule a visit</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:24px 0;"></div>
+<!-- Contact -->
+<div style="margin-bottom:24px;">
+<strong data-i18n="t088" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">Contact</strong>
+<p style="font-size:18px;font-weight:600;color:#1d1d1f;margin:0 0 12px;">(346) 867-1155</p>
+<div style="display:flex;gap:10px;">
+<button class="btn ghost" data-i18n="t146" id="callBtn2" style="flex:1;">Call</button>
+<button class="btn ghost" data-i18n="t147" id="textBtn2" style="flex:1;">Text</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:24px 0;"></div>
+<!-- What to Expect -->
 <div>
-<h2 data-i18n="t128">Houston Showroom</h2>
-<p class="lede" data-i18n="t129">See pieces in person, check comfort and finishes, and plan pickup.</p>
-</div>
-</div>
-<!-- Compact Info Grid -->
-<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--space-5); margin-bottom:var(--space-6);">
-<div class="card pad" style="background:var(--surface);">
-<div style="display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3);">
-<div style="width:44px; height:44px; border-radius:8px; background:rgba(0,0,0,.03); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-<svg fill="#FFFFFF" height="24" viewbox="0 0 24 24" width="24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path></svg>
-</div>
-<strong data-i18n="t130" style="font-size:16px;">Visit</strong>
-</div>
-<div style="display:grid; gap:var(--space-2);">
-<div class="pill"><span data-i18n="t131">Houston, TX 77002</span></div>
-<div class="pill">Hours: <strong data-i18n="t082">Mon–Sat 10–7</strong></div>
-<div class="pill">Parking: <strong data-i18n="t086">Easy lot</strong></div>
-</div>
-</div>
-<div class="card pad" style="background:var(--surface);">
-<div style="display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3);">
-<div style="width:44px; height:44px; border-radius:8px; background:rgba(0,0,0,.03); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-<svg fill="#FFFFFF" height="24" viewbox="0 0 24 24" width="24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
-</div>
-<strong data-i18n="t088" style="font-size:16px;">Contact</strong>
-</div>
-<p style="font-size:20px; font-weight:700; color:#1d1d1f; margin-bottom:var(--space-3);">(713) 555-1234</p>
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2);">
-<button class="btn ghost" data-i18n="t146" id="callBtn" style="min-height:40px; font-size:14px;">Call</button>
-<button class="btn ghost" data-i18n="t147" id="textBtn" style="min-height:40px; font-size:14px;">Text</button>
-</div>
-</div>
-<div class="card pad" style="background:var(--surface);">
-<div style="display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-3);">
-<div style="width:44px; height:44px; border-radius:8px; background:rgba(0,0,0,.03); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
-<svg fill="#FFFFFF" height="24" viewbox="0 0 24 24" width="24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-</div>
-<strong data-i18n="t137" style="font-size:16px;">What to Expect</strong>
-</div>
-<ul style="list-style:none; padding:0; margin:0; display:grid; gap:var(--space-2); color:var(--muted); font-size:14px;">
-<li data-i18n="t138">• Touch materials, check comfort</li>
-<li data-i18n="t139">• Fast answers on Delivery &amp; pickup</li>
-<li data-i18n="t140">• Clean, no-pressure guidance</li>
+<strong data-i18n="t137" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">What to expect</strong>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;color:rgba(0,0,0,.70);font-size:14px;">
+<li data-i18n="t138">Touch Materials, Check Comfort, Compare Finishes</li>
+<li data-i18n="t139">Fast Answers On Delivery & Pickup Options</li>
+<li data-i18n="t140">Clean, No-Pressure Guidance</li>
 </ul>
 </div>
-</div>
-<!-- CTA Buttons -->
-<div class="hero-ctas" style="margin-bottom:var(--space-6);">
-<button class="btn primary" data-i18n="t135" id="dirBtn">Get directions</button>
-<button class="btn ghost" data-i18n="t136" id="apptBtn">Schedule a visit</button>
-</div>
-<!-- Showroom Gallery -->
-<div class="card pad">
-<strong data-i18n="t141" style="font-size:14px; display:block; margin-bottom:var(--space-4);">Gallery</strong>
-<div class="grid grid-2" style="margin-top:12px;">
-<div class="p-media" style="border-radius:16px; overflow:hidden; border:1px solid rgba(26,26,26,.10);"><img alt="Showroom area 1" loading="lazy" src="https://images.unsplash.com/photo-1549187774-b4e9b0445b41?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px; overflow:hidden; border:1px solid rgba(26,26,26,.10);"><img alt="Showroom area 2" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px; overflow:hidden; border:1px solid rgba(26,26,26,.10);"><img alt="Showroom area 3" loading="lazy" src="https://images.unsplash.com/photo-1556228578-0d85b1a4d571?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
-<div class="p-media" style="border-radius:16px; overflow:hidden; border:1px solid rgba(26,26,26,.10);"><img alt="Showroom area 4" loading="lazy" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&amp;fit=crop&amp;w=1200&amp;q=70"/></div>
 </div>
 </div>
 </div>
@@ -3913,27 +3926,37 @@ window.scrollTo(0, 0);
 <!-- CONTACT -->
 <section class="section fade-rise" data-page="contact">
 <div class="container">
-<div class="section-head">
+<div class="section-head" style="align-items:center;">
+<div style="text-align:center;max-width:100%;">
+<h2 data-i18n="t142" style="margin:0 auto;">Contact</h2>
+<p class="lede" data-i18n="t143" style="margin:0 auto;max-width:100%;">Fast answers. Simple scheduling. No hoops.</p>
+</div>
+</div>
+<!-- Single unified contact card -->
+<div style="max-width:680px;margin:0 auto;">
+<div class="card pad soft-shadow">
+<!-- Call / Text -->
+<div style="margin-bottom:28px;">
+<strong data-i18n="t144" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;">Call / Text</strong>
+<p class="subtle" data-i18n="t145" style="margin:10px 0 14px;">Add your business phone number here. This demo uses placeholder actions.</p>
+<div style="display:flex;gap:10px;">
+<button class="btn primary" data-i18n="t146" id="callBtn" style="flex:1;">Call</button>
+<button class="btn ghost" data-i18n="t147" id="textBtn" style="flex:1;">Text</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:28px 0;"></div>
+<!-- Email -->
+<div style="margin-bottom:28px;">
+<strong data-i18n="t148" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;">Email</strong>
+<p class="subtle" style="margin:10px 0 0;"><a href="mailto:info@angelsfurniture.com" data-i18n="t149" style="color:#1d1d1f;text-decoration:none;font-weight:500;">info@angelsfurniture.com</a></p>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:28px 0;"></div>
+<!-- Message form -->
 <div>
-<h2 data-i18n="t142">Contact</h2>
-<p class="lede" data-i18n="t143">Fast answers. Simple scheduling. No hoops.</p>
-</div>
-</div>
-<div class="grid grid-2" style="align-items:start;">
-<div class="card pad soft-shadow">
-<strong data-i18n="t144" style="font-size:14px;">Call / Text</strong>
-<p class="subtle" data-i18n="t145" style="margin:10px 0 0;">Add your business phone number here. This demo uses placeholder actions.</p>
-<div class="hero-ctas" style="margin-top:14px;">
-<button class="btn primary" data-i18n="t146" id="callBtn">Call</button>
-<button class="btn ghost" data-i18n="t147" id="textBtn">Text</button>
-</div>
-<div class="divider" style="margin:16px 0;"></div>
-<strong data-i18n="t148" style="font-size:14px;">Email</strong>
-<p class="subtle" data-i18n="t149" style="margin:10px 0 0;"><a href="/cdn-cgi/l/email-protection#650c0b030a25040b020009160310170b0c111017004b060a08"><span class="__cf_email__" data-cfemail="2940474f466948474e4c455a4f5c5b47405d5c5b4c074a4644">[email protected]</span></a></p>
-</div>
-<div class="card pad soft-shadow">
-<strong data-i18n="t150" style="font-size:14px;">Message us</strong>
-<form id="contactForm" style="display:grid;gap:10px;margin-top:12px;">
+<strong data-i18n="t150" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:14px;">Message us</strong>
+<form id="contactForm" style="display:grid;gap:12px;">
 <label class="sr-only" for="name">Name</label>
 <input class="select" id="name" placeholder="Name" required=""/>
 <label class="sr-only" for="email">Email</label>
@@ -3941,7 +3964,7 @@ window.scrollTo(0, 0);
 <label class="sr-only" for="msg">Message</label>
 <textarea class="select" id="msg" placeholder="What are you shopping for?" required="" rows="4"></textarea>
 <button class="btn primary" data-i18n="t151" type="submit">Send message (demo)</button>
-<p class="subtle" data-i18n="t152" style="margin:0;">Swap this form to Formspree / Netlify forms / your backend later.</p>
+<p class="subtle" data-i18n="t152" style="margin:0;font-size:12px;">Swap this form to Formspree / Netlify forms / your backend later.</p>
 </form>
 </div>
 </div>
@@ -7863,10 +7886,8 @@ window.scrollTo(0, 0);
           </div>
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
-            <div class="p-meta">
-              <span class="price">${money(p.price)}</span>
-            </div>
-            <div class="subtle"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
+            <div class="price">${money(p.price)}</div>
+            <div class="p-meta"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
           </div>
         </a>
       </article>`;
@@ -8590,7 +8611,7 @@ window.scrollTo(0, 0);
   </script>
 <script>
 (() => {
-  const dict = {"en": {"t001": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t002": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Pickup & Delivery", "t005": "Living", "t006": "Bedroom", "t007": "Dining", "t008": "Office", "t009": "Decor", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout (demo)", "t017": "Menu", "t018": "Shop", "t019": "Houston-ready picks", "t020": "Living", "t021": "Bedroom", "t022": "Dining", "t023": "Office", "t024": "Decor", "t025": "Sale", "t026": "Showroom", "t027": "Visit us in Houston. Pickup available.", "t028": "Visit Houston Showroom", "t029": "About Angel’s", "t030": "Contact", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Dining", "t038": "Bouclé", "t039": "Ready today", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Furniture Houston Showroom", "t043": "Curated pieces, warm finishes, and clean modern lines. Shop collections, or grab “ready today” inventory for pickup or fast local Delivery.", "t044": "Shop Collections", "t045": "Visit Houston Showroom", "t046": "Great Deals • Easy Financing Available", "t047": "Ready today in Houston", "t048": "Pickup available", "t049": "Same-Week Delivery", "t050": "Shop By Room", "t051": "Quality furniture at unbeatable Houston prices. Easy financing available with flexible payment plans.", "t052": "Living Sofas, sectionals, tables", "t053": "Living", "t054": "Sofas, sectionals, tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Bedroom", "t057": "Beds, dressers, nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Dining", "t060": "Tables, chairs, storage", "t061": "Office Desks, chairs, lighting", "t062": "Office", "t063": "Desks, chairs, lighting", "t064": "New Arrivals", "t065": "Fresh styles just in! Affordable monthly payments with our easy financing options.", "t066": "Ready Today In Houston", "t067": "In-stock furniture ready for same-week delivery or pickup. Great deals with flexible payment plans.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Fast local Delivery", "t071": "Fast local Delivery", "t072": "Same-week options for many items. Clear Delivery windows and pickup availability.", "t073": "Curated quality", "t074": "Curated quality", "t075": "Warm textures and clean lines. We choose fewer pieces so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See finishes in person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See pieces in person, check comfort and finishes, and plan pickup.", "t081": "Hours: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Pickup: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Call / Text", "t089": "Local favorites", "t090": "Clean testimonial cards (no fake star ratings).", "t091": "“Fast Delivery, the finish looked even better in person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View in room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Delivery & assembly", "t112": "3–7 days", "t113": "Returns", "t114": "Easy 14-day policy", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching pieces that pair well — keeps decision flow smooth.", "t119": "About Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Furniture is a Houston boutique showroom focused on pieces that feel modern, warm, and easy to live with.\n              We keep the selection curated — fewer items, better fit. Come by to see finishes in person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Curated quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Swap this with real showroom/team photos for maximum trust.", "t128": "Houston showroom", "t129": "See it in person. Pickup available. Text us for quick questions.", "t130": "Visit", "t131": "Houston, TX (set your exact address)", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch materials, check comfort, compare finishes", "t139": "Fast answers on Delivery & pickup options", "t140": "Clean, no-pressure guidance", "t141": "Gallery", "t142": "Contact", "t143": "Fast answers. Simple scheduling. No hoops.", "t144": "Call / Text", "t145": "Add your business phone number here. This demo uses placeholder actions.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.com", "t150": "Message us", "t151": "Send message (demo)", "t152": "Swap this form to Formspree / Netlify forms / your backend later.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "Call Now", "t165": "Visit Our Showroom", "t166": "Touch the fabrics, test the comfort, and plan your delivery.", "t167": "Get Directions", "t168": "Schedule Visit", "t169": "FAIRBANKS BUSINESS PARK", "t170": "CALL OR TEXT", "t171": "HOURS", "t172": "Youth", "t173": "Youth"}, "es": {"t001": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t002": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Recogida & Delivery", "t005": "Sala", "t006": "Recámara", "t007": "Comedor", "t008": "Oficina", "t009": "Decoración", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout (demo)", "t017": "Menu", "t018": "Comprar", "t019": "Houston-ready picks", "t020": "Sala", "t021": "Recámara", "t022": "Comedor", "t023": "Oficina", "t024": "Decoración", "t025": "Sale", "t026": "Sala de exhibición", "t027": "Visit us en Houston. Recogida available.", "t028": "Visit Houston Sala", "t029": "Nosotros Angel’s", "t030": "Contacto", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Comedor", "t038": "Bouclé", "t039": "Listo hoy", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Muebles Houston Sala", "t043": "Piezas seleccionadas, acabados cálidos y líneas modernas limpias. Compra colecciones o elige inventario “listo hoy” para recogida o entrega local rápida.", "t044": "Comprar colecciones", "t045": "Visit Houston Sala", "t046": "Listo hoy en Houston • limited drops", "t047": "Listo hoy en Houston", "t048": "Recogida available", "t049": "Same-Week Delivery", "t050": "Comprar by room", "t051": "Start with the space, then refine by style. Built for fast decision-making on mobile.", "t052": "Living Sofas, sectionals, tables", "t053": "Sala", "t054": "Sofas, sectionals, tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Recámara", "t057": "Beds, dressers, nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Comedor", "t060": "Tables, chairs, storage", "t061": "Office Desks, chairs, lighting", "t062": "Oficina", "t063": "Desks, chairs, lighting", "t064": "New arrivals", "t065": "A limpias snap carousel that stays light on JS and feels premium.", "t066": "Listo hoy en Houston", "t067": "In-stock picks for fast local Delivery or pickup. Updated often.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Rápida local Delivery", "t071": "Rápida local Delivery", "t072": "Same-week options for many items. Clear Delivery windows and pickup availability.", "t073": "Seleccionado quality", "t074": "Seleccionado quality", "t075": "cálidos textures and limpias líneas. We choose fewer piezas so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See acabados en person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See piezas en person, check comfort and acabados, and plan pickup.", "t081": "Horarios: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Recogida: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Llamar / Enviar texto", "t089": "Local favorites", "t090": "limpias testimonial cards (no fake star ratings).", "t091": "“Rápida Delivery, the finish looked even better en person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View en room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Entrega & assembly", "t112": "3–7 days", "t113": "Returns", "t114": "Easy 14-day policy", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching piezas that pair well — keeps decision flow smooth.", "t119": "Nosotros Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Muebles is a Houston boutique showroom focused on piezas that feel modernas, cálidos, and easy to live with. We keep the selection curated — fewer items, better fit. Come by to see acabados en person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Seleccionado quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Swap this with real showroom/team photos for maximum trust.", "t128": "Houston showroom", "t129": "See it en person. Recogida available. Text us for quick questions.", "t130": "Visit", "t131": "Houston, TX (set your exact address)", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch materials, check comfort, compare acabados", "t139": "Rápida answers on Delivery & pickup options", "t140": "limpias, no-pressure guidance", "t141": "Gallery", "t142": "Contacto", "t143": "Rápida answers. Simple scheduling. No hoops.", "t144": "Llamar / Enviar texto", "t145": "Add your business phone number here. This demo uses placeholder actions.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.com", "t150": "Message us", "t151": "Send message (demo)", "t152": "Swap this form to Formspree / Netlify forms / your backend later.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "Llamar Ahora", "t165": "Visita Nuestra Sala", "t166": "Toca las telas, prueba la comodidad y planifica tu entrega.", "t167": "Obtener Direcciones", "t168": "Agendar Visita", "t169": "PARQUE EMPRESARIAL FAIRBANKS", "t170": "LLAMAR O ENVIAR TEXTO", "t171": "HORARIO", "t172": "Juventud", "t173": "Juventud"}};
+  const dict = {"en": {"t001": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t002": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Pickup & Delivery", "t005": "Living", "t006": "Bedroom", "t007": "Dining", "t008": "Office", "t009": "Decor", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout (demo)", "t017": "Menu", "t018": "Shop", "t019": "Houston-ready picks", "t020": "Living", "t021": "Bedroom", "t022": "Dining", "t023": "Office", "t024": "Decor", "t025": "Sale", "t026": "Showroom", "t027": "Visit us in Houston. Pickup available.", "t028": "Visit Houston Showroom", "t029": "About Angel’s", "t030": "Contact", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Dining", "t038": "Bouclé", "t039": "Ready today", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Furniture Houston Showroom", "t043": "Curated pieces, warm finishes, and clean modern lines. Shop collections, or grab “ready today” inventory for pickup or fast local Delivery.", "t044": "Shop Collections", "t045": "Visit Houston Showroom", "t046": "Great Deals • Easy Financing Available", "t047": "Ready today in Houston", "t048": "Pickup available", "t049": "Same-Week Delivery", "t050": "Shop By Room", "t051": "Quality furniture at unbeatable Houston prices. Easy financing available with flexible payment plans.", "t052": "Living Sofas, sectionals, tables", "t053": "Living", "t054": "Sofas, sectionals, tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Bedroom", "t057": "Beds, dressers, nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Dining", "t060": "Tables, chairs, storage", "t061": "Office Desks, chairs, lighting", "t062": "Office", "t063": "Desks, chairs, lighting", "t064": "New Arrivals", "t065": "Fresh styles just in! Affordable monthly payments with our easy financing options.", "t066": "Ready Today In Houston", "t067": "In-stock furniture ready for same-week delivery or pickup. Great deals with flexible payment plans.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Fast local Delivery", "t071": "Fast local Delivery", "t072": "Same-week options for many items. Clear Delivery windows and pickup availability.", "t073": "Curated quality", "t074": "Curated quality", "t075": "Warm textures and clean lines. We choose fewer pieces so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See finishes in person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See pieces in person, check comfort and finishes, and plan pickup.", "t081": "Hours: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Pickup: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Call / Text", "t089": "Local favorites", "t090": "Clean testimonial cards (no fake star ratings).", "t091": "“Fast Delivery, the finish looked even better in person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View in room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Delivery & assembly", "t112": "3–7 days", "t113": "Returns", "t114": "Easy 14-day policy", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching pieces that pair well — keeps decision flow smooth.", "t119": "About Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Furniture is a Houston boutique showroom focused on pieces that feel modern, warm, and easy to live with.\n              We keep the selection curated — fewer items, better fit. Come by to see finishes in person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Curated quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Swap this with real showroom/team photos for maximum trust.", "t128": "Houston showroom", "t129": "See it in person. Pickup available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch Materials, Check Comfort, Compare Finishes", "t139": "Fast Answers On Delivery & Pickup Options", "t140": "Clean, No-Pressure Guidance", "t141": "Gallery", "t142": "Contact", "t143": "Fast answers. Simple scheduling. No hoops.", "t144": "Call / Text", "t145": "Add your business phone number here. This demo uses placeholder actions.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.com", "t150": "Message us", "t151": "Send message (demo)", "t152": "Swap this form to Formspree / Netlify forms / your backend later.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "Call Now", "t165": "Visit Our Showroom", "t166": "Touch the fabrics, test the comfort, and plan your delivery.", "t167": "Get Directions", "t168": "Schedule Visit", "t169": "FAIRBANKS BUSINESS PARK", "t170": "CALL OR TEXT", "t171": "HOURS", "t172": "Youth", "t173": "Youth"}, "es": {"t001": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t002": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Recogida & Delivery", "t005": "Sala", "t006": "Recámara", "t007": "Comedor", "t008": "Oficina", "t009": "Decoración", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout (demo)", "t017": "Menu", "t018": "Comprar", "t019": "Houston-ready picks", "t020": "Sala", "t021": "Recámara", "t022": "Comedor", "t023": "Oficina", "t024": "Decoración", "t025": "Sale", "t026": "Sala de exhibición", "t027": "Visit us en Houston. Recogida available.", "t028": "Visit Houston Sala", "t029": "Nosotros Angel’s", "t030": "Contacto", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Comedor", "t038": "Bouclé", "t039": "Listo hoy", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Muebles Houston Sala", "t043": "Piezas seleccionadas, acabados cálidos y líneas modernas limpias. Compra colecciones o elige inventario “listo hoy” para recogida o entrega local rápida.", "t044": "Comprar colecciones", "t045": "Visit Houston Sala", "t046": "Listo hoy en Houston • limited drops", "t047": "Listo hoy en Houston", "t048": "Recogida available", "t049": "Same-Week Delivery", "t050": "Comprar by room", "t051": "Start with the space, then refine by style. Built for fast decision-making on mobile.", "t052": "Living Sofas, sectionals, tables", "t053": "Sala", "t054": "Sofas, sectionals, tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Recámara", "t057": "Beds, dressers, nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Comedor", "t060": "Tables, chairs, storage", "t061": "Office Desks, chairs, lighting", "t062": "Oficina", "t063": "Desks, chairs, lighting", "t064": "New arrivals", "t065": "A limpias snap carousel that stays light on JS and feels premium.", "t066": "Listo hoy en Houston", "t067": "In-stock picks for fast local Delivery or pickup. Updated often.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Rápida local Delivery", "t071": "Rápida local Delivery", "t072": "Same-week options for many items. Clear Delivery windows and pickup availability.", "t073": "Seleccionado quality", "t074": "Seleccionado quality", "t075": "cálidos textures and limpias líneas. We choose fewer piezas so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See acabados en person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See piezas en person, check comfort and acabados, and plan pickup.", "t081": "Horarios: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Recogida: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Llamar / Enviar texto", "t089": "Local favorites", "t090": "limpias testimonial cards (no fake star ratings).", "t091": "“Rápida Delivery, the finish looked even better en person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View en room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Entrega & assembly", "t112": "3–7 days", "t113": "Returns", "t114": "Easy 14-day policy", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching piezas that pair well — keeps decision flow smooth.", "t119": "Nosotros Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Muebles is a Houston boutique showroom focused on piezas that feel modernas, cálidos, and easy to live with. We keep the selection curated — fewer items, better fit. Come by to see acabados en person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Seleccionado quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Swap this with real showroom/team photos for maximum trust.", "t128": "Houston showroom", "t129": "See it en person. Recogida available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch materials, check comfort, compare acabados", "t139": "Rápida answers on Delivery & pickup options", "t140": "limpias, no-pressure guidance", "t141": "Gallery", "t142": "Contacto", "t143": "Rápida answers. Simple scheduling. No hoops.", "t144": "Llamar / Enviar texto", "t145": "Add your business phone number here. This demo uses placeholder actions.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.com", "t150": "Message us", "t151": "Send message (demo)", "t152": "Swap this form to Formspree / Netlify forms / your backend later.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "Llamar Ahora", "t165": "Visita Nuestra Sala", "t166": "Toca las telas, prueba la comodidad y planifica tu entrega.", "t167": "Obtener Direcciones", "t168": "Agendar Visita", "t169": "PARQUE EMPRESARIAL FAIRBANKS", "t170": "LLAMAR O ENVIAR TEXTO", "t171": "HORARIO", "t172": "Juventud", "t173": "Juventud"}};
   const KEY = 'angels_lang';
   const btnEN = document.getElementById('btnEN');
   const btnES = document.getElementById('btnES');
@@ -8660,13 +8681,15 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 </script>
 <style>
-/* Luxury Pastel Gold Footer (fixed + mobile-tight) */
+/* ===== APPLE-ELITE FOOTER (mirrors header translucent style) ===== */
+/* Apple-elite footer mirroring header */
 .footerA{
-  background: #f4e4c1;
-  border-top: 1px solid rgba(0,0,0,.08);
-  /* tighter + respects iOS safe-area */
-  padding: 18px 0 max(10px, env(safe-area-inset-bottom));
-  display:flex;               /* enables bottom pinning */
+  background:rgba(246,243,238,.80);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-top:1px solid rgba(0,0,0,.08);
+  padding:32px 0 max(16px, env(safe-area-inset-bottom));
+  display:flex;
 }
 .footerA::before{ display:none; }
 
@@ -8674,151 +8697,191 @@ document.addEventListener("DOMContentLoaded", () => {
   max-width:1200px;
   margin:0 auto;
   padding:0 24px;
-  position:relative;
-  z-index:1;
-
-  /* key: make footer content a column so bottom row can sit flush */
+  width:100%;
   display:flex;
   flex-direction:column;
-  flex:1;
-  min-width:0;
+  gap:24px;
 }
 
-/* Footer Layout - Compact */
+/* Logo at top - big and centered */
 .footerA .footer-logo{
   display:flex;
   justify-content:center;
-  margin: 0 0 14px;
+  margin:0;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(0,0,0,.06);
 }
 .footerA .footer-logo img{
   display:block;
-  height: 120px;
+  height: 170px;
   width:auto;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.06));
+  opacity:0.90;
 }
 
-.footerA .footer-top-row{
-  display:flex;
-  justify-content:space-between;
+/* Bottom row: © + Built by + links */
+.footerA .footer-bottom-row{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items:center;
-  gap:16px;
-  margin-top:auto;
-  margin-bottom:0;
-  padding-top:12px;
-  padding-bottom:0;
-  font-size:14px;
-  color:#1a1a1a;
-  font-weight:600;
+  column-gap:16px;
+  padding-top:20px;
+  border-top:1px solid rgba(0,0,0,.06);
 }
 
 .footerA .footer-copyright{
+  justify-self:start;
   text-align:left;
-  letter-spacing:0.01em;
-  color:#1a1a1a;
-  font-size:14px;
-  font-weight:600;
+  letter-spacing:-.01em;
+  color:rgba(0,0,0,.70);
+  font-size:13px;
+  font-weight:400;
+  white-space:nowrap;
+}
+
+.footerA .footer-builtby{
+  justify-self:center;
+  white-space:nowrap;
 }
 
 .footerA .footer-links{
+  justify-self:end;
   display:flex;
   justify-content:flex-end;
-  gap:18px;
+  gap:20px;
+  white-space:nowrap;
 }
 .footerA .footer-links a{
-  color:#1a1a1a;
+  color:rgba(0,0,0,.70);
   text-decoration:none;
-  transition:all 0.2s ease;
-  font-weight:700;
-  letter-spacing:0.01em;
-  font-size:14px;
+  transition:color 0.2s ease;
+  font-weight:400;
+  letter-spacing:-.01em;
+  font-size:13px;
 }
 .footerA .footer-links a:hover{
-  color:#000;
-  transform:translateY(-1px);
-}
-
-/* Built-by should sit at the very bottom of the footer */
-.footerA .footer-center{
-  margin-bottom:12px;
-
-  margin-top:auto;          /* <-- pins this block to bottom */
-  text-align:center;
+  color:#1d1d1f;
 }
 
 .footerA .snrg-credit{
   display:inline-flex;
   align-items:center;
-  gap:8px;
-  padding:9px 18px;
+  gap:10px;
+  padding:12px 24px;
   background:#ffffff;
-  border:1px solid rgba(0,0,0,.12);
-  border-radius:999px;
-  transition:all 0.25s cubic-bezier(0.2,0.8,0.2,1);
+  border:1px solid rgba(0,0,0,.14);
+  border-radius:12px;
+  transition:all 0.2s cubic-bezier(0.2,0.8,0.2,1);
   text-decoration:none;
-  box-shadow:0 2px 4px rgba(0,0,0,.06);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  white-space:nowrap;
 }
 .footerA .snrg-credit:hover{
-  border-color:rgba(0,0,0,.18);
-  box-shadow:0 3px 8px rgba(0,0,0,.12);
+  background:#ffffff;
+  border-color:rgba(0,0,0,.22);
+  box-shadow:0 4px 12px rgba(0,0,0,.10);
   transform:translateY(-1px);
 }
 
-.footerA .built-by-label{ font-size:13px; color:#1a1a1a; font-weight:600; }
-.footerA .snrg-text{ font-size:15px; font-weight:900; letter-spacing:-0.05em; color:#1a1a1a; text-transform:uppercase; text-shadow:none; }
-.footerA .snrg-icon{ width:14px; height:14px; color:#1a1a1a; filter:none; }
+.footerA .built-by-label{
+  font-size:14px;
+  color:rgba(0,0,0,.60);
+  font-weight:400;
+  letter-spacing:-.01em;
+}
+.footerA .snrg-text{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:#111;
+  text-transform:uppercase;
+}
+.footerA .snrg-icon{
+  width:16px;
+  height:16px;
+  color:rgba(0,0,0,.70);
+}
 
 /* Mobile */
 @media (max-width: 760px){
   .footerA{
-    padding: 14px 0 max(8px, env(safe-area-inset-bottom));
+    padding:24px 0 max(12px, env(safe-area-inset-bottom));
   }
-  .footerA .wrap{ padding:0 16px; }
-  .footerA .footer-logo{ margin-bottom: 10px; }
-  .footerA .footer-logo img{ height: 84px !important; } /* tighter */
-  .footerA .footer-top-row{
-    flex-direction: column;
-    gap: 8px;
-    text-align:center;
-    margin-bottom: 10px;
+  .footerA .wrap{
+    padding:0 16px;
+    gap:20px;
   }
-  .footerA .footer-links{ justify-content:center; gap:14px; }
-  .footerA .footer-links a{ font-size: 13px; }
-  .footerA .snrg-credit{ padding:8px 14px; }
+  .footerA .footer-logo{
+    padding-bottom:20px;
+  }
+  .footerA .footer-logo img{
+    height: 120px;
+  }
+  .footerA .footer-bottom-row{
+    grid-template-columns: 1fr auto 1fr;
+    column-gap:12px;
+    row-gap:0;
+  }
+  .footerA .footer-copyright{
+    text-align:left;
+    font-size:12px;
+  }
+  .footerA .footer-links{
+    justify-content:flex-end;
+    gap:16px;
+  }
+  .footerA .footer-links a{
+    font-size:12px;
+  }
+    .footerA .snrg-credit{
+    padding:10px 20px;
+  }
+  .footerA .built-by-label{
+    font-size:13px;
+  }
+  .footerA .snrg-text{
+    font-size:16px;
+  }
+  .footerA .snrg-icon{
+    width:14px;
+    height:14px;
+  }
 }
 </style>
 <footer aria-label="Footer" class="footerA">
-<div class="wrap">
-<!-- Logo at top -->
-<div class="footer-logo">
-<img alt="Angel's Furniture" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" style="height: 140px; width: auto; opacity: 0.85;"/>
-</div>
-<!-- Copyright left, Privacy/Terms right -->
+  <div class="wrap">
+    <!-- Logo -->
+    <div class="footer-logo">
+      <img alt="Angel's Furniture" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/>
+    </div>
 
-<!-- Built by SNRG centered at bottom -->
-<div class="footer-center">
-<a class="snrg-credit" href="https://snrgweb.com" rel="noopener noreferrer" target="_blank">
-<span class="built-by-label">Built by:</span>
-<span class="snrg-text">SNRG WEB</span>
-<svg class="snrg-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24">
-<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-<polyline points="15 3 21 3 21 9"></polyline>
-<line x1="10" x2="21" y1="14" y2="3"></line>
-</svg>
-</a>
-</div><div class="footer-top-row">
-<div class="footer-copyright">
-        © <span id="yearA"></span> Angel's Furniture
+    <!-- Bottom row: © + Built by + links -->
+    <div class="footer-bottom-row">
+      <div class="footer-copyright">© 2026 Angel's Furniture</div>
+
+      <div class="footer-builtby">
+        <a class="snrg-credit" href="https://snrgweb.com" target="_blank" rel="noopener noreferrer">
+          <span class="built-by-label">Built by</span>
+          <span class="snrg-text">SNRG WEB</span>
+          <svg class="snrg-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
       </div>
-<div class="footer-links">
-<a href="#/about">Privacy</a>
-<a href="#/about">Terms</a>
-</div>
-</div>
-</div>
+
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="#/about">Privacy</a>
+        <a href="#/about">Terms</a>
+      </nav>
+    </div>
+  </div>
 </footer>
 <script>
 (function(){
-  var y=document.getElementById('yearA'); 
-  if(y) y.textContent=new Date().getFullYear();
+  var y=document.getElementById('yearA');
+  if(y) y.textContent='2026';
 })();
 
 // Reset on hashchange (for single-page navigation)
