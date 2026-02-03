@@ -262,7 +262,7 @@
     }
     
     /* Navigation - DESKTOP ONLY (1100px+) */
-    nav.primary{
+    nav.nav-primary{
       display:none;
       flex:1;
       justify-content:center;
@@ -271,7 +271,7 @@
       font-size:14px;
       letter-spacing:-.01em;
     }
-    nav.primary a{
+    nav.nav-primary a{
       padding:10px 16px;
       border-radius:12px;
       color:rgba(26,26,26,.82);
@@ -280,11 +280,11 @@
       white-space:nowrap;
       font-weight:500;
     }
-    nav.primary a:hover{
+    nav.nav-primary a:hover{
       background:rgba(0,0,0,.03);
       color:var(--ink);
     }
-    nav.primary a:active{
+    nav.nav-primary a:active{
       background:rgba(0,0,0,.05);
       transform:scale(0.97);
     }
@@ -328,7 +328,7 @@
     
     /* DESKTOP ONLY - Show navigation */
     @media (min-width: 1100px){
-      nav.primary{ 
+      nav.nav-primary{ 
         display:flex;
       }
       .mobile-menu-only{ 
@@ -338,7 +338,7 @@
     
     /* TABLET/MOBILE - Hide navigation, optimize buttons */
     @media (max-width: 1099px){
-      nav.primary{
+      nav.nav-primary{
         display:none !important;
       }
       .header-actions{
@@ -659,6 +659,12 @@
       box-shadow:0 2px 8px rgba(0,0,0,.06);
       border-color:rgba(0,0,0,.12);
     }
+
+    .p-card.compact .p-media{ aspect-ratio: 4/3; }
+    .p-card.compact .p-body{ padding:10px 10px 12px; }
+    .p-card.compact .p-title{ font-size:12px; height:16px; }
+    .p-card.compact .price{ font-size:14px; }
+    .p-card.compact .p-meta{ display:none; }
     .p-media{
       aspect-ratio: 1/1;
       background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.01));
@@ -679,7 +685,7 @@
       opacity:0;
     }
     @media (hover:hover) and (pointer:fine){
-      .p-card:hover .p-media img.primary{ opacity:0; }
+      .p-card:hover .p-media img
       .p-card:hover .p-media img.swap{ opacity:1; }
     }
     .p-body{
@@ -1104,6 +1110,8 @@
       color:#1d1d1f;
       font-weight:500;
     }
+    /* FORCE HIDE PDP TRUST (Delivery & assembly / Returns / Secure checkout) */
+    .trust{ display:none !important; }
     .pdp-ctas{
       display:grid;
       gap:12px;
@@ -2546,7 +2554,7 @@ header { position: sticky; top:0; }
 
 /* Also, do not dim/blank the primary image (swap now duplicates, but keep safe) */
 @media (hover:hover) and (pointer:fine){
-  .hero .section .p-card:hover .p-media img.primary{ opacity:1 !important; }
+  .hero .section .p-card:hover .p-media img.p-img{ opacity:1 !important; }
   .hero .section .p-card:hover .p-media img.swap{ opacity:0 !important; }
 }
 
@@ -3031,7 +3039,7 @@ header{
 }
 
 @media (max-width: 980px){
-  .primary{ display:none; }
+  nav.nav-primary{ display:none; }
   .header-utility{ padding:10px 0; }
   .utility-text{ white-space:normal; }
   /* keep it clean on mobile: hide demo account + wishlist */
@@ -3106,7 +3114,7 @@ html, body{ scroll-behavior:auto; }
 /* Click-only mega menu (no hover) */
 .mega{ display:none; }
 .mega.open{ display:block; }
-nav.primary li:hover .mega{ display:none !important; }
+nav.nav-primary li:hover .mega{ display:none !important; }
 
 </style>
 <!-- Preload hero image (LCP) -->
@@ -3117,49 +3125,7 @@ nav.primary li:hover .mega{ display:none !important; }
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<style>
-/* ===== FOOTER: TIGHT, CENTERED, EVEN ===== */
-.site-footer{
-  margin-top:48px !important;
-}
-.footer-inner{
-  padding:24px 0 12px !important;
-}
-.footer-grid{
-  max-width:1100px;
-  margin:0 auto;
-  display:grid !important;
-  grid-template-columns:repeat(3,1fr) !important;
-  gap:20px !important;
-  text-align:center !important;
-}
-.footer-col{
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-}
-.footer-col h4{
-  margin-bottom:8px !important;
-}
-.footer-col ul li,
-.footer-col p{
-  margin:0 0 6px !important;
-  line-height:1.35 !important;
-}
-.footer-col ul li a{
-  padding:2px 0 !important;
-  font-size:14px !important;
-}
-.footer-bottom{
-  padding:12px 0 !important;
-}
-@media(max-width:900px){
-  .footer-grid{
-    grid-template-columns:1fr !important;
-    gap:16px !important;
-  }
-}
-</style>
+
 <style>
 /* ================= MOBILE & DESKTOP FIX PACK ================= */
 
@@ -3370,7 +3336,7 @@ window.scrollTo(0, 0);
 </div>
 <div aria-label="Primary" class="header-row" role="navigation">
 <a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
-<nav aria-label="Categories" class="primary">
+<nav aria-label="Categories" class="nav-primary">
 <a data-i18n="t005" data-nav="" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-nav="" href="#/collection/bedroom">Bedroom</a>
 <a data-i18n="t007" data-nav="" href="#/collection/dining">Dining</a>
@@ -3672,7 +3638,7 @@ window.scrollTo(0, 0);
 <div class="grid md-grid-3 grid-2 lg-grid-4">
 <a class="card p-card" href="#/collection/living" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Living Room" class="primary" loading="lazy" src="assets/images/thea-s343.png"/>
+<img alt="Living Room" class="p-img" loading="lazy" src="assets/images/thea-s343.png"/>
 <img alt="Living Room" class="swap" loading="lazy" src="assets/images/zaira-s351.png"/>
 </div>
 <div class="p-body">
@@ -3682,7 +3648,7 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/bedroom" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Bedroom" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Bedroom" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 <img alt="Bedroom" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
@@ -3692,7 +3658,7 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/dining" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Dining Room" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Dining Room" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 <img alt="Dining Room" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
@@ -3702,7 +3668,7 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/office" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Office" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Office" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 <img alt="Office" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
@@ -3791,20 +3757,18 @@ window.scrollTo(0, 0);
 </section>
 <!-- PDP -->
 <section class="pdp" data-page="product">
-<div class="container">
-<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
+  <div class="container">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
 <a class="pill" data-i18n="t102" data-nav="" href="#/collection/living" id="pdpBack">← Back to collection</a>
 <span class="pill" data-i18n="t103" id="pdpBreadcrumb">Product</span>
 </div>
-<div class="pdp-grid">
-<div class="gallery">
-<div aria-label="Open image viewer" class="gallery-main" id="galleryMain" role="button" tabindex="0"></div>
-<div class="thumbs" id="thumbs"></div>
-</div>
-</div>
-</div>
-<div class="pdp-panel pdp-sticky">
-<div class="pdp-card">
+    <div class="pdp-grid">
+      <div class="gallery">
+        <div aria-label="Open image viewer" class="gallery-main" id="galleryMain" role="button" tabindex="0"></div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+      <div class="pdp-panel pdp-sticky">
+        <div class="pdp-card">
 <h1 class="pdp-title" data-i18n="t106" id="pdpTitle">Product</h1>
 <div class="pdp-price">
 <div class="price" id="pdpPrice">$0</div>
@@ -3821,21 +3785,15 @@ window.scrollTo(0, 0);
 <button class="btn ghost full" data-i18n="t109" id="visitBtn">Schedule showroom visit</button>
 <button class="btn ghost full" data-i18n="t110" id="askBtn">Ask a question</button>
 </div>
-<div class="trust">
-<div class="row"><span data-i18n="t111">Delivery &amp; assembly</span><span data-i18n="t112" id="pdpDelivery">3–7 days</span></div>
-<div class="row"><span data-i18n="t113">Returns</span><span data-i18n="t114">Easy 14-day policy</span></div>
-<div class="row"><span data-i18n="t115">Secure checkout</span><span data-i18n="t116">Apple Pay / Google Pay</span></div>
-</div>
 <div class="accordion" id="pdpAcc"></div>
 </div>
-<div class="card pad" id="crossSell" style="margin-top:14px;">
+        <div class="card pad" id="crossSell" style="margin-top:14px;">
 <strong data-i18n="t117" style="font-size:14px;">Complete The Room</strong>
 <p class="subtle" data-i18n="t118" style="margin:8px 0 0;">Matching pieces that pair well — keeps decision flow smooth.</p>
 <div class="products" id="crossSellGrid" style="margin-top:12px;"></div>
-</div>
-</div>
-
-
+      </div>
+    </div>
+  </div>
 </section>
 <!-- ABOUT -->
 <section class="section fade-rise" data-page="about">
@@ -7824,7 +7782,7 @@ window.scrollTo(0, 0);
     }
 
     // No hover pull-down (was disruptive). Open on click (desktop), close on outside click / ESC.
-    $$('nav.primary a[data-mega]').forEach(a=>{
+    $$('nav.nav-primary a[data-mega]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         if(window.innerWidth < 900) return; // mobile keeps normal navigation
         const key = a.dataset.mega;
@@ -7840,7 +7798,7 @@ window.scrollTo(0, 0);
     document.addEventListener('click', (e)=>{
       if(!mega.classList.contains('open')) return;
       const inMega = mega.contains(e.target);
-      const inTrigger = e.target.closest && e.target.closest('nav.primary a[data-mega]');
+      const inTrigger = e.target.closest && e.target.closest('nav.nav-primary a[data-mega]');
       if(!inMega && !inTrigger) closeMega();
     });
 
@@ -7873,7 +7831,7 @@ window.scrollTo(0, 0);
       const stock = p.inStock ? 'In stock' : 'Made to order';
       const stockMobile = p.inStock ? 'Stock' : 'Order';
       return `
-      <article class="card p-card" data-id="${p.id}">
+      <article class="card p-card${compact?' compact':''}" data-id="${p.id}">
         <div class="p-actions">
           <button class="mini" aria-label="Add to cart" data-cart="${p.id}">
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"/></svg>
@@ -7881,7 +7839,7 @@ window.scrollTo(0, 0);
         </div>
         <a href="#/product/${p.id}" data-nav aria-label="${p.title}">
           <div class="p-media">
-            <img class="primary" loading="lazy" src="${p.images[0]}" alt="${p.title}">
+            <img class="p-img" loading="lazy" src="${p.images[0]}" alt="${p.title}">
             <img class="swap" loading="lazy" src="${swap}" alt="${p.title} alternate view">
           </div>
           <div class="p-body">
@@ -8184,9 +8142,61 @@ window.scrollTo(0, 0);
         });
       });
 
-      // Cross-sell
-      const pool = catalog.filter(x=>x.category===p.category && x.id!==p.id).slice(0,4);
-      $('#crossSellGrid').innerHTML = pool.map(x=>cardHTML(x)).join('') || `<div class="subtle">More matching items coming soon.</div>`;
+      // Cross-sell (smart room completion)
+      const title = (p.title||'').toLowerCase();
+      const isBed = /\bbed\b|headboard|platform/.test(title);
+      const isSofa = /sofa|sectional|loveseat/.test(title);
+
+      const desiredKeywords = (() => {
+        if (isBed) return ['nightstand','dresser','chest','mirror','bench'];
+        if (isSofa) return ['coffee table','end table','side table','console','tv','rug','accent chair','ottoman'];
+        if (p.category==='dining') return ['chair','bench','server','bar'];
+        if (p.category==='office') return ['desk','chair','bookcase','file'];
+        if (p.category==='youth') return ['dresser','nightstand','desk','chair'];
+        return ['table','chair','rug','lamp'];
+      })();
+
+      function crossSellScore(item){
+        if (item.id===p.id) return -999;
+        const tt = (item.title||'').toLowerCase();
+        let s = 0;
+
+        // Prefer same room/category
+        if (item.category === p.category) s += 2;
+
+        // Prefer “room completion” item types
+        if (desiredKeywords.some(k => tt.includes(k))) s += 6;
+
+        // Avoid suggesting the same core item type (no “bed -> bed”, “sofa -> sofa”)
+        if (isBed && (/\bbed\b|headboard|platform/.test(tt))) s -= 20;
+        if (isSofa && (/sofa|sectional|loveseat/.test(tt))) s -= 20;
+
+        // Small quality nudges
+        if (item.inStock) s += 1;
+        if (item.Delivery === 'ready') s += 1;
+
+        return s;
+      }
+
+      const ranked = catalog
+        .filter(x => x.id !== p.id)
+        .map(x => ({ x, s: crossSellScore(x) }))
+        .filter(o => o.s > 0)
+        .sort((a,b) => b.s - a.s)
+        .map(o => o.x);
+
+      // Deduplicate by title so we don't show essentially the same item multiple times
+      const picked = [];
+      const seenTitles = new Set();
+      for (const x of ranked){
+        const key = (x.title||'').toLowerCase().replace(/\s+/g,' ').trim();
+        if (seenTitles.has(key)) continue;
+        seenTitles.add(key);
+        picked.push(x);
+        if (picked.length === 4) break;
+      }
+
+      $('#crossSellGrid').innerHTML = picked.map(x=>cardHTML(x, true)).join('') || `<div class="subtle">More matching items coming soon.</div>`;
       wireProductCardActions($('#crossSellGrid'));
 
       // Buttons
@@ -8680,174 +8690,7 @@ document.addEventListener("DOMContentLoaded", () => {
   next.addEventListener('click', ()=>{ index = Math.min(maxIndex, index+1); update(); });
 })();
 </script>
-<style>
-/* ===== APPLE-ELITE FOOTER (mirrors header translucent style) ===== */
-/* Apple-elite footer mirroring header */
-.footerA{
-  background:rgba(246,243,238,.80);
-  backdrop-filter:saturate(160%) blur(14px);
-  -webkit-backdrop-filter:saturate(160%) blur(14px);
-  border-top:1px solid rgba(0,0,0,.08);
-  padding:32px 0 max(16px, env(safe-area-inset-bottom));
-  display:flex;
-}
-.footerA::before{ display:none; }
 
-.footerA .wrap{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 24px;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-
-/* Logo at top - big and centered */
-.footerA .footer-logo{
-  display:flex;
-  justify-content:center;
-  margin:0;
-  padding-bottom:24px;
-  border-bottom:1px solid rgba(0,0,0,.06);
-}
-.footerA .footer-logo img{
-  display:block;
-  height: 170px;
-  width:auto;
-  filter:drop-shadow(0 2px 8px rgba(0,0,0,.06));
-  opacity:0.90;
-}
-
-/* Bottom row: © + Built by + links */
-.footerA .footer-bottom-row{
-  display:grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items:center;
-  column-gap:16px;
-  padding-top:20px;
-  border-top:1px solid rgba(0,0,0,.06);
-}
-
-.footerA .footer-copyright{
-  justify-self:start;
-  text-align:left;
-  letter-spacing:-.01em;
-  color:rgba(0,0,0,.70);
-  font-size:13px;
-  font-weight:400;
-  white-space:nowrap;
-}
-
-.footerA .footer-builtby{
-  justify-self:center;
-  white-space:nowrap;
-}
-
-.footerA .footer-links{
-  justify-self:end;
-  display:flex;
-  justify-content:flex-end;
-  gap:20px;
-  white-space:nowrap;
-}
-.footerA .footer-links a{
-  color:rgba(0,0,0,.70);
-  text-decoration:none;
-  transition:color 0.2s ease;
-  font-weight:400;
-  letter-spacing:-.01em;
-  font-size:13px;
-}
-.footerA .footer-links a:hover{
-  color:#1d1d1f;
-}
-
-.footerA .snrg-credit{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 24px;
-  background:#ffffff;
-  border:1px solid rgba(0,0,0,.14);
-  border-radius:12px;
-  transition:all 0.2s cubic-bezier(0.2,0.8,0.2,1);
-  text-decoration:none;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-  white-space:nowrap;
-}
-.footerA .snrg-credit:hover{
-  background:#ffffff;
-  border-color:rgba(0,0,0,.22);
-  box-shadow:0 4px 12px rgba(0,0,0,.10);
-  transform:translateY(-1px);
-}
-
-.footerA .built-by-label{
-  font-size:14px;
-  color:rgba(0,0,0,.60);
-  font-weight:400;
-  letter-spacing:-.01em;
-}
-.footerA .snrg-text{
-  font-size:18px;
-  font-weight:700;
-  letter-spacing:-.02em;
-  color:#111;
-  text-transform:uppercase;
-}
-.footerA .snrg-icon{
-  width:16px;
-  height:16px;
-  color:rgba(0,0,0,.70);
-}
-
-/* Mobile */
-@media (max-width: 760px){
-  .footerA{
-    padding:24px 0 max(12px, env(safe-area-inset-bottom));
-  }
-  .footerA .wrap{
-    padding:0 16px;
-    gap:20px;
-  }
-  .footerA .footer-logo{
-    padding-bottom:20px;
-  }
-  .footerA .footer-logo img{
-    height: 120px;
-  }
-  .footerA .footer-bottom-row{
-    grid-template-columns: 1fr auto 1fr;
-    column-gap:12px;
-    row-gap:0;
-  }
-  .footerA .footer-copyright{
-    text-align:left;
-    font-size:12px;
-  }
-  .footerA .footer-links{
-    justify-content:flex-end;
-    gap:16px;
-  }
-  .footerA .footer-links a{
-    font-size:12px;
-  }
-    .footerA .snrg-credit{
-    padding:10px 20px;
-  }
-  .footerA .built-by-label{
-    font-size:13px;
-  }
-  .footerA .snrg-text{
-    font-size:16px;
-  }
-  .footerA .snrg-icon{
-    width:14px;
-    height:14px;
-  }
-}
-</style>
 <footer aria-label="Footer" class="footerA">
   <div class="wrap">
     <!-- Logo -->
@@ -8860,7 +8703,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="footer-copyright">© 2026 Angel's Furniture</div>
 
       <div class="footer-builtby">
-        <a class="snrg-credit" href="https://snrgweb.com" target="_blank" rel="noopener noreferrer">
+        <a class="snrg-btn" href="https://snrgweb.com" target="_blank" rel="noopener noreferrer">
           <span class="built-by-label">Built by</span>
           <span class="snrg-text">SNRG WEB</span>
           <svg class="snrg-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
@@ -8910,5 +8753,145 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 </script>
+
+<style>
+/* ===== FOOTER (DESKTOP PERFECT + MOBILE CLEAN) ===== */
+.footerA{
+  background:rgba(246,243,238,.80);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-top:1px solid rgba(0,0,0,.08);
+  padding:32px 0 calc(16px + env(safe-area-inset-bottom));
+}
+.footerA .wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.footerA .footer-logo{
+  display:flex;
+  justify-content:center;
+  margin:0;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.footerA .footer-logo img{
+  width:auto;
+  height:128px;
+  max-width:360px;
+  object-fit:contain;
+}
+.footerA .footer-bottom-row{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items:center;
+  gap:24px;
+  padding-top:22px;
+  border-top:1px solid rgba(0,0,0,.08);
+}
+.footer-copyright{
+  justify-self:start;
+  font-size:14px;
+  color:rgba(0,0,0,.65);
+}
+.footer-builtby{ justify-self:center; }
+.footer-links{
+  justify-self:end;
+  display:flex;
+  gap:18px;
+  font-size:14px;
+}
+.footer-links a{
+  color:rgba(0,0,0,.65);
+  text-decoration:none;
+}
+.footer-links a:hover{ color:rgba(0,0,0,.90); }
+.snrg-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:18px 22px;
+  border-radius:18px;
+  border:1px solid rgba(0,0,0,.14);
+  background:#fff;
+  color:#111;
+  box-shadow:0 8px 22px rgba(0,0,0,.08);
+  text-decoration:none;
+}
+.snrg-btn .muted{ color:rgba(0,0,0,.55); font-weight:500; }
+.snrg-btn strong{ font-size:22px; letter-spacing:-.02em; }
+.snrg-icon{width:18px;height:18px;flex:0 0 auto;opacity:.85}
+.snrg-btn .built-by-label{color:rgba(0,0,0,.55);font-weight:500}
+.snrg-btn .snrg-text{font-size:22px;font-weight:700;letter-spacing:-.02em}
+
+/* Mobile: keep ONLY built by centered, and ensure sticky bar doesn't cover it */
+@media (max-width: 640px){
+  .footerA{ padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
+  .footerA .wrap{ padding:0 16px; gap:18px; }
+  .footerA .footer-logo img{ height:108px; max-width:320px; }
+  .footerA .footer-bottom-row{
+    grid-template-columns: 1fr;
+    border-top:1px solid rgba(0,0,0,.08);
+    padding-top:16px;
+  }
+  .footer-copyright, .footer-links{ display:none !important; }
+}
+</style>
+
+
+<style>
+/* ===== APPLE-TECH PDP BUY SECTION ===== */
+.pdp-panel{ width: min(420px, 100%); }
+.pdp-card{
+  border-radius:22px;
+  border:1px solid rgba(0,0,0,.10);
+  background:rgba(255,255,255,.62);
+  backdrop-filter:saturate(160%) blur(12px);
+  -webkit-backdrop-filter:saturate(160%) blur(12px);
+  box-shadow:0 14px 40px rgba(0,0,0,.10);
+}
+.pdp-title{ font-size:28px; letter-spacing:-.02em; line-height:1.1; }
+.pdp-price{ display:flex; align-items:baseline; gap:10px; }
+.pdp-price .price{ font-size:22px; font-weight:650; letter-spacing:-.02em; }
+.pdp-ctas{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+.btn.primary{ background:#111; color:#fff; border:none; box-shadow:0 6px 16px rgba(0,0,0,.14); }
+.btn.ghost{ background:rgba(255,255,255,.62); border:1px solid rgba(0,0,0,.10); }
+.btn.ghost:hover{ background:rgba(255,255,255,.78); }
+.accordion .row{ border-radius:16px; border:1px solid rgba(0,0,0,.08); background:rgba(255,255,255,.55); }
+.accordion .row + .row{ margin-top:10px; }
+.accordion .row button{ padding:14px 16px; }
+
+/* Complete the room: Apple accessories strip */
+#crossSell{ border-radius:22px; border:1px solid rgba(0,0,0,.10); background:rgba(255,255,255,.55); }
+#crossSellGrid{
+  display:flex !important;
+  gap:12px;
+  overflow:auto;
+  padding:2px 2px 8px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+}
+#crossSellGrid::-webkit-scrollbar{ height:8px; }
+#crossSellGrid .p-card{ min-width:190px; max-width:190px; scroll-snap-align:start; }
+.p-card.compact{ border-radius:18px; overflow:hidden; }
+.p-card.compact .p-media{ aspect-ratio: 1 / 1; border-radius:18px; overflow:hidden; }
+.p-card.compact .p-body{ padding:10px 12px; }
+.p-card.compact .p-title{ font-size:13px; line-height:1.25; max-height:2.6em; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.p-card.compact .price{ font-size:13px; font-weight:650; }
+.p-card.compact .p-meta{ display:none; }
+.p-media img.p-img{ display:block; width:100%; height:100%; object-fit:cover; }
+
+/* Mobile: keep layout, no stacking beyond what's necessary */
+@media (max-width: 980px){
+  .pdp-grid{ grid-template-columns:1fr !important; }
+  .pdp-panel{ width:100% !important; }
+  .pdp-sticky{ position:relative !important; top:auto !important; }
+}
+</style>
+
 </body>
 </html>
