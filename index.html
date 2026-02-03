@@ -88,6 +88,12 @@
       overflow:hidden;clip:rect(0,0,0,0);
       white-space:nowrap;border:0;
     }
+    .hide-mobile{ display:inline; }
+    .show-mobile{ display:none; }
+    @media (max-width: 640px){
+      .hide-mobile{ display:none; }
+      .show-mobile{ display:inline; }
+    }
 
     /* Layout */
     .container{
@@ -633,7 +639,7 @@
       border-color:rgba(26,26,26,.12);
     }
     .p-media{
-      aspect-ratio: 4/3;
+      aspect-ratio: 1/1;
       background:linear-gradient(180deg, rgba(26,26,26,.04), rgba(26,26,26,.02));
       position:relative;
       overflow:hidden;
@@ -653,31 +659,48 @@
     @media (hover:hover) and (pointer:fine){
       .p-card:hover .p-media img.primary{ opacity:0; }
       .p-card:hover .p-media img.swap{ opacity:1; }
-      .p-card:hover .p-media img{ transform:scale(1.03); }
     }
     .p-body{
-      padding:14px 14px 14px;
+      padding:10px 12px 12px;
       display:flex;
       flex-direction:column;
-      gap:10px;
+      gap:6px;
     }
     .p-title{
       margin:0;
-      font-size:14px;
+      font-size:13px;
       letter-spacing:-.01em;
-      line-height:1.25;
+      line-height:1.2;
+    }
+    @media (max-width: 640px){
+      .p-title{
+        font-size:12px;
+        line-height:1.3;
+      }
+      .p-body{
+        padding:8px 10px 10px;
+        gap:5px;
+      }
+      .p-meta{
+        font-size:11px;
+        gap:6px;
+      }
+      .subtle{
+        font-size:10px;
+      }
     }
     .p-meta{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:10px;
+      gap:8px;
       color:rgba(26,26,26,.74);
-      font-size:13px;
+      font-size:12px;
     }
     .price{
       font-family:var(--mono);
       letter-spacing:-.02em;
+      font-weight:600;
     }
     .p-actions{
       position:absolute;
@@ -6331,6 +6354,7 @@ window.scrollTo(0, 0);
       const swap = p.images[1] || p.images[0];
       const badge = p.Delivery === 'ready' ? 'Ready today' : (p.Delivery === 'fast' ? '3–7 days' : '2–4 wks');
       const stock = p.inStock ? 'In stock' : 'Made to order';
+      const stockMobile = p.inStock ? 'Stock' : 'Order';
       return `
       <article class="card p-card" data-id="${p.id}">
         <div class="p-actions">
@@ -6346,10 +6370,9 @@ window.scrollTo(0, 0);
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
             <div class="p-meta">
-              <span class="pill">${badge}</span>
               <span class="price">${money(p.price)}</span>
             </div>
-            <div class="subtle">${stock} • ${p.material}</div>
+            <div class="subtle"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
           </div>
         </a>
       </article>`;
@@ -7146,25 +7169,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 <style>
-/* SLICK AS SHIT Pastel Bronze Footer */
+/* Luxury Pastel Gold Footer */
 .footerA{
-  background:linear-gradient(135deg, #d4c4b0 0%, #c9b89d 50%, #bda688 100%);
-  border-top:1px solid rgba(139,76,92,.15);
-  padding:20px 0 18px;
-  color:#2a2520;
-  position:relative;
-  overflow:hidden;
+  background: #f4e4c1;
+  padding: 24px 0 20px;
+  border-top: 1px solid rgba(0,0,0,.08);
 }
 .footerA::before{
-  content:'';
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  background:radial-gradient(circle at 30% 50%, rgba(201,162,74,.08) 0%, transparent 50%),
-             radial-gradient(circle at 70% 50%, rgba(139,76,92,.06) 0%, transparent 50%);
-  pointer-events:none;
+  display: none;
 }
 .footerA .wrap{
   max-width:1200px;
@@ -7174,194 +7186,105 @@ document.addEventListener("DOMContentLoaded", () => {
   z-index:1;
 }
 
-/* Visit Us Section - SLICK */
-.footerA .visit-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:28px;
-  padding:16px 0;
-  border-bottom:1px solid rgba(0,0,0,.15);
-  margin-bottom:14px;
+/* Footer Layout - Compact */
+.footerA .footer-logo{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
-.footerA .visit-info{
-  text-align:left;
-  font-size:13px;
-  line-height:1.6;
-  color:#3d3530;
-  font-weight:600;
-}
-.footerA .visit-info strong{
-  display:block;
-  font-size:16px;
-  font-weight:800;
-  margin-bottom:4px;
-  color:#1a1410;
-  letter-spacing:0.01em;
-}
-.footerA .visit-info a{
-  color:#1a1410;
-  text-decoration:none;
-  font-weight:800;
-  transition:color 0.2s ease;
-}
-.footerA .visit-info a:hover{
-  color:#000;
-}
-.footerA .visit-buttons{
-  display:flex;
-  gap:12px;
-}
-.footerA .btn-visit{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  height:40px;
-  padding:0 22px;
-  border-radius:999px;
-  font-weight:700;
-  font-size:13px;
-  text-decoration:none;
-  transition:all 0.25s cubic-bezier(0.2,0.8,0.2,1);
-  white-space:nowrap;
-  letter-spacing:0.01em;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
-}
-.footerA .btn-visit:active{
-  transform:translateY(1px);
-}
-.footerA .btn-visit.primary{
-  background:#7a3f4f;
-  color:#fff;
-  border:1px solid rgba(122,63,79,.4);
-  font-weight:800;
-}
-.footerA .btn-visit/* removed hover-based mega menu rule */
-.footerA .btn-visit.secondary{
-  background:rgba(255,255,255,.90);
-  backdrop-filter:blur(10px);
-  color:#1a1410;
-  border:1px solid rgba(26,20,16,.25);
-  font-weight:700;
-}
-.footerA .btn-visit.secondary:hover{
-  background:#fff;
-  box-shadow:0 4px 14px rgba(0,0,0,.15);
-  transform:translateY(-1px);
-  border-color:rgba(26,20,16,.35);
-}
-
-/* Bottom Row - PERFECTLY ALIGNED */
-.footerA .footer-bottom{
+.footerA .footer-top-row{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:12px;
-  color:#3a3a3a;
+  margin-bottom: 16px;
+  font-size:14px;
+  color:#1a1a1a;
   font-weight:600;
 }
 .footerA .footer-copyright{
-  flex:1;
   text-align:left;
   letter-spacing:0.01em;
-  color:#3a3a3a;
+  color:#1a1a1a;
+  font-size: 14px;
+  font-weight: 600;
+}
+.footerA .footer-links{
+  display:flex;
+  justify-content:flex-end;
+  gap:24px;
+}
+.footerA .footer-links a{
+  color:#1a1a1a;
+  text-decoration:none;
+  transition:all 0.2s ease;
+  font-weight:700;
+  letter-spacing:0.01em;
+  font-size: 14px;
+}
+.footerA .footer-links a:hover{
+  color:#000;
+  transform:translateY(-1px);
 }
 .footerA .footer-center{
-  flex:0 0 auto;
   text-align:center;
 }
 .footerA .snrg-credit{
   display:inline-flex;
   align-items:center;
-  gap:7px;
-  padding:8px 18px;
-  background:rgba(255,255,255,.85);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(201,162,74,.35);
+  gap:8px;
+  padding:10px 20px;
+  background:#ffffff;
+  border:1px solid rgba(0,0,0,.12);
   border-radius:999px;
   transition:all 0.25s cubic-bezier(0.2,0.8,0.2,1);
   text-decoration:none;
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
+  box-shadow:0 2px 4px rgba(0,0,0,.06);
 }
 .footerA .snrg-credit:hover{
-  background:#fff;
-  border-color:rgba(201,162,74,.55);
-  box-shadow:0 4px 12px rgba(201,162,74,.3);
-  transform:translateY(-2px);
+  background:#ffffff;
+  border-color:rgba(0,0,0,.18);
+  box-shadow:0 3px 8px rgba(0,0,0,.12);
+  transform:translateY(-1px);
 }
 .footerA .built-by-label{
-  font-size:11px;
-  color:#000;
+  font-size:13px;
+  color:#1a1a1a;
   font-weight:600;
 }
 .footerA .snrg-text{
   font-size:15px;
   font-weight:900;
   letter-spacing:-0.05em;
-  color:#000;
+  color:#1a1a1a;
   text-transform:uppercase;
   text-shadow:none;
 }
 .footerA .snrg-icon{
-  width:13px;
-  height:13px;
-  color:#000;
+  width:14px;
+  height:14px;
+  color:#1a1a1a;
   filter:none;
 }
-.footerA .footer-links{
-  flex:1;
-  display:flex;
-  justify-content:flex-end;
-  gap:18px;
-}
-.footerA .footer-links a{
-  color:#3a3a3a;
-  text-decoration:none;
-  transition:all 0.2s ease;
-  font-weight:700;
-  letter-spacing:0.01em;
-}
-.footerA .footer-links a:hover{
-  color:#1a1a1a;
-  transform:translateY(-1px);
-}
 
-/* Mobile - Still SLICK */
+/* Mobile */
 @media (max-width: 760px){
   .footerA{
-    padding:18px 0 16px;
+    padding:20px 0 18px;
   }
-  .footerA .visit-row{
-    flex-direction:column;
-    gap:16px;
-    padding:14px 0;
-    text-align:center;
+  .footerA .footer-logo{
+    margin-bottom: 16px;
   }
-  .footerA .visit-info{
-    text-align:center;
+  .footerA .footer-logo img{
+    height: 110px !important;
   }
-  .footerA .visit-buttons{
-    width:100%;
-    flex-direction:column;
+  .footerA .footer-top-row{
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    margin-bottom: 14px;
   }
-  .footerA .btn-visit{
-    width:100%;
-  }
-  .footerA .footer-bottom{
-    flex-direction:column;
-    gap:12px;
-    text-align:center;
-  }
-  .footerA .footer-copyright,
-  .footerA .footer-center,
   .footerA .footer-links{
-    flex:none;
-    width:100%;
-    text-align:center;
     justify-content:center;
-  }
-  .footerA .footer-links{
-    order:-1;
   }
 }
 </style>
@@ -7369,40 +7292,33 @@ document.addEventListener("DOMContentLoaded", () => {
 <footer class="footerA" aria-label="Footer">
   <div class="wrap">
     
-    <!-- Visit Us Row - SLICK -->
-    <div class="visit-row">
-      <div class="visit-info">
-        <strong>Visit Us</strong>
-        14300 Northwest Fwy, Bldg B-26, Houston, TX 77040<br>
-        <a href="tel:+13468671155">(346) 867-1155</a>
-      </div>
-      <div class="visit-buttons">
-        <a class="btn-visit primary" target="_blank" rel="noopener noreferrer"
-           href="https://www.google.com/maps/dir//14300+Northwest+Fwy+Bldg+B-26+Houston+TX+77040">Get Directions</a>
-        <a class="btn-visit secondary" href="#/contact">Message Us</a>
-      </div>
+    <!-- Logo at top -->
+    <div class="footer-logo">
+      <img src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" alt="Angel's Furniture" style="height: 140px; width: auto; opacity: 0.85;">
     </div>
-
-    <!-- Bottom Row: Copyright | SNRG WEB | Privacy/Terms -->
-    <div class="footer-bottom">
+    
+    <!-- Copyright left, Privacy/Terms right -->
+    <div class="footer-top-row">
       <div class="footer-copyright">
-        © <span id="yearA"></span> Angel's Furniture. All rights reserved.
-      </div>
-      <div class="footer-center">
-        <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="snrg-credit">
-          <span class="built-by-label">Built by:</span>
-          <span class="snrg-text">SNRG WEB</span>
-          <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-            <polyline points="15 3 21 3 21 9"></polyline>
-            <line x1="10" y1="14" x2="21" y2="3"></line>
-          </svg>
-        </a>
+        © <span id="yearA"></span> Angel's Furniture
       </div>
       <div class="footer-links">
         <a href="#/about">Privacy</a>
         <a href="#/about">Terms</a>
       </div>
+    </div>
+    
+    <!-- Built by SNRG centered at bottom -->
+    <div class="footer-center">
+      <a href="https://snrgweb.com" target="_blank" rel="noopener noreferrer" class="snrg-credit">
+        <span class="built-by-label">Built by:</span>
+        <span class="snrg-text">SNRG WEB</span>
+        <svg class="snrg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </a>
     </div>
 
   </div>
@@ -7413,16 +7329,6 @@ document.addEventListener("DOMContentLoaded", () => {
   var y=document.getElementById('yearA'); 
   if(y) y.textContent=new Date().getFullYear();
 })();
-</script>
-</footer>
-
-<script>
-(function(){
-  var y=document.getElementById('yearA'); 
-  if(y) y.textContent=new Date().getFullYear();
-})();
-</script>
-
 
 // Reset on hashchange (for single-page navigation)
 window.addEventListener('hashchange', function() {
