@@ -4,10 +4,10 @@
 <head>
 <link rel="preconnect" href="https://raw.githubusercontent.com">
 <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
-<link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" rel="icon" type="image/webp"/>
-<link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" rel="apple-touch-icon"/>
-<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" property="og:image"/>
-<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" property="twitter:image"/>
+<link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="icon" type="image/png"/>
+<link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="apple-touch-icon"/>
+<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" property="og:image"/>
+<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" property="twitter:image"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
 <meta content="#F6F3EE" name="theme-color"/>
@@ -3111,9 +3111,9 @@ nav.primary li:hover .mega{ display:none !important; }
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
-<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" property="og:image"/>
+<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp" name="twitter:image"/>
+<meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
@@ -3369,7 +3369,7 @@ window.scrollTo(0, 0);
 </div>
 </div>
 <div aria-label="Primary" class="header-row" role="navigation">
-<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp"/></span></a>
+<a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
 <nav aria-label="Categories" class="primary">
 <a data-i18n="t005" data-nav="" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-nav="" href="#/collection/bedroom">Bedroom</a>
@@ -4018,33 +4018,6 @@ window.scrollTo(0, 0);
 
     const $ = (sel, root=document) => root.querySelector(sel);
     const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-
-    // --- Image path fixer ---
-    // Your repo now stores images in category subfolders like:
-    // assets/images/bedroom/<file>.webp, assets/images/dining-room/<file>.webp, etc.
-    // But catalog URLs still point to assets/images/<file>.webp.
-    const CATEGORY_FOLDER = {
-      living: 'living-room',
-      dining: 'dining-room',
-      bedroom: 'bedroom',
-      youth: 'youth',
-      office: 'office',
-      decor: 'decor'
-    };
-
-    function fixImgUrl(p, url){
-      if(!url) return url;
-      const marker = '/assets/images/';
-      const i = url.indexOf(marker);
-      if(i === -1) return url;
-      const after = url.slice(i + marker.length);
-      // If it already has a subfolder, don't touch it.
-      if(after.includes('/')) return url;
-      const folder = CATEGORY_FOLDER[p && p.category] || (p && p.category) || '';
-      if(!folder) return url;
-      return url.slice(0, i + marker.length) + folder + '/' + after;
-    }
-
 
     const state = {
       route: { page:'home', slug:null, id:null },
@@ -8446,8 +8419,7 @@ window.scrollTo(0, 0);
 
     /* ---------- Home modules ---------- */
     function cardHTML(p, compact=false){
-      const primary = fixImgUrl(p, p.images[0]);
-      const swap = fixImgUrl(p, p.images[1] || p.images[0]);
+      const swap = p.images[1] || p.images[0];
       const badge = p.Delivery === 'ready' ? 'Ready today' : (p.Delivery === 'fast' ? '3–7 days' : '2–4 wks');
       const stock = p.inStock ? 'In stock' : 'Made to order';
       const stockMobile = p.inStock ? 'Stock' : 'Order';
@@ -8460,7 +8432,7 @@ window.scrollTo(0, 0);
         </div>
         <a href="#/product/${p.id}" data-nav aria-label="${p.title}">
           <div class="p-media">
-            <img class="primary" loading="eager" decoding="async" src="${primary}" alt="${p.title}">
+            <img class="primary" loading="eager" decoding="async" src="${p.images[0]}" alt="${p.title}">
             <img class="swap" loading="eager" decoding="async" src="${swap}" alt="${p.title} alternate view">
           </div>
           <div class="p-body">
@@ -8718,7 +8690,7 @@ window.scrollTo(0, 0);
 
       // Gallery
       const main = $('#galleryMain');
-      const first = fixImgUrl(p, p.images[0]);
+      const first = p.images[0];
       main.innerHTML = `<img src="${first}" alt="${p.title}">`;
       main.onclick = ()=> openLightbox(first, p.title);
       main.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openLightbox(first, p.title); } };
@@ -8869,7 +8841,7 @@ window.scrollTo(0, 0);
         return `
           <div class="card pad" style="display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start;margin-bottom:12px;">
             <div class="p-media" style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-              <img loading="lazy" src="${fixImgUrl(p, p.images[0])}" alt="${p.title}">
+              <img loading="lazy" src="${p.images[0]}" alt="${p.title}">
             </div>
             <div style="display:grid;gap:8px;">
               <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;">
@@ -9434,7 +9406,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <div class="wrap">
     <!-- Logo -->
     <div class="footer-logo">
-      <img alt="Angel's Furniture" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.webp"/>
+      <img alt="Angel's Furniture" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/>
     </div>
 
     <!-- Bottom row: © + Built by + links -->
