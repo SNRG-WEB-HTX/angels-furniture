@@ -2,6 +2,8 @@
 
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 <link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="icon" type="image/png"/>
 <link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="apple-touch-icon"/>
 <meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" property="og:image"/>
@@ -163,7 +165,6 @@
       background:#000000;
       box-shadow:0 6px 16px rgba(0,0,0,.22);
     }
-    .btn/* removed hover-based mega menu rule */
     .btn.ghost{
       background:rgba(0,0,0,.03);
       color:#1d1d1f;
@@ -202,7 +203,6 @@
       color:#1d1d1f !important;
       box-shadow:none !important;
       transition:all 200ms cubic-bezier(.2,.8,.2,1);
-    }
     }
     /* Apple-Elite Chip Buttons - No Gold */
     .chip{
@@ -262,7 +262,7 @@
     }
     
     /* Navigation - DESKTOP ONLY (1100px+) */
-    nav.nav-primary{
+    nav.primary{
       display:none;
       flex:1;
       justify-content:center;
@@ -271,7 +271,7 @@
       font-size:14px;
       letter-spacing:-.01em;
     }
-    nav.nav-primary a{
+    nav.primary a{
       padding:10px 16px;
       border-radius:12px;
       color:rgba(26,26,26,.82);
@@ -280,11 +280,11 @@
       white-space:nowrap;
       font-weight:500;
     }
-    nav.nav-primary a:hover{
+    nav.primary a:hover{
       background:rgba(0,0,0,.03);
       color:var(--ink);
     }
-    nav.nav-primary a:active{
+    nav.primary a:active{
       background:rgba(0,0,0,.05);
       transform:scale(0.97);
     }
@@ -328,7 +328,7 @@
     
     /* DESKTOP ONLY - Show navigation */
     @media (min-width: 1100px){
-      nav.nav-primary{ 
+      nav.primary{ 
         display:flex;
       }
       .mobile-menu-only{ 
@@ -338,7 +338,7 @@
     
     /* TABLET/MOBILE - Hide navigation, optimize buttons */
     @media (max-width: 1099px){
-      nav.nav-primary{
+      nav.primary{
         display:none !important;
       }
       .header-actions{
@@ -659,12 +659,6 @@
       box-shadow:0 2px 8px rgba(0,0,0,.06);
       border-color:rgba(0,0,0,.12);
     }
-
-    .p-card.compact .p-media{ aspect-ratio: 4/3; }
-    .p-card.compact .p-body{ padding:10px 10px 12px; }
-    .p-card.compact .p-title{ font-size:12px; height:16px; }
-    .p-card.compact .price{ font-size:14px; }
-    .p-card.compact .p-meta{ display:none; }
     .p-media{
       aspect-ratio: 1/1;
       background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.01));
@@ -685,7 +679,7 @@
       opacity:0;
     }
     @media (hover:hover) and (pointer:fine){
-      .p-card:hover .p-media img
+      .p-card:hover .p-media img.primary{ opacity:0; }
       .p-card:hover .p-media img.swap{ opacity:1; }
     }
     .p-body{
@@ -1027,16 +1021,10 @@
       border:1px solid rgba(26,26,26,.10);
       background:#fff;
       position:relative;
-      /* Ensure the gallery always has a real box (prevents “no image” blank column) */
-      min-height: clamp(280px, 45vw, 520px);
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
     }
     .gallery-main img{
       width:100%;
-      height:100%;
-      display:block;
+      height: clamp(280px, 45vw, 520px);
       object-fit:cover;
     }
     .thumbs{
@@ -1081,12 +1069,9 @@
       align-items:baseline;
       gap:12px;
       margin-top:10px;
-      flex-wrap:wrap;
     }
     .pdp-price .price{
       font-size:18px;
-      line-height:1.2;
-      letter-spacing:-.02em;
     }
     .subtle{
       color:rgba(0,0,0,.50);
@@ -1119,8 +1104,6 @@
       color:#1d1d1f;
       font-weight:500;
     }
-    /* FORCE HIDE PDP TRUST (Delivery & assembly / Returns / Secure checkout) */
-    .trust{ display:none !important; }
     .pdp-ctas{
       display:grid;
       gap:12px;
@@ -1514,7 +1497,6 @@
     /* Pages */
     main{ padding-bottom: 24px; }
     [data-page]{ display:none; }
-[data-page].active{ display:block; }
     [data-page].active{ display:block; }
 
     /* Skeletons */
@@ -2564,7 +2546,7 @@ header { position: sticky; top:0; }
 
 /* Also, do not dim/blank the primary image (swap now duplicates, but keep safe) */
 @media (hover:hover) and (pointer:fine){
-  .hero .section .p-card:hover .p-media img.p-img{ opacity:1 !important; }
+  .hero .section .p-card:hover .p-media img.primary{ opacity:1 !important; }
   .hero .section .p-card:hover .p-media img.swap{ opacity:0 !important; }
 }
 
@@ -3049,7 +3031,7 @@ header{
 }
 
 @media (max-width: 980px){
-  nav.nav-primary{ display:none; }
+  .primary{ display:none; }
   .header-utility{ padding:10px 0; }
   .utility-text{ white-space:normal; }
   /* keep it clean on mobile: hide demo account + wishlist */
@@ -3124,24 +3106,8 @@ html, body{ scroll-behavior:auto; }
 /* Click-only mega menu (no hover) */
 .mega{ display:none; }
 .mega.open{ display:block; }
-nav.nav-primary li:hover .mega{ display:none !important; }
+nav.primary li:hover .mega{ display:none !important; }
 
-
-    /* Mobile polish for PDP + footer */
-    @media (max-width: 640px){
-      .pdp-grid{ gap:16px; }
-      .pdp-card{ padding:18px; border-radius:18px; }
-      .gallery{ gap:10px; }
-      .gallery-main{ min-height: 340px; border-radius:18px; }
-      .thumbs{ grid-template-columns: repeat(5, minmax(0, 1fr)); gap:8px; }
-      .pdp-title{ font-size:24px; }
-      .pdp-price{ gap:10px; }
-      .pdp-ctas .btn{ padding:14px 14px; border-radius:999px; }
-      /* Footer: only show Built by on mobile + keep it above sticky bar */
-      .footer-bottom-row{ padding-bottom: 96px; }
-      .footer-left, .footer-right{ display:none !important; }
-      .footer-center{ justify-self:center; }
-    }
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
@@ -3151,7 +3117,49 @@ nav.nav-primary li:hover .mega{ display:none !important; }
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-
+<style>
+/* ===== FOOTER: TIGHT, CENTERED, EVEN ===== */
+.site-footer{
+  margin-top:48px !important;
+}
+.footer-inner{
+  padding:24px 0 12px !important;
+}
+.footer-grid{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid !important;
+  grid-template-columns:repeat(3,1fr) !important;
+  gap:20px !important;
+  text-align:center !important;
+}
+.footer-col{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+}
+.footer-col h4{
+  margin-bottom:8px !important;
+}
+.footer-col ul li,
+.footer-col p{
+  margin:0 0 6px !important;
+  line-height:1.35 !important;
+}
+.footer-col ul li a{
+  padding:2px 0 !important;
+  font-size:14px !important;
+}
+.footer-bottom{
+  padding:12px 0 !important;
+}
+@media(max-width:900px){
+  .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:16px !important;
+  }
+}
+</style>
 <style>
 /* ================= MOBILE & DESKTOP FIX PACK ================= */
 
@@ -3362,7 +3370,7 @@ window.scrollTo(0, 0);
 </div>
 <div aria-label="Primary" class="header-row" role="navigation">
 <a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
-<nav aria-label="Categories" class="nav-primary">
+<nav aria-label="Categories" class="primary">
 <a data-i18n="t005" data-nav="" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-nav="" href="#/collection/bedroom">Bedroom</a>
 <a data-i18n="t007" data-nav="" href="#/collection/dining">Dining</a>
@@ -3624,7 +3632,7 @@ window.scrollTo(0, 0);
 <main>
 <!-- HOME -->
 <!-- CMS COMPONENT: HERO (editable copy stays in i18n keys) -->
-<section class="hero active" data-cms="hero" data-page="home">
+<section class="hero" data-cms="hero" data-page="home">
 <div class="container">
 <div class="hero-surface">
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="cms-hero-config" type="application/json">
@@ -3664,8 +3672,8 @@ window.scrollTo(0, 0);
 <div class="grid md-grid-3 grid-2 lg-grid-4">
 <a class="card p-card" href="#/collection/living" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Living Room" class="p-img" loading="lazy" src="assets/images/thea-s343.png"/>
-<img alt="Living Room" class="swap" loading="lazy" src="assets/images/zaira-s351.png"/>
+<img alt="Living Room" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="assets/images/thea-s343.webp"/>
+<img alt="Living Room" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="assets/images/zaira-s351.webp"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t053">Living</h3>
@@ -3674,8 +3682,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/bedroom" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Bedroom" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Bedroom" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Bedroom" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Bedroom" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t056">Bedroom</h3>
@@ -3684,8 +3692,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/dining" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Dining Room" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Dining Room" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Dining Room" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Dining Room" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t059">Dining</h3>
@@ -3694,8 +3702,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/office" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Office" class="p-img" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Office" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Office" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Office" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t062">Office</h3>
@@ -3783,18 +3791,20 @@ window.scrollTo(0, 0);
 </section>
 <!-- PDP -->
 <section class="pdp" data-page="product">
-  <div class="container">
-    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
+<div class="container">
+<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px;">
 <a class="pill" data-i18n="t102" data-nav="" href="#/collection/living" id="pdpBack">← Back to collection</a>
 <span class="pill" data-i18n="t103" id="pdpBreadcrumb">Product</span>
 </div>
-    <div class="pdp-grid">
-      <div class="gallery">
-        <div aria-label="Open image viewer" class="gallery-main" id="galleryMain" role="button" tabindex="0"></div>
-        <div class="thumbs" id="thumbs"></div>
-      </div>
-      <div class="pdp-panel pdp-sticky">
-        <div class="pdp-card">
+<div class="pdp-grid">
+<div class="gallery">
+<div aria-label="Open image viewer" class="gallery-main" id="galleryMain" role="button" tabindex="0"></div>
+<div class="thumbs" id="thumbs"></div>
+</div>
+</div>
+</div>
+<div class="pdp-panel pdp-sticky">
+<div class="pdp-card">
 <h1 class="pdp-title" data-i18n="t106" id="pdpTitle">Product</h1>
 <div class="pdp-price">
 <div class="price" id="pdpPrice">$0</div>
@@ -3811,9 +3821,104 @@ window.scrollTo(0, 0);
 <button class="btn ghost full" data-i18n="t109" id="visitBtn">Schedule showroom visit</button>
 <button class="btn ghost full" data-i18n="t110" id="askBtn">Ask a question</button>
 </div>
+<div class="trust">
+<div class="row"><span data-i18n="t111">Delivery &amp; assembly</span><span data-i18n="t112" id="pdpDelivery">3–7 days</span></div>
+<div class="row"><span data-i18n="t113">Returns</span><span data-i18n="t114">Easy 14-day policy</span></div>
+<div class="row"><span data-i18n="t115">Secure checkout</span><span data-i18n="t116">Apple Pay / Google Pay</span></div>
+</div>
 <div class="accordion" id="pdpAcc"></div>
 </div>
+<div class="card pad" id="crossSell" style="margin-top:14px;">
+<strong data-i18n="t117" style="font-size:14px;">Complete The Room</strong>
+<p class="subtle" data-i18n="t118" style="margin:8px 0 0;">Matching pieces that pair well — keeps decision flow smooth.</p>
+<div class="products" id="crossSellGrid" style="margin-top:12px;"></div>
+</div>
+</div>
 
+
+</section>
+<!-- ABOUT -->
+<section class="section fade-rise" data-page="about">
+<div class="container">
+<div class="section-head">
+<div>
+<h2 data-i18n="t119">About Angel’s</h2>
+<p class="lede" data-i18n="t120">Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.</p>
+</div>
+</div>
+<div class="grid grid-2" style="align-items:start;">
+<div class="card pad soft-shadow">
+<strong data-i18n="t121" style="font-size:14px;">Our story</strong>
+<p class="subtle" data-i18n="t122" style="margin:10px 0 0;">
+              Angel’s Furniture is a Houston boutique showroom focused on pieces that feel modern, warm, and easy to live with.
+              We keep the selection curated — fewer items, better fit. Come by to see finishes in person, ask questions, and plan pickup or Delivery.
+            </p>
+<div class="divider" style="margin:14px 0;"></div>
+<strong data-i18n="t123" style="font-size:14px;">What We Stand For</strong>
+<div style="display:grid;gap:10px;margin-top:10px;">
+<div class="pill"><strong data-i18n="t124">Curated quality</strong> • fewer, better choices</div>
+<div class="pill"><strong data-i18n="t125">Real support</strong> • showroom + quick answers</div>
+<div class="pill"><strong data-i18n="t126">Houston-ready</strong> • pickup + local Delivery</div>
+</div>
+</div>
+<div class="card pad soft-shadow">
+<div class="p-media" style="border-radius:18px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
+<img alt="Showroom team photo placeholder" loading="lazy" src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&amp;fit=crop&amp;w=1600&amp;q=70">
+</img></div>
+<p class="subtle" data-i18n="t127" style="margin:12px 0 0;">Swap this with real showroom/team photos for maximum trust.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SHOWROOM -->
+<section class="section fade-rise" data-page="showroom">
+<div class="container">
+<!-- Section Header -->
+<div class="section-head" style="align-items:center;">
+<div style="text-align:center;max-width:100%;">
+<h2 data-i18n="t128" style="margin:0 auto;">Houston Showroom</h2>
+<p class="lede" data-i18n="t129" style="margin:0 auto;max-width:100%;">See it in person. Pickup available. Text us for quick questions.</p>
+</div>
+</div>
+<!-- Single unified showroom card -->
+<div style="max-width:680px;margin:0 auto 32px;">
+<div class="card pad soft-shadow">
+<!-- Visit -->
+<div style="margin-bottom:24px;">
+<strong data-i18n="t130" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">Visit</strong>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="font-size:14px;color:rgba(0,0,0,.70);"><span data-i18n="t131">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span></div>
+<div style="font-size:14px;color:rgba(0,0,0,.70);">Hours: <strong data-i18n="t082" style="color:#1d1d1f;font-weight:500;">Mon–Sat 10–7</strong></div>
+
+<div style="font-size:14px;color:rgba(0,0,0,.70);">Pickup: <strong data-i18n="t084" style="color:#1d1d1f;font-weight:500;">Available</strong></div>
+</div>
+<div style="display:flex;gap:10px;margin-top:14px;">
+<button class="btn primary" data-i18n="t135" id="dirBtn" style="flex:1;">Get directions</button>
+<button class="btn ghost" data-i18n="t136" id="apptBtn" style="flex:1;">Schedule a visit</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:24px 0;"></div>
+<!-- Contact -->
+<div style="margin-bottom:24px;">
+<strong data-i18n="t088" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">Contact</strong>
+<p style="font-size:18px;font-weight:600;color:#1d1d1f;margin:0 0 12px;">(346) 867-1155</p>
+<div style="display:flex;gap:10px;">
+<button class="btn ghost" data-i18n="t146" id="callBtn2" style="flex:1;">Call</button>
+<button class="btn ghost" data-i18n="t147" id="textBtn2" style="flex:1;">Text</button>
+</div>
+</div>
+<!-- Divider -->
+<div class="divider" style="margin:24px 0;"></div>
+<!-- What to Expect -->
+<div>
+<strong data-i18n="t137" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;display:block;margin-bottom:12px;">What to expect</strong>
+<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;color:rgba(0,0,0,.70);font-size:14px;">
+<li data-i18n="t138">Touch Materials, Check Comfort, Compare Finishes</li>
+<li data-i18n="t139">Fast Answers On Delivery & Pickup Options</li>
+<li data-i18n="t140">Clean, No-Pressure Guidance</li>
+</ul>
+</div>
 </div>
 </div>
 </div>
@@ -3844,7 +3949,7 @@ window.scrollTo(0, 0);
 <!-- Email -->
 <div style="margin-bottom:28px;">
 <strong data-i18n="t148" style="font-size:15px;font-weight:600;color:#1d1d1f;letter-spacing:-.01em;">Email</strong>
-<p class="subtle" style="margin:10px 0 0;"><a href="mailto:info@angelsfurniture.com" data-i18n="t149" style="color:#1d1d1f;text-decoration:none;font-weight:500;">info@angelsfurniture.com</a></p>
+<p class="subtle" style="margin:10px 0 0;"><a href="/cdn-cgi/l/email-protection#f69f989099b6979891939a85908384989f82838493d895999b" data-i18n="t149" style="color:#1d1d1f;text-decoration:none;font-weight:500;"><span class="__cf_email__" data-cfemail="e58c8b838aa5848b828089968390978b8c91909780cb868a88">[email&#160;protected]</span></a></p>
 </div>
 <!-- Divider -->
 <div class="divider" style="margin:28px 0;"></div>
@@ -3901,7 +4006,7 @@ window.scrollTo(0, 0);
 </button>
 </div>
 </nav>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     /* =========================
        Minimal JS, premium UX
        - Hash router pages
@@ -3955,7 +4060,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/zaira-s351.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/zaira-s351.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -3976,7 +4081,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/austin-s319.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/austin-s319.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -3997,7 +4102,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/thea-s343.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/thea-s343.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4018,7 +4123,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/gia-s300.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/gia-s300.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4039,7 +4144,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Leatherette',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/miami-white-sofa-loveseat-set-led-lights-74497.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/miami-white-sofa-loveseat-set-led-lights-74497.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4060,7 +4165,7 @@ window.scrollTo(0, 0);
         Delivery:'standard',
         material:'Leatherette',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/minerva-black-s3300.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/minerva-black-s3300.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4081,7 +4186,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/relax-gray-sleeper-sofa-72497.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/relax-gray-sleeper-sofa-72497.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4102,7 +4207,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/queen-sleeper-sofa-2920439.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/queen-sleeper-sofa-2920439.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4123,7 +4228,7 @@ window.scrollTo(0, 0);
         Delivery:'standard',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-sofa-loveseat-302-04.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-sofa-loveseat-302-04.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4144,7 +4249,7 @@ window.scrollTo(0, 0);
         Delivery:'standard',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-sofa-loveseat-277-04.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-sofa-loveseat-277-04.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4165,7 +4270,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/snuggle-station-s329.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/snuggle-station-s329.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4186,7 +4291,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/stepso-green-s1400.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/stepso-green-s1400.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4207,7 +4312,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/arabella-accent-chair-4902s.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/arabella-accent-chair-4902s.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4228,7 +4333,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/chaise-lounge-4600.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/chaise-lounge-4600.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4249,7 +4354,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/britany-tv-stand-4813bk.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/britany-tv-stand-4813bk.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4270,7 +4375,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Glass',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/providence-cocktail-group-4213set.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/providence-cocktail-group-4213set.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4291,7 +4396,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/picasso-caramel-mi-633.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/picasso-caramel-mi-633.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4312,7 +4417,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lora-collection-323494.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lora-collection-323494.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4333,7 +4438,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/floor-lamp-6293f.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/floor-lamp-6293f.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4354,7 +4459,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/table-lamp-6290t.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/table-lamp-6290t.webp'],
         variants:[],
         details:{
           dimensions:'See in showroom',
@@ -4376,7 +4481,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Leatherette',
         dims:'FM72014DW',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lantrisnant-bed-fm72014dw.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lantrisnant-bed-fm72014dw.webp'],
         variants:[
           { id:'FOA-FM72014DW-DW', name:'Dark Walnut', swatch:'#5C4033' }
         ],
@@ -4399,7 +4504,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Stone',
         dims:'FM74021DW-F',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-bed-fm74021dw-f.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-bed-fm74021dw-f.webp'],
         variants:[
           { id:'FOA-FM74021DW-DW', name:'Dark Walnut', swatch:'#5C4033' }
         ],
@@ -4422,7 +4527,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Melamine',
         dims:'FM7200WH',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/horten-bed-fm7200wh.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/horten-bed-fm7200wh.webp'],
         variants:[
           { id:'FOA-FM7200WH-WW', name:'White Wash', swatch:'#F5F5F5' }
         ],
@@ -4445,7 +4550,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'FM72006IV',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/palmdale-bed-fm72006iv.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/palmdale-bed-fm72006iv.webp'],
         variants:[
           { id:'FOA-FM72006IV-IV', name:'Ivory', swatch:'#FFFFF0' }
         ],
@@ -4468,7 +4573,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Metal & Wood',
         dims:'FM74003BK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/danvers-bed-fm74003bk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/danvers-bed-fm74003bk.webp'],
         variants:[
           { id:'FOA-FM74003BK-BLK', name:'Black', swatch:'#000000' }
         ],
@@ -4491,7 +4596,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Boucle & Velvet',
         dims:'FM72005GR',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/finamore-bed-fm72005gr.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/finamore-bed-fm72005gr.webp'],
         variants:[
           { id:'FOA-FM72005GR-OLV', name:'Olive Green', swatch:'#556B2F' }
         ],
@@ -4514,7 +4619,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Marble',
         dims:'FM7670',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/fromberg-bed-fm7670.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/fromberg-bed-fm7670.webp'],
         variants:[
           { id:'FOA-FM7670-CHR', name:'Brown Cherry', swatch:'#8B4513' }
         ],
@@ -4537,7 +4642,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric & Wood',
         dims:'FM7597GY',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/gristalt-bed-fm7597gy.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/gristalt-bed-fm7597gy.webp'],
         variants:[
           { id:'FOA-FM7597GY-GRY', name:'Stone Gray', swatch:'#708090' }
         ],
@@ -4560,7 +4665,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'FM7425BK-G',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/goldsberg-bed-fm7425bk-g.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/goldsberg-bed-fm7425bk-g.webp'],
         variants:[
           { id:'FOA-FM7425BK-BLK', name:'Black/Gold', swatch:'#000000' }
         ],
@@ -4583,7 +4688,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'FM7701BR',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sheringham-bed-fm7701br.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sheringham-bed-fm7701br.webp'],
         variants:[
           { id:'FOA-FM7701BR-GRY', name:'Weathered Gray', swatch:'#808080' }
         ],
@@ -4608,7 +4713,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal & Fabric',
         dims:'B6800',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/carter-bedroom-lamp-setb6800.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/carter-bedroom-lamp-setb6800.webp'],
         variants:[],
         details:{
           dimensions:'Standard lamp set dimensions',
@@ -4629,7 +4734,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'B7300',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/cressida-bedroom-setb7300.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/cressida-bedroom-setb7300.webp'],
         variants:[],
         details:{
           dimensions:'Complete bedroom set with bed, dresser, nightstands',
@@ -4650,7 +4755,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'B8250',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sienna-bedroom-setb8250.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sienna-bedroom-setb8250.webp'],
         variants:[],
         details:{
           dimensions:'Complete bedroom set with bed, dresser, nightstands',
@@ -4671,7 +4776,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Electronics',
         dims:'5212GY',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/voltare-fireplace-tv-lift-bed-5212gy.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/voltare-fireplace-tv-lift-bed-5212gy.webp'],
         variants:[
           { id:'BR-VOLTARE-5212GY-GRY', name:'Gray', swatch:'#808080' }
         ],
@@ -4694,7 +4799,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric & Wood',
         dims:'B9255',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/millie-upholstered-bed-setb9255.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/millie-upholstered-bed-setb9255.webp'],
         variants:[],
         details:{
           dimensions:'Queen/King upholstered bed set',
@@ -4715,7 +4820,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'B6580',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaymes-q-bedroom-setb6580.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaymes-q-bedroom-setb6580.webp'],
         variants:[],
         details:{
           dimensions:'Complete Queen bedroom set',
@@ -4724,7 +4829,556 @@ window.scrollTo(0, 0);
           warranty:'1-year warranty'
         }
       },
-      // ========== DINING ROOM ==========
+      
+
+      // ========== BEDROOM - LOCAL ASSETS PROVIDED ==========
+{
+  id:'BR-HH3600',
+  title:'HH3600 5PC Bedroom Set (Queen/King)',
+  category:'bedroom',
+  price:1399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-set-hh3600.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: Bed (Queen/King), Nightstand, Dresser, Mirror, Chest',
+    materials:'Wood/veneer finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($169.00). Sold as a 5PC set only.'
+  }
+},
+{
+  id:'BR-MOONLIGHT',
+  title:'Moonlight LED 5PC Bedroom Set (Queen/King)',
+  category:'bedroom',
+  price:1699,
+  featured:false,
+  best:false,
+  isNew:true,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/moonlight-5pc-queen-bedroom-75497.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: LED Bed (Queen/King), Nightstand, Dresser, LED Mirror, Chest',
+    materials:'Modern glam finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($189.00). Sold as a 5PC set only.'
+  }
+},
+{
+  id:'BR-HH3500',
+  title:'HH3500 5PC Bedroom Set (Dark Charcoal)',
+  category:'bedroom',
+  price:1399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-queen-hh3500.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: Bed (Queen/King), Nightstand, Dresser, Mirror, Chest',
+    materials:'Dark charcoal wood/veneer',
+    shipping:'Houston delivery available',
+    notes:'Sold as a 5PC set only.'
+  }
+},
+{
+  id:'BR-HH3700',
+  title:'HH3700 5PC Bedroom Set (Queen/King)',
+  category:'bedroom',
+  price:1449,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-queen-hh3700.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: Bed (Queen/King), Nightstand, Dresser, Mirror, Chest',
+    materials:'Wood/veneer finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($179.00). Sold as a 5PC set only.'
+  }
+},
+{
+  id:'BR-B427',
+  title:'Ashley B427 Twin/Full Bedroom Set (1 Left)',
+  category:'bedroom',
+  price:899,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'ready',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-4pc-twin-bedroom-b427.webp'],
+  variants:[],
+  details:{
+    dimensions:'Twin or Full • 4PC: Bed, Dresser, Mirror, Nightstand • 5PC adds Chest',
+    materials:'Engineered wood (white finish)',
+    shipping:'Houston delivery available',
+    notes:'Limited availability (1 left).'
+  }
+},
+{
+  id:'BR-B211',
+  title:'Ashley B211 Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:1799,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b211.webp'],
+  variants:[],
+  details:{
+    dimensions:'Queen/King available • 4PC or 5PC (5PC adds Chest)',
+    materials:'Mixed wood tones',
+    shipping:'Houston delivery available',
+    notes:'See size options in showroom / call to confirm.'
+  }
+},
+{
+  id:'BR-HAVANA',
+  title:'Havana Black LED Bedroom Set',
+  category:'bedroom',
+  price:1899,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/havana-5pc-bedroom-78497.webp'],
+  variants:[],
+  details:{
+    dimensions:'King 4PC available • Bed, Nightstand, Dresser, Mirror (5PC adds Chest when available)',
+    materials:'Black finish',
+    shipping:'Houston delivery available',
+    notes:'LED lights on headboard & mirror. Queen 4PC SOLD OUT.'
+  }
+},
+{
+  id:'BR-BOSON',
+  title:'Boson Bouclé Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:2099,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Boson-5pc-bedroom-78497.webp'],
+  variants:[],
+  details:{
+    dimensions:'Queen/King • 4PC or 5PC (5PC includes Chest)',
+    materials:'Bouclé upholstery headboard',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($219.00).'
+  }
+},
+{
+  id:'BR-OSLO',
+  title:'Oslo Bouclé Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:2099,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/oslo-5pc-bedroom-78497.webp'],
+  variants:[],
+  details:{
+    dimensions:'Queen/King • 4PC or 5PC (5PC includes Chest)',
+    materials:'Bouclé upholstery headboard',
+    shipping:'Houston delivery available',
+    notes:'Modern soft-texture look.'
+  }
+},
+{
+  id:'BR-MAGNOLIA10',
+  title:'Magnolia10 Platform Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:1499,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/magnolia-5pc-bedroom.webp'],
+  variants:[],
+  details:{
+    dimensions:'Platform bed (slat kit included) • 4PC/5PC (Chest only in 5PC)',
+    materials:'Wood/veneer finish',
+    shipping:'Houston delivery available',
+    notes:'Hidden drawer + felt-lined top drawers.'
+  }
+},
+{
+  id:'BR-B6030',
+  title:'B6030 Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:1499,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/4pc-bedroom-b6030.webp'],
+  variants:[],
+  details:{
+    dimensions:'King 4PC or 5PC (Chest only in 5PC)',
+    materials:'Wood finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($159.00).'
+  }
+},
+{
+  id:'BR-BEVERLY',
+  title:'Beverly LED Upholstered 5PC Bedroom Set',
+  category:'bedroom',
+  price:2399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/beverly-5pc-bedroom-710997.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Soft fur upholstery headboard',
+    shipping:'Houston delivery available',
+    notes:'Platform bed. LED on headboard + all case pieces. Extra nightstand ($229.00).'
+  }
+},
+{
+  id:'BR-BLANCA2',
+  title:'Blanca2 Black Bedroom Set',
+  category:'bedroom',
+  price:2199,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/blanca2black-bedroom-78997.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set (Chest only in 5PC). King available.',
+    materials:'Black finish',
+    shipping:'Houston delivery available',
+    notes:'Queen options SOLD OUT.'
+  }
+},
+{
+  id:'BR-DIAMONDPALACE',
+  title:'Diamond Palace Black Velvet Platform 5PC',
+  category:'bedroom',
+  price:3299,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/diamond-palace-black-5pc-711997.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC Set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Velvet fabric upholstery',
+    shipping:'Houston delivery available',
+    notes:'Platform bed. Extra nightstand available ($249.00).'
+  }
+},
+{
+  id:'BR-KINGDOM',
+  title:'Kingdom Bedroom Set (Glass Top) (4PC/5PC)',
+  category:'bedroom',
+  price:2099,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/kingdom-5pc-king-713997.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+    materials:'Glass top on dresser & nightstand',
+    shipping:'Houston delivery available',
+    notes:'13 slats included.'
+  }
+},
+{
+  id:'BR-B5030',
+  title:'B5030 Black Velvet Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:2099,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b5030.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+    materials:'Black velvet',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($219.00).'
+  }
+},
+{
+  id:'BR-B1200',
+  title:'B1200 Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:1599,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b1200.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+    materials:'Wood/veneer finish',
+    shipping:'Houston delivery available',
+    notes:'Modern transitional styling.'
+  }
+},
+{
+  id:'BR-B8010',
+  title:'B8010 Bedroom Set (Platform + Full Extension Glides)',
+  category:'bedroom',
+  price:1599,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-king-b8010.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set • Platform bed (slat kit) • Chest included (not sold separately)',
+    materials:'Wood/veneer finish',
+    shipping:'Houston delivery available',
+    notes:'Full extension drawer glides. Extra nightstand ($169.00).'
+  }
+},
+{
+  id:'BR-B7000',
+  title:'B7000 5PC Bedroom Set',
+  category:'bedroom',
+  price:1699,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b7000.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set • Chest included (not sold separately)',
+    materials:'Wood finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand ($179.00).'
+  }
+},
+{
+  id:'BR-B9000',
+  title:'B9000 Bedroom Set (Full Extension Glides)',
+  category:'bedroom',
+  price:1799,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b9000.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set • Chest only in 5PC',
+    materials:'Wood finish',
+    shipping:'Houston delivery available',
+    notes:'Full extension drawer glides. Extra nightstand ($179.00).'
+  }
+},
+{
+  id:'BR-B777',
+  title:'Ashley B777 5PC Bedroom Set (Whitewash)',
+  category:'bedroom',
+  price:1399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b777.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Whitewash finish',
+    shipping:'Houston delivery available',
+    notes:'Queen/King available.'
+  }
+},
+{
+  id:'BR-B1000',
+  title:'B1000 Bedroom Set (4PC/5PC)',
+  category:'bedroom',
+  price:1799,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b1000.webp'],
+  variants:[],
+  details:{
+    dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+    materials:'Wood finish',
+    shipping:'Houston delivery available',
+    notes:'Extra nightstand available ($219.00).'
+  }
+},
+{
+  id:'BR-B916',
+  title:'Ashley B916 5PC Bedroom Set (New Arrival)',
+  category:'bedroom',
+  price:2299,
+  featured:true,
+  best:false,
+  isNew:true,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b916.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Hardwood solids, oak & ash veneer, cast resin components',
+    shipping:'Houston delivery available',
+    notes:'Headboard bridge with 2 overhead LED lights. Foundation required (sold separately).'
+  }
+},
+{
+  id:'BR-MAJESTY2',
+  title:'Majesty2 Black 5PC Bedroom Set',
+  category:'bedroom',
+  price:2399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/majesty2black-5pc-710997.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Upholstered glam design',
+    shipping:'Houston delivery available',
+    notes:'Call to confirm availability.'
+  }
+},
+{
+  id:'BR-MASTER',
+  title:'Master 5PC Bedroom Set',
+  category:'bedroom',
+  price:2399,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/master-5pc-queen-710997.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Upholstered glam design',
+    shipping:'Houston delivery available',
+    notes:'Call to confirm availability.'
+  }
+},
+{
+  id:'BR-B844',
+  title:'B844 5PC Bedroom Set',
+  category:'bedroom',
+  price:1499,
+  featured:false,
+  best:false,
+  isNew:false,
+  inStock:true,
+  Delivery:'fast',
+  material:'',
+  dims:'',
+  images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b844.webp'],
+  variants:[],
+  details:{
+    dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+    materials:'Wood finish',
+    shipping:'Houston delivery available',
+    notes:'Call to confirm availability.'
+  }
+},
+// ========== DINING ROOM ==========
       {
         id:'BR-LILLIAN-B7100',
         title:'Lillian Bedroom Group',
@@ -4737,7 +5391,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & LED',
         dims:'SETB7100',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.webp'],
         variants:[
           { id:'BR-LILLIAN-B7100-SLV', name:'Silver', swatch:'#C0C0C0' }
         ],
@@ -4760,7 +5414,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'SETB4255',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.webp'],
         variants:[
           { id:'BR-EMILY-B4255-WHT', name:'White', swatch:'#FFFFFF' }
         ],
@@ -4783,7 +5437,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'SETB6840',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.webp'],
         variants:[
           { id:'BR-ELLAMAE-B6840-GRY', name:'Reclaimed Grey', swatch:'#808080' }
         ],
@@ -4806,7 +5460,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'SETB8162',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.webp'],
         variants:[
           { id:'BR-REMINGTON-B8162-BW', name:'Black/White', swatch:'#000000' }
         ],
@@ -4829,7 +5483,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'5094LG',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/daphne-bed-5094lg.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/daphne-bed-5094lg.webp'],
         variants:[
           { id:'BR-DAPHNE-5094LG-LGRY', name:'Light Grey', swatch:'#D3D3D3' }
         ],
@@ -4852,7 +5506,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'SETB9280',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.webp'],
         variants:[
           { id:'BR-JAYLEN-B9280-BLK', name:'Black', swatch:'#000000' }
         ],
@@ -4875,7 +5529,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Solid Wood',
         dims:'FM7399ES-Q-5PC',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.webp'],
         variants:[
           { id:'BR-HINWITZ-FM7399ES-ESP', name:'Espresso', swatch:'#3B2F2F' }
         ],
@@ -4898,7 +5552,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & LED',
         dims:'SETB7100',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lillian-bedroom-setb7100.webp'],
         variants:[
           { id:'BR-LILLIAN-B7100-SLV', name:'Silver', swatch:'#C0C0C0' }
         ],
@@ -4921,7 +5575,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'SETB4255',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/emily-storage-bedroom-setb4255.webp'],
         variants:[
           { id:'BR-EMILY-B4255-WHT', name:'White', swatch:'#FFFFFF' }
         ],
@@ -4944,7 +5598,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'SETB6840',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ella-mae-bedroom-setb6840.webp'],
         variants:[
           { id:'BR-ELLAMAE-B6840-GRY', name:'Reclaimed Grey', swatch:'#808080' }
         ],
@@ -4967,7 +5621,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'SETB8162',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/remington-bedroom-sebb8162.webp'],
         variants:[
           { id:'BR-REMINGTON-B8162-BW', name:'Black/White', swatch:'#000000' }
         ],
@@ -4990,7 +5644,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'SETB9280',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jaylen-bedroom-set9280.webp'],
         variants:[
           { id:'BR-JAYLEN-B9280-BLK', name:'Black', swatch:'#000000' }
         ],
@@ -5013,7 +5667,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Solid Wood',
         dims:'FM7399ES-Q-5PC',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hintwitz-bedroom-fm7399es-q-5pc.webp'],
         variants:[
           { id:'BR-HINWITZ-FM7399ES-ESP', name:'Espresso', swatch:'#3B2F2F' }
         ],
@@ -5036,7 +5690,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Glass & Metal',
         dims:'D106',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/black-glass-dining-4chairs-d106.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/black-glass-dining-4chairs-d106.webp'],
         variants:[],
         details:{
           dimensions:'Table with 4 chairs',
@@ -5057,7 +5711,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D360',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-set-6chairs-d360.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-set-6chairs-d360.webp'],
         variants:[],
         details:{
           dimensions:'Table with 6 chairs',
@@ -5078,7 +5732,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D1120',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-set-bench-light-oak-d1120.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-set-bench-light-oak-d1120.webp'],
         variants:[],
         details:{
           dimensions:'Table with chairs and bench',
@@ -5099,7 +5753,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D2800',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-table-6chair-d2800.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dining-table-6chair-d2800.webp'],
         variants:[],
         details:{
           dimensions:'Large table with 6 chairs',
@@ -5120,7 +5774,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Fabric',
         dims:'Pub Height',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dior-grey-pub-table-4chairs.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/dior-grey-pub-table-4chairs.webp'],
         variants:[
           { id:'DN-DIOR-PUB-GRY', name:'Grey', swatch:'#808080' }
         ],
@@ -5143,7 +5797,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'75497',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/florida-white-dining-table-6chairs-75497.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/florida-white-dining-table-6chairs-75497.webp'],
         variants:[],
         details:{
           dimensions:'Table with 6 chairs',
@@ -5164,7 +5818,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Faux Marble & Wood',
         dims:'1220GREY',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/grey-faux-marble-dining-6chairs-1220grey.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/grey-faux-marble-dining-6chairs-1220grey.webp'],
         variants:[
           { id:'DN-GREYMARBLE-1220-GRY', name:'Grey Marble', swatch:'#A9A9A9' }
         ],
@@ -5187,7 +5841,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'2137-6P',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lloyd-dining-group-2137-6p.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lloyd-dining-group-2137-6p.webp'],
         variants:[],
         details:{
           dimensions:'6-piece dining set',
@@ -5208,7 +5862,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D947-55T',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/table-6chairs-d947-55t.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/table-6chairs-d947-55t.webp'],
         variants:[],
         details:{
           dimensions:'Table with 6 chairs',
@@ -5229,7 +5883,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Fabric',
         dims:'72197',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/tahoe-beige-pub-table-4chairs-72197.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/tahoe-beige-pub-table-4chairs-72197.webp'],
         variants:[
           { id:'DN-TAHOE-72197-BEI', name:'Beige', swatch:'#F5F5DC' }
         ],
@@ -5252,7 +5906,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Fabric',
         dims:'72197',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/winner10-pub-table-4chairs-72197.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/winner10-pub-table-4chairs-72197.webp'],
         variants:[],
         details:{
           dimensions:'Counter height pub set with 4 stools',
@@ -5273,7 +5927,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D388-425',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/7pc-dining-set-d388-425.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/7pc-dining-set-d388-425.webp'],
         variants:[],
         details:{
           dimensions:'7-piece complete dining set',
@@ -5295,7 +5949,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal & Fabric',
         dims:'D546-424',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/24inch-counterheight-swivel-barstool-d546-424.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/24inch-counterheight-swivel-barstool-d546-424.webp'],
         variants:[],
         details:{
           dimensions:'24" seat height, counter height',
@@ -5316,7 +5970,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'D984',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-table-6chairs-d984.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-table-6chairs-d984.webp'],
         variants:[],
         details:{
           dimensions:'Table with 6 chairs',
@@ -5337,7 +5991,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'2152T-4282',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bardstown-dining-2152t-4282.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bardstown-dining-2152t-4282.webp'],
         variants:[],
         details:{
           dimensions:'Complete dining set',
@@ -5358,7 +6012,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal & Leatherette',
         dims:'8100',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/black-adjustable-bar-stool-8100.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/black-adjustable-bar-stool-8100.webp'],
         variants:[
           { id:'BS-ADJUSTABLE-8100-BLK', name:'Black', swatch:'#000000' }
         ],
@@ -5382,7 +6036,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Chenille',
         dims:'FM61114GR-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/trevisan-sofa-fm61114gr-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/trevisan-sofa-fm61114gr-sf.webp'],
         variants:[
           { id:'LR-TREVISAN-FM61114GR-OLV', name:'Olive Green', swatch:'#556B2F' }
         ],
@@ -5406,7 +6060,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Chenille',
         dims:'FM64007GR-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/mellone-sofa-fm64007gr-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/mellone-sofa-fm64007gr-sf.webp'],
         variants:[
           { id:'LR-MELLONE-OLIVE', name:'Olive Green', swatch:'#556B2F' }
         ],
@@ -5429,7 +6083,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Chenille',
         dims:'FM67005WH-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lasalle-sofa-fm67005wh-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lasalle-sofa-fm67005wh-sf.webp'],
         variants:[
           { id:'LR-LASALLE-WHITE', name:'White', swatch:'#FFFFFF' }
         ],
@@ -5452,7 +6106,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Compressed Foam',
         dims:'FM62102TP-SF-PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nappi-sofa-compressed-foam-fm62102tp-sf-pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nappi-sofa-compressed-foam-fm62102tp-sf-pk.webp'],
         variants:[
           { id:'LR-NAPPI-TAUPE', name:'Taupe', swatch:'#8B7E74' }
         ],
@@ -5475,7 +6129,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'SM2296GY-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/wilmette-sofa-sm2296gy-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/wilmette-sofa-sm2296gy-sf.webp'],
         variants:[
           { id:'LR-WILMETTE-GRAY', name:'Gray', swatch:'#808080' }
         ],
@@ -5498,7 +6152,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Velvet',
         dims:'FM67000BK-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/doriphei-sofa-fm67000bk-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/doriphei-sofa-fm67000bk-sf.webp'],
         variants:[
           { id:'LR-DORIPHEI-BLACK', name:'Black Velvet/Gold', swatch:'#000000' }
         ],
@@ -5521,7 +6175,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'FM67001BG-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/valdosta-sofa-fm67001bg-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/valdosta-sofa-fm67001bg-sf.webp'],
         variants:[
           { id:'LR-VALDOSTA-BEIGE', name:'Beige/Gold', swatch:'#F5F5DC' }
         ],
@@ -5544,7 +6198,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'FM67002BG-SF',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/adelpha-sofa-fm67002bg-sf.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/adelpha-sofa-fm67002bg-sf.webp'],
         variants:[
           { id:'LR-ADELPHA-BEIGE', name:'Beige/Gold', swatch:'#F5F5DC' }
         ],
@@ -5567,7 +6221,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Fabric',
         dims:'SL64002BR-SF-PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/denholme-pull-out-sl64002br-sf-pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/denholme-pull-out-sl64002br-sf-pk.webp'],
         variants:[
           { id:'LR-DENHOLME-BROWN', name:'Brown', swatch:'#8B4513' }
         ],
@@ -5591,7 +6245,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Marble & Metal',
         dims:'FM47000BK-CR',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/virden-round-cocktail-fm47000bk-cr.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/virden-round-cocktail-fm47000bk-cr.webp'],
         variants:[
           { id:'LR-VIRDEN-BLK-WHT-GLD', name:'Black/White/Gold', swatch:'#000000' }
         ],
@@ -5614,7 +6268,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Paper Veneer',
         dims:'FM44005BK-CR-TABLE',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/surdal-coffee-fm44005bk-cr-table.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/surdal-coffee-fm44005bk-cr-table.webp'],
         variants:[
           { id:'LR-SURDAL-BLACK', name:'Black', swatch:'#000000' }
         ],
@@ -5637,7 +6291,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Paper Veneer',
         dims:'FM44003NT-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/holen-coffee-table-fm44003nt-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/holen-coffee-table-fm44003nt-3pk.webp'],
         variants:[
           { id:'LR-HOLEN-NATURAL', name:'Natural', swatch:'#D2B48C' }
         ],
@@ -5660,7 +6314,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'FM44001CH-CO',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/westerham-cocktail-table-fm44001ch-co.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/westerham-cocktail-table-fm44001ch-co.webp'],
         variants:[
           { id:'LR-WESTERHAM-CHERRY', name:'Dark Cherry', swatch:'#8B0000' }
         ],
@@ -5683,7 +6337,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Faux Marble',
         dims:'FM42900BK-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900bk-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900bk-3pk.webp'],
         variants:[
           { id:'LR-FINDLAY-BLACK', name:'Black', swatch:'#000000' }
         ],
@@ -5706,7 +6360,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Faux Marble',
         dims:'FM42900BR-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900br-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900br-3pk.webp'],
         variants:[
           { id:'LR-FINDLAY-BROWN', name:'Brown', swatch:'#8B4513' }
         ],
@@ -5729,7 +6383,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Faux Marble',
         dims:'FM42900BW-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900bw-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900bw-3pk.webp'],
         variants:[
           { id:'LR-FINDLAY-BW', name:'Black & White', swatch:'#000000' }
         ],
@@ -5752,7 +6406,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Faux Marble',
         dims:'FM42900WH-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900wh-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/findlay-coffee-table-fm42900wh-3pk.webp'],
         variants:[
           { id:'LR-FINDLAY-WHITE', name:'White', swatch:'#FFFFFF' }
         ],
@@ -5775,7 +6429,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'TM4008-3PK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lethia-tables-tm4008-3pk.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lethia-tables-tm4008-3pk.webp'],
         variants:[
           { id:'LR-LETHIA-WALNUT', name:'Walnut', swatch:'#8B4513' }
         ],
@@ -5798,7 +6452,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Mixed Materials',
         dims:'FM44006GY-CN',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/levis-nesting-cocktail-table-fm44006gy-cn.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/levis-nesting-cocktail-table-fm44006gy-cn.webp'],
         variants:[
           { id:'LR-LEVIS-GRAY', name:'Gray', swatch:'#808080' }
         ],
@@ -5821,7 +6475,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Sintered Stone',
         dims:'FM42001BK-C',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maidstone-coffee-table-fm42001bk-c.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maidstone-coffee-table-fm42001bk-c.webp'],
         variants:[
           { id:'LR-MAIDSTONE-BW', name:'Black/White', swatch:'#000000' }
         ],
@@ -5844,7 +6498,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Glass',
         dims:'FM47008WH-C',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maloy-cocktail-table-fm47008wh-c.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maloy-cocktail-table-fm47008wh-c.webp'],
         variants:[
           { id:'LR-MALOY-WHITE', name:'White', swatch:'#FFFFFF' }
         ],
@@ -5867,7 +6521,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Mixed Materials',
         dims:'FM44007BK-CR',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bogor-cocktail-table-fm44007bk-cr.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bogor-cocktail-table-fm44007bk-cr.webp'],
         variants:[
           { id:'LR-BOGOR-MULTI', name:'White/Gold/Black', swatch:'#FFFFFF' }
         ],
@@ -5891,7 +6545,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Stone & Wood',
         dims:'FM44020DW-CR-ST',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-cocktail-table-fm44020dw-cr-st.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-cocktail-table-fm44020dw-cr-st.webp'],
         variants:[
           { id:'LR-VELLARA-CR-DW', name:'Dark Walnut', swatch:'#654321' }
         ],
@@ -5914,7 +6568,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Stone & Wood',
         dims:'FM44020DW-ST',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellar-chairside-table-fm44020dw-st.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellar-chairside-table-fm44020dw-st.webp'],
         variants:[
           { id:'LR-VELLARA-CS-DW', name:'Dark Walnut', swatch:'#654321' }
         ],
@@ -5937,7 +6591,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Stone & Wood',
         dims:'FM44020DW-S',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-sofa-table-fm44020dw-s.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/vellara-sofa-table-fm44020dw-s.webp'],
         variants:[
           { id:'LR-VELLARA-SF-DW', name:'Dark Walnut', swatch:'#654321' }
         ],
@@ -5960,7 +6614,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Marble',
         dims:'FM44010NT-S',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sundbry-sofa-table-fm4401nt-s.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sundbry-sofa-table-fm4401nt-s.webp'],
         variants:[
           { id:'LR-SUNDBRY-WN', name:'White/Natural', swatch:'#FFFFFF' }
         ],
@@ -5984,7 +6638,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Polyester',
         dims:'9100',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/espress-9100-big-man-recliner-73497.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/espress-9100-big-man-recliner-73497.webp'],
         variants:[
           { id:'RC-ESPRESSO-9100-ESP', name:'Espresso', swatch:'#3E2723' }
         ],
@@ -6007,7 +6661,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Leatherette',
         dims:'73697',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/topgun-ivory-recliner-led-73697.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/topgun-ivory-recliner-led-73697.webp'],
         variants:[
           { id:'RC-TOPGUN-73697-IVO', name:'Ivory', swatch:'#FFFFF0' }
         ],
@@ -6030,7 +6684,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette',
         dims:'FM6011BR-CH-M',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ezekius-recliner-fm6011br-ch-m.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ezekius-recliner-fm6011br-ch-m.webp'],
         variants:[
           { id:'RC-EZEKIUS-FM6011BR-BRN', name:'Brown', swatch:'#8B4513' }
         ],
@@ -6053,7 +6707,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric',
         dims:'FM-AC6009GY',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/pysche-recliner-fm-ac6009gy.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/pysche-recliner-fm-ac6009gy.webp'],
         variants:[
           { id:'RC-PYSCHE-FM-AC6009GY-GRY', name:'Gray', swatch:'#808080' }
         ],
@@ -6078,7 +6732,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Leatherette',
         dims:'H556-01A',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h556-01a.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h556-01a.webp'],
         variants:[],
         details:{
           dimensions:'Adjustable height office chair',
@@ -6099,7 +6753,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Polyester',
         dims:'H742-01A',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h742-01a.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/office-chair-h742-01a.webp'],
         variants:[
           { id:'OF-CHAIR-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
         ],
@@ -6122,7 +6776,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Upholstered Tweed',
         dims:'5324OT-SET',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/philipa-daybed-5340t-set.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/philipa-daybed-5340t-set.webp'],
         variants:[
           { id:'OF-DAYBED-5324OT-OAT', name:'Oatmeal Tweed', swatch:'#E8DCC8' }
         ],
@@ -6145,7 +6799,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'B9330-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-valor-writing-desk-b9330.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-valor-writing-desk-b9330.webp'],
         variants:[],
         details:{
           dimensions:'Standard writing desk',
@@ -6166,7 +6820,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'B6832-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-driftwood-b6832.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-driftwood-b6832.webp'],
         variants:[
           { id:'OF-DESK-B6832-DRF', name:'Driftwood', swatch:'#B8A88A' }
         ],
@@ -6189,7 +6843,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'B6830-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-grey-b6830.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rangley-writing-desk-grey-b6830.webp'],
         variants:[
           { id:'OF-DESK-B6830-GRY', name:'Grey/Brown', swatch:'#8B7D6B' }
         ],
@@ -6212,7 +6866,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Faux Marble & Wood',
         dims:'4950',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rylee-faux-marble-desk-4950.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rylee-faux-marble-desk-4950.webp'],
         variants:[],
         details:{
           dimensions:'Premium writing desk with marble top',
@@ -6233,7 +6887,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette & Metal',
         dims:'CM-FC612',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/argon-office-chair-cm-fc612.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/argon-office-chair-cm-fc612.webp'],
         variants:[
           { id:'OF-CHAIR-CMFC612-BLK', name:'Black/Red/Silver', swatch:'#000000' }
         ],
@@ -6256,7 +6910,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Polyresin',
         dims:'A2000765',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-lauretman-a2000765.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-lauretman-a2000765.webp'],
         variants:[
           { id:'OF-DECOR-A2000765-GLD', name:'Antiqued Goldtone', swatch:'#D4AF37' }
         ],
@@ -6279,7 +6933,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'A4000589',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-a4000589.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-a4000589.webp'],
         variants:[
           { id:'OF-BOOKCASE-A4000589-BRN', name:'Brown/Gold', swatch:'#8B4513' }
         ],
@@ -6302,7 +6956,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Oak Veneer',
         dims:'H742-70',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h742-70.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h742-70.webp'],
         variants:[
           { id:'OF-BOOKCASE-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
         ],
@@ -6325,7 +6979,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'H743-70',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h743-70.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bookcase-h743-70.webp'],
         variants:[],
         details:{
           dimensions:'Traditional bookcase with shelves',
@@ -6346,7 +7000,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood & Oak Veneer',
         dims:'H742-34',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h742-34.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h742-34.webp'],
         variants:[
           { id:'OF-DESK-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
         ],
@@ -6369,7 +7023,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Wood',
         dims:'H3929',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h3929.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/desk-h3929.webp'],
         variants:[
           { id:'OF-DESK-H3929-TAN', name:'Tan', swatch:'#D2B48C' }
         ],
@@ -6392,7 +7046,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood & Mirror',
         dims:'B4852WH-RACK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/luxo-rack-white-b4852wh.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/luxo-rack-white-b4852wh.webp'],
         variants:[
           { id:'OF-RACK-B4852WH-WHT', name:'White', swatch:'#FFFFFF' }
         ],
@@ -6415,7 +7069,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'B4900-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nyomi-desk-writing-desk-b4900.png'],
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nyomi-desk-writing-desk-b4900.webp'],
         variants:[],
         details:{
           dimensions:'Compact modern desk',
@@ -6437,7 +7091,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Hardwood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/troutdale-captain-fm7106gy-t-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/troutdale-captain-fm7106gy-t-bed.webp'],
         variants:[],
         details:{
           dimensions:'Twin Captain Bed with Bookcase Headboards, Trundle w/ Drawers, USB-A and USB-C Ports',
@@ -6458,7 +7112,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/twin-bunk-bed-bb10.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/twin-bunk-bed-bb10.webp'],
         variants:[],
         details:{
           dimensions:'Twin over Twin Bunk Bed with Full Slat Kit',
@@ -6479,7 +7133,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/twin-full-bunk-bed-bb21.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/twin-full-bunk-bed-bb21.webp'],
         variants:[],
         details:{
           dimensions:'Twin over Full Bunk Bed w/ Twin Trundle - Full Slat Kit',
@@ -6500,7 +7154,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'ABS Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/axel-peacebus-twin-foa77260r-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/axel-peacebus-twin-foa77260r-bed.webp'],
         variants:[],
         details:{
           dimensions:'Peace Bus Design with LED and Sound on Headlights - Mattress Ready',
@@ -6521,7 +7175,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/full-full-bunk-trundle-bb30.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/full-full-bunk-trundle-bb30.webp'],
         variants:[],
         details:{
           dimensions:'Full over Full Bunk Bed w/ Twin Trundle - Full Slat Kit',
@@ -6542,7 +7196,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Solid Hardwood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/griffin-twin-fm7108db-t-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/griffin-twin-fm7108db-t-bed.webp'],
         variants:[],
         details:{
           dimensions:'Slat Design with Panel Headboard, Patented Insert & Lock Joint',
@@ -6563,7 +7217,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'ABS Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jourley-car-bed-foa7732wh-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/jourley-car-bed-foa7732wh-bed.webp'],
         variants:[],
         details:{
           dimensions:'Race Car Design with LED Headlights',
@@ -6584,7 +7238,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Velvet',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maya-twin-plaform-trundle-71697.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/maya-twin-plaform-trundle-71697.webp'],
         variants:[],
         details:{
           dimensions:'Twin Platform Bed w/ Twin Trundle',
@@ -6605,7 +7259,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'Solid Hardwood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/mcpherson-twin-captain-fm-bk104wh-t-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/mcpherson-twin-captain-fm-bk104wh-t-bed.webp'],
         variants:[],
         details:{
           dimensions:'Bookcase with Attached Side Ladder, Trundle Included, Open Shelves, Mortise & Tenon Joint',
@@ -6626,7 +7280,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nautia-twin-full-bunk-fm-bk629bl-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nautia-twin-full-bunk-fm-bk629bl-bed.webp'],
         variants:[],
         details:{
           dimensions:'Twin over Full with Attached Angled Ladder, Rails w/ Insert & Lock Joint Structure for Safety, Upper Bed Clearance 32"',
@@ -6647,7 +7301,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nicoli-full-metal-bed-fm7900wh-f.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/nicoli-full-metal-bed-fm7900wh-f.webp'],
         variants:[],
         details:{
           dimensions:'Full Metal Construction - Mattress Ready',
@@ -6668,7 +7322,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'ABS Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/overlander-car-bed-foa7740bw-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/overlander-car-bed-foa7740bw-bed.webp'],
         variants:[],
         details:{
           dimensions:'4x4 Off-Road Design with LED Headlights',
@@ -6689,7 +7343,7 @@ window.scrollTo(0, 0);
         Delivery:'fast',
         material:'ABS Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/pacefinder-car-bed-foa7331wh-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/pacefinder-car-bed-foa7331wh-bed.webp'],
         variants:[],
         details:{
           dimensions:'Race Car Design with LED Headlights',
@@ -6710,7 +7364,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'ABS Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/roadstar-car-bed-foa7730rd-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/roadstar-car-bed-foa7730rd-bed.webp'],
         variants:[],
         details:{
           dimensions:'Race Car Design with High Gloss Surface, LED Headlights - 83"W X 42.5"D X 26.5"H',
@@ -6731,7 +7385,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/thera-daybed-trundle-fm1000bk.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/thera-daybed-trundle-fm1000bk.webp'],
         variants:[],
         details:{
           dimensions:'Pipe-inspired Framework, Full Metal Construction - Mattress Ready',
@@ -6752,7 +7406,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette, ABS, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/trackster-foa7723bl-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/trackster-foa7723bl-bed.webp'],
         variants:[],
         details:{
           dimensions:'Race Car Design, Mattress Ready (Max 8"H)',
@@ -6773,7 +7427,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Wood Veneer, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/louis-phillipe-bed-fm7866ch.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/louis-phillipe-bed-fm7866ch.webp'],
         variants:[],
         details:{
           dimensions:'Transitional Sleigh Design, Foundation Required',
@@ -6794,7 +7448,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette, ABS, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/randlar-boys-foa7724bk-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/randlar-boys-foa7724bk-bed.webp'],
         variants:[],
         details:{
           dimensions:'Off-road SUV Design, Mattress Ready',
@@ -6815,7 +7469,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette, ABS, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/randlar-foa7724pk-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/randlar-foa7724pk-bed.webp'],
         variants:[],
         details:{
           dimensions:'Off-road SUV Design, Mattress Ready',
@@ -6836,7 +7490,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric, Acrylic, Solid Wood, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/allie-bed-cm7901.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/allie-bed-cm7901.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design, Foundation Required',
@@ -6857,7 +7511,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/charm-bed-cm7715.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/charm-bed-cm7715.webp'],
         variants:[],
         details:{
           dimensions:'Princess Carriage Design, Mattress Ready',
@@ -6878,7 +7532,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Linen-like, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sybella-bed-cm7218dg.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/sybella-bed-cm7218dg.webp'],
         variants:[],
         details:{
           dimensions:'Transitional design, Mattress Ready',
@@ -6899,7 +7553,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Fabric, Acrylic, Solid Wood, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/allie-bed-cm7901rg.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/allie-bed-cm7901rg.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design, Slat Kit Included',
@@ -6920,7 +7574,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette, Solid Wood, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/belva-bed-cm7174.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/belva-bed-cm7174.webp'],
         variants:[],
         details:{
           dimensions:'Traditional design, Foundation Required',
@@ -6941,7 +7595,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'MDF, Particle Board, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/firestall-twin-cm7644-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/firestall-twin-cm7644-bed.webp'],
         variants:[],
         details:{
           dimensions:'Fire Truck Design, Slat Kit Included',
@@ -6962,7 +7616,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Leatherette, ABS, Others',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/patrolene-foa7723pl-bed.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/patrolene-foa7723pl-bed.webp'],
         variants:[],
         details:{
           dimensions:'Patrol Car Design, Mattress Ready (Max 8"H)',
@@ -6983,7 +7637,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Premium Corduroy',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/micah-black-b9020.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/micah-black-b9020.webp'],
         variants:[],
         details:{
           dimensions:'King: 97.04" x 83.07" x 59.44" | Queen: 97" x 98" x 59.44"',
@@ -7004,7 +7658,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'PU',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/marbella-bed-b700.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/marbella-bed-b700.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 87.5" x 68.5" x 61" | King: 87.5" x 84.5" x 61"',
@@ -7025,7 +7679,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Velvet',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bella-blue-velvet-b1852.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/bella-blue-velvet-b1852.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 65.6" x 3" x 67.3" | King: 81.6" x 3" x 67.3"',
@@ -7046,7 +7700,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Upholstered',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/apollo-white-b420.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/apollo-white-b420.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 102.5" x 90" x 42.5" | King: 102.5" x 105.5" x 42.5"',
@@ -7067,7 +7721,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Upholstered',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/aspen-green-bed-b786.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/aspen-green-bed-b786.webp'],
         variants:[],
         details:{
           dimensions:'Modern comfort design',
@@ -7088,7 +7742,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Upholstered',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/luna-cream-bed-b400.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/luna-cream-bed-b400.webp'],
         variants:[],
         details:{
           dimensions:'66" Height',
@@ -7109,7 +7763,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Velvet',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rose-grey-bed-b600.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/rose-grey-bed-b600.webp'],
         variants:[],
         details:{
           dimensions:'55" Height',
@@ -7130,7 +7784,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Velvet',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lux-black-bed-b8009.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lux-black-bed-b8009.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 93.75" x 100.5" x 55" | King: 110" x 100.5" x 55"',
@@ -7151,7 +7805,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Teddy Fabric',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/zima-brown-bed-b200.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/zima-brown-bed-b200.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 85.8" x 73.2" x 39.4" | King: 85.8" x 89" x 39.4"',
@@ -7172,7 +7826,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Velvet',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/milan-white-b838.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/milan-white-b838.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 87.4" x 71.7" x 51.2" | King: 87.4" x 87.4" x 51.2"',
@@ -7193,7 +7847,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Upholstered',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/royal-black-tvbed-b8010.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/royal-black-tvbed-b8010.webp'],
         variants:[],
         details:{
           dimensions:'Queen: 101.25" x 71.25" x 58.5" | King: 101.25" x 87.75" x 58.5"',
@@ -7214,7 +7868,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Rubberwood, Polywood Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lantrisnant-dresser-fm72014dw-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lantrisnant-dresser-fm72014dw-d.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design',
@@ -7235,7 +7889,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Rubberwood, Engineered Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/panelli-dresser-fm72017br-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/panelli-dresser-fm72017br-d.webp'],
         variants:[],
         details:{
           dimensions:'Transitional design',
@@ -7256,7 +7910,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Poplar Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/galea-dresser-fm74006sv-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/galea-dresser-fm74006sv-d.webp'],
         variants:[],
         details:{
           dimensions:'Glam style',
@@ -7277,7 +7931,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Rubberwood, Paper Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ranier-dresser-fm72002gy-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ranier-dresser-fm72002gy-d.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design',
@@ -7298,7 +7952,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Rubberwood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hepburne-dresser-fm74000wn-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/hepburne-dresser-fm74000wn-d.webp'],
         variants:[],
         details:{
           dimensions:'Mid-Century Modern',
@@ -7319,7 +7973,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Rubberwood, Cherry Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/westerham-dresser-7m74001ch-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/westerham-dresser-7m74001ch-d.webp'],
         variants:[],
         details:{
           dimensions:'Transitional design',
@@ -7340,7 +7994,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Acacia Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/torrance-dresser-fm74002bk-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/torrance-dresser-fm74002bk-d.webp'],
         variants:[],
         details:{
           dimensions:'Mid-Century Modern',
@@ -7361,7 +8015,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Wood Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/louis-philippe-dresser-fm7866wh-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/louis-philippe-dresser-fm7866wh-d.webp'],
         variants:[],
         details:{
           dimensions:'Transitional design',
@@ -7382,7 +8036,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Wood Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ventresca-dresser-fm7635ch-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ventresca-dresser-fm7635ch-d.webp'],
         variants:[],
         details:{
           dimensions:'Traditional design',
@@ -7403,7 +8057,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Metal, Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashbourne-dresser-7m7415bk-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashbourne-dresser-7m7415bk-d.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design',
@@ -7424,7 +8078,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/kenyada-dresser-fm7421es-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/kenyada-dresser-fm7421es-d.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design',
@@ -7445,7 +8099,7 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Wood',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lucida-dresser-fm72015bg-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/lucida-dresser-fm72015bg-d.webp'],
         variants:[],
         details:{
           dimensions:'Contemporary design with LED',
@@ -7466,13 +8120,559 @@ window.scrollTo(0, 0);
         Delivery:'ready',
         material:'Solid Wood, Oak Veneer',
         dims:'',
-        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/merthyr-dresser-fm7431br-d.png'],
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/merthyr-dresser-fm7431br-d.webp'],
         variants:[],
         details:{
           dimensions:'Transitional design',
           materials:'Solid Wood, Oak Veneer, Others - Brown. Panel Style Headboard, Ball-Bearing Slides',
           shipping:'Houston delivery: next‑day or same‑week when in stock',
           warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'BR-B1000',
+        title:'B1000 Bedroom Set (4PC/5PC)',
+        category:'bedroom',
+        price:1799,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b1000.webp'],
+        variants:[],
+        details:{
+          dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+          materials:'Wood finish',
+          shipping:'Houston delivery available',
+          notes:'Extra nightstand available ($219.00).'
+        }
+      },
+      {
+        id:'BR-B1200',
+        title:'B1200 Bedroom Set (4PC/5PC)',
+        category:'bedroom',
+        price:1599,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b1200.webp'],
+        variants:[],
+        details:{
+          dimensions:'4PC/5PC set (Chest only in 5PC). Queen/King available.',
+          materials:'Wood/veneer finish',
+          shipping:'Houston delivery available',
+          notes:'Modern transitional styling.'
+        }
+      },
+      {
+        id:'BR-B211',
+        title:'Ashley B211 Bedroom Set (4PC/5PC)',
+        category:'bedroom',
+        price:1799,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b211.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC: Queen/King bed, Dresser, Mirror, 2 Nightstands',
+          materials:'Rustic finish, replicated oak grain',
+          shipping:'Houston delivery available',
+          notes:'Headboard with decorative paneling.'
+        }
+      },
+      {
+        id:'BR-B427',
+        title:'Ashley B427 Twin Bedroom Set (4PC)',
+        category:'bedroom',
+        price:1399,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-4pc-twin-bedroom-b427.webp'],
+        variants:[],
+        details:{
+          dimensions:'4PC Twin: Bed, Dresser, Mirror, Nightstand',
+          materials:'Grayish brown finish, replicated wood grain',
+          shipping:'Houston delivery available',
+          notes:'Perfect for kids or guest rooms.'
+        }
+      },
+      {
+        id:'BR-B5030',
+        title:'B5030 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:1899,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b5030.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Contemporary wood finish',
+          shipping:'Houston delivery available',
+          notes:'Clean lines, modern aesthetic.'
+        }
+      },
+      {
+        id:'BR-B6030',
+        title:'B6030 Bedroom Set (4PC)',
+        category:'bedroom',
+        price:1699,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/4pc-bedroom-b6030.webp'],
+        variants:[],
+        details:{
+          dimensions:'4PC set: Queen/King bed, Dresser, Mirror, Nightstand',
+          materials:'Traditional wood finish',
+          shipping:'Houston delivery available',
+          notes:'Classic design, warm finish.'
+        }
+      },
+      {
+        id:'BR-B7000',
+        title:'B7000 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2099,
+        featured:true,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b7000.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Premium wood construction',
+          shipping:'Houston delivery available',
+          notes:'Elegant design with upholstered headboard.'
+        }
+      },
+      {
+        id:'BR-B777',
+        title:'Ashley B777 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2199,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b777.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Distressed finish, solid wood',
+          shipping:'Houston delivery available',
+          notes:'Vintage-inspired farmhouse style.'
+        }
+      },
+      {
+        id:'BR-B8010',
+        title:'Royal Black TV Lift Bed (King)',
+        category:'bedroom',
+        price:3499,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/royal-black-tvbed-b8010.webp'],
+        variants:[],
+        details:{
+          dimensions:'King size with built-in TV lift mechanism',
+          materials:'Black finish, premium upholstery',
+          shipping:'Houston delivery: Professional installation available',
+          notes:'Electric TV lift at footboard. Remote control included.'
+        }
+      },
+      {
+        id:'BR-B844',
+        title:'B844 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:1999,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b844.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Contemporary finish',
+          shipping:'Houston delivery available',
+          notes:'Modern clean design.'
+        }
+      },
+      {
+        id:'BR-B9000',
+        title:'B9000 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2299,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-b9000.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Premium finish, quality construction',
+          shipping:'Houston delivery available',
+          notes:'Sophisticated style with LED accents.'
+        }
+      },
+      {
+        id:'BR-B916',
+        title:'Ashley B916 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2299,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/ashley-5pc-bedroom-b916.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Hardwood solids, oak & ash veneer, cast resin components',
+          shipping:'Houston delivery available',
+          notes:'Headboard bridge with 2 overhead LED lights. Foundation required.'
+        }
+      },
+      {
+        id:'BR-BEVERLY',
+        title:'Beverly 5PC Bedroom Set',
+        category:'bedroom',
+        price:2599,
+        featured:true,
+        best:true,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/beverly-5pc-bedroom-710997.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Mirrored finish with crystal accents',
+          shipping:'Houston delivery available',
+          notes:'Glamorous Hollywood Regency style with LED lighting.'
+        }
+      },
+      {
+        id:'BR-BLANCA2',
+        title:'Blanca 2 Black Bedroom Set',
+        category:'bedroom',
+        price:2799,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/blanca2black-bedroom-78997.webp'],
+        variants:[],
+        details:{
+          dimensions:'Queen/King bed with matching case goods',
+          materials:'Black finish with LED accents',
+          shipping:'Houston delivery available',
+          notes:'Modern design with built-in LED lighting throughout.'
+        }
+      },
+      {
+        id:'BR-BOSON',
+        title:'Boson 5PC Bedroom Set',
+        category:'bedroom',
+        price:2399,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Boson-5pc-bedroom-78497.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Contemporary finish',
+          shipping:'Houston delivery available',
+          notes:'Sleek modern styling.'
+        }
+      },
+      {
+        id:'BR-DIAMONDPALACE',
+        title:'Diamond Palace Black 5PC Bedroom',
+        category:'bedroom',
+        price:2999,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/diamond-palace-black-5pc-711997.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set with mirrored panels',
+          materials:'Black lacquer finish, mirrored accents, crystal tufting',
+          shipping:'Houston delivery: White glove service available',
+          notes:'Ultra-luxury design with LED lighting and crystal details.'
+        }
+      },
+      {
+        id:'BR-HAVANA',
+        title:'Havana 5PC Bedroom Set',
+        category:'bedroom',
+        price:2399,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/havana-5pc-bedroom-78497.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Contemporary finish',
+          shipping:'Houston delivery available',
+          notes:'Modern transitional design.'
+        }
+      },
+      {
+        id:'BR-HH3500',
+        title:'HH3500 Queen Bedroom Set (5PC)',
+        category:'bedroom',
+        price:1999,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-queen-hh3500.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Wood construction',
+          shipping:'Houston delivery available',
+          notes:'Classic design with clean lines.'
+        }
+      },
+      {
+        id:'BR-HH3600',
+        title:'HH3600 Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2099,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-set-hh3600.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Quality wood construction',
+          shipping:'Houston delivery available',
+          notes:'Traditional styling with modern touches.'
+        }
+      },
+      {
+        id:'BR-HH3700',
+        title:'HH3700 Queen Bedroom Set (5PC)',
+        category:'bedroom',
+        price:2199,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/5pc-bedroom-queen-hh3700.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Premium wood finish',
+          shipping:'Houston delivery available',
+          notes:'Elegant design with detailed craftsmanship.'
+        }
+      },
+      {
+        id:'BR-KINGDOM',
+        title:'Kingdom 5PC King Bedroom Set',
+        category:'bedroom',
+        price:3299,
+        featured:true,
+        best:true,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/kingdom-5pc-king-713997.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC King set with upholstered headboard',
+          materials:'Premium finish with crystal tufted headboard',
+          shipping:'Houston delivery: White glove service recommended',
+          notes:'Luxury statement piece with LED lighting and mirrored accents.'
+        }
+      },
+      {
+        id:'BR-MAGNOLIA10',
+        title:'Magnolia 5PC Bedroom Set',
+        category:'bedroom',
+        price:2499,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/magnolia-5pc-bedroom.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Contemporary styling',
+          shipping:'Houston delivery available',
+          notes:'Modern clean aesthetic.'
+        }
+      },
+      {
+        id:'BR-MAJESTY2',
+        title:'Majesty 2 Black 5PC Bedroom',
+        category:'bedroom',
+        price:2899,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/majesty2black-5pc-710997.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set with LED lighting',
+          materials:'Black lacquer finish with mirrored panels',
+          shipping:'Houston delivery available',
+          notes:'Bold contemporary design with integrated LED system.'
+        }
+      },
+      {
+        id:'BR-MASTER',
+        title:'Master 5PC Queen Bedroom Set',
+        category:'bedroom',
+        price:2799,
+        featured:true,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/master-5pc-queen-710997.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set: Bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Premium finish with decorative details',
+          shipping:'Houston delivery available',
+          notes:'Sophisticated design with quality craftsmanship.'
+        }
+      },
+      {
+        id:'BR-MOONLIGHT',
+        title:'Moonlight 5PC Queen Bedroom',
+        category:'bedroom',
+        price:2599,
+        featured:true,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/moonlight-5pc-queen-bedroom-75497.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC Queen set with LED accents',
+          materials:'Contemporary finish with lighting features',
+          shipping:'Houston delivery available',
+          notes:'Modern design with ambient LED lighting.'
+        }
+      },
+      {
+        id:'BR-OSLO',
+        title:'Oslo 5PC Bedroom Set',
+        category:'bedroom',
+        price:2299,
+        featured:false,
+        best:false,
+        isNew:false,
+        inStock:true,
+        Delivery:'fast',
+        material:'',
+        dims:'',
+        images:['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/oslo-5pc-bedroom-78497.webp'],
+        variants:[],
+        details:{
+          dimensions:'5PC set: Queen/King bed, Dresser, Mirror, Nightstand, Chest',
+          materials:'Scandinavian-inspired finish',
+          shipping:'Houston delivery available',
+          notes:'Clean minimalist design.'
         }
       }
           ];
@@ -7547,7 +8747,7 @@ window.scrollTo(0, 0);
     };
 
     /* ---------- Utilities ---------- */
-    const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+    const money = n => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
     const clamp = (v,min,max)=> Math.max(min, Math.min(max, v));
 
     function toast(msg){
@@ -7684,6 +8884,8 @@ window.scrollTo(0, 0);
       const go = e.target?.closest?.('[data-go]')?.dataset?.go;
       if(go){
         location.hash = go;
+        // Immediately render (mobile Safari can miss/delay hashchange)
+        try { route(); } catch(e) {}
         closeThing('menuDrawer');
         closeThing('searchModal');
         closeThing('filterModal');
@@ -7719,7 +8921,7 @@ window.scrollTo(0, 0);
     }
 
     // No hover pull-down (was disruptive). Open on click (desktop), close on outside click / ESC.
-    $$('nav.nav-primary a[data-mega]').forEach(a=>{
+    $$('nav.primary a[data-mega]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         if(window.innerWidth < 900) return; // mobile keeps normal navigation
         const key = a.dataset.mega;
@@ -7735,7 +8937,7 @@ window.scrollTo(0, 0);
     document.addEventListener('click', (e)=>{
       if(!mega.classList.contains('open')) return;
       const inMega = mega.contains(e.target);
-      const inTrigger = e.target.closest && e.target.closest('nav.nav-primary a[data-mega]');
+      const inTrigger = e.target.closest && e.target.closest('nav.primary a[data-mega]');
       if(!inMega && !inTrigger) closeMega();
     });
 
@@ -7763,12 +8965,12 @@ window.scrollTo(0, 0);
 
     /* ---------- Home modules ---------- */
     function cardHTML(p, compact=false){
-      const swap = imgURL(p.images[1] || p.images[0]);
+      const swap = p.images[1] || p.images[0];
       const badge = p.Delivery === 'ready' ? 'Ready today' : (p.Delivery === 'fast' ? '3–7 days' : '2–4 wks');
       const stock = p.inStock ? 'In stock' : 'Made to order';
       const stockMobile = p.inStock ? 'Stock' : 'Order';
       return `
-      <article class="card p-card${compact?' compact':''}" data-id="${p.id}">
+      <article class="card p-card" data-id="${p.id}">
         <div class="p-actions">
           <button class="mini" aria-label="Add to cart" data-cart="${p.id}">
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.5-8.3C.9 9.9 2.1 7 4.9 6.1c2-.6 3.7.3 5 1.8 1.3-1.5 3-2.4 5-1.8 2.8.9 4 3.8 2.4 6.6C19 16.4 12 21 12 21z"/></svg>
@@ -7776,8 +8978,8 @@ window.scrollTo(0, 0);
         </div>
         <a href="#/product/${p.id}" data-nav aria-label="${p.title}">
           <div class="p-media">
-            <img class="p-img" loading="lazy" src="${imgURL(p.images[0])}" alt="${p.title}">
-            <img class="swap" loading="lazy" src="${imgURL(swap)}" alt="${p.title} alternate view">
+            <img class="primary" loading="eager" decoding="async" src="${p.images[0]}" alt="${p.title}">
+            <img class="swap" loading="eager" decoding="async" src="${swap}" alt="${p.title} alternate view">
           </div>
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
@@ -7990,18 +9192,7 @@ window.scrollTo(0, 0);
       toast('Quick view');
     }
 
-    
-    // Resolve local asset paths when running as a single HTML file (no /assets folder on disk)
-    const ASSET_BASE = 'https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/';
-    function imgURL(src){
-      if(!src) return src;
-      if(/^https?:\/\//i.test(src) || src.startsWith('data:')) return src;
-      if(src.startsWith('/')) return src;
-      if(src.startsWith('assets/')) return ASSET_BASE + src;
-      return src;
-    }
-
-/* ---------- PDP ---------- */
+    /* ---------- PDP ---------- */
     function renderPDP(id){
       const p = catalog.find(x=>x.id===id);
       if(!p){
@@ -8045,15 +9236,15 @@ window.scrollTo(0, 0);
 
       // Gallery
       const main = $('#galleryMain');
-      const first = imgURL(p.images[0]);
+      const first = p.images[0];
       main.innerHTML = `<img src="${first}" alt="${p.title}">`;
       main.onclick = ()=> openLightbox(first, p.title);
       main.onkeydown = (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); openLightbox(first, p.title); } };
 
       const thumbs = $('#thumbs');
       thumbs.innerHTML = p.images.slice(0,6).map((src,i)=>`
-        <button class="thumb" aria-current="${i===0}" data-src="${imgURL(src)}" aria-label="Select image ${i+1}">
-          <img loading="lazy" src="${imgURL(src)}" alt="${p.title} thumbnail ${i+1}">
+        <button class="thumb" aria-current="${i===0}" data-src="${src}" aria-label="Select image ${i+1}">
+          <img loading="lazy" src="${src}" alt="${p.title} thumbnail ${i+1}">
         </button>
       `).join('');
       thumbs.querySelectorAll('.thumb').forEach(btn=>{
@@ -8089,7 +9280,11 @@ window.scrollTo(0, 0);
           item.setAttribute('aria-expanded', String(!expanded));
         });
       });
-      // Complete-the-room removed per request (no cross-sell render here)
+
+      // Cross-sell
+      const pool = catalog.filter(x=>x.category===p.category && x.id!==p.id).slice(0,4);
+      $('#crossSellGrid').innerHTML = pool.map(x=>cardHTML(x)).join('') || `<div class="subtle">More matching items coming soon.</div>`;
+      wireProductCardActions($('#crossSellGrid'));
 
       // Buttons
       $('#addToCartBtn').onclick = ()=> addToCart(p.id);
@@ -8192,7 +9387,7 @@ window.scrollTo(0, 0);
         return `
           <div class="card pad" style="display:grid;grid-template-columns:88px 1fr;gap:12px;align-items:start;margin-bottom:12px;">
             <div class="p-media" style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,26,26,.10);">
-              <img loading="lazy" src="${imgURL(p.images[0])}" alt="${p.title}">
+              <img loading="lazy" src="${p.images[0]}" alt="${p.title}">
             </div>
             <div style="display:grid;gap:8px;">
               <div style="display:flex;justify-content:space-between;gap:10px;align-items:start;">
@@ -8418,6 +9613,9 @@ window.scrollTo(0, 0);
     }
 
     window.addEventListener('hashchange', route);
+    // Ensure route runs on mobile back/forward cache restores and initial paint
+    window.addEventListener('pageshow', route);
+    document.addEventListener('DOMContentLoaded', route);
 
     // Click handler for navigation links
     document.body.addEventListener('click', (e)=>{
@@ -8582,7 +9780,174 @@ document.addEventListener("DOMContentLoaded", () => {
   next.addEventListener('click', ()=>{ index = Math.min(maxIndex, index+1); update(); });
 })();
 </script>
+<style>
+/* ===== APPLE-ELITE FOOTER (mirrors header translucent style) ===== */
+/* Apple-elite footer mirroring header */
+.footerA{
+  background:rgba(246,243,238,.80);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-top:1px solid rgba(0,0,0,.08);
+  padding:32px 0 max(16px, env(safe-area-inset-bottom));
+  display:flex;
+}
+.footerA::before{ display:none; }
 
+.footerA .wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 24px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+/* Logo at top - big and centered */
+.footerA .footer-logo{
+  display:flex;
+  justify-content:center;
+  margin:0;
+  padding-bottom:24px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.footerA .footer-logo img{
+  display:block;
+  height: 170px;
+  width:auto;
+  filter:drop-shadow(0 2px 8px rgba(0,0,0,.06));
+  opacity:0.90;
+}
+
+/* Bottom row: © + Built by + links */
+.footerA .footer-bottom-row{
+  display:grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items:center;
+  column-gap:16px;
+  padding-top:20px;
+  border-top:1px solid rgba(0,0,0,.06);
+}
+
+.footerA .footer-copyright{
+  justify-self:start;
+  text-align:left;
+  letter-spacing:-.01em;
+  color:rgba(0,0,0,.70);
+  font-size:13px;
+  font-weight:400;
+  white-space:nowrap;
+}
+
+.footerA .footer-builtby{
+  justify-self:center;
+  white-space:nowrap;
+}
+
+.footerA .footer-links{
+  justify-self:end;
+  display:flex;
+  justify-content:flex-end;
+  gap:20px;
+  white-space:nowrap;
+}
+.footerA .footer-links a{
+  color:rgba(0,0,0,.70);
+  text-decoration:none;
+  transition:color 0.2s ease;
+  font-weight:400;
+  letter-spacing:-.01em;
+  font-size:13px;
+}
+.footerA .footer-links a:hover{
+  color:#1d1d1f;
+}
+
+.footerA .snrg-credit{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 24px;
+  background:#ffffff;
+  border:1px solid rgba(0,0,0,.14);
+  border-radius:12px;
+  transition:all 0.2s cubic-bezier(0.2,0.8,0.2,1);
+  text-decoration:none;
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  white-space:nowrap;
+}
+.footerA .snrg-credit:hover{
+  background:#ffffff;
+  border-color:rgba(0,0,0,.22);
+  box-shadow:0 4px 12px rgba(0,0,0,.10);
+  transform:translateY(-1px);
+}
+
+.footerA .built-by-label{
+  font-size:14px;
+  color:rgba(0,0,0,.60);
+  font-weight:400;
+  letter-spacing:-.01em;
+}
+.footerA .snrg-text{
+  font-size:18px;
+  font-weight:700;
+  letter-spacing:-.02em;
+  color:#111;
+  text-transform:uppercase;
+}
+.footerA .snrg-icon{
+  width:16px;
+  height:16px;
+  color:rgba(0,0,0,.70);
+}
+
+/* Mobile */
+@media (max-width: 760px){
+  .footerA{
+    padding:24px 0 max(12px, env(safe-area-inset-bottom));
+  }
+  .footerA .wrap{
+    padding:0 16px;
+    gap:20px;
+  }
+  .footerA .footer-logo{
+    padding-bottom:20px;
+  }
+  .footerA .footer-logo img{
+    height: 120px;
+  }
+  .footerA .footer-bottom-row{
+    grid-template-columns: 1fr auto 1fr;
+    column-gap:12px;
+    row-gap:0;
+  }
+  .footerA .footer-copyright{
+    text-align:left;
+    font-size:12px;
+  }
+  .footerA .footer-links{
+    justify-content:flex-end;
+    gap:16px;
+  }
+  .footerA .footer-links a{
+    font-size:12px;
+  }
+    .footerA .snrg-credit{
+    padding:10px 20px;
+  }
+  .footerA .built-by-label{
+    font-size:13px;
+  }
+  .footerA .snrg-text{
+    font-size:16px;
+  }
+  .footerA .snrg-icon{
+    width:14px;
+    height:14px;
+  }
+}
+</style>
 <footer aria-label="Footer" class="footerA">
   <div class="wrap">
     <!-- Logo -->
@@ -8595,7 +9960,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="footer-copyright">© 2026 Angel's Furniture</div>
 
       <div class="footer-builtby">
-        <a class="snrg-btn" href="https://snrgweb.com" target="_blank" rel="noopener noreferrer">
+        <a class="snrg-credit" href="https://snrgweb.com" target="_blank" rel="noopener noreferrer">
           <span class="built-by-label">Built by</span>
           <span class="snrg-text">SNRG WEB</span>
           <svg class="snrg-icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
@@ -8639,155 +10004,10 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
   // close on outside click or ESC
   document.addEventListener('click', ()=> document.querySelectorAll('.mega').forEach(m=>m.classList.remove('open')));
-  document.addEventListener('keydown', e=>{
-    if(e.key==='Escape') document.querySelectorAll('.mega').forEach(m=>m.classList.remove('open'));
-  });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.mega').forEach(m=>m.classList.remove('open')); });
+  // prevent mega from closing when clicking inside
+  document.querySelectorAll('.mega').forEach(m=>{ m.addEventListener('click', e=>e.stopPropagation()); });
 });
-
 </script>
-
-<style>
-/* ===== FOOTER (DESKTOP PERFECT + MOBILE CLEAN) ===== */
-.footerA{
-  background:rgba(246,243,238,.80);
-  backdrop-filter:saturate(160%) blur(14px);
-  -webkit-backdrop-filter:saturate(160%) blur(14px);
-  border-top:1px solid rgba(0,0,0,.08);
-  padding:32px 0 calc(16px + env(safe-area-inset-bottom));
-}
-.footerA .wrap{
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 24px;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  gap:24px;
-}
-.footerA .footer-logo{
-  display:flex;
-  justify-content:center;
-  margin:0;
-  padding-bottom:24px;
-  border-bottom:1px solid rgba(0,0,0,.06);
-}
-.footerA .footer-logo img{
-  width:auto;
-  height:128px;
-  max-width:360px;
-  object-fit:contain;
-}
-.footerA .footer-bottom-row{
-  display:grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items:center;
-  gap:24px;
-  padding-top:22px;
-  border-top:1px solid rgba(0,0,0,.08);
-}
-.footer-copyright{
-  justify-self:start;
-  font-size:14px;
-  color:rgba(0,0,0,.65);
-}
-.footer-builtby{ justify-self:center; }
-.footer-links{
-  justify-self:end;
-  display:flex;
-  gap:18px;
-  font-size:14px;
-}
-.footer-links a{
-  color:rgba(0,0,0,.65);
-  text-decoration:none;
-}
-.footer-links a:hover{ color:rgba(0,0,0,.90); }
-.snrg-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:18px 22px;
-  border-radius:18px;
-  border:1px solid rgba(0,0,0,.14);
-  background:#fff;
-  color:#111;
-  box-shadow:0 8px 22px rgba(0,0,0,.08);
-  text-decoration:none;
-}
-.snrg-btn .muted{ color:rgba(0,0,0,.55); font-weight:500; }
-.snrg-btn strong{ font-size:22px; letter-spacing:-.02em; }
-.snrg-icon{width:18px;height:18px;flex:0 0 auto;opacity:.85}
-.snrg-btn .built-by-label{color:rgba(0,0,0,.55);font-weight:500}
-.snrg-btn .snrg-text{font-size:22px;font-weight:700;letter-spacing:-.02em}
-/* SNRG Button Size Tweak (slightly smaller on all devices) */
-.snrg-btn{ padding:10px 16px !important; border-radius:14px !important; gap:10px !important; }
-.snrg-btn .snrg-text{ font-size:20px !important; }
-.snrg-icon{ width:16px !important; height:16px !important; }
-.snrg-btn .built-by-label{ font-size:14px !important; }
-@media (max-width: 640px){
-  .snrg-btn{ padding:10px 14px !important; }
-  .snrg-btn .snrg-text{ font-size:18px !important; }
-}
-
-
-/* Mobile: keep ONLY built by centered, and ensure sticky bar doesn't cover it */
-@media (max-width: 640px){
-  .footerA{ padding-bottom: calc(120px + env(safe-area-inset-bottom)); }
-  .footerA .wrap{ padding:0 16px; gap:18px; }
-  .footerA .footer-logo img{ height:108px; max-width:320px; }
-  .footerA .footer-bottom-row{
-    grid-template-columns: 1fr;
-    border-top:1px solid rgba(0,0,0,.08);
-    padding-top:16px;
-  }
-  .footer-copyright, .footer-links{ display:none !important; }
-}
-</style>
-
-
-<style>
-/* ===== APPLE-TECH PDP BUY SECTION ===== */
-.pdp-panel{ width: min(420px, 100%); }
-.pdp-card{
-  border-radius:22px;
-  border:1px solid rgba(0,0,0,.10);
-  background:rgba(255,255,255,.62);
-  backdrop-filter:saturate(160%) blur(12px);
-  -webkit-backdrop-filter:saturate(160%) blur(12px);
-  box-shadow:0 14px 40px rgba(0,0,0,.10);
-}
-.pdp-title{ font-size:28px; letter-spacing:-.02em; line-height:1.1; }
-.pdp-price{ display:flex; align-items:baseline; gap:10px; }
-.pdp-price .price{ font-size:22px; font-weight:650; letter-spacing:-.02em; }
-.pdp-ctas{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
-.btn.primary{ background:#111; color:#fff; border:none; box-shadow:0 6px 16px rgba(0,0,0,.14); }
-.btn.ghost{ background:rgba(255,255,255,.62); border:1px solid rgba(0,0,0,.10); }
-.btn.ghost:hover{ background:rgba(255,255,255,.78); }
-.accordion .row{ border-radius:16px; border:1px solid rgba(0,0,0,.08); background:rgba(255,255,255,.55); }
-.accordion .row + .row{ margin-top:10px; }
-.accordion .row button{ padding:14px 16px; }
-
-
-/* Mobile: keep layout, no stacking beyond what's necessary */
-@media (max-width: 980px){
-  .pdp-grid{ grid-template-columns:1fr !important; }
-  .pdp-panel{ width:100% !important; }
-  .pdp-sticky{ position:relative !important; top:auto !important; }
-}
-
-/* PDP mobile polish */
-@media (max-width: 720px){
-  .pdp{ padding-bottom: 76px; } /* room for sticky bottom bar */
-  .pdp-grid{ gap:14px !important; }
-  .gallery-main{ min-height: 320px; border-radius:18px; }
-  .thumbs{ grid-template-columns: repeat(5, minmax(0, 1fr)); gap:8px; }
-  .pdp-card{ padding:18px; border-radius:20px; }
-  .pdp-title{ font-size:26px; }
-  .pdp-price{ flex-wrap:wrap; row-gap:6px; }
-  .pdp-price .price{ line-height:1.1; }
-}
-
-</style>
-
 </body>
 </html>
