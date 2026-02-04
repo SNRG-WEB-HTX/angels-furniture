@@ -2,6 +2,8 @@
 
 <html lang="en">
 <head>
+<link rel="preconnect" href="https://raw.githubusercontent.com">
+<link rel="dns-prefetch" href="https://raw.githubusercontent.com">
 <link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="icon" type="image/png"/>
 <link href="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" rel="apple-touch-icon"/>
 <meta content="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" property="og:image"/>
@@ -3672,8 +3674,8 @@ window.scrollTo(0, 0);
 <div class="grid md-grid-3 grid-2 lg-grid-4">
 <a class="card p-card" href="#/collection/living" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Living Room" class="primary" loading="lazy" src="assets/images/thea-s343.png"/>
-<img alt="Living Room" class="swap" loading="lazy" src="assets/images/zaira-s351.png"/>
+<img alt="Living Room" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="assets/images/thea-s343.png"/>
+<img alt="Living Room" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="assets/images/zaira-s351.png"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t053">Living</h3>
@@ -3682,8 +3684,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/bedroom" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Bedroom" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Bedroom" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Bedroom" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Bedroom" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t056">Bedroom</h3>
@@ -3692,8 +3694,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/dining" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Dining Room" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Dining Room" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Dining Room" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Dining Room" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t059">Dining</h3>
@@ -3702,8 +3704,8 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/office" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Office" class="primary" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Office" class="swap" loading="lazy" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Office" class="primary" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Office" class="swap" loading="lazy" decoding="async" fetchpriority="low" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t062">Office</h3>
@@ -8338,6 +8340,8 @@ window.scrollTo(0, 0);
       const go = e.target?.closest?.('[data-go]')?.dataset?.go;
       if(go){
         location.hash = go;
+        // Immediately render (mobile Safari can miss/delay hashchange)
+        try { route(); } catch(e) {}
         closeThing('menuDrawer');
         closeThing('searchModal');
         closeThing('filterModal');
@@ -8430,8 +8434,8 @@ window.scrollTo(0, 0);
         </div>
         <a href="#/product/${p.id}" data-nav aria-label="${p.title}">
           <div class="p-media">
-            <img class="primary" loading="lazy" src="${p.images[0]}" alt="${p.title}">
-            <img class="swap" loading="lazy" src="${swap}" alt="${p.title} alternate view">
+            <img class="primary" loading="lazy" decoding="async" fetchpriority="low" src="${p.images[0]}" alt="${p.title}">
+            <img class="swap" loading="lazy" decoding="async" fetchpriority="low" src="${swap}" alt="${p.title} alternate view">
           </div>
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
@@ -9065,6 +9069,9 @@ window.scrollTo(0, 0);
     }
 
     window.addEventListener('hashchange', route);
+    // Ensure route runs on mobile back/forward cache restores and initial paint
+    window.addEventListener('pageshow', route);
+    document.addEventListener('DOMContentLoaded', route);
 
     // Click handler for navigation links
     document.body.addEventListener('click', (e)=>{
