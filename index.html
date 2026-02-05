@@ -770,7 +770,7 @@
     }
     .mini:active{ transform:translateY(1px); }
     .mini:hover{ background:rgba(255,255,255,.90); }
-    .mini.added{ background:#1F8A5B !important; border-color:#1F8A5B !important; }
+    .mini.added{ background:#C9A86A !important; border-color:#C9A86A !important; }
     .mini.added svg{ fill:#fff; stroke:#fff; }
     .mini svg{ fill:none; stroke:currentColor; transition:all var(--t220) var(--ease); }
     .mini.added svg{ fill:#fff !important; }
@@ -1025,7 +1025,7 @@
     .gallery-main img{
       width:100%;
       height: clamp(280px, 45vw, 520px);
-      object-fit:cover;
+      object-fit:contain;
     }
     .thumbs{
       display:grid;
@@ -1548,14 +1548,14 @@ header{ min-height: 110px !important; }
 /* ===== Hero readable glass card ===== */
 .hero-glass-card{
   background: rgba(255,255,255,.28);
-  border: 3px solid rgba(0,0,0,.10);
+  border: 3px solid #C9A86A;
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
   padding: clamp(18px, 3vw, 28px);
   box-shadow: 0 12px 30px rgba(26,26,26,.10), 
-              0 0 0 2px rgba(0,0,0,.06) inset,
+              0 0 0 2px rgba(201,168,106,.15) inset,
               0 2px 4px rgba(0,0,0,.04),
-              0 0 20px rgba(0,0,0,.05);
+              0 0 20px rgba(201,168,106,.12);
   max-width: 820px;
   position: relative;
 }
@@ -1569,11 +1569,11 @@ header{ min-height: 110px !important; }
   border-radius: 22px;
   padding: 3px;
   background: linear-gradient(135deg, 
-    rgba(0,0,0,.12) 0%, 
-    rgba(0,0,0,.06) 25%, 
-    rgba(0,0,0,.04) 50%, 
-    rgba(0,0,0,.06) 75%, 
-    rgba(0,0,0,.12) 100%);
+    rgba(201,168,106,.35) 0%, 
+    rgba(201,168,106,.20) 25%, 
+    rgba(201,168,106,.12) 50%, 
+    rgba(201,168,106,.20) 75%, 
+    rgba(201,168,106,.35) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -1687,11 +1687,11 @@ header { position: sticky; top:0; }
 
 .hero-glass-card{
   background: rgba(255,255,255,.28) !important;
-  border: 1.5px solid rgba(0,0,0,.08);
+  border: 1.5px solid #C9A86A !important;
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
   padding: clamp(16px, 3vw, 24px);
-  box-shadow: 0 12px 30px rgba(26,26,26,.10);
+  box-shadow: 0 12px 30px rgba(26,26,26,.10), 0 0 20px rgba(201,168,106,.12);
   max-width: 860px;
 }
 
@@ -1720,11 +1720,11 @@ header { position: sticky; top:0; }
   max-width: 100% !important;
   width: fit-content !important;
   background: rgba(255,255,255,.28) !important;  /* white transparent */
-  border: 1.5px solid rgba(0,0,0,.08);
+  border: 1.5px solid #C9A86A !important;
   backdrop-filter: saturate(140%) blur(10px);
   border-radius: 22px;
   padding: clamp(14px, 2.5vw, 22px);
-  box-shadow: 0 10px 26px rgba(26,26,26,.10);
+  box-shadow: 0 10px 26px rgba(26,26,26,.10), 0 0 20px rgba(201,168,106,.12);
 }
 .hero-card-title{ margin-bottom: 12px; }
 .hero-card-actions{}
@@ -1736,41 +1736,59 @@ header { position: sticky; top:0; }
 }
 /* ===== PREMIUM SHOP-BY-ROOM CARDS ===== */
 .shop-room-card{
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  border: 1px solid rgba(26,26,26,.10);
-  background: #fff;
-  box-shadow: 0 10px 28px rgba(26,26,26,.10);
+  position:relative;
+  overflow:hidden;
+  border-radius:22px;
+  border:1px solid rgba(26,26,26,.10);
+  box-shadow: 0 14px 34px rgba(26,26,26,.14);
+  transform: translateZ(0);
   transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+  min-height: 220px;
 }
 .shop-room-card:hover{
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(26,26,26,.14);
+  box-shadow: 0 20px 48px rgba(26,26,26,.18);
 }
 .shop-room-card .p-media{
+  position:absolute !important; 
+  inset:0 !important;
   border-radius: 0 !important;
   border: 0 !important;
 }
+.shop-room-card .p-media img{
+  width:100%; height:100%;
+  object-fit:cover;
+  filter: saturate(108%) contrast(102%);
+  transform: scale(1.02);
+}
+.shop-room-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 420px at 50% 10%, rgba(255,255,255,.10), rgba(0,0,0,0) 55%),
+    linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55) 100%);
+  pointer-events:none;
+}
 .shop-room-overlay{
   position:absolute;
-  inset:auto 12px 12px 12px;
-  background: rgba(255,255,255,.82);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(26,26,26,.10);
-  border-radius: 14px;
-  padding: 12px 14px;
+  left:14px; right:14px; bottom:14px;
+  z-index:2;
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
+  gap:12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(10px) saturate(140%);
 }
 .shop-room-overlay strong{
-  font-size: 15px;
-  letter-spacing: -.01em;
-}
-.shop-room-overlay .subtle{
-  font-size: 12px;
+  color:#fff;
+  font-weight:800;
+  letter-spacing:-.02em;
+  text-shadow: 0 10px 30px rgba(0,0,0,.55);
+  font-size: 16px;
 }
 
 
@@ -2681,25 +2699,26 @@ body, .btn, input, textarea, select{
   padding: clamp(14px, 2.6vw, 24px);
   border-radius: 22px;
   background: rgba(255,255,255,.28);
-  border: 1.5px solid rgba(0,0,0,.08);
+  border: 3px solid #C9A86A;
   backdrop-filter: blur(12px) saturate(140%);
   box-shadow: 0 18px 46px rgba(0,0,0,.28),
-              0 0 0 1px rgba(0,0,0,.05) inset,
-              0 4px 12px rgba(0,0,0,.04);
+              0 0 0 2px rgba(201,168,106,.15) inset,
+              0 4px 12px rgba(0,0,0,.04),
+              0 0 20px rgba(201,168,106,.12);
   position: relative;
 }
 .hero-glass::before {
   content: '';
   position: absolute;
-  inset: -1.5px;
+  inset: -3px;
   border-radius: 22px;
-  padding: 1.5px;
+  padding: 3px;
   background: linear-gradient(135deg, 
-    rgba(0,0,0,.08) 0%, 
-    rgba(0,0,0,.05) 25%, 
-    rgba(0,0,0,.03) 50%, 
-    rgba(0,0,0,.05) 75%, 
-    rgba(0,0,0,.08) 100%);
+    rgba(201,168,106,.35) 0%, 
+    rgba(201,168,106,.20) 25%, 
+    rgba(201,168,106,.12) 50%, 
+    rgba(201,168,106,.20) 75%, 
+    rgba(201,168,106,.35) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -2817,9 +2836,9 @@ body, .btn, input, textarea, select{
     margin: -30px auto 0 !important;
     padding-bottom: 30px !important;
     background: rgba(255,255,255,.28) !important;
-    border: 1.5px solid rgba(0,0,0,.08) !important;
+    border: 3px solid #C9A86A !important;
     backdrop-filter: blur(12px) saturate(140%);
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12), 0 0 20px rgba(201,168,106,.12);
   }
 
   /* Hero text: readable, furniture-brand calm */
@@ -3232,9 +3251,9 @@ img {
     max-width: 560px !important;
     margin: 0 auto !important;
     background: rgba(255,255,255,.28) !important;
-    border: 1.5px solid rgba(0,0,0,.08) !important;
+    border: 3px solid #C9A86A !important;
     backdrop-filter: blur(12px) saturate(140%);
-    box-shadow: 0 12px 30px rgba(0,0,0,.12);
+    box-shadow: 0 12px 30px rgba(0,0,0,.12), 0 0 20px rgba(201,168,106,.12);
   }
 
   .hero h1{
@@ -3881,9 +3900,6 @@ window.scrollTo(0, 0);
 </div>
 <div class="pdp-ctas">
 <button class="btn primary full" data-i18n="t107" id="addToCartBtn">Add to cart</button>
-<button class="btn ghost full" data-i18n="t108" id="pickupBtn">Store pickup</button>
-<button class="btn ghost full" data-i18n="t109" id="visitBtn">Schedule showroom visit</button>
-<button class="btn ghost full" data-i18n="t110" id="askBtn">Ask a question</button>
 </div>
 <div class="trust">
 <div class="row"><span data-i18n="t111">Delivery &amp; assembly</span><span data-i18n="t112" id="pdpDelivery">3–7 days</span></div>
@@ -8612,7 +8628,7 @@ window.scrollTo(0, 0);
           btn.classList.add("added");
           setTimeout(()=>btn.classList.remove("added"), 1500);
           e.preventDefault(); e.stopPropagation();
-          addToCart(btn.dataset.wish);
+          addToCart(btn.dataset.cart);
         });
       });
       root.querySelectorAll('[data-quick]').forEach(btn=>{
@@ -8733,9 +8749,6 @@ window.scrollTo(0, 0);
       // Buttons
       $('#addToCartBtn').onclick = ()=> addToCart(p.id);
       $('#stickyAdd').onclick = ()=> addToCart(p.id);
-      $('#pickupBtn').onclick = ()=> toast('Pickup: available options (demo)');
-      $('#visitBtn').onclick = ()=> { location.hash = '#/showroom'; toast('Showroom visit'); };
-      $('#askBtn').onclick = ()=> { location.hash = '#/contact'; toast('Ask a question'); };
 
       // Mobile sticky CTA toggle when on PDP
       $('#mobileSticky').classList.add('show');
