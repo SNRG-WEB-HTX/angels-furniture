@@ -373,6 +373,32 @@
     }
     }
 
+
+    /* LAPTOP TUNING — keep Living Room in header, move Decor to hamburger-only */
+    @media (min-width: 1100px) and (max-width: 1440px){
+      nav.primary a[href="#/collection/decor"]{ display:none !important; }
+      /* bring hamburger back so Decor (and overflow) is reachable */
+      .mobile-menu-only{ display:inline-flex !important; }
+    }
+
+    /* Monthly Specials stars (tight + classy) */
+    .ms-star{
+      color:#C8A24A;
+      font-size:12px;
+      line-height:1;
+      margin:0 3px; /* tighter */
+      vertical-align:middle;
+    }
+    .nav-specials{
+      display:inline-flex;
+      align-items:center;
+      gap:0;
+      font-weight:700;
+    }
+    .btn-specials{
+      font-weight:800;
+    }
+
     /* Mega menu */
     .mega{
       position:absolute;
@@ -690,6 +716,40 @@
       flex-direction:column;
       gap:2px;
     }
+
+    /* Catalog: replace visible prices with an Apple-clean "Email for Price" CTA */
+    .price-cta{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:fit-content;
+      margin-top:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid rgba(26,26,26,.10);
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(160%) blur(14px);
+      box-shadow:0 8px 20px rgba(26,26,26,.08), 0 1px 0 rgba(255,255,255,.75) inset;
+      font-weight:900;
+      font-size:18px;
+      letter-spacing:-.02em;
+      transition:transform var(--t160) var(--ease), box-shadow var(--t160) var(--ease), background var(--t160) var(--ease);
+      -webkit-tap-highlight-color:rgba(0,0,0,.04);
+    }
+    .price-cta:hover{
+      transform:translateY(-1px);
+      background:rgba(255,255,255,.98);
+      box-shadow:0 12px 28px rgba(26,26,26,.10), 0 1px 0 rgba(255,255,255,.85) inset;
+    }
+    .price-cta:active{ transform:scale(.98); }
+    .price-cta::after{
+      content:"→";
+      margin-left:10px;
+      font-weight:900;
+      opacity:.85;
+    }
+
+
     .p-title{
       margin:0;
       font-size:13px;
@@ -703,6 +763,21 @@
       max-width:100%;
       height:16px;
     }
+
+    .price-cta.inline{
+      margin-top:0;
+      padding:8px 10px;
+      border-radius:12px;
+      font-size:14px;
+      letter-spacing:-.01em;
+      box-shadow:0 6px 16px rgba(26,26,26,.08), 0 1px 0 rgba(255,255,255,.75) inset;
+    }
+    @media (max-width: 520px){
+      .price-cta.inline{ font-size:13px; padding:7px 9px; }
+      .price-cta.inline::after{ margin-left:8px; }
+    }
+
+
     .price{
       font-family:var(--mono);
       letter-spacing:-.02em;
@@ -7848,11 +7923,12 @@ window.scrollTo(0, 0);
 <div aria-label="Primary" class="header-row" role="navigation">
 <a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
 <nav aria-label="Categories" class="primary">
-<a data-i18n="t005" data-nav="" href="#/collection/living">Living</a>
+<a data-i18n="t005" data-nav="" href="#/collection/living">Living Room</a>
 <a data-i18n="t006" data-nav="" href="#/collection/bedroom">Bedroom</a>
 <a data-i18n="t007" data-nav="" href="#/collection/dining">Dining</a>
 <a data-i18n="t008" data-nav="" href="#/collection/office">Office</a>
 <a data-i18n="t172" data-nav="" href="#/collection/youth">Youth</a>
+<a class="nav-specials" data-nav="" href="#/collection/sale"><span class="ms-star">★</span>Monthly Specials<span class="ms-star">★</span></a>
 <a data-i18n="t009" data-nav="" href="#/collection/decor">Decor</a>
 </nav>
 <div class="header-actions">
@@ -7969,6 +8045,7 @@ window.scrollTo(0, 0);
 <button class="btn ghost full" data-go="#/collection/dining" data-i18n="t022">Dining</button>
 <button class="btn ghost full" data-go="#/collection/office" data-i18n="t023">Office</button>
 <button class="btn ghost full" data-go="#/collection/youth" data-i18n="t173">Youth</button>
+<button class="btn ghost full btn-specials" data-go="#/collection/sale"><span class="ms-star">★</span>Monthly Specials<span class="ms-star">★</span></button>
 <button class="btn ghost full" data-go="#/collection/decor" data-i18n="t024">Decor</button>
 </div>
 </div>
@@ -8281,7 +8358,7 @@ window.scrollTo(0, 0);
 <div class="pdp-card">
 <h1 class="pdp-title" data-i18n="t106" id="pdpTitle">Product</h1>
 <div class="pdp-price">
-<div class="price" id="pdpPrice">$0</div>
+<a class="price-cta" id="pdpPrice" href="mailto:info@angelsfurniture.org">Email for Price</a>
 <div class="subtle" id="pdpPayLater">or pay over time (optional)</div>
 </div>
 <div class="status" id="pdpStatus"></div>
@@ -8444,7 +8521,7 @@ window.scrollTo(0, 0);
 <div class="inner">
 <div style="flex:1;">
 <div id="stickyTitle" style="font-weight:600;letter-spacing:-.01em;font-size:13px;">Add to cart</div>
-<div class="price" id="stickyPrice">$0</div>
+<a class="price-cta inline" id="stickyPrice" href="mailto:info@angelsfurniture.org">Email for Price</a>
 </div>
 <button class="btn primary" data-i18n="t153" id="stickyAdd" style="min-height:44px;padding:12px 16px;">Add to cart</button>
 </div>
@@ -12777,7 +12854,7 @@ window.scrollTo(0, 0);
           </div>
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
-            <div class="price">${money(p.price)}</div>
+            <a class="price-cta" href="mailto:info@angelsfurniture.org?subject=${encodeURIComponent(`Pricing Request - ${p.title}`)}&body=${encodeURIComponent(`Hi Angel\'s Furniture,\n\nI\'d like pricing for: ${p.title}\n\nMy name: \nMy phone: \n\nThanks!`)}">Email for Price</a>
             <div class="p-meta"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
           </div>
         </a>
@@ -13068,8 +13145,20 @@ window.scrollTo(0, 0);
       state.selectedVariant = p.variants?.[0]?.id || null;
 
       $('#pdpTitle').textContent = p.title;
-      $('#pdpPrice').textContent = money(p.price);
-      $('#stickyPrice').textContent = money(p.price);
+
+      // Prices are intentionally hidden — request pricing via email
+      const mailto = `mailto:info@angelsfurniture.org?subject=${encodeURIComponent(`Pricing Request - ${p.title}`)}&body=${encodeURIComponent(`Hi Angel\'s Furniture,\n\nI\'d like pricing for: ${p.title}\n\nMy name: \nMy phone: \n\nThanks!`)}`;
+      const pdpPriceEl = $('#pdpPrice');
+      if(pdpPriceEl){
+        pdpPriceEl.textContent = 'Email for Price';
+        pdpPriceEl.setAttribute('href', mailto);
+      }
+      const stickyPriceEl = $('#stickyPrice');
+      if(stickyPriceEl){
+        stickyPriceEl.textContent = 'Email for Price';
+        stickyPriceEl.setAttribute('href', mailto);
+      }
+
       $('#stickyTitle').textContent = p.title;
 
       // Breadcrumb + back link
@@ -13298,7 +13387,7 @@ if(!state.cart.length){
                 </button>
               </div>
               <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-                <div class="price">${money(p.price)}</div>
+                <a class="price-cta" href="mailto:info@angelsfurniture.org?subject=${encodeURIComponent(`Pricing Request - ${p.title}`)}&body=${encodeURIComponent(`Hi Angel\'s Furniture,\n\nI\'d like pricing for: ${p.title}\n\nMy name: \nMy phone: \n\nThanks!`)}">Email for Price</a>
                 <div style="display:flex;gap:8px;align-items:center;">
                   <button class="chip" data-dec="${item.key}" aria-label="Decrease quantity">−</button>
                   <span class="pill"><strong>${item.qty}</strong></span>
