@@ -3287,7 +3287,7 @@ img {
 .p-title{ font-size:14px !important; line-height:1.25 !important; }
 .p-meta{ font-size:13px !important; }
 
-/* Email-for-price UI (white envelope w/ gold trim, bold black text) */
+/* Email for-price UI (white envelope w/ gold trim, bold black text) */
 .email-price{
   display:inline-flex;
   align-items:center;
@@ -3315,18 +3315,14 @@ img {
 }
 .email-price:hover{ opacity:.9; }
 
-.email-price .email-price-label{ font-weight:900; }
+.email-price .email-price-label{font-weight:700;white-space:nowrap;}
 .email-price .email-price-arrow{
   font-size:12px;
   color:#C9A86A;
   opacity:.92;
   transform: translateY(-0.5px);
 }
-.email-price:hover .email-price-label{
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-}
+.email-price:hover .email-price-label{font-weight:700;white-space:nowrap;}
 
 </style>
 <!-- Preload hero image (LCP) -->
@@ -8153,6 +8149,64 @@ Do NOT use placeholder numbers.
 -->
 
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+
+<style id="snrg-mobile-email-price-tune">
+/* =========================================================
+   MOBILE ONLY: Product cards — hide stock/materials line
+   and tune Email for-Price sizing/layout (Apple-slick)
+   ========================================================= */
+@media (max-width: 768px){
+  /* Hide the stock/materials meta line ONLY on product cards (those have .price.email-price) */
+  .p-card .price.email-price + .p-meta{
+    display:none !important;
+  }
+
+  /* Make Email for-Price use the "second & third line" under the title */
+  .p-card .price.email-price{
+    white-space:normal !important;          /* allow wrap */
+    line-height:1.05 !important;
+    font-size:clamp(12px, 3.4vw, 14px) !important; /* smart mobile scaling */
+    gap:6px !important;
+    padding-top:2px;
+  }
+
+  /* Smaller, classy envelope */
+  .p-card .price.email-price .env{
+    width:13px !important;
+    height:13px !important;
+    flex:0 0 13px !important;
+  }
+
+  /* Stack the words so it becomes 2 lines cleanly */
+  .p-card .price.email-price .email-price-label{font-weight:700;white-space:nowrap;}
+  .p-card .price.email-price .email-price-word{
+    display:block !important;
+  }
+
+  /* Keep the arrow subtle and tight */
+  .p-card .price.email-price .email-price-arrow{
+    font-size:11px !important;
+    transform: translateY(-0.5px);
+    margin-right:1px;
+  }
+
+  /* Slight bump for card title + description to read better on mobile */
+  .p-card .p-title{
+    font-size:clamp(15px, 4.2vw, 17px) !important;
+    line-height:1.18 !important;
+  }
+  .p-card .p-desc{
+    font-size:clamp(12.5px, 3.5vw, 14px) !important;
+    line-height:1.35 !important;
+  }
+}
+
+/* --- FIX: ensure visible spacing between 'Email' and 'for Price' everywhere --- */
+.email-price-label{font-weight:700;white-space:nowrap;}
+.email-price-space{display:none;}
+.email-price-word{display:inline-block;}
+</style>
+
 </head>
 <body>
 <script>
@@ -13119,7 +13173,7 @@ window.scrollTo(0, 0);
               <span class="email-price-arrow" title="Click to email for pricing" aria-hidden="true">→</span><svg class="env" viewBox="0 0 24 24" aria-hidden="true">
   <rect class="fill" x="3.5" y="6" width="17" height="12" rx="2"></rect>
   <path d="M4.5 8l7.5 6 7.5-6"></path>
-</svg><span class="email-price-label" title="Click to email for pricing">Email for Price</span>
+</svg><span class="email-price-label" title="Click to email for pricing"><span class="email-price-word">Email</span> <span class="email-price-space"> </span><span class="email-price-word">for Price</span></span>
             </div>
             <div class="p-meta"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
           </div>
