@@ -8374,6 +8374,21 @@ Do NOT use placeholder numbers.
 }
 </style>
 
+
+<style id="snrg-mobile-title-1line-fix">
+/* Mobile-only: force product card titles to a single line so they never collide with the Email-for-Price CTA */
+@media (max-width: 768px){
+  .p-card .p-title{
+    display:block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+    line-height: 1.25 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <script>
