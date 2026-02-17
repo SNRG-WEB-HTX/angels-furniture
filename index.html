@@ -3315,6 +3315,18 @@ img {
 }
 .email-price:hover .email-price-label{font-weight:700;white-space:nowrap;}
 
+
+/* === NO-PRICE MODE (auto) === */
+.price, .money, [data-email-price], [data-price], .email-price, .email-price-space { 
+  display:none !important;
+}
+#cartTotal, #checkoutTotal { display:none !important; }
+.hide-price-line { display:none !important; }
+/* Hide price-based sort options if present */
+option[value="price-asc"], option[value="price-desc"], option[data-sort="price-asc"], option[data-sort="price-desc"] { display:none; }
+/* Hide any price chips (defensive) */
+.chip[data-setprice]{ display:none !important; }
+/* === /NO-PRICE MODE === */
 </style>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
@@ -3684,7 +3696,7 @@ img {
         "postalCode": "77040",
         "addressCountry": "US"
       },
-      "priceRange": "$$",
+
       "paymentAccepted": [
         "Cash",
         "Credit Card",
@@ -4743,7 +4755,7 @@ window.scrollTo(0, 0);
 </div>
 <div class="body" id="cartBody"></div>
 <div class="foot"><div class="checkout-slim">
-<div class="line">
+<div class="line hide-price-line">
 <div class="subtle">Subtotal</div>
 <div class="price" id="cartTotal">$0</div>
 </div>
@@ -5036,8 +5048,6 @@ window.scrollTo(0, 0);
 <option value="featured">Featured</option>
 <option value="best">Best sellers</option>
 <option value="new">New</option>
-<option value="low">Price low → high</option>
-<option value="high">Price high → low</option>
 </select>
 </div>
 <div class="section-head">
@@ -5065,8 +5075,6 @@ window.scrollTo(0, 0);
 <option value="featured">Featured</option>
 <option value="best">Best sellers</option>
 <option value="new">New</option>
-<option value="low">Price low → high</option>
-<option value="high">Price high → low</option>
 </select>
 </div>
 </div>
@@ -11605,16 +11613,6 @@ window.scrollTo(0, 0);
       const Delivery = f.Delivery;
       const mat = f.material;
       return `
-        <div class="filter-row">
-          <label for="${prefix}-price">Max price: <span class="price">${money(max)}</span></label>
-          <div class="range">
-            <input id="${prefix}-price" type="range" min="100" max="3000" step="50" value="${max}" aria-label="Max price" />
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            ${[300,600,1000,1500,2000,2500,3500,5000,10000].map(v=>`<button class="chip" data-setprice="${v}" aria-pressed="${max===v}">Under ${money(v)}</button>`).join('')}
-          </div>
-        </div>
-
         <div class="filter-row">
           <label>Availability</label>
           <label class="check"><input id="${prefix}-stock" type="checkbox" ${inStock} /> In-stock only</label>
