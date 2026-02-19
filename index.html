@@ -4639,7 +4639,145 @@ Do NOT use placeholder numbers.
   }
 }
 </style>
-</link></link></head>
+</link></link>
+<style>
+/* =========================
+   ADDRESS — header + footer
+   Apple-clean alignment, zero clutter
+   ========================= */
+
+/* HEADER utility: make room for address (desktop) */
+.header-utility{
+  justify-content:space-between !important;
+  gap:12px !important;
+}
+.header-utility .utility-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex:1 1 auto;
+  min-width:0;
+}
+.utility-address{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 12px;
+  border-radius:999px;
+  border:1px solid rgba(26,26,26,.14);
+  background:rgba(255,255,255,.72);
+  backdrop-filter:saturate(160%) blur(12px);
+  -webkit-backdrop-filter:saturate(160%) blur(12px);
+  box-shadow:0 10px 26px rgba(0,0,0,.06);
+  color:rgba(26,26,26,.86);
+  font-weight:700;
+  letter-spacing:-.01em;
+  font-size:12.5px;
+  max-width:100%;
+  text-decoration:none;
+}
+.utility-address:hover{ background:rgba(255,255,255,.90); }
+.utility-address .addr-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  min-width:0;
+}
+.utility-pin{
+  width:16px;height:16px;
+  flex:0 0 16px;
+  fill:none;
+  stroke:rgba(26,26,26,.75);
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+/* Mobile: stack cleanly, allow 2-line address */
+@media (max-width: 520px){
+  .header-utility{
+    align-items:stretch !important;
+  }
+  .header-utility .utility-left{ width:100%; }
+  .utility-address{
+    width:100%;
+    border-radius:16px;
+    padding:10px 12px;
+  }
+  .utility-address .addr-text{
+    white-space:normal;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    line-height:1.25;
+  }
+}
+
+/* FOOTER address block (works on desktop + mobile) */
+.footerA .footer-address{
+  display:flex;
+  justify-content:center;
+  padding-top:4px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.footerA .footer-address-link{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 14px;
+  border-radius:999px;
+  border:1px solid rgba(26,26,26,.12);
+  background:rgba(255,255,255,.72);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  box-shadow:0 12px 30px rgba(0,0,0,.08);
+  color:rgba(26,26,26,.86);
+  font-weight:700;
+  font-size:13px;
+  letter-spacing:-.01em;
+  max-width:100%;
+  text-decoration:none;
+}
+.footerA .footer-address-link:hover{ background:rgba(255,255,255,.90); }
+.footerA .footer-address-link .addr-text{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.footerA .footer-pin{
+  width:18px;height:18px;
+  flex:0 0 18px;
+  fill:none;
+  stroke:rgba(26,26,26,.75);
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+@media (max-width: 760px){
+  .footerA .footer-address{
+    padding-bottom:16px;
+  }
+  .footerA .footer-address-link{
+    width:100%;
+    justify-content:center;
+    border-radius:18px;
+    padding:12px 14px;
+    text-align:center;
+  }
+  .footerA .footer-address-link .addr-text{
+    white-space:normal;
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+    line-height:1.25;
+  }
+}
+</style>
+</head>
 <body>
 <script>
 // FORCE PAGE TO START AT TOP ON EVERY LOAD/RELOAD
@@ -4658,6 +4796,16 @@ window.scrollTo(0, 0);
 <div class="container">
 <!-- Utility strip: ordering + delivery + financing (minimal) -->
 <div aria-label="Ordering, delivery, and financing" class="header-utility">
+<div class="utility-left">
+  <a class="utility-address" href="https://www.google.com/maps?q=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040" target="_blank" rel="noopener noreferrer" aria-label="Open store address in Google Maps">
+    <svg class="utility-pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12z"></path>
+      <circle cx="12" cy="10" r="2.5"></circle>
+    </svg>
+    <span class="addr-text">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span>
+  </a>
+</div>
+
 <div class="utility-right">
 <a aria-label="Call now" class="utility-finance-btn" href="tel:+13468671155">
         Call Now
@@ -12647,6 +12795,16 @@ img {
 <!-- Logo -->
 <div class="footer-logo">
 <img alt="Angel's Furniture" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/>
+</div>
+<!-- Address -->
+<div class="footer-address">
+  <a class="footer-address-link" href="https://www.google.com/maps?q=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040" target="_blank" rel="noopener noreferrer" aria-label="Open store address in Google Maps">
+    <svg class="footer-pin" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12z"></path>
+      <circle cx="12" cy="10" r="2.5"></circle>
+    </svg>
+    <span class="addr-text">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span>
+  </a>
 </div>
 <!-- Bottom row: © + Built by + links -->
 <div class="footer-bottom-row">
