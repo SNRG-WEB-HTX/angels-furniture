@@ -5452,6 +5452,110 @@ header{
 }
 
 </style>
+
+<style>
+
+/* =========================================================
+   MOBILE HEADER + HERO FIX (DO NOT AFFECT DESKTOP/TABLET)
+   Requirements:
+   - One confined header on mobile (no address/phone strips)
+   - Restore normal logo (no white/black frame box)
+   - Hero CTAs fit perfectly
+   - Footer: remove room links; show logo on mobile only
+   ========================================================= */
+
+/* MOBILE ONLY */
+@media (max-width: 980px){
+
+  /* Remove utility/address/phone strip entirely on mobile */
+  .header-utility{ display:none !important; }
+
+  /* Confined single-row header */
+  header{
+    background: rgba(246,243,238,.78) !important;
+    border-bottom: 1px solid rgba(26,26,26,.08) !important;
+  }
+  .header-row{
+    display:grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items:center !important;
+    padding: 12px 0 12px !important;
+  }
+  .header-container{ padding: 0 16px !important; }
+
+  /* Restore NORMAL logo look on mobile: NO boxes, no frames */
+  .brand .logo-wrap{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+  .header-logo-img{
+    height: 62px !important;
+    max-width: 240px !important;
+    filter: drop-shadow(0 10px 24px rgba(0,0,0,.10)) !important;
+  }
+
+  /* Keep icon buttons clean and consistent */
+  .icon-btn{
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 16px !important;
+    background: rgba(255,255,255,.30) !important;
+    border: 1px solid rgba(0,0,0,.06) !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure right cluster doesn't stack weird */
+  .mobile-right-actions{
+    flex-direction: row !important;
+    align-items:center !important;
+    gap: 10px !important;
+    justify-content:flex-end !important;
+  }
+
+  /* HERO: stop jumbled CTA cropping */
+  .hero-ctas{
+    display:flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: stretch !important;
+  }
+  .hero-ctas .btn{
+    width: 100% !important;
+    justify-content:center !important;
+    padding: 14px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  /* Give hero card breathing room */
+  .hero-glass{
+    padding: 18px 16px !important;
+  }
+
+  /* FOOTER: remove room/category links on mobile and show ONLY logo */
+  .footer-grid, .footer-cols, .footer-links, .footer-nav, .footer-rooms{
+    display:none !important;
+  }
+  .footer-logo-section.footer-logo-mobile-only{
+    display:flex !important;
+    justify-content:center !important;
+    padding: 18px 0 10px !important;
+  }
+  .footer-logo-section.footer-logo-mobile-only .footer-logo-img{
+    height: 110px !important;
+    max-width: 320px !important;
+    filter: drop-shadow(0 10px 24px rgba(0,0,0,.10)) !important;
+  }
+}
+
+/* DESKTOP/TABLET: hide the mobile-only footer logo container */
+@media (min-width: 981px){
+  .footer-logo-section.footer-logo-mobile-only{ display:none !important; }
+}
+
+</style>
 </head>
 <body>
 <script>
@@ -5504,10 +5608,6 @@ window.scrollTo(0, 0);
 <a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
 <!-- Mobile-only right cluster (lang + menu) — hidden on desktop -->
 <div class="mobile-right-actions">
-
-<button aria-label="Apply for financing" class="utility-finance-btn mobile-finance-btn" id="openFinanceMobile" type="button">
-  Apply for Financing
-</button>
 <div class="lang-toggle-mini" id="langToggle"><button aria-pressed="true" id="btnEN" type="button">EN</button><button aria-pressed="false" id="btnES" type="button">ES</button></div>
 <button aria-label="Menu" class="icon-btn mob-menu-btn">
 <svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
@@ -12116,9 +12216,7 @@ window.scrollTo(0, 0);
     $('#bnCart').addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
     $('#bnMenu').addEventListener('click', ()=> openDrawer('menuDrawer'));
     $("#openFinance").addEventListener("click", ()=> openDrawer("financeDrawer"));
-    const ofm = document.getElementById("openFinanceMobile");
-    if(ofm){ ofm.addEventListener("click", ()=> openDrawer("financeDrawer")); }
-    $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.hash = b.dataset.go));
+$$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.hash = b.dataset.go));
 
     /* ---------- Mega menu ---------- */
     const mega = $('#mega');
