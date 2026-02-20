@@ -749,6 +749,9 @@
       text-overflow:unset;
       max-width:100%;
       height:auto;
+      padding-bottom:8px;
+      border-bottom:1px solid rgba(0,0,0,.06);
+      margin-bottom:4px;
     }
     .price{
       font-family:var(--mono);
@@ -762,6 +765,8 @@
       text-overflow:ellipsis;
       height:18px;
     }
+    /* Email-price needs auto height for two-line layout */
+    .price.email-price { height:auto !important; overflow:visible !important; }
     .p-meta{
       display:flex;
       align-items:center;
@@ -783,7 +788,7 @@
     @media (max-width: 640px){
       .p-title{
         font-size:12px;
-        height:16px;
+        padding-bottom:6px;
       }
       .price{
         font-size:14px;
@@ -3400,6 +3405,38 @@ img {
   cursor:pointer;
   user-select:none;
 }
+
+/* ── Two-line email/call price layout ── */
+.price.email-price[data-email-price]{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:2px !important;
+  height:auto !important;
+  align-items:flex-start !important;
+}
+.ep-email-line,
+.ep-call-line {
+  display:flex;
+  align-items:center;
+  gap:5px;
+  font-size:11.5px;
+  font-weight:700;
+  color:#0B0E14;
+  letter-spacing:-.01em;
+  white-space:nowrap;
+  text-decoration:none;
+  line-height:1.25;
+  pointer-events:none; /* outer card handles click */
+}
+.ep-email-line svg { width:12px; height:12px; flex-shrink:0; }
+.ep-email-line svg rect { fill:#fff; stroke:#C9A86A; stroke-width:1.8; }
+.ep-email-line svg path { stroke:#C9A86A; stroke-width:1.8; fill:none; }
+.ep-call-line svg { width:11px; height:11px; flex-shrink:0; stroke:#C9A86A; fill:none; }
+.ep-call-line { color:rgba(26,26,26,.65); font-size:10.5px; font-weight:600; }
+@media (max-width: 640px) {
+  .ep-email-line, .ep-call-line { font-size:10px; }
+  .ep-call-line { font-size:9.5px; }
+}
 .email-price .env{
   width:14px; height:14px; /* smaller + classy */
   flex:0 0 14px;
@@ -4608,9 +4645,10 @@ Do NOT use placeholder numbers.
 
 /* === BASE DESKTOP TIGHTENING (all screens) === */
 .p-card .price.email-price{
-  display:inline-flex !important;
-  align-items:center !important;
-  gap:4px !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:2px !important;
   height:auto !important;
   line-height:1.2 !important;
   padding:0 !important;
@@ -4652,8 +4690,11 @@ Do NOT use placeholder numbers.
 }
 
 .p-card .p-title{
-  margin-bottom:2px !important;
   line-height:1.2 !important;
+  height:auto !important;
+  padding-bottom:8px !important;
+  border-bottom:1px solid rgba(0,0,0,.06) !important;
+  margin-bottom:6px !important;
 }
 
 /* === LAPTOP/TABLET (769px - 1279px) === */
@@ -4695,42 +4736,17 @@ Do NOT use placeholder numbers.
     display:none !important;
   }
 
-  /* Ultra-compact mobile layout */
+  /* Two-line email/call on mobile */
   .p-card .price.email-price{
-    display:inline-flex !important;
-    flex-wrap:nowrap !important;
-    align-items:center !important;
-    gap:3px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+    gap:2px !important;
     font-size:11px !important;
-    line-height:1.15 !important;
+    line-height:1.2 !important;
     height:auto !important;
     white-space:nowrap !important;
     padding:0 !important;
-  }
-
-  /* Micro envelope for mobile */
-  .p-card .price.email-price .env{
-    width:11px !important;
-    height:11px !important;
-    flex:0 0 11px !important;
-  }
-
-  /* Compact arrow */
-  .p-card .price.email-price .email-price-arrow{
-    font-size:9px !important;
-    margin:0 1px !important;
-  }
-
-  /* Tight label */
-  .p-card .price.email-price .email-price-label{
-    gap:3px !important;
-    font-weight:700 !important;
-  }
-
-  /* Space handling for mobile */
-  .p-card .price.email-price .email-price-space{
-    display:inline !important;
-    width:3px !important;
   }
 
   /* Super-tight card body */
@@ -5078,6 +5094,364 @@ a[href^="tel"],
 }
 
 </style>
+
+<style>
+
+/* =========================================================
+   HEADER SYSTEM — FINAL OVERRIDE (2026-02-20)
+   Root cause fixed: conflicting header rules + duplicate mobile bars.
+   This block is LAST in <head>, so it wins everywhere.
+   Goals:
+   - Mobile: very top = Address pill only (no phone/finance strip)
+   - Mobile: clean single header row (icons left, logo center, menu/lang right)
+   - Desktop: utility strip shows address + phone + financing
+   - Consistent color scheme + spacing across breakpoints
+   ========================================================= */
+
+/* Base header look */
+header{
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 999 !important;
+  background: rgba(246,243,238,.78) !important;
+  backdrop-filter: saturate(160%) blur(14px) !important;
+  -webkit-backdrop-filter: saturate(160%) blur(14px) !important;
+  border-bottom: 1px solid rgba(26,26,26,.08) !important;
+}
+
+/* Utility strip layout (desktop default) */
+.header-utility{
+  width: 100% !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid rgba(26,26,26,.06) !important;
+  background: rgba(246,243,238,.55) !important;
+}
+.header-utility-inner{
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+.utility-left{ min-width: 0 !important; }
+.utility-address{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 10px 14px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08) !important;
+  text-decoration: none !important;
+}
+.utility-address .addr-text{
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  max-width: 56vw !important;
+  color: rgba(26,26,26,.85) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  letter-spacing: -.01em !important;
+}
+.utility-right{
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+/* Keep phone as a button but not identical to financing */
+a.utility-phone.utility-finance-btn{
+  background: rgba(255,255,255,.72) !important;
+  color:#000 !important;
+  font-weight: 800 !important;
+  border: 1px solid rgba(0,0,0,.10) !important;
+}
+#openFinance.utility-finance-btn{
+  background: #1d1d1f !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  border: 1px solid rgba(0,0,0,.22) !important;
+}
+#openFinance.utility-finance-btn:hover{ background:#000 !important; }
+
+/* Main header row */
+.header-container{ padding: 0 20px !important; }
+.header-row{
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  padding: 14px 0 14px !important;
+}
+
+/* Brand */
+.brand{ display:flex !important; align-items:center !important; text-decoration:none !important; }
+.brand .logo-wrap{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  border-radius: 18px !important;
+  padding: 10px 14px !important;
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.10) !important;
+}
+.header-logo-img{
+  height: 64px !important;
+  width: auto !important;
+  max-width: 330px !important;
+  filter:none !important;
+}
+
+/* Desktop nav/actions */
+.header-right{ display:flex !important; align-items:center !important; gap: 14px !important; }
+.primary{ display:flex !important; align-items:center !important; gap: 22px !important; }
+.primary a{ color: rgba(26,26,26,.78) !important; font-weight: 650 !important; text-decoration:none !important; }
+.primary a:hover{ color: rgba(26,26,26,.98) !important; }
+.header-actions{ display:flex !important; align-items:center !important; gap: 10px !important; }
+
+/* Mobile: smart layout + top address only */
+@media (max-width: 980px){
+  /* TOP = address only */
+  .header-utility-inner{
+    justify-content: center !important;
+  }
+  .utility-right{ display:none !important; }   /* removes phone/finance strip on mobile */
+  .utility-address{ width: min(720px, 100%) !important; justify-content:center !important; }
+  .utility-address .addr-text{ max-width: 82vw !important; }
+
+  /* Hide desktop nav cluster on mobile */
+  .header-right{ display:none !important; }
+
+  /* Mobile header row becomes 3-column grid: left icons / logo / right icons */
+  .header-row{
+    display:grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items:center !important;
+    padding: 12px 0 12px !important;
+  }
+  .mobile-left-actions{ display:flex !important; gap:10px !important; justify-content:flex-start !important; }
+  .brand{ grid-column: 2 !important; justify-content:center !important; }
+  .mobile-right-actions{ display:flex !important; gap:10px !important; justify-content:flex-end !important; }
+
+  /* Make logo framed black on mobile (matches your request) */
+  .brand .logo-wrap{
+    background:#000 !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.18) !important;
+    padding: 8px 12px !important;
+  }
+  .header-logo-img{ height: 52px !important; max-width: 220px !important; }
+}
+
+/* Tiny phones */
+@media (max-width: 420px){
+  .header-logo-img{ height: 48px !important; max-width: 200px !important; }
+  .utility-address{ border-radius: 18px !important; padding: 10px 12px !important; }
+}
+
+</style>
+
+<style>
+
+/* =========================================================
+   FINAL PATCH — LOGO + HEADER CHIPS (Nintendo x Apple)
+   - Remove desktop white frame around logo (use clean, floating mark)
+   - Keep mobile black logo frame
+   - Make utility items sleek (not bulky pills)
+   ========================================================= */
+
+/* Desktop logo: no white frame */
+.brand .logo-wrap{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+.header-logo-img{
+  height: 64px !important;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.08)) !important;
+}
+
+/* Sleek utility chips (desktop) */
+.utility-address,
+a.utility-phone.utility-finance-btn,
+#openFinance.utility-finance-btn{
+  border-radius: 999px !important;
+  padding: 8px 12px !important;
+  min-height: 38px !important;
+  box-shadow: none !important;
+  backdrop-filter: saturate(140%) blur(10px) !important;
+  -webkit-backdrop-filter: saturate(140%) blur(10px) !important;
+  letter-spacing: -.01em !important;
+}
+.utility-address{
+  background: rgba(255,255,255,.45) !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+}
+.utility-address .addr-text{
+  font-weight: 650 !important;
+  font-size: 12.5px !important;
+  color: rgba(26,26,26,.86) !important;
+}
+a.utility-phone.utility-finance-btn{
+  background: rgba(255,255,255,.35) !important;
+  border: 1px solid rgba(0,0,0,.10) !important;
+  font-weight: 750 !important;
+}
+#openFinance.utility-finance-btn{
+  background: rgba(0,0,0,.82) !important;
+  border: 1px solid rgba(0,0,0,.18) !important;
+  font-weight: 700 !important;
+}
+#openFinance.utility-finance-btn:hover{ background: #000 !important; }
+
+/* Make header icon buttons lighter + tighter */
+.icon-btn{
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 14px !important;
+  background: rgba(255,255,255,.38) !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+  box-shadow: none !important;
+}
+.icon-btn:hover{
+  background: rgba(255,255,255,.55) !important;
+}
+
+/* Footer logo: no framed card */
+.footer-logo-section{
+  padding: 16px 0 18px !important;
+}
+.footer-logo-link{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  text-decoration:none !important;
+}
+.footer-logo-img{
+  height: 96px !important;
+  width:auto !important;
+  max-width: 320px !important;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.08)) !important;
+}
+
+/* Mobile keeps the black framed logo */
+@media (max-width: 980px){
+  .brand .logo-wrap{
+    background:#000 !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    box-shadow: 0 10px 24px rgba(0,0,0,.18) !important;
+    padding: 8px 12px !important;
+    border-radius: 18px !important;
+  }
+  .icon-btn{
+    background: rgba(255,255,255,.18) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+  }
+}
+
+</style>
+
+<style>
+
+/* =========================================================
+   PATCH — BIGGER LOGO + FINANCE DRAWER VISIBILITY
+   ========================================================= */
+
+/* Header logo bigger (desktop) */
+.header-logo-img{ height: 78px !important; max-width: 380px !important; }
+
+/* Keep desktop logo clean (no frame) */
+@media (min-width: 981px){
+  .brand .logo-wrap{ background: transparent !important; border:none !important; box-shadow:none !important; padding:0 !important; }
+}
+
+/* Mobile logo slightly bigger but still fits */
+@media (max-width: 980px){
+  .header-logo-img{ height: 58px !important; max-width: 250px !important; }
+}
+
+/* Footer logo uses same header logo, bigger */
+.footer-logo-img{ height: 112px !important; max-width: 380px !important; filter: drop-shadow(0 10px 24px rgba(0,0,0,.08)) !important; }
+
+/* Financing drawer: ensure ALL content visible + readable */
+#financeDrawer.drawer{ background: rgba(255,255,255,.99) !important; }
+#financeDrawer .head h3{ color:#1d1d1f !important; }
+#financeDrawer .body{ overflow:auto !important; padding: 18px 20px 28px !important; }
+#financeDrawer .body *{ color:#1d1d1f !important; }
+#financeDrawer .subtle{ color: rgba(26,26,26,.78) !important; }
+#financeDrawer .finance-grid{ display:grid !important; grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+#financeDrawer .finance-card{ white-space: normal !important; line-height: 1.15 !important; }
+#financeDrawer .finance-meta{ color: rgba(26,26,26,.75) !important; font-weight: 600 !important; }
+#financeDrawer .finance-card.is-disabled{ opacity: .55 !important; }
+#financeDrawer .finance-card.is-disabled .finance-meta{ opacity: 1 !important; }
+
+/* Very small phones: 1-column grid so nothing gets clipped */
+@media (max-width: 380px){
+  #financeDrawer .finance-grid{ grid-template-columns: 1fr !important; }
+}
+
+</style>
+
+<style>
+
+/* =========================================================
+   FINANCE DRAWER FIX
+   Root cause: drawer/overlay z-index under sticky header, hiding close button.
+   Also make drawer head sticky so user can always exit.
+   ========================================================= */
+:root{
+  --z-modal: 5000;
+}
+.drawer{
+  z-index: 5000 !important;
+}
+.overlay, .modal{
+  z-index: 4500 !important;
+}
+header{
+  z-index: 900 !important;
+}
+.drawer .head{
+  position: sticky !important;
+  top: 0 !important;
+  background: rgba(255,255,255,.98) !important;
+  z-index: 2 !important;
+}
+
+/* Mobile finance button placement (above EN/ES) */
+@media (max-width: 980px){
+  .mobile-right-actions{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-end !important;
+    gap:8px !important;
+  }
+  .mobile-finance-btn{
+    background: rgba(0,0,0,.86) !important;
+    color:#fff !important;
+    border: 1px solid rgba(0,0,0,.22) !important;
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+    font-weight: 750 !important;
+    min-height: 38px !important;
+    box-shadow: none !important;
+  }
+  .mobile-finance-btn:hover{ background:#000 !important; }
+}
+
+</style>
 </head>
 <body>
 <script>
@@ -5094,9 +5468,9 @@ window.scrollTo(0, 0);
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <!-- Header -->
 <header>
-<div class="container">
-<!-- Utility strip: ordering + delivery + financing (minimal) -->
+<!-- Utility strip: full-bleed background, inner content aligned to container -->
 <div aria-label="Ordering, delivery, and financing" class="header-utility">
+<div class="header-utility-inner">
 <div class="utility-left">
 <a aria-label="Open store address in Google Maps" class="utility-address" href="https://www.google.com/maps?q=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" class="utility-pin" focusable="false" viewbox="0 0 24 24">
@@ -5113,8 +5487,34 @@ window.scrollTo(0, 0);
       </button>
 </div>
 </div>
+</div>
+<!-- Main nav row inside container for perfect alignment -->
+<div class="container header-container">
 <div aria-label="Primary" class="header-row" role="navigation">
+<!-- Mobile-only left cluster (search + cart) — hidden on desktop -->
+<div class="mobile-left-actions" aria-label="Search and cart">
+<button aria-label="Search" class="icon-btn mob-search-btn">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+</button>
+<button aria-label="Cart" class="icon-btn mob-cart-btn">
+<svg class="icon" fill="none" stroke="#C9A86A" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+</button>
+</div>
+<!-- Brand / logo -->
 <a class="brand" data-nav="" href="#/home"><span class="logo-wrap"><img alt="Angel’s Furniture" class="header-logo-img" decoding="async" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"/></span></a>
+<!-- Mobile-only right cluster (lang + menu) — hidden on desktop -->
+<div class="mobile-right-actions">
+
+<button aria-label="Apply for financing" class="utility-finance-btn mobile-finance-btn" id="openFinanceMobile" type="button">
+  Apply for Financing
+</button>
+<div class="lang-toggle-mini" id="langToggle"><button aria-pressed="true" id="btnEN" type="button">EN</button><button aria-pressed="false" id="btnES" type="button">ES</button></div>
+<button aria-label="Menu" class="icon-btn mob-menu-btn">
+<svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
+</button>
+</div>
+<!-- Desktop: nav + actions grouped right — aligns under phone/financing -->
+<div class="header-right">
 <nav aria-label="Categories" class="primary">
 <a data-i18n="t005" data-nav="" href="#/collection/living">Living</a>
 <a data-i18n="t006" data-nav="" href="#/collection/bedroom">Bedroom</a>
@@ -5134,9 +5534,11 @@ window.scrollTo(0, 0);
 <button aria-label="Menu" class="icon-btn" id="openMenu">
 <svg class="icon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
 </button>
-<div class="lang-toggle-mini" id="langToggle"><button aria-pressed="true" id="btnEN" type="button">EN</button><button aria-pressed="false" id="btnES" type="button">ES</button></div></div>
+<div class="lang-toggle-mini" id="langToggleDesktop"><button aria-pressed="true" id="btnEN2" type="button">EN</button><button aria-pressed="false" id="btnES2" type="button">ES</button></div>
 </div>
+</div><!-- /.header-right -->
 </div>
+</div><!-- /.header-container -->
 <!-- Mega menu (desktop) -->
 <div aria-hidden="true" class="mega" id="mega">
 <div class="container">
@@ -5232,7 +5634,7 @@ window.scrollTo(0, 0);
 <button class="btn ghost full" data-go="#/collection/living" data-i18n="t020">Living</button>
 <button class="btn ghost full" data-go="#/collection/bedroom" data-i18n="t021">Bedroom</button>
 <button class="btn ghost full" data-go="#/collection/dining" data-i18n="t022">Dining</button>
-<button class="btn ghost full" data-go="#/collection/office" data-i18n="t023">Office</button>
+<button class="btn ghost full" data-go="#/collection/mattress" data-i18n="t023">Mattress</button>
 <button class="btn ghost full" data-go="#/collection/youth" data-i18n="t173">Youth</button>
 <button class="btn ghost full specials-btn" data-go="#/collection/sale"><span aria-hidden="true" class="ms-star">★</span><span class="ms-text">Monthly Specials</span><span aria-hidden="true" class="ms-star">★</span></button>
 </div>
@@ -5374,7 +5776,7 @@ window.scrollTo(0, 0);
 <section class="hero" data-cms="hero" data-page="home">
 <div class="container">
 <div class="hero-surface">
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="cms-hero-config" type="application/json">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script id="cms-hero-config" type="application/json">
 {
   "headlineKey": "t042",
   "ledeKey": "t043",
@@ -5442,12 +5844,12 @@ window.scrollTo(0, 0);
 </a>
 <a class="card p-card" href="#/collection/mattress" style="text-decoration:none;display:block;">
 <div class="p-media">
-<img alt="Office" class="primary" decoding="async" fetchpriority="low" loading="eager" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
-<img alt="Office" class="swap" decoding="async" fetchpriority="low" loading="eager" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&amp;fit=crop&amp;w=1800&amp;q=80"/>
+<img alt="Mattress" class="primary" decoding="async" fetchpriority="low" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/shop-by-room-mattress.webp"/>
+<img alt="Mattress" class="swap" decoding="async" fetchpriority="low" loading="eager" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/shop-by-room-mattress.webp"/>
 </div>
 <div class="p-body">
 <h3 class="p-title" data-i18n="t062">Mattress Sets</h3>
-<div class="p-meta" data-i18n="t063">Desks, Chairs, Lighting</div>
+<div class="p-meta" data-i18n="t063">Hybrids, Memory Foam, Firm</div>
 </div>
 </a>
 </div>
@@ -10224,362 +10626,193 @@ window.scrollTo(0, 0);
         }
       }
       ,
-      // ========== OFFICE CATEGORY ==========
+      // ========== MATTRESS CATEGORY ==========
       {
-        id:'OF-CHAIR-H556',
-        title:'Office Chair H556',
-        category:'office',
-        price: 399,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood & Leatherette',
-        dims:'H556-01A',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/office-chair-h556-01a.webp'],
-        variants:[],
-        details:{
-          dimensions:'Adjustable height office chair',
-          materials:'Solid wood frame with tufted leatherette cushions. Adjustable height mechanism with casters for easy mobility.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-CHAIR-H742',
-        title:'Antique White Office Chair',
-        category:'office',
-        price: 449,
-        featured:true,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood & Polyester',
-        dims:'H742-01A',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/office-chair-h742-01a.webp'],
-        variants:[
-          { id:'OF-CHAIR-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
-        ],
-        details:{
-          dimensions:'25.38"W x 25"D x 37.13"H',
-          materials:'Solid wood frame with antiqued white finish and grain texture. Foam cushioned seat and backrest with polyester upholstery. Adjustable height with casters.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DAYBED-5324OT',
-        title:'Philipa Daybed with Trundle',
-        category:'office',
-        price: 1299,
+        id:'MT-BAMBOO-7',
+        title:'Bamboo 7 Inch Mattress',
+        category:'mattress',
+        price: 499,
         featured:true,
         best:true,
         isNew:true,
         inStock:true,
-        Delivery:'fast',
-        material:'Upholstered Tweed',
-        dims:'5324OT-SET',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/philipa-daybed-5340t-set.webp'],
-        variants:[
-          { id:'OF-DAYBED-5324OT-OAT', name:'Oatmeal Tweed', swatch:'#E8DCC8' }
-        ],
+        Delivery:'ready',
+        material:'Bamboo / Foam',
+        dims:'7 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/bamboo-7-inch.webp'],
+        variants:[],
         details:{
-          dimensions:'Daybed with pull-out trundle',
-          materials:'Stylish multifunctional daybed in oatmeal tweed upholstery. Features innovative pull-out trundle for guest sleeping. Clean lines and neutral tone. Perfect for home office or guest room.',
-          shipping:'Houston Delivery: 5–7 days',
+          dimensions:'7" profile',
+          materials:'Bamboo cover with supportive foam layers.',
+          shipping:'Houston Delivery: 3–7 days',
           warranty:'1-year warranty'
         }
       },
       {
-        id:'OF-DESK-B9330',
-        title:'Valor Writing Desk',
-        category:'office',
+        id:'MT-GOLD-9',
+        title:'Gold 9 Inch Mattress',
+        category:'mattress',
         price: 599,
         featured:true,
         best:false,
         isNew:true,
         inStock:true,
         Delivery:'ready',
-        material:'Wood',
-        dims:'B9330-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/desk-valor-writing-desk-b9330.webp'],
+        material:'Foam',
+        dims:'9 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/gold-9-inch.webp'],
         variants:[],
         details:{
-          dimensions:'Standard writing desk',
-          materials:'Rustic charm with distressed white finish and chevron-patterned drawer front. Spacious surface for work or creativity. Sturdy construction complements farmhouse and contemporary interiors.',
-          shipping:'Houston Delivery: 3–5 days',
+          dimensions:'9" profile',
+          materials:'Balanced comfort foam build for everyday support.',
+          shipping:'Houston Delivery: 3–7 days',
           warranty:'1-year warranty'
         }
       },
       {
-        id:'OF-DESK-B6832',
-        title:'Rangley Writing Desk - Driftwood',
-        category:'office',
-        price: 549,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood',
-        dims:'B6832-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/rangley-writing-desk-driftwood-b6832.webp'],
-        variants:[
-          { id:'OF-DESK-B6832-DRF', name:'Driftwood', swatch:'#B8A88A' }
-        ],
-        details:{
-          dimensions:'Modern writing desk',
-          materials:'Two-tone finish with light woodgrain base and crisp contrasting surface. Spacious drawers for storage. Sturdy construction with minimalist aesthetic.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DESK-B6830',
-        title:'Rangley Writing Desk - Grey/Brown',
-        category:'office',
-        price: 549,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood',
-        dims:'B6830-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/rangley-writing-desk-grey-b6830.webp'],
-        variants:[
-          { id:'OF-DESK-B6830-GRY', name:'Grey/Brown', swatch:'#8B7D6B' }
-        ],
-        details:{
-          dimensions:'Contemporary writing desk',
-          materials:'Rich textured finish with spacious surface. Dual drawers with elegant metal handles. Modern design for home or office.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DESK-4950',
-        title:'Rylee Faux Marble Desk',
-        category:'office',
+        id:'MT-ICETECH-10',
+        title:'IceTech 10 Inch Mattress',
+        category:'mattress',
         price: 699,
         featured:true,
         best:true,
         isNew:true,
         inStock:true,
         Delivery:'fast',
-        material:'Faux Marble & Wood',
-        dims:'4950',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/rylee-faux-marble-desk-4950.webp'],
+        material:'Cooling Foam',
+        dims:'10 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/icetech-10-inch.webp'],
         variants:[],
         details:{
-          dimensions:'Premium writing desk with marble top',
-          materials:'Elegant faux marble top surface with black wood base and drawers. Contemporary styling with ample storage.',
-          shipping:'Houston Delivery: 5–7 days',
+          dimensions:'10" profile',
+          materials:'Cooling cover + comfort foam layers designed for temperature control.',
+          shipping:'Houston Delivery: 3–7 days',
           warranty:'1-year warranty'
         }
       },
       {
-        id:'OF-CHAIR-CMFC612',
-        title:'Argon Gaming Office Chair',
-        category:'office',
-        price: 329,
-        featured:true,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Leatherette & Metal',
-        dims:'CM-FC612',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/argon-office-chair-cm-fc612.webp'],
-        variants:[
-          { id:'OF-CHAIR-CMFC612-BLK', name:'Black/Red/Silver', swatch:'#000000' }
-        ],
-        details:{
-          dimensions:'Contemporary gaming chair',
-          materials:'Black leatherette with silver and red accents. Pneumatic height adjustable seat, padded armrests, sturdy wheel base. Perfect for gaming or office.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DECOR-A2000765',
-        title:'Lauretman Alligator Sculpture',
-        category:'decor',
-        price: 249,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Polyresin',
-        dims:'A2000765',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/ashley-lauretman-a2000765.webp'],
-        variants:[
-          { id:'OF-DECOR-A2000765-GLD', name:'Antiqued Goldtone', swatch:'#D4AF37' }
-        ],
-        details:{
-          dimensions:'22.5"L x 10.5"D x 6.5"H',
-          materials:'Polyresin alligator sculpture in antiqued goldtone finish. Remarkable attention to detail in contemporary fashion. Glam appeal for office or living room.',
-          shipping:'Houston Delivery: 3–5 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-BOOKCASE-A4000589',
-        title:'Ashley Bookcase',
-        category:'decor',
-        price: 599,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood',
-        dims:'A4000589',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/bookcase-a4000589.webp'],
-        variants:[
-          { id:'OF-BOOKCASE-A4000589-BRN', name:'Brown/Gold', swatch:'#8B4513' }
-        ],
-        details:{
-          dimensions:'48"W x 12.5"D x 72"H',
-          materials:'Brown with gold finish bookcase. Multiple shelves for storage and display.',
-          shipping:'Houston Delivery: 5–7 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-BOOKCASE-H742',
-        title:'Antique White Bookcase',
-        category:'decor',
-        price: 799,
-        featured:true,
-        best:true,
-        isNew:true,
-        inStock:true,
-        Delivery:'fast',
-        material:'Wood & Oak Veneer',
-        dims:'H742-70',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/bookcase-h742-70.webp'],
-        variants:[
-          { id:'OF-BOOKCASE-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
-        ],
-        details:{
-          dimensions:'45"W x 17"D x 74.63"H',
-          materials:'Hardwood solids, oak veneer and MDF with antiqued white finish. Wood grain texture, round metal knobs with aged pewter tone. 4 fixed shelves and smooth-gliding drawer.',
-          shipping:'Houston Delivery: 5–7 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-BOOKCASE-H743',
-        title:'Traditional Bookcase H743',
-        category:'decor',
-        price: 749,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'fast',
-        material:'Wood',
-        dims:'H743-70',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/bookcase-h743-70.webp'],
-        variants:[],
-        details:{
-          dimensions:'Traditional bookcase with shelves',
-          materials:'Quality wood construction with traditional styling. Multiple fixed shelves for books and display items.',
-          shipping:'Houston Delivery: 5–7 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DESK-H742',
-        title:'Antique White Executive Desk',
-        category:'office',
+        id:'MT-COPPER-SUPREME-HYBRID',
+        title:'Copper Supreme Hybrid Mattress',
+        category:'mattress',
         price: 899,
         featured:true,
-        best:true,
+        best:false,
         isNew:true,
         inStock:true,
         Delivery:'fast',
-        material:'Wood & Oak Veneer',
-        dims:'H742-34',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/desk-h742-34.webp'],
-        variants:[
-          { id:'OF-DESK-H742-WHT', name:'Antique White', swatch:'#F5F5DC' }
-        ],
+        material:'Hybrid',
+        dims:'Hybrid',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/copper-supreme-hybrid.webp'],
+        variants:[],
         details:{
-          dimensions:'60"W x 28"D x 31"H',
-          materials:'Hardwood solids, oak veneer and MDF with antiqued white finish. Wood grain texture, round metal knobs in dark bronze. Smooth-gliding accessories drawer, wide keyboard drawer. 110V power with USB-A and USB-C charging ports included.',
-          shipping:'Houston Delivery: 5–7 days',
+          dimensions:'Hybrid build',
+          materials:'Copper-infused comfort layers over responsive coils.',
+          shipping:'Houston Delivery: 3–7 days',
           warranty:'1-year warranty'
         }
       },
       {
-        id:'OF-DESK-H3929',
-        title:'Tan Executive L-Desk',
-        category:'office',
+        id:'MT-M203-12-HYBRID',
+        title:'M203 12 Inch Hybrid Mattress',
+        category:'mattress',
+        price: 999,
+        featured:false,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Hybrid',
+        dims:'12 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/m203-12-inch-hybrid.webp'],
+        variants:[],
+        details:{
+          dimensions:'12" profile',
+          materials:'Supportive coils + comfort foam for all-around balance.',
+          shipping:'Houston Delivery: 3–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'MT-M697-12-HYBRID',
+        title:'M697 12 Inch Hybrid Mattress',
+        category:'mattress',
+        price: 1099,
+        featured:false,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Hybrid',
+        dims:'12 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/m697-12-inch-hybrid.webp'],
+        variants:[],
+        details:{
+          dimensions:'12" profile',
+          materials:'Hybrid support with a pressure-relieving comfort top.',
+          shipping:'Houston Delivery: 3–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'MT-ROYAL-COMFORT-FIRM-12-HYBRID',
+        title:'Royal Comfort Firm 12 Inch Hybrid Mattress',
+        category:'mattress',
+        price: 1199,
+        featured:true,
+        best:false,
+        isNew:true,
+        inStock:true,
+        Delivery:'ready',
+        material:'Hybrid • Firm',
+        dims:'12 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/royal-comfort-firm-12-inch-hybrid.webp'],
+        variants:[],
+        details:{
+          dimensions:'12" profile',
+          materials:'Firm feel hybrid support for a flatter, supportive sleep.',
+          shipping:'Houston Delivery: 3–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'MT-ROYAL-ULTRA-PLUSH-12-HYBRID',
+        title:'Royal Ultra Plush 12 Inch Hybrid Mattress',
+        category:'mattress',
         price: 1299,
         featured:true,
         best:false,
         isNew:true,
         inStock:true,
-        Delivery:'fast',
-        material:'Wood',
-        dims:'H3929',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/desk-h3929.webp'],
-        variants:[
-          { id:'OF-DESK-H3929-TAN', name:'Tan', swatch:'#D2B48C' }
-        ],
-        details:{
-          dimensions:'60"W x 64"D x 29"H',
-          materials:'Large L-shaped executive desk in tan finish. Spacious workspace with ample storage and surface area.',
-          shipping:'Houston Delivery: 7–10 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-RACK-B4852WH',
-        title:'Luxo Display Rack - White',
-        category:'office',
-        price: 449,
-        featured:true,
-        best:false,
-        isNew:true,
-        inStock:true,
         Delivery:'ready',
-        material:'Wood & Mirror',
-        dims:'B4852WH-RACK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/luxo-rack-white-b4852wh.webp'],
-        variants:[
-          { id:'OF-RACK-B4852WH-WHT', name:'White', swatch:'#FFFFFF' }
-        ],
-        details:{
-          dimensions:'Contemporary display shelving',
-          materials:'Sleek modern shelving unit in crisp white finish. Clean minimalist lines with mirrored back. Each spacious shelf showcases decor, plants, or books. Perfect for living rooms, home offices, or reading nooks.',
-          shipping:'Houston Delivery: 5–7 days',
-          warranty:'1-year warranty'
-        }
-      },
-      {
-        id:'OF-DESK-B4900',
-        title:'Nyomi Writing Desk',
-        category:'office',
-        price: 479,
-        featured:false,
-        best:false,
-        isNew:true,
-        inStock:true,
-        Delivery:'ready',
-        material:'Wood',
-        dims:'B4900-DESK',
-        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Office/nyomi-desk-writing-desk-b4900.webp'],
+        material:'Hybrid • Plush',
+        dims:'12 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/royal-ultra-plush-12-inch-hybrid.webp'],
         variants:[],
         details:{
-          dimensions:'Compact modern desk',
-          materials:'Clean silhouette with softly rounded edges. Light neutral wood finish with minimalist appeal. Dual drawers with sleek black pulls. Streamlined profile ideal for smaller offices or contemporary homes.',
-          shipping:'Houston Delivery: 3–5 days',
+          dimensions:'12" profile',
+          materials:'Plush comfort top over supportive coils for pressure relief.',
+          shipping:'Houston Delivery: 3–7 days',
+          warranty:'1-year warranty'
+        }
+      },
+      {
+        id:'MT-NOCHE-LUXURY-13-HYBRID',
+        title:'Noche Luxury 13 Inch Hybrid Mattress',
+        category:'mattress',
+        price: 1499,
+        featured:true,
+        best:true,
+        isNew:true,
+        inStock:true,
+        Delivery:'fast',
+        material:'Hybrid • Luxury',
+        dims:'13 inch',
+        images: ['https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/noche-luxury-13-inch-hybrid.webp'],
+        variants:[],
+        details:{
+          dimensions:'13" profile',
+          materials:'Luxury hybrid construction with plush comfort and strong support.',
+          shipping:'Houston Delivery: 3–7 days',
           warranty:'1-year warranty'
         }
       },
@@ -11670,15 +11903,15 @@ window.scrollTo(0, 0);
           { label:'Available', img:'https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=1200&q=70', href:'#/collection/dining?Delivery=ready'},
         ]
       },
-      office: {
+      mattress: {
         cols:[
-          { title:'Shop', links:[['Desks','#/collection/office'],['Chairs','#/collection/office?q=chair'],['Lighting','#/collection/office?q=light']]},
-          { title:'Style', links:[['Slim setups','#/collection/office?q=slim'],['Black + wood','#/collection/office?q=black']]},
-          { title:'Shortcuts', links:[['Available','#/collection/office?Delivery=ready'],['New arrivals','#/collection/office?sort=new']]}
+          { title:'Shop', links:[['All Mattresses','#/collection/mattress'],['Hybrid','#/collection/mattress?q=hybrid'],['Firm','#/collection/mattress?q=firm'],['Plush','#/collection/mattress?q=plush']]},
+          { title:'Comfort', links:[['Cooling','#/collection/mattress?q=cooling'],['Memory Foam','#/collection/mattress?q=foam'],['Bamboo','#/collection/mattress?q=bamboo']]},
+          { title:'Shortcuts', links:[['Available','#/collection/mattress?Delivery=ready'],['New arrivals','#/collection/mattress?sort=new']]}
         ],
         feats:[
-          { label:'Desks', img:'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=70', href:'#/collection/office'},
-          { label:'Setup essentials', img:'https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=70', href:'#/collection/office?q=essentials'},
+          { label:'Shop mattresses', img:'https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/shop-by-room-mattress.webp', href:'#/collection/mattress'},
+          { label:'Cooling hybrids', img:'https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/Mattress/icetech-10-inch.webp', href:'#/collection/mattress?q=cooling'},
         ]
       },
       decor: {
@@ -11864,11 +12097,27 @@ window.scrollTo(0, 0);
     $('#openMenu').addEventListener('click', ()=> openDrawer('menuDrawer'));
     $('#openSearch').addEventListener('click', ()=>{ openModal('searchModal'); hydrateRecentSearch(); $('#searchInput').focus(); });
 
+    // Mobile header button proxies
+    const mobSearch = document.querySelector('.mob-search-btn');
+    const mobCart = document.querySelector('.mob-cart-btn');
+    const mobMenu = document.querySelector('.mob-menu-btn');
+    if(mobSearch) mobSearch.addEventListener('click', ()=>{ openModal('searchModal'); hydrateRecentSearch(); $('#searchInput').focus(); });
+    if(mobCart)   mobCart.addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
+    if(mobMenu)   mobMenu.addEventListener('click', ()=> openDrawer('menuDrawer'));
+
+    // Sync desktop lang toggle (duplicate) with main toggle
+    const btnEN2 = document.getElementById('btnEN2');
+    const btnES2 = document.getElementById('btnES2');
+    if(btnEN2) btnEN2.addEventListener('click', ()=> document.getElementById('btnEN').click());
+    if(btnES2) btnES2.addEventListener('click', ()=> document.getElementById('btnES').click());
+
     $('#bnSearch').addEventListener('click', ()=>{ openModal('searchModal'); hydrateRecentSearch(); $('#searchInput').focus(); });
     $('#bnWish').addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
     $('#bnCart').addEventListener('click', ()=>{ renderCart(); openDrawer('cartDrawer'); });
     $('#bnMenu').addEventListener('click', ()=> openDrawer('menuDrawer'));
     $("#openFinance").addEventListener("click", ()=> openDrawer("financeDrawer"));
+    const ofm = document.getElementById("openFinanceMobile");
+    if(ofm){ ofm.addEventListener("click", ()=> openDrawer("financeDrawer")); }
     $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.hash = b.dataset.go));
 
     /* ---------- Mega menu ---------- */
@@ -11954,12 +12203,16 @@ window.scrollTo(0, 0);
           <div class="p-body">
             <h3 class="p-title">${p.title}</h3>
             <div class="price email-price" data-email-price data-title="${p.title}">
-              <span class="email-price-arrow" title="Email or call for pricing" aria-hidden="true">→</span><svg class="env" viewBox="0 0 24 24" aria-hidden="true">
-  <rect class="fill" x="3.5" y="6" width="17" height="12" rx="2"></rect>
-  <path d="M4.5 8l7.5 6 7.5-6"></path>
-</svg><span class="email-price-label" title="Email or call for pricing">Email or Call for Price</span>
+              <a class="ep-email-line" href="mailto:info@angelsfurniture.org?subject=Price+Request%3A+${encodeURIComponent(p.title)}&amp;body=Hi+Angels+Furniture%2C+I'd+like+pricing+for%3A+${encodeURIComponent(p.title)}" aria-label="Email for price" tabindex="-1">
+                <svg class="env" viewBox="0 0 24 24" aria-hidden="true"><rect class="fill" x="3.5" y="6" width="17" height="12" rx="2"></rect><path d="M4.5 8l7.5 6 7.5-6"></path></svg>
+                <span>Email for Price</span>
+              </a>
+              <a class="ep-call-line" href="tel:+13468671155" aria-label="Call for price" tabindex="-1">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <span>Call (346) 867-1155</span>
+              </a>
             </div>
-            <div class="p-meta"><span class="hide-mobile">${stock}</span><span class="show-mobile">${stockMobile}</span> • ${p.material}</div>
+
           </div>
         </div>
       </article>`;
@@ -11969,7 +12222,7 @@ window.scrollTo(0, 0);
       // Get mixed products for carousel - balanced across categories
       // Randomizes on every page load for fresh content
       function getMixedProducts(filterFn, count) {
-        const categories = ['living', 'bedroom', 'dining', 'office', 'youth', 'decor'];
+        const categories = ['living', 'bedroom', 'dining', 'mattress', 'youth', 'decor'];
         const perCategory = Math.ceil(count / categories.length);
         let mixed = [];
         
@@ -12107,7 +12360,7 @@ window.scrollTo(0, 0);
     
     function renderCollection(qText=''){
       const cat = state.collection || 'living';
-      const titleMap = { living:'Living', bedroom:'Bedroom', dining:'Dining', office:'Office', decor:'Decor', sale:'Sale', youth:'Youth' };
+      const titleMap = { living:'Living', bedroom:'Bedroom', dining:'Dining', mattress:'Mattress', decor:'Decor', sale:'Sale', youth:'Youth' };
       $('#collectionTitle').textContent = titleMap[cat] || 'Collection';
       $('#collectionSubtitle').textContent = cat==='sale' ? 'Clearance and limited deals.' : 'Filter by price, availability, and Delivery speed.';
 
@@ -12827,7 +13080,7 @@ $('#keepShoppingBtn')?.addEventListener('click', ()=>{ closeThing('cartDrawer');
   </script>
 <script>
 (() => {
-  const dict = {"en": {"t001": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t002": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Pickup & Delivery", "t005": "Living", "t006": "Bedroom", "t007": "Dining", "t008": "Mattress", "t009": "Decor", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout", "t017": "Menu", "t018": "Shop", "t019": "Houston-ready picks", "t020": "Living", "t021": "Bedroom", "t022": "Dining", "t023": "Mattress", "t024": "Decor", "t025": "Sale", "t026": "Showroom", "t027": "Visit us in Houston. Pickup available.", "t028": "Visit Houston Showroom", "t029": "About Angel’s", "t030": "Contact", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Dining", "t038": "Bouclé", "t039": "Available", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Furniture Houston Showroom", "t043": "Handpicked pieces, warm finishes, and clean modern lines. Shop collections, or grab “Available” inventory for pickup or fast local Delivery.", "t044": "Shop Collections", "t045": "Visit Houston Showroom", "t046": "Great Deals • Easy Financing Available", "t047": "Available in Houston", "t048": "Pickup available", "t049": "delivery", "t050": "Shop By Room", "t051": "Quality furniture at unbeatable Houston prices. Easy financing available with flexible payment plans.", "t052": "Living Sofas, sectionals, tables", "t053": "Living Room Sets", "t054": "Sofas, Sectionals, Tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Bedroom Sets", "t057": "Beds, Dressers, Nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Dining Room Sets", "t060": "Tables, Chairs, Storage", "t061": "Office Desks, chairs, lighting", "t062": "Mattress Sets", "t063": "Desks, Chairs, Lighting", "t064": "New Arrivals", "t065": "Fresh styles just in! Affordable monthly payments with our easy financing options.", "t066": "Available in Houston", "t067": "In-stock furniture ready for delivery or pickup. Great deals with flexible payment plans.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Fast local Delivery", "t071": "Fast local Delivery", "t072": "Fast options for many items. Clear Delivery windows and pickup availability.", "t073": "Handpicked quality", "t074": "Handpicked quality", "t075": "Warm textures and clean lines. We choose fewer pieces so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See finishes in person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See pieces in person, check comfort and finishes, and plan pickup.", "t081": "Hours: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Pickup: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Call", "t089": "Local favorites", "t090": "Clean testimonial cards (no fake star ratings).", "t091": "“delivery, the finish looked even better in person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View in room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Delivery & assembly", "t112": "3–7 days", "t113": "Warranty", "t114": "1 year manufacturer warranty", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching pieces that pair well — keeps decision flow smooth.", "t119": "About Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Furniture is a Houston boutique showroom focused on pieces that feel modern, warm, and easy to live with.\n              We keep the selection handpicked — fewer items, better fit. Come by to see finishes in person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Handpicked quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Visit the showroom to see current pieces, finishes, and comfort in person.", "t128": "Houston showroom", "t129": "See it in person. Pickup available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch Materials, Check Comfort, Compare Finishes", "t139": "Fast Answers On Delivery & Pickup Options", "t140": "Clean, No-Pressure Guidance", "t141": "Gallery", "t142": "Contact", "t143": "Fast answers. Simple scheduling. No hoops.", "t144": "Call", "t145": "Call us at (346) 867-1155 for questions, availability, and pickup/delivery timing.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.org", "t150": "Message us", "t151": "Send message", "t152": "Use this form to send a quick message. We’ll get back to you as soon as possible.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "(346) 867-1155", "t165": "Visit Our Showroom", "t166": "Touch the fabrics, test the comfort, and plan your delivery.", "t167": "Get Directions", "t168": "Schedule Visit", "t169": "FAIRBANKS BUSINESS PARK", "t170": "CALL", "t171": "HOURS", "t172": "Youth", "t173": "Youth"}, "es": {"t001": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t002": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Recogida & Delivery", "t005": "Sala", "t006": "Recámara", "t007": "Comedor", "t008": "Colchones", "t009": "Decoración", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout", "t017": "Menu", "t018": "Comprar", "t019": "Houston-ready picks", "t020": "Sala", "t021": "Recámara", "t022": "Comedor", "t023": "Colchones", "t024": "Decoración", "t025": "Sale", "t026": "Sala de exhibición", "t027": "Visit us en Houston. Recogida available.", "t028": "Visit Houston Sala", "t029": "Nosotros Angel’s", "t030": "Contacto", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Comedor", "t038": "Bouclé", "t039": "Disponible", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Muebles Houston Sala", "t043": "Piezas seleccionadas, acabados cálidos y líneas modernas limpias. Compra colecciones o elige inventario “listo hoy” para recogida o entrega local rápida.", "t044": "Comprar colecciones", "t045": "Visit Houston Sala", "t046": "Listo hoy en Houston • limited drops", "t047": "Listo hoy en Houston", "t048": "Recogida available", "t049": "delivery", "t050": "Comprar by room", "t051": "Start with the space, then refine by style. Built for fast decision-making on mobile.", "t052": "Living Sofas, sectionals, tables", "t053": "Juegos de sala", "t054": "Sofas, Sectionals, Tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Juegos de recámara", "t057": "Beds, Dressers, Nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Juegos de comedor", "t060": "Tables, Chairs, Storage", "t061": "Office Desks, chairs, lighting", "t062": "Juegos de colchón", "t063": "Desks, Chairs, Lighting", "t064": "New arrivals", "t065": "A limpias snap carousel that stays light on JS and feels premium.", "t066": "Disponible en Houston", "t067": "In-stock picks for fast local Delivery or pickup. Updated often.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Rápida local Delivery", "t071": "Rápida local Delivery", "t072": "Fast options for many items. Clear Delivery windows and pickup availability.", "t073": "Seleccionado quality", "t074": "Seleccionado quality", "t075": "cálidos textures and limpias líneas. We choose fewer piezas so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See acabados en person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See piezas en person, check comfort and acabados, and plan pickup.", "t081": "Horarios: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Recogida: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Llamar", "t089": "Local favorites", "t090": "limpias testimonial cards (no fake star ratings).", "t091": "“Rápida Delivery, the finish looked even better en person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View en room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Entrega & assembly", "t112": "3–7 days", "t113": "Warranty", "t114": "1 year manufacturer warranty", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching piezas that pair well — keeps decision flow smooth.", "t119": "Nosotros Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Muebles is a Houston boutique showroom focused on piezas that feel modernas, cálidos, and easy to live with. We keep the selection handpicked — fewer items, better fit. Come by to see acabados en person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Seleccionado quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Visit the showroom to see current pieces, finishes, and comfort in person.", "t128": "Houston showroom", "t129": "See it en person. Recogida available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch materials, check comfort, compare acabados", "t139": "Rápida answers on Delivery & pickup options", "t140": "limpias, no-pressure guidance", "t141": "Gallery", "t142": "Contacto", "t143": "Rápida answers. Simple scheduling. No hoops.", "t144": "Llamar", "t145": "Call us at (346) 867-1155 for questions, availability, and pickup/delivery timing.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.org", "t150": "Message us", "t151": "Send message", "t152": "Use this form to send a quick message. We’ll get back to you as soon as possible.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "(346) 867-1155", "t165": "Visita Nuestra Sala", "t166": "Toca las telas, prueba la comodidad y planifica tu entrega.", "t167": "Obtener Direcciones", "t168": "Agendar Visita", "t169": "PARQUE EMPRESARIAL FAIRBANKS", "t170": "LLAMAR O ENVIAR TEXTO", "t171": "HORARIO", "t172": "Juventud", "t173": "Juventud"}};
+  const dict = {"en": {"t001": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t002": "Angel’s Furniture Houston showroom • Pickup & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Pickup & Delivery", "t005": "Living", "t006": "Bedroom", "t007": "Dining", "t008": "Mattress", "t009": "Decor", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout", "t017": "Menu", "t018": "Shop", "t019": "Houston-ready picks", "t020": "Living", "t021": "Bedroom", "t022": "Dining", "t023": "Mattress", "t024": "Decor", "t025": "Sale", "t026": "Showroom", "t027": "Visit us in Houston. Pickup available.", "t028": "Visit Houston Showroom", "t029": "About Angel’s", "t030": "Contact", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Dining", "t038": "Bouclé", "t039": "Available", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Furniture Houston Showroom", "t043": "Handpicked pieces, warm finishes, and clean modern lines. Shop collections, or grab “Available” inventory for pickup or fast local Delivery.", "t044": "Shop Collections", "t045": "Visit Houston Showroom", "t046": "Great Deals • Easy Financing Available", "t047": "Available in Houston", "t048": "Pickup available", "t049": "delivery", "t050": "Shop By Room", "t051": "Quality furniture at unbeatable Houston prices. Easy financing available with flexible payment plans.", "t052": "Living Sofas, sectionals, tables", "t053": "Living Room Sets", "t054": "Sofas, Sectionals, Tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Bedroom Sets", "t057": "Beds, Dressers, Nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Dining Room Sets", "t060": "Tables, Chairs, Storage", "t061": "Mattress Premium sleep, hybrids, foam", "t062": "Mattress Sets", "t063": "Hybrids, Memory Foam, Firm", "t064": "New Arrivals", "t065": "Fresh styles just in! Affordable monthly payments with our easy financing options.", "t066": "Available in Houston", "t067": "In-stock furniture ready for delivery or pickup. Great deals with flexible payment plans.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Fast local Delivery", "t071": "Fast local Delivery", "t072": "Fast options for many items. Clear Delivery windows and pickup availability.", "t073": "Handpicked quality", "t074": "Handpicked quality", "t075": "Warm textures and clean lines. We choose fewer pieces so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See finishes in person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See pieces in person, check comfort and finishes, and plan pickup.", "t081": "Hours: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Pickup: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Call", "t089": "Local favorites", "t090": "Clean testimonial cards (no fake star ratings).", "t091": "“delivery, the finish looked even better in person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View in room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Delivery & assembly", "t112": "3–7 days", "t113": "Warranty", "t114": "1 year manufacturer warranty", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching pieces that pair well — keeps decision flow smooth.", "t119": "About Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Furniture is a Houston boutique showroom focused on pieces that feel modern, warm, and easy to live with.\n              We keep the selection handpicked — fewer items, better fit. Come by to see finishes in person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Handpicked quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Visit the showroom to see current pieces, finishes, and comfort in person.", "t128": "Houston showroom", "t129": "See it in person. Pickup available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch Materials, Check Comfort, Compare Finishes", "t139": "Fast Answers On Delivery & Pickup Options", "t140": "Clean, No-Pressure Guidance", "t141": "Gallery", "t142": "Contact", "t143": "Fast answers. Simple scheduling. No hoops.", "t144": "Call", "t145": "Call us at (346) 867-1155 for questions, availability, and pickup/delivery timing.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.org", "t150": "Message us", "t151": "Send message", "t152": "Use this form to send a quick message. We’ll get back to you as soon as possible.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "(346) 867-1155", "t165": "Visit Our Showroom", "t166": "Touch the fabrics, test the comfort, and plan your delivery.", "t167": "Get Directions", "t168": "Schedule Visit", "t169": "FAIRBANKS BUSINESS PARK", "t170": "CALL", "t171": "HOURS", "t172": "Youth", "t173": "Youth"}, "es": {"t001": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t002": "Angel’s Muebles Houston showroom • Recogida & Delivery", "t003": "Angel’s Furniture", "t004": "Houston showroom • Recogida & Delivery", "t005": "Sala", "t006": "Recámara", "t007": "Comedor", "t008": "Colchones", "t009": "Decoración", "t010": "Sale", "t011": "0", "t012": "0", "t013": "0", "t014": "0", "t015": "Cart", "t016": "Checkout", "t017": "Menu", "t018": "Comprar", "t019": "Houston-ready picks", "t020": "Sala", "t021": "Recámara", "t022": "Comedor", "t023": "Colchones", "t024": "Decoración", "t025": "Sale", "t026": "Sala de exhibición", "t027": "Visit us en Houston. Recogida available.", "t028": "Visit Houston Sala", "t029": "Nosotros Angel’s", "t030": "Contacto", "t031": "Wishlist", "t032": "Keep shopping", "t033": "Search", "t034": "Popular:", "t035": "Sofas", "t036": "Sectionals", "t037": "Comedor", "t038": "Bouclé", "t039": "Disponible", "t040": "Recent:", "t041": "Filters", "t042": "Angel’s Muebles Houston Sala", "t043": "Piezas seleccionadas, acabados cálidos y líneas modernas limpias. Compra colecciones o elige inventario “listo hoy” para recogida o entrega local rápida.", "t044": "Comprar colecciones", "t045": "Visit Houston Sala", "t046": "Listo hoy en Houston • limited drops", "t047": "Listo hoy en Houston", "t048": "Recogida available", "t049": "delivery", "t050": "Comprar by room", "t051": "Start with the space, then refine by style. Built for fast decision-making on mobile.", "t052": "Living Sofas, sectionals, tables", "t053": "Juegos de sala", "t054": "Sofas, Sectionals, Tables", "t055": "Bedroom Beds, dressers, nightstands", "t056": "Juegos de recámara", "t057": "Beds, Dressers, Nightstands", "t058": "Dining Tables, chairs, storage", "t059": "Juegos de comedor", "t060": "Tables, Chairs, Storage", "t061": "Colchones Sueño premium, híbridos, espuma", "t062": "Juegos de colchón", "t063": "Híbridos, Espuma, Firme", "t064": "New arrivals", "t065": "A limpias snap carousel that stays light on JS and feels premium.", "t066": "Disponible en Houston", "t067": "In-stock picks for fast local Delivery or pickup. Updated often.", "t068": "Why Angel’s", "t069": "Premium experience, Houston warmth. No fluff.", "t070": "Rápida local Delivery", "t071": "Rápida local Delivery", "t072": "Fast options for many items. Clear Delivery windows and pickup availability.", "t073": "Seleccionado quality", "t074": "Seleccionado quality", "t075": "cálidos textures and limpias líneas. We choose fewer piezas so every piece works.", "t076": "Real showroom support", "t077": "Real showroom support", "t078": "See acabados en person. Ask questions. Schedule a quick visit.", "t079": "Houston showroom", "t080": "See piezas en person, check comfort and acabados, and plan pickup.", "t081": "Horarios: Mon–Sat 10–7", "t082": "Mon–Sat 10–7", "t083": "Recogida: Available", "t084": "Available", "t085": "Parking: Easy lot", "t086": "Easy lot", "t087": "Get directions", "t088": "Llamar", "t089": "Local favorites", "t090": "limpias testimonial cards (no fake star ratings).", "t091": "“Rápida Delivery, the finish looked even better en person. Easy pickup.”", "t092": "“They helped us match a dining set to our floors. Zero pressure.”", "t093": "“The sectional is perfect. Quick questions got answered immediately.”", "t094": "Inspiration gallery", "t095": "Lazy loaded image grid. Swap with your IG feed later.", "t096": "Filters", "t097": "Collection", "t098": "Quality furniture at unbeatable prices. Ask about our flexible financing options.", "t099": "Filters", "t100": "Clear", "t101": "Sort", "t102": "← Back to collection", "t103": "Product", "t104": "View en room", "t105": "Static mockups (no heavy 3D). Swap with your brand imagery later.", "t106": "Product", "t107": "Add to cart", "t108": "Store pickup", "t109": "Schedule showroom visit", "t110": "Ask a question", "t111": "Entrega & assembly", "t112": "3–7 days", "t113": "Warranty", "t114": "1 year manufacturer warranty", "t115": "Secure checkout", "t116": "Apple Pay / Google Pay", "t117": "Complete the room", "t118": "Matching piezas that pair well — keeps decision flow smooth.", "t119": "Nosotros Angel’s", "t120": "Local, straightforward, and showroom-first — built to help Houston homes feel calm and put-together.", "t121": "Our story", "t122": "Angel’s Muebles is a Houston boutique showroom focused on piezas that feel modernas, cálidos, and easy to live with. We keep the selection handpicked — fewer items, better fit. Come by to see acabados en person, ask questions, and plan pickup or Delivery.", "t123": "What we stand for", "t124": "Seleccionado quality", "t125": "Real support", "t126": "Houston-ready", "t127": "Visit the showroom to see current pieces, finishes, and comfort in person.", "t128": "Houston showroom", "t129": "See it en person. Recogida available. Text us for quick questions.", "t130": "Visit", "t131": "14300 Northwest Fwy Bldg B-26, Houston, TX 77040", "t132": "Mon–Sat 10–7", "t133": "Easy lot", "t134": "Available", "t135": "Get directions", "t136": "Schedule a visit", "t137": "What to expect", "t138": "Touch materials, check comfort, compare acabados", "t139": "Rápida answers on Delivery & pickup options", "t140": "limpias, no-pressure guidance", "t141": "Gallery", "t142": "Contacto", "t143": "Rápida answers. Simple scheduling. No hoops.", "t144": "Llamar", "t145": "Call us at (346) 867-1155 for questions, availability, and pickup/delivery timing.", "t146": "Call", "t147": "Text", "t148": "Email", "t149": "info@angelsfurniture.org", "t150": "Message us", "t151": "Send message", "t152": "Use this form to send a quick message. We’ll get back to you as soon as possible.", "t153": "Add to cart", "t154": "Home", "t155": "Home", "t156": "Search", "t157": "Search", "t158": "Saved", "t159": "Saved", "t160": "Cart", "t161": "Cart", "t162": "Menu", "t163": "Menu", "t164": "(346) 867-1155", "t165": "Visita Nuestra Sala", "t166": "Toca las telas, prueba la comodidad y planifica tu entrega.", "t167": "Obtener Direcciones", "t168": "Agendar Visita", "t169": "PARQUE EMPRESARIAL FAIRBANKS", "t170": "LLAMAR O ENVIAR TEXTO", "t171": "HORARIO", "t172": "Juventud", "t173": "Juventud"}};
   const KEY = 'angels_lang';
   const btnEN = document.getElementById('btnEN');
   const btnES = document.getElementById('btnES');
@@ -12912,15 +13165,21 @@ img { max-width:100%; height:auto; }
 /* ══════════════════════════════
    UTILITY BAR (desktop default)
    ══════════════════════════════ */
+/* Utility bar: full bleed background, inner content aligned to site container */
 .header-utility {
+  background: #EDE9E2;
+  border-bottom: 1px solid #E0D9CE;
+  width: 100%;
+}
+.header-utility-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: var(--container, 1280px);
+  margin-inline: auto;
   padding: 8px clamp(16px, 4vw, 28px);
   font-size: 12px;
   font-weight: 500;
-  background: #EDE9E2;
-  border-bottom: 1px solid #E0D9CE;
   color: rgba(26,26,26,.65);
   letter-spacing: .01em;
   gap: 12px;
@@ -12977,7 +13236,7 @@ img { max-width:100%; height:auto; }
 
 /* ── MOBILE UTILITY BAR ── */
 @media (max-width: 768px) {
-  .header-utility {
+  .header-utility-inner {
     padding: 6px clamp(14px, 4vw, 20px);
     font-size: 11px;
   }
@@ -12986,7 +13245,8 @@ img { max-width:100%; height:auto; }
   .utility-finance-btn { display: none; }
 }
 @media (max-width: 480px) {
-  .header-utility { display: none; }
+  /* Keep address bar visible on mobile (top of page) */
+  .header-utility { display: block; }
 }
 
 /* ══════════════════════════════
@@ -13001,12 +13261,14 @@ header {
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border-bottom: 1px solid rgba(0,0,0,.07);
 }
+/* container inside header: no extra padding, just vertical */
+.header-container { padding-inline: clamp(16px, 4vw, 28px); }
 .header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  padding: 10px clamp(14px, 4vw, 24px);
+  padding: 10px 0;
   position: relative;
 }
 .brand { display: flex; align-items: center; flex-shrink: 0; }
@@ -13017,6 +13279,8 @@ header {
   display: block;
 }
 nav.primary { display: none; }
+/* header-right hidden on mobile — shown via desktop/tablet media queries */
+.header-right { display: none; }
 .header-actions {
   display: flex;
   align-items: center;
@@ -13043,19 +13307,37 @@ nav.primary { display: none; }
 
 /* ── DESKTOP NAV ── */
 @media (min-width: 1100px) {
-  .header-row { padding: 12px clamp(20px,4vw,28px); gap: 24px; }
+  /* header-row: logo left, header-right flush-right (under phone/financing) */
+  .header-row {
+    padding: 12px 0;
+    gap: 0;
+    justify-content: space-between;
+  }
   .header-logo-img { height: 54px; max-width: 190px; }
+
+  /* Hide mobile-only clusters on desktop */
+  .mobile-left-actions,
+  .mobile-right-actions,
+  .mobile-contact-bar { display: none !important; }
+
+  /* Right cluster: nav + actions as one right-aligned group */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Nav inside the right cluster — no flex:1, no centering */
   nav.primary {
     display: flex;
-    flex: 1;
-    justify-content: center;
     align-items: center;
-    gap: 4px;
+    gap: 2px;
     font-size: 15px;
     letter-spacing: -.01em;
   }
   nav.primary a {
-    padding: 9px 14px;
+    padding: 9px 13px;
     border-radius: 11px;
     color: rgba(26,26,26,.80);
     font-weight: 500;
@@ -13063,6 +13345,10 @@ nav.primary { display: none; }
     transition: background 160ms, color 160ms;
   }
   nav.primary a:hover { background: rgba(0,0,0,.04); color: #1A1A1A; }
+
+  /* Desktop actions inside header-right */
+  .header-actions { display: flex !important; gap: 8px; }
+
   .mobile-menu-only { display: none !important; }
   .icon-btn { width: 46px; height: 46px; min-width: 46px; min-height: 46px; border-radius: 13px; }
 }
@@ -13072,6 +13358,122 @@ nav.primary { display: none; }
   .header-logo-img { height: 40px; max-width: 130px; }
   .icon-btn { width: 38px; height: 38px; min-width: 38px; min-height: 38px; border-radius: 9px; }
   .header-actions { gap: 4px; }
+}
+
+/* ── TABLET: 641px-1099px — hide mobile clusters, show desktop actions ── */
+@media (min-width: 641px) and (max-width: 1099px) {
+  .mobile-left-actions,
+  .mobile-right-actions,
+  .mobile-contact-bar { display: none !important; }
+  .header-right { display: flex; align-items: center; gap: 6px; }
+  .header-actions { display: flex !important; gap: 6px; }
+  .header-row { display: flex; justify-content: space-between; gap: 12px; }
+  .brand { flex-shrink: 0; }
+  nav.primary { display: none; } /* nav only shows at 1100+ */
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE HEADER REVAMP — ≤ 640px
+   Clean, modern, centered-logo layout
+   ══════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+
+  /* Remove the extra top contact strip on mobile — address should be the first thing */
+  .mobile-contact-bar { display: none !important; }
+
+  /* Keep the address bar visible and simplify it on mobile */
+  .header-utility { display: block; }
+  .utility-right { display: none; }
+  .header-utility-inner { justify-content: center; }
+  .utility-address { max-width: 100%; white-space: nowrap; }
+
+  header {
+    background: rgba(246,243,238,.97);
+    border-bottom: 1px solid rgba(0,0,0,.09);
+    box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  }
+
+  /* ── Contact bar: Call · Email strips ── */
+  .mobile-contact-bar {
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0,.07);
+  }
+  .mobile-contact-bar a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: rgba(26,26,26,.78);
+    text-decoration: none;
+    transition: background .16s;
+    line-height: 1;
+  }
+  .mobile-contact-bar a:first-child {
+    border-right: 1px solid rgba(0,0,0,.07);
+  }
+  .mobile-contact-bar a:hover { background: rgba(0,0,0,.03); }
+  .mobile-contact-bar svg { flex-shrink: 0; }
+  .mobile-contact-bar .mcb-label { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; }
+  .mobile-contact-bar .mcb-sub { font-size: 10px; font-weight: 500; color: rgba(26,26,26,.45); letter-spacing: .01em; }
+
+  /* ── Main header row: [cart+search] [logo] [lang+menu] ── */
+  .header-container { padding-inline: 0; }
+  .header-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 10px 14px;
+    gap: 0;
+  }
+  /* left cluster: search + cart */
+  .mobile-left-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-start;
+  }
+  /* center: brand/logo */
+  .brand {
+    justify-content: center;
+  }
+  .header-logo-img {
+    height: 44px;
+    max-width: 140px;
+  }
+  /* right cluster: lang toggle + menu */
+  .mobile-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  /* reorder header-actions — hide on mobile, replaced by split left/right */
+  .header-actions { display: none !important; }
+
+  /* icon-btn on mobile */
+  .icon-btn {
+    width: 40px; height: 40px;
+    min-width: 40px; min-height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,.80);
+    border: 1px solid rgba(0,0,0,.09);
+    box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  }
+
+  /* lang toggle sizing */
+  .lang-toggle-mini {
+    border-radius: 9px;
+    padding: 2px;
+  }
+  .lang-toggle-mini button {
+    padding: 4px 7px;
+    font-size: 10.5px;
+  }
 }
 
 /* lang toggle */
@@ -13332,18 +13734,16 @@ nav.primary { display: none; }
 </style>
 <footer aria-label="Footer" class="footerA">
   <div class="footer-inner">
+  <div class="footer-logo-section" aria-label="Angel’s Furniture">
+    <a class="footer-logo-link" href="#/home" aria-label="Home">
+      <img class="footer-logo-img" src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png" alt="Angel’s Furniture" loading="lazy" decoding="async"/>
+    </a>
+  </div>
+
+  
+
     <!-- Single logo — no duplication -->
-    <div class="footer-logo">
-      <a class="footer-logo-wrap" href="#/home" aria-label="Angel's Furniture — Home">
-        <img
-          alt="Angel's Furniture"
-          class="footer-logo-img"
-          decoding="async"
-          loading="lazy"
-          src="https://raw.githubusercontent.com/SNRG-WEB-HTX/angels-furniture/main/assets/images/angels-logo.png"
-        />
-      </a>
-    </div>
+    
     <!-- Nav -->
     <nav aria-label="Footer navigation" class="footer-nav">
       <a data-nav href="#/collection/living" data-i18n="t005">Living</a>
@@ -13401,14 +13801,4 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
       window.location.href = `mailto:info@angelsfurniture.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
     el.addEventListener('click', handler, {capture:true});
-    el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ handler(e); } }, {capture:true});
-  });
-  const blockCheckout = ()=>{
-    if(location.hash && /#\/checkout/i.test(location.hash)){
-      location.hash = '#/home';
-    }
-  };
-  window.addEventListener('hashchange', blockCheckout);
-  blockCheckout();
-</script>
-</body></html>
+    el.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ handler(e); } }, {cap
