@@ -5956,6 +5956,56 @@ header{
   }
 }
 
+/* ─────────────────────────────────────────────────────────
+   MOBILE TIGHT SPACING — header + footer only
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+
+  /* Header — kill excess vertical padding */
+  html body header {
+    min-height: 0 !important;
+  }
+  html body header .header-row {
+    padding: 6px 0 !important;
+  }
+  html body header .header-container {
+    padding-inline: 14px !important;
+  }
+
+  /* Footer — tighten all internal sections */
+  html body .footerA .footer-inner {
+    padding: 18px 16px 0 !important;
+  }
+  html body .footerA .footer-logo-section {
+    padding: 0 0 10px !important;
+    margin: 0 !important;
+  }
+  html body .footerA .footer-logo-img {
+    height: 72px !important;
+    max-width: 220px !important;
+  }
+  html body .footerA .footer-nav {
+    gap: 6px !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+  }
+  html body .footerA .footer-social {
+    gap: 8px !important;
+    padding: 8px 0 !important;
+    margin: 0 !important;
+  }
+  html body .footerA .footer-divider {
+    margin: 8px 0 !important;
+  }
+  html body .footerA .footer-address {
+    padding: 0 0 8px !important;
+    margin: 0 !important;
+  }
+  html body .footer-copy {
+    padding: 8px 0 0 !important;
+    gap: 10px !important;
+  }
+}
 </style>
 
 </head>
