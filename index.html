@@ -5618,6 +5618,111 @@ header{
 }
 </style>
 
+
+<style>
+
+/* =========================================================
+   MOBILE HEADER ALIGNMENT PATCH
+   - Search + Cart on SAME ROW as Hamburger
+   - Positioned directly LEFT of Hamburger
+   - Logo + EN/ES remain left cluster
+   - MOBILE ONLY (no desktop impact)
+   ========================================================= */
+@media (max-width: 980px){
+
+  .header-row{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+  }
+
+  /* Left cluster: logo + language */
+  .brand{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+
+  /* Ensure language sits beside logo */
+  .lang-toggle-mini{
+    margin-left: 6px !important;
+  }
+
+  /* Right cluster container */
+  .mobile-actions{
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+
+  /* Force search + cart before hamburger */
+  .mobile-actions .icon-btn:not(.mob-menu-btn){
+    order: 1 !important;
+  }
+
+  .mobile-actions .mob-menu-btn{
+    order: 2 !important;
+  }
+
+}
+
+</style>
+
+<style>
+
+/* =========================================================
+   MOBILE FOOTER APPLE-TIGHT + NO CTA OVERLAP
+   - Prevent sticky bottom CTA from blocking "Built by SNRG WEB"
+   - Tighten footer spacing/padding on mobile only
+   ========================================================= */
+@media (max-width: 980px){
+
+  /* Give page enough bottom breathing room so sticky CTA never covers footer */
+  body{
+    padding-bottom: calc(110px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* If sticky CTA uses fixed positioning, keep it off the safe-area */
+  .sticky-cta, .bottom-cta, .cta-sticky, #stickyCta, #bottomCta{
+    bottom: env(safe-area-inset-bottom) !important;
+  }
+
+  /* Apple-tight footer spacing */
+  .site-footer, footer, .footerA{
+    padding-top: 0 !important;
+  }
+
+  .footer-inner{
+    padding: 12px 16px 18px !important;
+  }
+
+  .footer-logo-section{
+    padding: 10px 0 10px !important;
+    margin: 0 !important;
+  }
+  .footer-logo-img{
+    height: 96px !important;
+    max-width: 300px !important;
+  }
+
+  /* Keep bottom copy/button visible and compact */
+  .footer-bottom{
+    padding: 10px 0 6px !important;
+    margin: 0 !important;
+  }
+  .footer-bottom-content{
+    gap: 10px !important;
+  }
+
+  /* Slightly stronger SNRG button, but not huge */
+  .snrg-btn{
+    padding: 11px 18px !important;
+    font-size: 13.5px !important;
+    font-weight: 750 !important;
+  }
+}
+
+</style>
 </head>
 <body>
 <script>
