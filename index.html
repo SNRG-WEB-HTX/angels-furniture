@@ -2380,14 +2380,14 @@ header { position: sticky; top:0; }
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px 0 20px;
+  padding: 12px 0 14px;
 }
 
 .footer-logo-section img {
   height: 104px;
   width: auto;
   max-width: 280px;
-  opacity: 0.7;
+  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
@@ -5475,15 +5475,28 @@ header{
     background: rgba(246,243,238,.78) !important;
     border-bottom: 1px solid rgba(26,26,26,.08) !important;
   }
-  .header-row{
-    display:grid !important;
-    grid-template-columns: 1fr auto 1fr !important;
-    align-items:center !important;
-    padding: 12px 0 12px !important;
-  }
   .header-container{ padding: 0 16px !important; }
 
-  /* Restore NORMAL logo look on mobile: NO boxes, no frames */
+  /* MOBILE HEADER ORDER (mobile only):
+     [LOGO] [EN/ES] .... [Search] [Cart] [Menu]
+     Uses grid placement without changing desktop DOM. */
+  .header-row{
+    display:grid !important;
+    grid-template-columns: auto auto 1fr auto auto auto !important;
+    align-items:center !important;
+    column-gap: 10px !important;
+    row-gap: 0 !important;
+    padding: 12px 0 12px !important;
+  }
+  .brand{ grid-column: 1 !important; justify-content:flex-start !important; }
+  .mobile-right-actions{ display: contents !important; } /* lets EN/ES + menu become grid items */
+  .lang-toggle-mini{ grid-column: 2 !important; justify-self:start !important; }
+  .mobile-left-actions{ display: contents !important; }  /* lets search/cart become grid items */
+  .mob-search-btn{ grid-column: 4 !important; justify-self:end !important; }
+  .mob-cart-btn{ grid-column: 5 !important; justify-self:end !important; }
+  .mob-menu-btn{ grid-column: 6 !important; justify-self:end !important; }
+
+  /* Restore NORMAL logo on mobile: no boxes/frames */
   .brand .logo-wrap{
     background: transparent !important;
     border: none !important;
@@ -5507,14 +5520,6 @@ header{
     box-shadow: none !important;
   }
 
-  /* Ensure right cluster doesn't stack weird */
-  .mobile-right-actions{
-    flex-direction: row !important;
-    align-items:center !important;
-    gap: 10px !important;
-    justify-content:flex-end !important;
-  }
-
   /* HERO: stop jumbled CTA cropping */
   .hero-ctas{
     display:flex !important;
@@ -5534,28 +5539,85 @@ header{
     padding: 18px 16px !important;
   }
 
-  /* FOOTER: remove room/category links on mobile and show ONLY logo */
+  /* FOOTER on mobile: keep it clean (hide room/category links) */
   .footer-grid, .footer-cols, .footer-links, .footer-nav, .footer-rooms{
     display:none !important;
   }
-  .footer-logo-section.footer-logo-mobile-only{
+  .footer-logo-section{
     display:flex !important;
     justify-content:center !important;
-    padding: 18px 0 10px !important;
+    padding: 12px 0 10px !important;
   }
-  .footer-logo-section.footer-logo-mobile-only .footer-logo-img{
-    height: 110px !important;
+  .footer-logo-section .footer-logo-img{
+    height: 108px !important;
     max-width: 320px !important;
-    filter: drop-shadow(0 10px 24px rgba(0,0,0,.10)) !important;
+  }
+
+  /* Built by: always visible + a bit more prominent on mobile */
+  .footer-built{
+    margin-top: 10px !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    letter-spacing: .02em !important;
+    color: rgba(0,0,0,.82) !important;
+  }
+  .footer-built a{
+    display:inline-flex !important;
+    align-items:center !important;
+    gap:8px !important;
+    padding: 10px 14px !important;
+    border-radius: 999px !important;
+    background: rgba(0,0,0,.06) !important;
+    border: 1px solid rgba(0,0,0,.10) !important;
+    color: #000 !important;
+    text-decoration:none !important;
+  }
+  .footer-built a:hover{
+    background: rgba(0,0,0,.10) !important;
   }
 }
-
-/* DESKTOP/TABLET: hide the mobile-only footer logo container */
-@media (min-width: 981px){
-  .footer-logo-section.footer-logo-mobile-only{ display:none !important; }
 }
 
 </style>
+
+<style id="mobile-only-order-fix">
+/* FINAL MOBILE-ONLY OVERRIDES (do not affect tablet/desktop) */
+@media (max-width: 980px){
+  header .header-utility{ display:none !important; }
+
+  header .header-row{
+    display:grid !important;
+    grid-template-columns: auto auto 1fr auto auto auto !important;
+    align-items:center !important;
+    column-gap: 10px !important;
+    padding: 12px 0 !important;
+  }
+  header .brand{ grid-column:1 !important; justify-content:flex-start !important; }
+  header .mobile-right-actions{ display: contents !important; }
+  header .lang-toggle-mini{ grid-column:2 !important; justify-self:start !important; }
+  header .mobile-left-actions{ display: contents !important; }
+  header .mob-search-btn{ grid-column:4 !important; justify-self:end !important; }
+  header .mob-cart-btn{ grid-column:5 !important; justify-self:end !important; }
+  header .mob-menu-btn{ grid-column:6 !important; justify-self:end !important; }
+
+  header .brand .logo-wrap{
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+  header .header-logo-img{
+    height: 64px !important;
+    max-width: 260px !important;
+  }
+
+  /* Footer logo centered/tight on mobile */
+  footer .footer-logo-section{ padding: 12px 0 10px !important; }
+  footer .footer-built{ display:block !important; }
+}
+</style>
+
 </head>
 <body>
 <script>
