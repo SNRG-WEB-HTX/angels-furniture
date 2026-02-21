@@ -5723,6 +5723,241 @@ header{
 }
 
 </style>
+
+<!-- ═══════════════════════════════════════════════════════
+     TERMINAL BLOCK — LAST IN <HEAD>, WINS ALL CSS CONFLICTS
+     Fixes: 1) SNRG badge blackout  2) Mobile footer ghost space
+            3) Mobile header order: [logo][EN/ES] … [search][cart][☰]
+     ═══════════════════════════════════════════════════════ -->
+<style>
+
+/* ─────────────────────────────────────────────────────────
+   1. SNRG WEB BADGE — override .footerA * {color:#000 !important}
+      Must use equal or higher specificity with !important
+   ───────────────────────────────────────────────────────── */
+.footerA .snrg-badge,
+.footerA .snrg-badge:link,
+.footerA .snrg-badge:visited {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 11px 18px 11px 16px !important;
+  border-radius: 999px !important;
+  background: #111111 !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  text-decoration: none !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: -.01em !important;
+  line-height: 1 !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.28), 0 1px 3px rgba(0,0,0,.16) !important;
+  transition: background 160ms ease, box-shadow 160ms ease, transform 140ms ease !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  vertical-align: middle !important;
+}
+.footerA .snrg-badge:hover {
+  background: #000 !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,.30) !important;
+  transform: translateY(-1px) !important;
+  color: #ffffff !important;
+}
+.footerA .snrg-badge:active {
+  transform: scale(0.97) !important;
+  color: #ffffff !important;
+}
+.footerA .snrg-badge .snrg-badge-label {
+  color: rgba(255,255,255,.50) !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+}
+.footerA .snrg-badge .snrg-badge-brand {
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  letter-spacing: .02em !important;
+}
+.footerA .snrg-badge .snrg-badge-arrow {
+  color: rgba(255,255,255,.55) !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+.footerA .snrg-badge:hover .snrg-badge-arrow {
+  transform: translateX(2px) !important;
+  color: rgba(255,255,255,.85) !important;
+}
+
+/* Mobile badge size */
+@media (max-width: 640px) {
+  .footerA .snrg-badge {
+    padding: 10px 16px 10px 14px !important;
+    font-size: 13px !important;
+  }
+  .footerA .snrg-badge .snrg-badge-brand {
+    font-size: 13px !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   2. KILL GHOST SPACE UNDER FOOTER ON MOBILE
+      Root cause: body{padding-bottom:calc(110px + …) !important}
+      added for sticky CTA clearance — override it after footer
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+  html body {
+    padding-bottom: 0 !important;
+  }
+  /* Footer: pad bottom just enough to clear the fixed bottom-nav bar (~62px) */
+  html body footer.footerA,
+  html body .footerA {
+    padding-bottom: calc(62px + env(safe-area-inset-bottom)) !important;
+    margin-bottom: 0 !important;
+  }
+  /* Kill any site-footer margin/padding stacking */
+  html body .site-footer {
+    margin-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  html body .footer-inner {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   3. MOBILE HEADER — SINGLE ROW, CORRECT ORDER
+      LEFT:  [logo] [EN/ES]
+      RIGHT: [search] [cart] [☰]
+
+      DOM structure:
+        .mobile-left-actions  → search btn + cart btn
+        .brand                → logo
+        .mobile-right-actions → lang-toggle-mini + mob-menu-btn
+
+      Strategy: grid on .header-row, display:contents on
+      mobile-left-actions & mobile-right-actions so all 5
+      elements become direct grid children, then place each.
+   ───────────────────────────────────────────────────────── */
+@media (max-width: 980px) {
+
+  /* Kill utility strip — no double row */
+  html body header .header-utility {
+    display: none !important;
+  }
+
+  /* Desktop nav cluster hidden */
+  html body header .header-right {
+    display: none !important;
+  }
+
+  /* Single-row 6-col grid:
+     col1=logo | col2=EN/ES | col3=spacer | col4=search | col5=cart | col6=☰ */
+  html body header .header-row {
+    display: grid !important;
+    grid-template-columns: auto auto 1fr auto auto auto !important;
+    grid-template-rows: auto !important;
+    align-items: center !important;
+    column-gap: 8px !important;
+    row-gap: 0 !important;
+    padding: 10px 0 !important;
+    flex-direction: unset !important;
+    flex-wrap: unset !important;
+    justify-content: unset !important;
+  }
+
+  /* Logo → col 1 */
+  html body header .brand {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    flex: unset !important;
+    width: auto !important;
+    order: unset !important;
+  }
+
+  /* Dissolve mobile-right-actions so its children join the grid */
+  html body header .mobile-right-actions {
+    display: contents !important;
+    order: unset !important;
+    flex-direction: unset !important;
+  }
+
+  /* EN/ES toggle → col 2 */
+  html body header .lang-toggle-mini {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+  }
+
+  /* Hamburger → col 6 */
+  html body header .mob-menu-btn {
+    grid-column: 6 !important;
+    grid-row: 1 !important;
+    order: unset !important;
+  }
+
+  /* Dissolve mobile-left-actions so search+cart join the grid */
+  html body header .mobile-left-actions {
+    display: contents !important;
+    order: unset !important;
+    flex-direction: unset !important;
+  }
+
+  /* Search → col 4 */
+  html body header .mob-search-btn {
+    grid-column: 4 !important;
+    grid-row: 1 !important;
+    order: unset !important;
+  }
+
+  /* Cart → col 5 */
+  html body header .mob-cart-btn {
+    grid-column: 5 !important;
+    grid-row: 1 !important;
+    order: unset !important;
+  }
+
+  /* 44px tap targets — Fitts's Law / WCAG 2.2 */
+  html body header .icon-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+
+  /* Logo image */
+  html body header .header-logo-img {
+    height: 52px !important;
+    width: auto !important;
+    max-width: 200px !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 380px) {
+  html body header .header-logo-img {
+    height: 44px !important;
+    max-width: 160px !important;
+  }
+  html body header .icon-btn {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  html body header .header-row {
+    column-gap: 5px !important;
+  }
+}
+
+</style>
+
 </head>
 <body>
 <script>
@@ -13958,10 +14193,22 @@ nav.primary { display: none; }
 
 /* ── COPYRIGHT + BUILT BY ── */
 .footerA .footer-copy {
-  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 16px 0 0;
+  width: 100%;
+}
+.footer-copy-line {
+  white-space: nowrap;
+  font-size: 13px;
   font-weight: 400;
-  color: rgba(26,26,26,.40);
-  line-height: 1.7;
+  color: rgba(26,26,26,.45);
+  line-height: 1;
+  letter-spacing: -0.01em;
 }
 .footerA .footer-copy strong { color: rgba(26,26,26,.65); font-weight: 700; }
 .footerA .footer-copy a { color: rgba(26,26,26,.45); transition: color .22s; }
@@ -14040,9 +14287,16 @@ nav.primary { display: none; }
     </a>
     <!-- Copyright -->
     <div class="footer-copy">
-      © <span id="yearA">2026</span> <strong>Angel's Furniture</strong> · Houston, TX ·
-      <a href="tel:+13468671155">(346) 867-1155</a>
-      <div class="footer-built">Built by <a href="https://snrgweb.com" rel="noopener noreferrer" target="_blank">SNRG WEB</a></div>
+      <span class="footer-copy-line">© <span id="yearA">2026</span> <strong>Angel's Furniture</strong> · Houston, TX</span>
+      <a href="https://snrgweb.com" rel="noopener noreferrer" target="_blank" class="snrg-badge" aria-label="Website built by SNRG WEB — Houston web design">
+  <span class="snrg-badge-label">Built by</span>
+  <span class="snrg-badge-brand">SNRG WEB</span>
+  <svg class="snrg-badge-arrow" aria-hidden="true" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+  </svg>
+</a>
     </div>
   </div>
 </footer>
