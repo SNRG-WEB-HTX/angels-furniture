@@ -838,8 +838,8 @@
     }
     @media (min-width:1024px){
       .collection-layout{
-        grid-template-columns: 300px 1fr;
-        gap:24px;
+        grid-template-columns: 1fr;
+        gap:18px;
       }
     }
     .filters-rail{
@@ -6005,6 +6005,21 @@ header{
 }
 </style>
 
+
+<style>
+/* ===== Collection controls: sort only (filters removed) ===== */
+#sortMobileWrap{ display:none; }
+@media (max-width: 1023px){
+  #sortDeskWrap{ display:none !important; }
+  #sortMobileWrap{ display:flex !important; }
+  #sortMobile{ width:220px; max-width: 58vw; }
+}
+@media (min-width: 1024px){
+  #sortDeskWrap{ display:flex !important; }
+  #sortMobileWrap{ display:none !important; }
+}
+</style>
+
 </head>
 <body>
 <script>
@@ -6431,17 +6446,6 @@ window.scrollTo(0, 0);
 <!-- COLLECTION -->
 <section class="section fade-rise" data-page="collection">
 <div class="container">
-<div class="sticky-filterbar">
-<button class="btn ghost" data-i18n="t096" id="openFiltersMobile">
-<svg aria-hidden="true" class="icon" viewbox="0 0 24 24"><path d="M4 6h16"></path><path d="M7 12h10"></path><path d="M10 18h4"></path></svg>
-            Filters
-          </button>
-<select aria-label="Sort" class="select" id="sortMobile">
-<option value="featured">Featured</option>
-<option value="best">Best sellers</option>
-<option value="new">New</option>
-</select>
-</div>
 <div class="section-head">
 <div>
 <h2 data-i18n="t097" id="collectionTitle">Collection</h2>
@@ -6449,21 +6453,20 @@ window.scrollTo(0, 0);
 </div>
 </div>
 <div class="collection-layout">
-<aside class="filters-rail">
-<div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-<strong data-i18n="t099" style="font-size:14px;">Filters</strong>
-<button class="btn ghost" data-i18n="t100" id="clearFiltersDesk" style="min-height:40px;padding:10px 14px;">Clear</button>
-</div>
-<div id="filtersDesk" style="margin-top:12px;"></div>
-</div>
-</aside>
 <div>
 <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;">
 <div class="subtle" id="resultCount">0 items</div>
-<div id="sortDeskWrap" style="display:none;gap:10px;align-items:center;">
+<div id="sortDeskWrap" style="display:flex;gap:10px;align-items:center;">
 <span class="subtle" data-i18n="t101">Sort</span>
 <select class="select" id="sortDesk" style="width:220px;">
+<option value="featured">Featured</option>
+<option value="best">Best sellers</option>
+<option value="new">New</option>
+</select>
+</div>
+<div id="sortMobileWrap" style="display:none;gap:10px;align-items:center;">
+<span class="subtle" data-i18n="t101">Sort</span>
+<select class="select" id="sortMobile" style="width:220px;">
 <option value="featured">Featured</option>
 <option value="best">Best sellers</option>
 <option value="new">New</option>
@@ -12765,11 +12768,17 @@ $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.h
       </article>`;
     }
 
-    function renderHome(){
+    
+    // Treat "sets" as anything explicitly labeled Set/Suite/Collection/Package or bundled with a "+" (e.g., Sofa + Loveseat)
+    function isSetItem(p){
+      return ['living','bedroom','dining'].includes(p.category) && /(\bset\b|\bsuite\b|\bcollection\b|\bpackage\b|\+)/i.test(p.title);
+    }
+
+function renderHome(){
       // Get mixed products for carousel - balanced across categories
       // Randomizes on every page load for fresh content
       function getMixedProducts(filterFn, count) {
-        const categories = ['living', 'bedroom', 'dining', 'mattress', 'youth', 'decor'];
+        const categories = ['living', 'bedroom', 'dining'];
         const perCategory = Math.ceil(count / categories.length);
         let mixed = [];
         
@@ -12782,7 +12791,7 @@ $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.h
         return mixed.sort(() => Math.random() - 0.5).slice(0, count);
       }
       
-      const featured = getMixedProducts(p => p.featured || p.isNew, 16);
+      const featured = getMixedProducts(p => (p.featured || p.isNew) && isSetItem(p), 16);
       $('#newArrivals').innerHTML = featured.map(p=>cardHTML(p)).join('');
       wireProductCardActions($('#newArrivals'));
 
@@ -12840,7 +12849,7 @@ $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.h
       });
 
       // Available section - randomized on every load
-      const ready = getMixedProducts(p => p.Delivery==='ready' && p.inStock, 12);
+      const ready = getMixedProducts(p => p.Delivery==='ready' && p.inStock && isSetItem(p), 12);
       $('#readyToday').innerHTML = ready.map(p=>cardHTML(p)).join('');
       wireProductCardActions($('#readyToday'));
     }
@@ -12892,11 +12901,34 @@ $$('.bn-item[data-go]').forEach(b => b.addEventListener('click', ()=> location.h
     function applySort(items){
       const s = state.sort;
       const arr = [...items];
-      if(s==='featured') arr.sort((a,b)=> (b.featured?1:0) - (a.featured?1:0));
-      if(s==='best') arr.sort((a,b)=> (b.best?1:0) - (a.best?1:0));
-      if(s==='new') arr.sort((a,b)=> (b.isNew?1:0) - (a.isNew?1:0));
-      if(s==='low') arr.sort((a,b)=> a.price - b.price);
-      if(s==='high') arr.sort((a,b)=> b.price - a.price);
+
+      // Always group: Sets first, then individual pieces; keep Decor at the bottom in mixed views.
+      const typeRank = (p)=>{
+        if(p.category === 'decor') return 2;
+        if(typeof isSetItem === 'function' && isSetItem(p)) return 0;
+        return 1;
+      };
+
+      const sortRank = (p)=>{
+        if(s==='featured') return (p.featured?1:0);
+        if(s==='best') return (p.best?1:0);
+        if(s==='new') return (p.isNew?1:0);
+        return 0;
+      };
+
+      arr.sort((a,b)=>{
+        const ta = typeRank(a), tb = typeRank(b);
+        if(ta !== tb) return ta - tb;
+
+        if(s==='low') return a.price - b.price;
+        if(s==='high') return b.price - a.price;
+
+        const ra = sortRank(a), rb = sortRank(b);
+        if(ra !== rb) return rb - ra;
+
+        return String(a.title).localeCompare(String(b.title));
+      });
+
       return arr;
     }
 
@@ -13400,7 +13432,8 @@ if(!state.cart.length){
       $('#applyFiltersMobile').onclick = ()=> { closeThing('filterModal'); renderCollection(getRouteQuery()); };
       openModal('filterModal');
     }
-    $('#openFiltersMobile').addEventListener('click', openFiltersMobile);
+    const ofm = $('#openFiltersMobile');
+    if(ofm) ofm.addEventListener('click', openFiltersMobile);
 
     function wireFilters(prefix, root){
       const price = root.querySelector(`#${prefix}-price`);
@@ -13427,9 +13460,12 @@ if(!state.cart.length){
     }
 
     function renderFiltersUI(){
-      // desktop
-      $('#filtersDesk').innerHTML = filterTemplate('d');
-      wireFilters('d', $('#filtersDesk'));
+      // filters UI removed; keep sort sync + guard
+      const fd = $('#filtersDesk');
+      if(fd){
+        fd.innerHTML = filterTemplate('d');
+        wireFilters('d', fd);
+      }
       // sync desktop controls
       const sd = $('#sortDesk');
       if(sd) sd.value = state.sort;
@@ -13437,7 +13473,8 @@ if(!state.cart.length){
       if(sm) sm.value = state.sort;
     }
 
-    $('#clearFiltersDesk').addEventListener('click', ()=>{
+    const clearDesk = $('#clearFiltersDesk');
+    if(clearDesk) clearDesk.addEventListener('click', ()=>{
       resetFilters();
       renderFiltersUI();
       renderCollection(getRouteQuery());
@@ -13445,8 +13482,10 @@ if(!state.cart.length){
 
     // Sort
     function wireSort(){
-      $('#sortMobile').addEventListener('change', (e)=>{ state.sort = e.target.value; renderCollection(getRouteQuery()); });
-      $('#sortDesk').addEventListener('change', (e)=>{ state.sort = e.target.value; renderCollection(getRouteQuery()); });
+      const sm = $('#sortMobile');
+      if(sm) sm.addEventListener('change', (e)=>{ state.sort = e.target.value; renderCollection(getRouteQuery()); });
+      const sd = $('#sortDesk');
+      if(sd) sd.addEventListener('change', (e)=>{ state.sort = e.target.value; renderCollection(getRouteQuery()); });
     }
 
     /* ---------- Router ---------- */
