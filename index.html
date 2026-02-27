@@ -10348,6 +10348,198 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
     width: min(540px, 94vw) !important;
   }
 }
+
+/* CRITICAL: ENSURE PRODUCT CARDS DISPLAY ON ALL DEVICES */
+/* Force display on all breakpoints */
+.products,
+#collectionGrid,
+.collection-grid,
+[id*="collection"] .products,
+[data-page="collection"] .products,
+section[data-page="collection"] #collectionGrid {
+  display: grid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.p-card,
+.product-card,
+[class*="card"][class*="prod"],
+#collectionGrid > * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+.p-media,
+.p-body,
+.p-title,
+.p-meta,
+.price {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.p-media img,
+.p-card img,
+.product-card img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-width: 100% !important;
+}
+
+/* Ensure collection pages render products */
+[data-page] {
+  display: none !important;
+}
+
+[data-page].active {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+[data-page="collection"].active,
+section[data-page="collection"].active {
+  display: block !important;
+}
+
+[data-page].active .products,
+[data-page].active #collectionGrid,
+section[data-page="collection"].active .products,
+section[data-page="collection"].active #collectionGrid {
+  display: grid !important;
+  visibility: visible !important;
+}
+
+[data-page].active .p-card,
+section[data-page="collection"].active .p-card {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Mobile product grid - FORCE 2 columns */
+@media (max-width: 980px) {
+  .products,
+  #collectionGrid,
+  section[data-page="collection"] .products {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .p-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important;
+  }
+  
+  .p-media {
+    aspect-ratio: 4/3 !important;
+    width: 100% !important;
+    display: block !important;
+  }
+  
+  .p-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .products,
+  #collectionGrid,
+  section[data-page="collection"] .products {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+    visibility: visible !important;
+  }
+  
+  .p-card,
+  .p-media,
+  .p-body,
+  .p-title {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .products,
+  #collectionGrid {
+    display: grid !important;
+    gap: 10px !important;
+  }
+}
+
+/* Collection layout */
+.collection-layout {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+}
+
+.collection-layout .products,
+.collection-layout #collectionGrid {
+  display: grid !important;
+}
+
+/* Section visibility */
+.section,
+section {
+  display: block !important;
+}
+
+.section .products,
+section .products {
+  display: grid !important;
+}
+
+/* Ensure carousel products show */
+.carousel {
+  display: flex !important;
+}
+
+.carousel .p-card {
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+/* Remove any potential hiding transforms or translations */
+.products,
+.p-card,
+#collectionGrid,
+#collectionGrid > * {
+  transform: none !important;
+  transition: transform var(--t160) var(--ease), box-shadow var(--t160) var(--ease), border-color var(--t160) var(--ease) !important;
+}
+
+/* Ensure container is visible */
+.container,
+[data-page="collection"] .container,
+section[data-page="collection"] .container {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 </style>
 </body>
 </html>
