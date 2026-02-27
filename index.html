@@ -9997,6 +9997,86 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   header .brand{ pointer-events:auto!important; }
 }
 
+
+/* ========== ROOT CAUSE FIX: MOBILE COLLECTION PAGES ========== */
+@media (max-width: 640px) {
+  /* Force collection page and all children visible */
+  [data-page="collection"],
+  [data-page="collection"] *,
+  [data-page="collection"] .container,
+  [data-page="collection"] .products,
+  [data-page="collection"] #collectionGrid {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  /* Force grid display for products containers */
+  [data-page="collection"] .products,
+  [data-page="collection"] #collectionGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* Force product cards visible */
+  [data-page="collection"] .p-card {
+    display: block !important;
+    position: relative !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force media and images visible */
+  [data-page="collection"] .p-media {
+    display: block !important;
+    aspect-ratio: 4/3 !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  
+  [data-page="collection"] .p-media img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+/* ========== LAPTOP: SMALLER BUTTONS & TEXT (1024px-1440px) ========== */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .p-card .af-mini.af-phone-btn,
+  .p-card .af-mini.af-message-btn {
+    font-size: 11px !important;
+    padding: 9px 12px !important;
+    min-height: 38px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+  
+  .p-card .p-title {
+    font-size: 12.5px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .p-card .price {
+    font-size: 13px !important;
+  }
+  
+  .p-card .p-meta {
+    font-size: 10.5px !important;
+  }
+  
+  .af-button-row {
+    gap: 6px !important;
+  }
+}
 </style>
 </body>
 <style>
@@ -10408,6 +10488,86 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   .af-button-row {
     gap: 8px !important;
     margin-top: 10px !important;
+  }
+}
+
+/* ========== ROOT CAUSE FIX: MOBILE COLLECTION PAGES ========== */
+@media (max-width: 640px) {
+  /* Force collection page and all children visible */
+  [data-page="collection"],
+  [data-page="collection"] *,
+  [data-page="collection"] .container,
+  [data-page="collection"] .products,
+  [data-page="collection"] #collectionGrid {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  /* Force grid display for products containers */
+  [data-page="collection"] .products,
+  [data-page="collection"] #collectionGrid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  /* Force product cards visible */
+  [data-page="collection"] .p-card {
+    display: block !important;
+    position: relative !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Force media and images visible */
+  [data-page="collection"] .p-media {
+    display: block !important;
+    aspect-ratio: 4/3 !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  
+  [data-page="collection"] .p-media img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+/* ========== LAPTOP: SMALLER BUTTONS & TEXT (1024px-1440px) ========== */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .p-card .af-mini.af-phone-btn,
+  .p-card .af-mini.af-message-btn {
+    font-size: 11px !important;
+    padding: 9px 12px !important;
+    min-height: 38px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+  }
+  
+  .p-card .p-title {
+    font-size: 12.5px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .p-card .price {
+    font-size: 13px !important;
+  }
+  
+  .p-card .p-meta {
+    font-size: 10.5px !important;
+  }
+  
+  .af-button-row {
+    gap: 6px !important;
   }
 }
 </style>
