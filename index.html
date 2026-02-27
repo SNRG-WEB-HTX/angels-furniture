@@ -761,14 +761,6 @@ window.scrollTo(0, 0);
 <button class="btn ghost full specials-btn" data-go="#/collection/sale"><span aria-hidden="true" class="ms-star">★</span><span class="ms-text">Monthly Specials</span><span aria-hidden="true" class="ms-star">★</span></button>
 </div>
 </div>
-<div class="card pad">
-<strong data-i18n="t026" style="font-size:14px;">Showroom</strong>
-<p class="subtle" data-i18n="t027" style="margin:8px 0 0;">Visit us in Houston. Pickup available.</p>
-<div style="display:grid;gap:10px;margin-top:12px;">
-<button class="btn primary full" data-go="#/showroom" data-i18n="t028">Visit Angel&#8217;s Furniture</button>
-</div>
-</div>
-</div>
 </aside>
 <aside aria-hidden="true" aria-label="Wishlist drawer" class="drawer" id="wishlistDrawer">
 <div class="head">
@@ -1034,14 +1026,11 @@ window.scrollTo(0, 0);
 <div class="container">
 <div class="section-head">
 <div>
-<h2 data-i18n="t097" id="collectionTitle">Collection</h2>
-<p class="lede" data-i18n="t098" id="collectionSubtitle">Easy financing available with flexible payment plans.</p>
 </div>
 </div>
 <div class="collection-layout">
 <div>
 <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;">
-<div class="subtle" id="resultCount">0 items</div>
 </div>
 <div class="products" id="collectionGrid"></div>
 </div>
@@ -10567,6 +10556,50 @@ section[data-page="collection"] .container {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+/* ========== MOBILE FIXES ========== */
+@media (max-width: 640px) {
+  /* AGGRESSIVELY hide showroom - target parent container */
+  aside#menuDrawer .card.pad:nth-last-child(1),
+  aside#menuDrawer .card.pad:last-child,
+  aside#menuDrawer .body > div > .card.pad:last-child {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Also hide individual showroom elements */
+  strong[data-i18n="t026"],
+  p[data-i18n="t027"],
+  button[data-i18n="t028"],
+  button[data-go="#/showroom"] {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Hide Collection header */
+  h2[data-i18n="t097"],
+  p[data-i18n="t098"],
+  #collectionTitle,
+  #collectionSubtitle,
+  #resultCount {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+  }
+  
+  /* Make ALL grids 1 column on mobile */
+  .products,
+  #collectionGrid,
+  .shop-by-room .products,
+  .shop-by-room .shop-room-grid,
+  .shop-room-grid,
+  [data-page="collection"] .products {
+    grid-template-columns: 1fr !important;
+  }
 }
 </style>
 </body>
