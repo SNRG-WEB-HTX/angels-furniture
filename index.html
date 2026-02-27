@@ -462,6 +462,38 @@ section[data-page="collection"] .container{
   color: rgba(20,20,22,.70) !important;
 }
 </style>
+
+<style id="mobile-product-card-polish">
+@media (max-width: 640px){
+  /* remove financing hint under title on mobile */
+  .af-pHint{ display:none !important; }
+
+  /* slightly taller image (bigger visual) */
+  .af-pImg{ aspect-ratio: 5 / 4 !important; }
+
+  /* uniform, full-width cards + grids */
+  .af-pCard, .p-card{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+  .af-pBody{ padding: 14px 14px 16px !important; }
+  .af-pTitle{ padding-bottom: 8px !important; }
+
+  /* force all product grids to single column */
+  .products-grid, .product-grid, .p-grid, .grid-products, .collection-grid, .af-products, .af-grid, .carousel-track{
+    grid-template-columns: 1fr !important;
+  }
+
+  /* prevent weird gaps from flex/carousel layouts */
+  .carousel .p-card, .carousel .af-pCard{
+    width:100% !important;
+    min-width:100% !important;
+    max-width:100% !important;
+  }
+  .carousel-track{ gap: 14px !important; }
+}
+</style>
 </head>
 <body>
 <script>
@@ -491,10 +523,10 @@ window.scrollTo(0, 0);
 </a>
 </div>
 <div class="utility-right">
+<a aria-label="Call (346) 867-1155" class="utility-phone" href="tel:+13468671155">(346) 867-1155</a>
 <button aria-label="Apply for financing" class="utility-finance-btn" id="openFinance" type="button" data-cta="primary">
         Apply for Financing
       </button>
-<a aria-label="Call (346) 867-1155" class="utility-phone" href="tel:+13468671155">(346) 867-1155</a>
 </div>
 </div>
 </div>
