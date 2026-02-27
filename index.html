@@ -8128,7 +8128,7 @@ function renderHome(){
       if (!currentPage[cat]) currentPage[cat] = 1;
 
       // show desktop sort
-      const _sdw = $('#sortDeskWrap'); if(_sdw) _sdw.style.display = (window.innerWidth >= 1024) ? 'flex' : 'none';
+      const __sdw = $('#sortDeskWrap'); if(__sdw) __sdw.style.display = (window.innerWidth >= 1024) ? 'flex' : 'none';
 
       let items = catalog.filter(p=>p.category===cat);
 
@@ -8852,7 +8852,7 @@ $('#keepShoppingBtn')?.addEventListener('click', ()=>{ closeThing('cartDrawer');
 
     // Desktop vs mobile sort visibility
     window.addEventListener('resize', ()=>{
-      const _sdw = $('#sortDeskWrap'); if(_sdw) _sdw.style.display = (window.innerWidth >= 1024) ? 'flex' : 'none';
+      const __sdw = $('#sortDeskWrap'); if(__sdw) __sdw.style.display = (window.innerWidth >= 1024) ? 'flex' : 'none';
     });
 
     // Initialize
