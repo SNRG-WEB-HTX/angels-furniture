@@ -553,6 +553,34 @@ article.af-pCard {
   filter: none !important;
 }
 </style>
+
+<style id="snrg-room-mobile-match-readytoday">
+/* Mobile-only: make Shop By Room cards match Available in Houston card geometry */
+@media (max-width: 720px){
+  /* Slightly smaller subsection copy so it never runs off */
+  .shop-by-room .section-head .lede{
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+    max-width: 40ch;
+  }
+
+  /* Match ReadyToday card media + padding */
+  .shop-by-room .p-media{
+    aspect-ratio: 16 / 9 !important;
+  }
+  .shop-by-room .p-body{
+    padding: 14px 14px 16px !important;
+    gap: 4px !important;
+  }
+
+  /* Keep titles same size; tune meta to fit cleanly */
+  .shop-by-room .p-meta{
+    font-size: 12px !important;
+    line-height: 1.25 !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <script>
