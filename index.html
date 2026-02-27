@@ -553,6 +553,204 @@ article.af-pCard {
   filter: none !important;
 }
 </style>
+
+
+<style id="snrg-hotfix-v2">
+/* =======================================================================
+   HOTFIX v2:
+   1) PRODUCT CARD CTA BUTTONS — STACK ON LAPTOP (match mobile) + no overflow
+   2) SHOWROOM heading centering override (in case global styles win)
+   ======================================================================= */
+
+/* --- 1) Product card CTA buttons --- */
+.af-pActions{
+  display:flex;
+  gap:10px;
+  width:100%;
+  flex-wrap:nowrap;
+}
+
+/* Let items shrink safely in any mode */
+.af-mini{
+  min-width: 0;          /* critical for flex shrink */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Stack CTA buttons on laptop/desktop (per request) */
+@media (min-width: 1024px){
+  .af-pActions{
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .af-mini{
+    width: 100% !important;
+    flex: 0 0 auto !important;
+    font-size: 12px !important;
+    padding: 10px 12px !important;
+    min-height: 42px !important;
+    border-radius: 12px !important;
+    letter-spacing: .01em !important;
+  }
+  .af-mini svg{
+    width: 16px !important;
+    height: 16px !important;
+    margin-right: 6px !important;
+    flex: 0 0 auto !important;
+  }
+}
+
+/* Prevent any accidental bleed outside the card body */
+.af-pCard,
+.af-pCard *{ box-sizing:border-box; }
+.af-pCard .af-pBody{ overflow:hidden; }
+
+/* --- 2) Showroom title + subtitle centering --- */
+/* Some global section heading rules were overriding text alignment on laptop.
+   Force centering with higher specificity. */
+.showroomX .showroomX-head{
+  text-align: center !important;
+}
+.showroomX .showroomX-head h2,
+.showroomX .showroomX-head .lede{
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+</style>
+
+
+
+<style id="snrg-showroom-v1">
+/* =======================================================================
+   SHOWROOM (REVAMP): contact-style cards, Angel's palette
+   ======================================================================= */
+.showroomX{padding:26px 0 44px;}
+.showroomX-head{max-width:920px;margin:0 auto 18px;text-align:center;display:flex;flex-direction:column;gap:10px;}
+.showroomX-head h2{margin:0;font-size:clamp(34px,4.2vw,54px);letter-spacing:-.03em;line-height:1.06;}
+.showroomX-head .lede{margin:0;color:rgba(26,26,26,.70);font-size:16px;line-height:1.55;}
+.showroomX-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  max-width:1100px;
+  margin:0 auto;
+}
+@media (max-width:820px){
+  .showroomX-grid{grid-template-columns:1fr;gap:12px;}
+}
+.showroomX-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:16px 18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(26,26,26,.10);
+  box-shadow:0 14px 34px rgba(0,0,0,.08);
+  transition:transform 180ms cubic-bezier(.2,.8,.2,1), box-shadow 180ms cubic-bezier(.2,.8,.2,1), border-color 180ms cubic-bezier(.2,.8,.2,1);
+  color:#111;
+  text-decoration:none;
+  min-height:72px;
+}
+.showroomX-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 46px rgba(0,0,0,.12);
+  border-color:rgba(201,168,106,.55);
+}
+.showroomX-card.is-static{cursor:default;}
+.showroomX-ic{
+  width:44px;height:44px;border-radius:14px;
+  display:grid;place-items:center;
+  border:1px solid rgba(26,26,26,.10);
+  background:rgba(246,243,238,.65);
+  color:#C9A86A;
+  flex:0 0 auto;
+}
+.showroomX-ic svg{width:22px;height:22px;}
+.showroomX-txt{min-width:0;display:flex;flex-direction:column;gap:2px;flex:1 1 auto;}
+.showroomX-title{font-weight:800;letter-spacing:-.01em;font-size:15px;line-height:1.2;}
+.showroomX-sub{color:rgba(26,26,26,.72);font-weight:600;font-size:13px;line-height:1.35;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media (max-width:420px){
+  .showroomX-card{padding:15px 16px;}
+  .showroomX-sub{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+}
+.showroomX-arrow{font-weight:900;font-size:18px;opacity:.9;flex:0 0 auto;margin-left:auto;}
+.showroomX-card.is-wide{grid-column:1 / -1;}
+.showroomX-note{
+  max-width:1100px;margin:14px auto 0;
+  display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+.showroomX-note .pill{
+  background:rgba(255,255,255,.72)!important;
+  border:1px solid rgba(26,26,26,.10)!important;
+  color:rgba(26,26,26,.86)!important;
+  font-weight:700!important;
+}
+</style>
+
+
+<style id="snrg-utility-pills-v1">
+/* =======================================================================
+   HEADER UTILITY PILL BUTTONS — uniform sizing, spacing, alignment
+   ======================================================================= */
+.header-utility-inner{
+  align-items:center !important;
+}
+.utility-left, .utility-right{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+}
+.utility-address, .utility-phone, #openFinance{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-height: 42px !important;
+  padding: 10px 14px !important;
+  border-radius: 999px !important;
+  font-size: 12.5px !important;
+  line-height: 1 !important;
+  box-sizing: border-box !important;
+}
+
+/* Make phone look like the other pills */
+.utility-phone{
+  background: rgba(255,255,255,.72) !important;
+  border: 1px solid rgba(0,0,0,.08) !important;
+  box-shadow: 0 10px 24px rgba(0,0,0,.08) !important;
+  color: rgba(26,26,26,.92) !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
+}
+
+/* Address pill: keep text from breaking layout */
+.utility-address .addr-text{
+  max-width: 56vw !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+
+/* Primary financing pill stays visually primary but same size */
+#openFinance{
+  min-width: 170px !important; /* keeps it consistent with phone */
+}
+
+/* Tighten on smaller widths */
+@media (max-width: 980px){
+  .header-utility-inner{gap:10px !important;}
+  .utility-address .addr-text{max-width: 48vw !important;}
+}
+@media (max-width: 520px){
+  .utility-address{max-width: 100% !important;}
+  .utility-address .addr-text{max-width: 62vw !important;}
+  #openFinance{min-width: 0 !important;}
+}
+</style>
+
 </head>
 <body>
 <script>
@@ -1067,135 +1265,94 @@ window.scrollTo(0, 0);
 <!-- ABOUT SECTION REMOVED -->
 
 <!-- SHOWROOM -->
-<section class="section fade-rise" data-page="showroom">
+
+<section class="section fade-rise showroomX" data-page="showroom" aria-labelledby="showroomTitle">
   <div class="container">
-    <!-- Section Header -->
-    <div class="section-head" style="align-items:center;">
-      <div style="text-align:center;max-width:980px;margin:0 auto;">
-        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px;">
-          <span class="pill" style="background:linear-gradient(135deg, rgba(199,162,75,.20), rgba(31,138,91,.12));border-color:rgba(199,162,75,.35);color:#1A1A1A;">
-            <strong style="font-weight:650;">Northwest Houston</strong> • Fairbanks Business Park
-          </span>
-          <span class="pill" style="background:rgba(45,108,223,.08);border-color:rgba(45,108,223,.22);color:#1A1A1A;">
-            <strong style="font-weight:650;">Pickup</strong> • Local Delivery
-          </span>
-        </div>
-        <h2 data-i18n="t128" style="margin:0 auto;letter-spacing:-.02em;">Houston Showroom</h2>
-        <p class="lede" data-i18n="t129" style="margin:10px auto 0;max-width:820px;">Come see it in person—try the comfort, see the colors, and we’ll help you pick what fits your home and your budget.</p>
-      </div>
+    <div class="showroomX-head">
+      <h2 id="showroomTitle" data-i18n="t165">Visit Our Showroom</h2>
+      <p class="lede" data-i18n="t166">Come in, try it out, and we’ll help you get it home.</p>
     </div>
 
-    <div class="grid grid-2" style="align-items:start;gap:18px;margin-top:22px;">
-      <!-- Left: Details -->
-      <div class="card pad soft-shadow" style="border:1px solid rgba(199,162,75,.28);background:
-        radial-gradient(900px 300px at 10% 0%, rgba(199,162,75,.14), transparent 55%),
-        radial-gradient(900px 300px at 100% 10%, rgba(31,138,91,.10), transparent 55%),
-        var(--surface);">
+    <div class="showroomX-grid" role="list">
+      <!-- Left column -->
+      <a class="showroomX-card" role="listitem" href="tel:+13468671155" aria-label="Call Angel's Furniture">
+        <span class="showroomX-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18.85a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.11 4.11 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7a2 2 0 0 1 1.72 2.03z"/>
+          </svg>
+        </span>
+        <span class="showroomX-txt">
+          <span class="showroomX-title" data-i18n="t170">Call</span>
+          <span class="showroomX-sub">(346) 867-1155</span>
+        </span>
+        <span class="showroomX-arrow" aria-hidden="true">→</span>
+      </a>
 
-        <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start;">
-          <div>
-            <strong style="font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em;display:block;margin-bottom:8px;">Visit Us</strong>
-            <div style="font-size:14px;color:rgba(0,0,0,.72);line-height:1.5;">
-              <span data-i18n="t131">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span><br/>
-<div class="hoursList" aria-label="Showroom hours">
-  <div class="hrow"><span class="day">Monday</span><span class="time">10AM–6PM</span></div>
-  <div class="hrow"><span class="day">Tuesday</span><span class="time">Closed</span></div>
-  <div class="hrow"><span class="day">Wednesday</span><span class="time">10AM–6PM</span></div>
-  <div class="hrow"><span class="day">Thursday</span><span class="time">10AM–6PM</span></div>
-  <div class="hrow"><span class="day">Friday</span><span class="time">10AM–7PM</span></div>
-  <div class="hrow"><span class="day">Saturday</span><span class="time">10AM–7PM</span></div>
-  <div class="hrow"><span class="day">Sunday</span><span class="time">Closed</span></div>
-</div>
-            </div>
-          </div>
+      <a class="showroomX-card" role="listitem" href="https://www.google.com/maps/dir/?api=1&destination=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040" target="_blank" rel="noopener">
+        <span class="showroomX-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </span>
+        <span class="showroomX-txt">
+          <span class="showroomX-title" data-i18n="t167">Get Directions</span>
+          <span class="showroomX-sub">14300 Northwest Fwy Bldg B-26, Houston, TX 77040</span>
+        </span>
+        <span class="showroomX-arrow" aria-hidden="true">→</span>
+      </a>
 
-          <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;">
-            <a id="dirBtn" class="btn" href="https://www.google.com/maps/dir/?api=1&destination=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040" target="_blank" rel="noopener"
-               style="background:#FFFFFF;border:1px solid rgba(26,26,26,.14);color:var(--ink);box-shadow:0 8px 18px rgba(26,26,26,.08);">
-              <span data-i18n="t135" style="font-weight:650;">Get Directions</span>
-            </a>
-            <a id="apptBtn" class="btn" href="#/contact"
-               style="background:linear-gradient(180deg, rgba(199,162,75,.98), rgba(179,138,45,.98));border:1px solid rgba(0,0,0,.08);color:#FFFFFF;box-shadow:0 10px 22px rgba(179,138,45,.22);">
-              <span data-i18n="t136" style="font-weight:700;">Schedule A Visit</span>
-            </a>
-          </div>
-        </div>
+      <a class="showroomX-card" role="listitem" href="mailto:info@angelsfurniture.org">
+        <span class="showroomX-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="M3 7l9 6 9-6"/>
+          </svg>
+        </span>
+        <span class="showroomX-txt">
+          <span class="showroomX-title">Email</span>
+          <span class="showroomX-sub">info@angelsfurniture.org</span>
+        </span>
+        <span class="showroomX-arrow" aria-hidden="true">→</span>
+      </a>
 
-        <div class="divider" style="margin:16px 0;"></div>
-
-        <div style="display:grid;gap:10px;">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <span class="pill" style="background:rgba(31,138,91,.10);border-color:rgba(31,138,91,.22);">Easy Parking</span>
-            <span class="pill" style="background:rgba(199,162,75,.12);border-color:rgba(199,162,75,.28);">Family-Friendly</span>
-            <span class="pill" style="background:rgba(45,108,223,.08);border-color:rgba(45,108,223,.22);">Text Us s</span>
-          </div>
-
-          <div class="card" style="border-radius:16px;border:1px solid rgba(26,26,26,.10);padding:14px;background:rgba(246,243,238,.65);">
-            <div style="display:grid;gap:8px;">
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:10px;height:10px;border-radius:999px;margin-top:6px;background:rgba(31,138,91,.95);box-shadow:0 0 0 6px rgba(31,138,91,.12);"></div>
-                <div style="font-size:14px;color:rgba(0,0,0,.74);">
-                  Bring a photo of your room (or your measurements). We’ll help you match pieces and finishes fast.
-                </div>
-              </div>
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:10px;height:10px;border-radius:999px;margin-top:6px;background:rgba(199,162,75,.98);box-shadow:0 0 0 6px rgba(199,162,75,.14);"></div>
-                <div style="font-size:14px;color:rgba(0,0,0,.74);">
-                  Want easy payments? Ask us about financing when you’re here — we’ll walk you through it.
-                </div>
-              </div>
-              <div style="display:flex;gap:10px;align-items:flex-start;">
-                <div style="width:10px;height:10px;border-radius:999px;margin-top:6px;background:rgba(45,108,223,.95);box-shadow:0 0 0 6px rgba(45,108,223,.12);"></div>
-                <div style="font-size:14px;color:rgba(0,0,0,.74);">
-                  Pickup and local delivery options — we’ll give you the real timing up front.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:2px;">
-            <a class="btn" href="tel:+13468671155" style="background:#FFFFFF;border:1px solid rgba(26,26,26,.14);color:var(--ink);">
-              <span style="font-weight:700;">Call</span> <span style="opacity:.75;">(346) 867-1155</span>
-            </a>
-            
-          </div>
-        </div>
+      <div class="showroomX-card is-static" role="listitem" aria-label="Showroom hours">
+        <span class="showroomX-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 7v5l3 2"/>
+          </svg>
+        </span>
+        <span class="showroomX-txt">
+          <span class="showroomX-title" data-i18n="t171">Hours</span>
+          <span class="showroomX-sub">Mon–Sat: 10:00 AM – 7:00 PM • Sun: Closed</span>
+        </span>
+        <span class="showroomX-arrow" aria-hidden="true">→</span>
       </div>
 
-      <!-- Right: Map + Visuals -->
-      <div class="card pad soft-shadow" style="border:1px solid rgba(26,26,26,.10);background:var(--surface);">
-        <strong style="font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em;display:block;margin-bottom:12px;">Map</strong>
-
-        <div style="border-radius:18px;overflow:hidden;border:1px solid rgba(26,26,26,.12);box-shadow:0 12px 24px rgba(26,26,26,.08);">
-          <iframe
-            title="Angel’s Furniture Houston Showroom Map"
-            src="https://www.google.com/maps?q=14300%20Northwest%20Fwy%20Bldg%20B-26%2C%20Houston%2C%20TX%2077040&output=embed"
-            width="100%" height="280" style="border:0;display:block;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-        <div class="divider" style="margin:16px 0;"></div>
-
-        <strong style="font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-.01em;display:block;margin-bottom:10px;">Inside The Showroom</strong>
-        <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:10px;">
-          <div class="p-media" style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,26,26,.10);aspect-ratio:4/3;">
-            <img alt="Showroom vignette" loading="lazy" src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1200&q=70" style="width:100%;height:100%;object-fit:cover;"/>
-          </div>
-          <div class="p-media" style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,26,26,.10);aspect-ratio:4/3;">
-            <img alt="Living room set" loading="lazy" src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=70" style="width:100%;height:100%;object-fit:cover;"/>
-          </div>
-          <div class="p-media" style="border-radius:14px;overflow:hidden;border:1px solid rgba(26,26,26,.10);aspect-ratio:4/3;">
-            <img alt="Bedroom set" loading="lazy" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=70" style="width:100%;height:100%;object-fit:cover;"/>
-          </div>
-        </div>
-
-        <p class="subtle" style="margin:12px 0 0;">
-          Tip: If you’re coming from 290, it’s a quick hop — park easy, come in, and we’ll get you taken care of.
-        </p>
-      </div>
+      <!-- Full-width "highlight" card -->
+      <a class="showroomX-card is-wide" role="listitem" href="javascript:void(0)" onclick="openDrawer('financeDrawer'); return false;" data-open="financeDrawer"" aria-label="Financing and help in store">
+        <span class="showroomX-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 1v22"/>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </span>
+        <span class="showroomX-txt">
+          <span class="showroomX-title">Easy Financing In-Store</span>
+          <span class="showroomX-sub">Bring your ID — we’ll help you get approved and set up delivery or pickup.</span>
+        </span>
+        <span class="showroomX-arrow" aria-hidden="true">→</span>
+      </a>
     </div>
 
+    <div class="showroomX-note">
+      <span class="pill">Fairbanks Business Park</span>
+      <span class="pill">Pickup • Local Delivery</span>
+    </div>
   </div>
 </section>
+
 
 </main>
 <!-- Mobile sticky CTA (PDP) -->
@@ -10078,6 +10235,81 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   }
 }
 </style>
+
+<style id="snrg-header-utility-perfect-v1">
+/* =======================================================================
+   PERFECT HEADER UTILITY STRIP
+   Goal: address / phone / apply-for-financing are SAME SIZE, SAME ALIGNMENT,
+   perfectly centered and spaced on laptop/desktop.
+   This block is intentionally placed at end of document to beat overrides.
+   ======================================================================= */
+
+/* Make the three pills sit centered as one cluster */
+.header-utility .header-utility-inner{
+  display:flex !important;
+  justify-content:center !important;
+  align-items:center !important;
+  gap:12px !important;
+}
+
+/* Flatten left/right wrappers so children participate in same flex row */
+@supports (display: contents){
+  .header-utility .utility-left,
+  .header-utility .utility-right{
+    display: contents !important;
+  }
+}
+
+/* Uniform pill sizing */
+.header-utility .utility-address,
+.header-utility a.utility-phone,
+.header-utility #openFinance{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:10px !important;
+  min-height:44px !important;
+  padding:10px 16px !important;
+  border-radius:999px !important;
+  font-size:12.5px !important;
+  line-height:1 !important;
+  box-sizing:border-box !important;
+  white-space:nowrap !important;
+}
+
+/* Ensure phone looks like a pill (same base styling) */
+.header-utility a.utility-phone{
+  background:rgba(255,255,255,.72) !important;
+  border:1px solid rgba(0,0,0,.08) !important;
+  box-shadow:0 10px 24px rgba(0,0,0,.08) !important;
+  text-decoration:none !important;
+}
+
+/* Keep address readable without breaking centering */
+.header-utility .utility-address .addr-text{
+  max-width: 44vw !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+}
+
+/* Keep the primary button visually primary but same dimensions */
+.header-utility #openFinance{
+  min-width: 176px !important;
+}
+
+/* Responsive: allow wrapping cleanly */
+@media (max-width: 920px){
+  .header-utility .header-utility-inner{
+    flex-wrap:wrap !important;
+  }
+  .header-utility .utility-address .addr-text{
+    max-width: 72vw !important;
+  }
+  .header-utility #openFinance{min-width:0 !important;}
+}
+</style>
+
 </body>
 <style>
 /* ============================================
