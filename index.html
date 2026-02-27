@@ -10347,6 +10347,68 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   #searchModal .panel {
     width: min(540px, 94vw) !important;
   }
+  
+  /* FIX: Ensure collection pages show products on mobile */
+  [data-page="collection"] .products,
+  [data-page="collection"] #collectionGrid,
+  [data-page="collection"] .p-card,
+  [data-page="collection"] .p-media,
+  [data-page="collection"] .p-media img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Ensure proper layout for collection grids */
+  [data-page="collection"] .products {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  
+  [data-page="collection"] .p-card {
+    border: 1px solid rgba(0,0,0,.08) !important;
+    background: #fff !important;
+  }
+}
+
+/* LAPTOP DISPLAY: Reduce button and text sizes (1024px - 1440px) */
+@media (min-width: 1024px) and (max-width: 1440px) {
+  /* Product card buttons - make smaller */
+  .p-card .af-mini.af-phone-btn,
+  .p-card .af-mini.af-message-btn {
+    font-size: 12px !important;
+    padding: 10px 14px !important;
+    min-height: 42px !important;
+    font-weight: 700 !important;
+  }
+  
+  /* Product card title - reduce size */
+  .p-card .p-title {
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    padding-bottom: 7px !important;
+  }
+  
+  /* Product card price - reduce size */
+  .p-card .price {
+    font-size: 14px !important;
+  }
+  
+  /* Product card meta text - reduce size */
+  .p-card .p-meta {
+    font-size: 11px !important;
+  }
+  
+  /* Product card body padding */
+  .p-card .p-body {
+    padding: 10px !important;
+  }
+  
+  /* Button container spacing */
+  .af-button-row {
+    gap: 8px !important;
+    margin-top: 10px !important;
+  }
 }
 </style>
 </body>
