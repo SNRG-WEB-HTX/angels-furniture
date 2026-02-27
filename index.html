@@ -471,6 +471,15 @@ section[data-page="collection"] .container{
   /* slightly taller image (bigger visual) */
   .af-pImg{ aspect-ratio: 5 / 4 !important; }
 
+  /* FIX: On mobile, never let wc-animate hide product cards (iOS IntersectionObserver edge cases) */
+  .af-pCard.wc-animate, .p-card.wc-animate{
+    opacity:1 !important;
+    transform:none !important;
+    filter:none !important;
+    transition:none !important;
+  }
+
+
   /* uniform, full-width cards + grids */
   .af-pCard, .p-card{
     width:100% !important;
