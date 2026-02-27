@@ -768,6 +768,35 @@ window.scrollTo(0, 0);
 <svg class="icon" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.2-3.2"></path></svg>
 <input autocomplete="off" id="searchInput" placeholder="Try “bouclé sofa”, “oak dining”, “ready today”…" type="search"/>
 </div>
+<div class="search-room-links">
+<div class="search-room-title">Shop By Room</div>
+<div class="search-room-grid">
+<a href="#/collection/living" class="search-room-link" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+<span data-i18n="t005">Living</span>
+</a>
+<a href="#/collection/bedroom" class="search-room-link" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3v-6a3 3 0 00-3-3H6a3 3 0 00-3 3v6a3 3 0 003 3z"/></svg>
+<span data-i18n="t006">Bedroom</span>
+</a>
+<a href="#/collection/dining" class="search-room-link" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M5 3v18M3 5h4M3 10h4M3 15h4M12 3v18m-2-2h4m-4-5h4m-4-5h4M19 3v18m-2-2h4m-4-5h4m-4-5h4"/></svg>
+<span data-i18n="t007">Dining</span>
+</a>
+<a href="#/collection/mattress" class="search-room-link" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 12h18M3 8h18M3 16h18M3 20h18M3 4h18"/></svg>
+<span data-i18n="t008">Mattress</span>
+</a>
+<a href="#/collection/youth" class="search-room-link" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+<span data-i18n="t172">Youth</span>
+</a>
+<a href="#/collection/sale" class="search-room-link search-room-link-special" data-close="searchModal" data-nav="">
+<svg class="search-room-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+<span><span class="ms-star">★</span> Monthly Specials <span class="ms-star">★</span></span>
+</a>
+</div>
+</div>
 <div class="search-suggest">
 <div class="suggest-row">
 <span class="subtle" data-i18n="t034">Popular:</span>
@@ -9968,6 +9997,357 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   header .brand{ pointer-events:auto!important; }
 }
 
+</style>
+</body>
+<style>
+/* ============================================
+   COMPREHENSIVE MOBILE & UI IMPROVEMENTS
+   ============================================ */
+
+/* SEARCH MODAL - ROOM LINKS STYLING */
+.search-room-links {
+  margin: 16px 0;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(246,243,238,0.4) 0%, rgba(237,233,226,0.6) 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(201,168,106,0.20);
+}
+
+.search-room-title {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(26,26,26,0.65);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.search-room-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.search-room-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.85);
+  border: 1.5px solid rgba(0,0,0,0.08);
+  border-radius: 14px;
+  text-decoration: none;
+  color: rgba(26,26,26,0.85);
+  font-weight: 650;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  transition: all 200ms cubic-bezier(0.2,0.8,0.2,1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.search-room-link:hover {
+  background: #FFFFFF;
+  border-color: rgba(201,168,106,0.40);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(201,168,106,0.15);
+}
+
+.search-room-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke: rgba(201,168,106,0.85);
+}
+
+.search-room-link-special {
+  grid-column: 1 / -1;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(201,168,106,0.12) 0%, rgba(201,168,106,0.08) 100%);
+  border-color: rgba(201,168,106,0.25);
+}
+
+.search-room-link-special:hover {
+  background: linear-gradient(135deg, rgba(201,168,106,0.18) 0%, rgba(201,168,106,0.12) 100%);
+  border-color: rgba(201,168,106,0.40);
+}
+
+@media (max-width: 640px) {
+  .search-room-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .search-room-link {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  
+  .search-room-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* MENU DRAWER - COMPLETE REVAMP */
+#menuDrawer {
+  background: linear-gradient(180deg, rgba(246,243,238,0.98) 0%, rgba(255,255,255,0.98) 100%) !important;
+  backdrop-filter: saturate(180%) blur(24px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(24px) !important;
+  border-left: 1px solid rgba(201,168,106,0.25) !important;
+  box-shadow: -6px 0 32px rgba(0,0,0,0.12), -2px 0 12px rgba(201,168,106,0.08) !important;
+}
+
+#menuDrawer .head {
+  background: linear-gradient(135deg, rgba(246,243,238,0.95) 0%, rgba(237,233,226,0.90) 100%) !important;
+  border-bottom: 1px solid rgba(201,168,106,0.20) !important;
+  padding: 18px 20px 16px !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  backdrop-filter: blur(16px) !important;
+}
+
+#menuDrawer .head h3 {
+  color: #1A1A1A !important;
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.02em !important;
+}
+
+#menuDrawer .body {
+  padding: 20px !important;
+  background: transparent !important;
+}
+
+#menuDrawer .searchbar {
+  margin-bottom: 16px !important;
+  background: rgba(255,255,255,0.90) !important;
+  border: 1.5px solid rgba(201,168,106,0.20) !important;
+  border-radius: 16px !important;
+  padding: 12px 14px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+
+#menuDrawer .searchbar:focus-within {
+  border-color: rgba(201,168,106,0.50) !important;
+  box-shadow: 0 6px 18px rgba(201,168,106,0.15) !important;
+}
+
+#menuDrawer .searchbar input {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: #1A1A1A !important;
+}
+
+#menuDrawer .searchbar input::placeholder {
+  color: rgba(26,26,26,0.45) !important;
+}
+
+#menuDrawer .card {
+  background: rgba(255,255,255,0.75) !important;
+  border: 1.5px solid rgba(201,168,106,0.15) !important;
+  border-radius: 18px !important;
+  padding: 18px !important;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08) !important;
+  margin-bottom: 14px !important;
+}
+
+#menuDrawer .card strong {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  color: #1A1A1A !important;
+  letter-spacing: -0.01em !important;
+}
+
+#menuDrawer .btn.ghost {
+  background: rgba(255,255,255,0.85) !important;
+  border: 1.5px solid rgba(0,0,0,0.10) !important;
+  color: rgba(26,26,26,0.85) !important;
+  font-weight: 650 !important;
+  font-size: 14px !important;
+  padding: 12px 16px !important;
+  border-radius: 14px !important;
+  transition: all 200ms cubic-bezier(0.2,0.8,0.2,1) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+}
+
+#menuDrawer .btn.ghost:hover {
+  background: #FFFFFF !important;
+  border-color: rgba(201,168,106,0.35) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 6px 14px rgba(201,168,106,0.12) !important;
+}
+
+#menuDrawer .btn.primary {
+  background: linear-gradient(135deg, #C9A86A 0%, #B8972A 100%) !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  font-weight: 750 !important;
+  font-size: 15px !important;
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+  box-shadow: 0 8px 20px rgba(201,168,106,0.35), 0 2px 6px rgba(0,0,0,0.10) !important;
+  transition: all 200ms cubic-bezier(0.2,0.8,0.2,1) !important;
+}
+
+#menuDrawer .btn.primary:hover {
+  background: linear-gradient(135deg, #D4B07A 0%, #C9A86A 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 28px rgba(201,168,106,0.40), 0 4px 10px rgba(0,0,0,0.12) !important;
+}
+
+#menuDrawer .specials-btn {
+  background: linear-gradient(135deg, rgba(201,168,106,0.15) 0%, rgba(201,168,106,0.08) 100%) !important;
+  border-color: rgba(201,168,106,0.30) !important;
+}
+
+#menuDrawer .specials-btn:hover {
+  background: linear-gradient(135deg, rgba(201,168,106,0.22) 0%, rgba(201,168,106,0.12) 100%) !important;
+  border-color: rgba(201,168,106,0.45) !important;
+}
+
+#menuDrawer .subtle {
+  color: rgba(26,26,26,0.65) !important;
+  font-weight: 500 !important;
+}
+
+/* Desktop menu drawer styling */
+@media (min-width: 641px) {
+  #menuDrawer {
+    width: min(480px, 94vw) !important;
+  }
+  
+  #menuDrawer .head h3 {
+    font-size: 19px !important;
+  }
+  
+  #menuDrawer .body {
+    padding: 24px !important;
+  }
+  
+  #menuDrawer .card {
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+/* SHOP BY ROOM - MOBILE FONT SIZE IMPROVEMENTS */
+@media (max-width: 980px) {
+  .shop-by-room .p-card .p-title {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+  }
+  
+  .shop-by-room .p-card .p-meta {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    font-weight: 500 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .shop-by-room .p-card .p-title {
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    font-weight: 700 !important;
+    padding-bottom: 10px !important;
+  }
+  
+  .shop-by-room .p-card .p-meta {
+    font-size: 14px !important;
+    line-height: 1.3 !important;
+    font-weight: 500 !important;
+  }
+  
+  .shop-by-room .p-card .p-body {
+    padding: 10px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-by-room .p-card .p-title {
+    font-size: 15.5px !important;
+    line-height: 1.22 !important;
+  }
+  
+  .shop-by-room .p-card .p-meta {
+    font-size: 13.5px !important;
+  }
+}
+
+/* PHONE & MESSAGE BUTTON FONT SIZE MATCHING */
+.af-mini.af-phone-btn,
+.af-mini.af-message-btn {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  padding: 12px 18px !important;
+  letter-spacing: -0.01em !important;
+}
+
+@media (max-width: 768px) {
+  .af-mini.af-phone-btn,
+  .af-mini.af-message-btn {
+    font-size: 15px !important;
+    font-weight: 750 !important;
+    padding: 14px 20px !important;
+    min-height: 48px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .af-mini.af-phone-btn,
+  .af-mini.af-message-btn {
+    font-size: 14.5px !important;
+    padding: 13px 18px !important;
+    min-height: 46px !important;
+  }
+}
+
+/* ENHANCED MODAL OVERLAY */
+.overlay.show {
+  background: rgba(26,26,26,0.55) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* SEARCH MODAL ENHANCEMENTS */
+#searchModal .panel {
+  background: rgba(255,255,255,0.98) !important;
+  backdrop-filter: saturate(180%) blur(20px) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(20px) !important;
+  border: 1px solid rgba(201,168,106,0.20) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.20), 0 0 20px rgba(201,168,106,0.10) !important;
+}
+
+#searchModal .head {
+  background: linear-gradient(135deg, rgba(246,243,238,0.85) 0%, rgba(237,233,226,0.80) 100%) !important;
+  border-bottom: 1px solid rgba(201,168,106,0.18) !important;
+}
+
+#searchModal .searchbar {
+  background: rgba(255,255,255,0.90) !important;
+  border: 1.5px solid rgba(201,168,106,0.20) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+
+#searchModal .searchbar:focus-within {
+  border-color: rgba(201,168,106,0.45) !important;
+  box-shadow: 0 6px 18px rgba(201,168,106,0.15) !important;
+}
+
+/* MOBILE SPECIFIC ENHANCEMENTS */
+@media (max-width: 640px) {
+  .drawer,
+  #menuDrawer {
+    width: min(400px, 92vw) !important;
+  }
+  
+  #searchModal .panel {
+    width: min(540px, 94vw) !important;
+  }
+}
 </style>
 </body>
 </html>
