@@ -52,13 +52,8 @@
 <meta content="English" name="language"/>
 <meta content="7 days" name="revisit-after"/>
 <meta content="global" name="distribution"/>
-<meta content="general" name="rating"/>
-<!-- Search Engine Verification (Add your verification codes when available) -->
-<!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE"/> -->
-<!-- <meta name="msvalidate.01" content="YOUR_BING_VERIFICATION_CODE"/> -->
-<!-- <meta name="yandex-verification" content="YOUR_YANDEX_CODE"/> -->
-<!-- Apple Specific -->
 <meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="yes" name="mobile-web-app-capable"/>
 <meta content="default" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="Angel's Furniture" name="apple-mobile-web-app-title"/>
 <!-- Microsoft Specific -->
@@ -8962,10 +8957,10 @@ if(!state.cart.length){
     $('#apptBtn')?.addEventListener('click', ()=> toast('Scheduling: connect Calendly/Zoho (later)'));
     $('#callBtn')?.addEventListener('click', ()=> toast('Set tel: link'));
     $('#textBtn')?.addEventListener('click', ()=> toast('Set sms: link'));
-    $('#contactForm').addEventListener('submit', (e)=>{ e.preventDefault(); toast('Message sent'); e.target.reset(); });
+    $('#contactForm')?.addEventListener('submit', (e)=>{ e.preventDefault(); toast('Message sent'); e.target.reset(); });
 
     // Checkout demo
-    $('#checkoutBtn').addEventListener('click', ()=>{
+    $('#checkoutBtn')?.addEventListener('click', ()=>{
       if(!state.cart.length){ toast('Cart is empty'); return; }
       // hydrate checkout summary
       const items = state.cart.reduce((s,i)=>s+i.qty,0);
@@ -9553,8 +9548,8 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   mo.observe(document.body, {subtree:true, childList:true});
   window.addEventListener('load', ()=>{ wireCards(document); patchSubtitle(); stripAfTags(document); });
   window.addEventListener('hashchange', ()=> setTimeout(()=>{ wireCards(document); patchSubtitle(); stripAfTags(document); }, 0));
-
-  // Also override ex</script>
+})();
+</script>
 
 <style>
 
