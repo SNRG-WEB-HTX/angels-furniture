@@ -116,54 +116,12 @@ Do NOT use placeholder numbers.
 }
 
 /* Monthly Specials hero promo (Sale collection) */
-.sale-promo{
-  margin-top:14px;
-  display:flex;
-  justify-content:center;
-}
-.sale-promo-inner{
-  position:relative;
-  display:inline-block;
-  border-radius:22px;
-  overflow:hidden;
-  background:transparent;
-  box-shadow: 0 24px 70px rgba(0,0,0,.22);
-}
-/* Gold frame that matches the logo vibe (no extra padding / no background) */
-.sale-promo-inner::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  padding:10px;                 /* frame thickness */
-  border-radius:22px;
-  background:linear-gradient(135deg,
-    #8a6115 0%,
-    #d9b35a 18%,
-    #f3e1a6 36%,
-    #caa24a 55%,
-    #f6e6b6 72%,
-    #a8741d 100%
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events:none;
-}
-.sale-promo-media{
-  margin:0;
-  padding:0;
-  background:transparent;
-}
-.sale-promo-media img{
-  display:block;
-  width:min(1240px, 96vw);
-  height:auto;
-  max-height:min(74vh, 760px);
-  object-fit:contain;
-  background:transparent;
-}
+.sale-promo{margin-top:14px}
+.sale-promo-inner{border-radius:24px;overflow:hidden}
+.sale-promo-media{background:#fff}
+.sale-promo-media img{width:100%;height:auto;display:block;object-fit:cover}
+.sale-promo-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;padding:14px 16px;background:rgba(255,255,255,.92);border-top:1px solid rgba(0,0,0,.06);backdrop-filter:saturate(180%) blur(14px)}
+@media (min-width:900px){.sale-promo-actions{justify-content:flex-end}}
 
 </style>
 <style id="cta-match-css">
@@ -798,56 +756,6 @@ article.af-pCard {
 }
 </style>
 
-
-<style>
-/* Monthly Special image reduced by 30% and centered */
-.monthly-special-hero img,
-img[src*="march-special.webp"]{
-    width:70% !important;
-    max-width:840px !important;
-    height:auto !important;
-    display:block !important;
-    margin:0 auto !important;
-    object-fit:contain !important;
-}
-</style>
-
-
-<style id="sale-promo-overrides">
-/* Sale (Monthly Specials) — remove Ecwid title/description + empty grid, pull promo up under header */
-body.is-sale-promo #collectionTitle,
-body.is-sale-promo #collectionSubtitle,
-body.is-sale-promo .section-head,
-body.is-sale-promo #resultCount,
-body.is-sale-promo .sticky-filterbar,
-body.is-sale-promo .filters-rail,
-body.is-sale-promo .collection-layout > div:not(#salePromo),
-body.is-sale-promo .products,
-body.is-sale-promo .grid__products,
-body.is-sale-promo .ec-store .grid__products,
-body.is-sale-promo .ecwid-productBrowser-emptyProductList,
-body.is-sale-promo .ec-store .grid__message,
-body.is-sale-promo .ec-store .ecwid-search-result-empty{
-  display:none !important;
-}
-
-body.is-sale-promo section.section[data-page="collection"]{
-  padding-top:0 !important;
-}
-
-body.is-sale-promo #salePromo{
-  margin-top:0 !important;
-}
-
-body.is-sale-promo section.section[data-page="collection"] .container{
-  padding-top:0 !important;
-}
-
-body.is-sale-promo #salePromo .sale-promo-inner{
-  box-shadow:none !important;
-}
-</style>
-
 </head>
 <body>
 <script>
@@ -1307,11 +1215,13 @@ window.scrollTo(0, 0);
 </div>
 
 <div id="salePromo" class="sale-promo" hidden>
-  <div class="sale-promo-inner">
+  <div class="sale-promo-inner card soft-shadow">
     <div class="sale-promo-media">
-      <img src="https://images.angelsfurniture.org/assets/images/march-special.webp"
-           alt="Angel's Furniture Monthly Specials — March"
-           loading="eager" fetchpriority="high" decoding="async"/>
+      <img src="https://images.angelsfurniture.org/assets/images/march-special.webp" alt="Angel's Furniture Monthly Specials — March" loading="eager" fetchpriority="high" decoding="async"/>
+    </div>
+    <div class="sale-promo-actions">
+      <a class="btn primary" href="tel:+13468671155">Call (346) 867-1155</a>
+      <a class="btn ghost" href="#/contact">Get Financing</a>
     </div>
   </div>
 </div>
@@ -8420,19 +8330,8 @@ function renderHome(){
       const endIdx = startIdx + ITEMS_PER_PAGE;
       const paginatedItems = items.slice(startIdx, endIdx);
 
-      // Update results + handle Sale promo page (hide empty grid)
-      const __rc = $('#resultCount');
-      const __cg = $('#collectionGrid');
-      if(cat === 'sale' && totalItems === 0){
-        if(__rc) __rc.style.display = 'none';
-        if(__cg){ __cg.innerHTML = ''; __cg.style.display = 'none'; }
-        const __pg = document.getElementById('paginationControls');
-        if(__pg) __pg.remove();
-        return;
-      } else {
-        if(__rc){ __rc.style.display = ''; __rc.textContent = `${totalItems} item${totalItems===1?'':'s'} (Page ${page} of ${totalPages})`; }
-        if(__cg){ __cg.style.display = ''; __cg.innerHTML = paginatedItems.map(p=>cardHTML(p)).join('') || `<div class="card pad"><strong style="font-size:14px;">No matches</strong><p class="subtle" style="margin:8px 0 0;">Try clearing filters or changing Delivery speed.</p></div>`; }
-      }
+      $('#resultCount').textContent = `${totalItems} item${totalItems===1?'':'s'} (Page ${page} of ${totalPages})`;
+      $('#collectionGrid').innerHTML = paginatedItems.map(p=>cardHTML(p)).join('') || `<div class="card pad"><strong style="font-size:14px;">No matches</strong><p class="subtle" style="margin:8px 0 0;">Try clearing filters or changing Delivery speed.</p></div>`;
 
       // ADD PAGINATION CONTROLS (remove old ones first to prevent duplication)
       const existingPagination = document.getElementById('paginationControls');
@@ -10492,23 +10391,6 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
 }
 </style>
 
-
-<script id="sale-promo-toggle">
-(function(){
-  function toggleSalePromo(){
-    var isSale = /#\/collection\/sale\b/i.test(location.hash || "");
-    document.body.classList.toggle('is-sale-promo', isSale);
-    var promo = document.getElementById('salePromo');
-    if(promo){
-      promo.hidden = !isSale;
-    }
-  }
-  window.addEventListener('hashchange', toggleSalePromo, {passive:true});
-  document.addEventListener('DOMContentLoaded', toggleSalePromo, {once:true});
-  toggleSalePromo();
-})();
-</script>
-
 </body>
 <style>
 /* ============================================
@@ -11056,22 +10938,5 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   }
 }
 </style>
-
-<script id="sale-promo-toggle">
-(function(){
-  function toggleSalePromo(){
-    var isSale = /#\/collection\/sale\b/i.test(location.hash || "");
-    document.body.classList.toggle('is-sale-promo', isSale);
-    var promo = document.getElementById('salePromo');
-    if(promo){
-      promo.hidden = !isSale;
-    }
-  }
-  window.addEventListener('hashchange', toggleSalePromo, {passive:true});
-  document.addEventListener('DOMContentLoaded', toggleSalePromo, {once:true});
-  toggleSalePromo();
-})();
-</script>
-
 </body>
 </html>
