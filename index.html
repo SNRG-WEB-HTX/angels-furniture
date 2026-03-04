@@ -63,6 +63,7 @@
 <meta name="description" content="Angel's Furniture Houston — Living room, Bedroom &amp; Dining sets with Easy Financing. Visit our Houston showroom at 14300 Northwest Fwy. Call (346) 867-1155."/>
 <!-- Preload hero image (LCP) -->
 <link as="image" href="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70" imagesizes="100vw" imagesrcset="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1000&amp;q=70 1000w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=1600&amp;q=70 1600w, https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&amp;fit=crop&amp;w=2200&amp;q=70 2200w" rel="preload"/>
+<link rel="preload" href="https://images.angelsfurniture.org/assets/images/march-special.webp" as="image" type="image/webp" fetchpriority="high"/>
 <meta content="https://images.angelsfurniture.org/assets/images/angels-logo.png" name="twitter:image"/>
 
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -113,6 +114,57 @@ Do NOT use placeholder numbers.
   }
   .carousel{padding-right:0 !important;}
 }
+
+/* Monthly Specials hero promo (Sale collection) */
+.sale-promo{
+  margin-top:14px;
+  display:flex;
+  justify-content:center;
+}
+.sale-promo-inner{
+  position:relative;
+  display:inline-block;
+  border-radius:22px;
+  overflow:hidden;
+  background:transparent;
+  box-shadow: 0 24px 70px rgba(0,0,0,.22);
+}
+/* Gold frame that matches the logo vibe (no extra padding / no background) */
+.sale-promo-inner::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:10px;                 /* frame thickness */
+  border-radius:22px;
+  background:linear-gradient(135deg,
+    #8a6115 0%,
+    #d9b35a 18%,
+    #f3e1a6 36%,
+    #caa24a 55%,
+    #f6e6b6 72%,
+    #a8741d 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events:none;
+}
+.sale-promo-media{
+  margin:0;
+  padding:0;
+  background:transparent;
+}
+.sale-promo-media img{
+  display:block;
+  width:min(1240px, 96vw);
+  height:auto;
+  max-height:min(74vh, 760px);
+  object-fit:contain;
+  background:transparent;
+}
+
 </style>
 <style id="cta-match-css">
 /* Match Apply for Financing to Schedule a Visit (same palette + behavior) */
@@ -1203,6 +1255,17 @@ window.scrollTo(0, 0);
 <p class="lede" data-i18n="t098" id="collectionSubtitle">Easy financing available with flexible payment plans.</p>
 </div>
 </div>
+
+<div id="salePromo" class="sale-promo" hidden>
+  <div class="sale-promo-inner">
+    <div class="sale-promo-media">
+      <img src="https://images.angelsfurniture.org/assets/images/march-special.webp"
+           alt="Angel's Furniture Monthly Specials — March"
+           loading="eager" fetchpriority="high" decoding="async"/>
+    </div>
+  </div>
+</div>
+
 <div class="collection-layout">
 <div>
 <div style="display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:12px;">
@@ -8275,6 +8338,10 @@ function renderHome(){
       const titleMap = { living:'Living', bedroom:'Bedroom', dining:'Dining', mattress:'Mattress', decor:'Decor', sale:'Sale', youth:'Youth' };
       $('#collectionTitle').textContent = titleMap[cat] || 'Collection';
       $('#collectionSubtitle').textContent = cat==='sale' ? 'Clearance and limited deals.' : 'Easy financing available with flexible payment plans to fit your budget.';
+      // Monthly Specials hero promo
+      const __promo = $('#salePromo');
+      if(__promo){ __promo.hidden = (cat !== 'sale'); }
+
 
       // Initialize page if not set
       if (!currentPage[cat]) currentPage[cat] = 1;
@@ -8303,8 +8370,19 @@ function renderHome(){
       const endIdx = startIdx + ITEMS_PER_PAGE;
       const paginatedItems = items.slice(startIdx, endIdx);
 
-      $('#resultCount').textContent = `${totalItems} item${totalItems===1?'':'s'} (Page ${page} of ${totalPages})`;
-      $('#collectionGrid').innerHTML = paginatedItems.map(p=>cardHTML(p)).join('') || `<div class="card pad"><strong style="font-size:14px;">No matches</strong><p class="subtle" style="margin:8px 0 0;">Try clearing filters or changing Delivery speed.</p></div>`;
+      // Update results + handle Sale promo page (hide empty grid)
+      const __rc = $('#resultCount');
+      const __cg = $('#collectionGrid');
+      if(cat === 'sale' && totalItems === 0){
+        if(__rc) __rc.style.display = 'none';
+        if(__cg){ __cg.innerHTML = ''; __cg.style.display = 'none'; }
+        const __pg = document.getElementById('paginationControls');
+        if(__pg) __pg.remove();
+        return;
+      } else {
+        if(__rc){ __rc.style.display = ''; __rc.textContent = `${totalItems} item${totalItems===1?'':'s'} (Page ${page} of ${totalPages})`; }
+        if(__cg){ __cg.style.display = ''; __cg.innerHTML = paginatedItems.map(p=>cardHTML(p)).join('') || `<div class="card pad"><strong style="font-size:14px;">No matches</strong><p class="subtle" style="margin:8px 0 0;">Try clearing filters or changing Delivery speed.</p></div>`; }
+      }
 
       // ADD PAGINATION CONTROLS (remove old ones first to prevent duplication)
       const existingPagination = document.getElementById('paginationControls');
