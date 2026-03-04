@@ -798,6 +798,56 @@ article.af-pCard {
 }
 </style>
 
+
+<style>
+/* Monthly Special image reduced by 30% and centered */
+.monthly-special-hero img,
+img[src*="march-special.webp"]{
+    width:70% !important;
+    max-width:840px !important;
+    height:auto !important;
+    display:block !important;
+    margin:0 auto !important;
+    object-fit:contain !important;
+}
+</style>
+
+
+<style id="sale-promo-overrides">
+/* Sale (Monthly Specials) — remove Ecwid title/description + empty grid, pull promo up under header */
+body.is-sale-promo #collectionTitle,
+body.is-sale-promo #collectionSubtitle,
+body.is-sale-promo .section-head,
+body.is-sale-promo #resultCount,
+body.is-sale-promo .sticky-filterbar,
+body.is-sale-promo .filters-rail,
+body.is-sale-promo .collection-layout > div:not(#salePromo),
+body.is-sale-promo .products,
+body.is-sale-promo .grid__products,
+body.is-sale-promo .ec-store .grid__products,
+body.is-sale-promo .ecwid-productBrowser-emptyProductList,
+body.is-sale-promo .ec-store .grid__message,
+body.is-sale-promo .ec-store .ecwid-search-result-empty{
+  display:none !important;
+}
+
+body.is-sale-promo section.section[data-page="collection"]{
+  padding-top:0 !important;
+}
+
+body.is-sale-promo #salePromo{
+  margin-top:0 !important;
+}
+
+body.is-sale-promo section.section[data-page="collection"] .container{
+  padding-top:0 !important;
+}
+
+body.is-sale-promo #salePromo .sale-promo-inner{
+  box-shadow:none !important;
+}
+</style>
+
 </head>
 <body>
 <script>
@@ -10442,6 +10492,23 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
 }
 </style>
 
+
+<script id="sale-promo-toggle">
+(function(){
+  function toggleSalePromo(){
+    var isSale = /#\/collection\/sale\b/i.test(location.hash || "");
+    document.body.classList.toggle('is-sale-promo', isSale);
+    var promo = document.getElementById('salePromo');
+    if(promo){
+      promo.hidden = !isSale;
+    }
+  }
+  window.addEventListener('hashchange', toggleSalePromo, {passive:true});
+  document.addEventListener('DOMContentLoaded', toggleSalePromo, {once:true});
+  toggleSalePromo();
+})();
+</script>
+
 </body>
 <style>
 /* ============================================
@@ -10989,5 +11056,22 @@ window.addEventListener('hashchange', function(){ window.scrollTo(0,0); });
   }
 }
 </style>
+
+<script id="sale-promo-toggle">
+(function(){
+  function toggleSalePromo(){
+    var isSale = /#\/collection\/sale\b/i.test(location.hash || "");
+    document.body.classList.toggle('is-sale-promo', isSale);
+    var promo = document.getElementById('salePromo');
+    if(promo){
+      promo.hidden = !isSale;
+    }
+  }
+  window.addEventListener('hashchange', toggleSalePromo, {passive:true});
+  document.addEventListener('DOMContentLoaded', toggleSalePromo, {once:true});
+  toggleSalePromo();
+})();
+</script>
+
 </body>
 </html>
