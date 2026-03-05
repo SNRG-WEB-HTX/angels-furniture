@@ -118,10 +118,17 @@ Do NOT use placeholder numbers.
 /* Monthly Specials hero promo (Sale collection) */
 .sale-promo{margin-top:14px}
 .sale-promo-inner{border-radius:24px;overflow:hidden}
-.sale-promo-media{background:#fff}
-.sale-promo-media img{width:100%;height:auto;display:block;object-fit:cover}
+.sale-promo-media{background:#fff;display:flex;justify-content:center;align-items:center;padding:12px}
+.sale-promo-media img{width:70%!important;max-width:900px;height:auto!important;display:block;object-fit:contain!important}
 .sale-promo-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center;padding:14px 16px;background:rgba(255,255,255,.92);border-top:1px solid rgba(0,0,0,.06);backdrop-filter:saturate(180%) blur(14px)}
 @media (min-width:900px){.sale-promo-actions{justify-content:flex-end}}
+
+
+/* Sale page cleanup: hide Sale heading + empty grid, and lift promo toward header */
+section[data-page="collection"].is-sale{padding-top:0!important}
+section[data-page="collection"].is-sale .section-head{display:none!important}
+section[data-page="collection"].is-sale .collection-layout{display:none!important}
+section[data-page="collection"].is-sale #salePromo{margin-top:-10px!important}
 
 </style>
 <style id="cta-match-css">
@@ -8302,6 +8309,13 @@ function renderHome(){
       const __promo = $('#salePromo');
       if(__promo){ __promo.hidden = (cat !== 'sale'); }
 
+      // Sale page: remove "Sale / Clearance..." header + empty results grid, and lift promo up
+      const __colSec = document.querySelector('section[data-page="collection"]');
+      if(__colSec){ __colSec.classList.toggle('is-sale', cat === 'sale'); }
+      const __head = __colSec ? __colSec.querySelector('.section-head') : null;
+      const __layout = __colSec ? __colSec.querySelector('.collection-layout') : null;
+      if(__head) __head.style.display = (cat === 'sale') ? 'none' : '';
+      if(__layout) __layout.style.display = (cat === 'sale') ? 'none' : '';
 
       // Initialize page if not set
       if (!currentPage[cat]) currentPage[cat] = 1;
